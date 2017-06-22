@@ -1,0 +1,35 @@
+{
+    "name": "Earthquake",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "description": "Deal 1 damage to all enemy minions. Costs (1) more and deals (1) more damage for each.",
+    "targetSelection": "NONE",
+	"race": "ELEMENTAL",
+    "spell": {
+        "class": "DamageSpell",
+		"target": "ENEMY_MINIONS",
+		"value": {
+			"class": "AlgebraicValueProvider",
+			"operation": "ADD",
+			"value1": 1,
+			"value2": {
+				"class": "EntityCounter",
+				"target": "ENEMY_MINIONS"
+			} 
+		}
+    },
+	"manaCostModifier": {
+		"class": "AlgebraicValueProvider",
+		"operation": "MULTIPLY",
+		"value1": {
+			"class": "EntityCounter",
+			"target": "ENEMY_MINIONS"
+		},
+		"value2": -1
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

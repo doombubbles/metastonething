@@ -1,0 +1,23 @@
+{
+	"name": "Moon Mother",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Whenever you cast a Restoration spell, Draw a card.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF",
+			"race": "RESTORATION"
+		},
+		"spell": {
+			"class": "DrawCardSpell"
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

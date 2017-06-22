@@ -1,0 +1,29 @@
+{
+	"name": "Greater Ragnaros",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "ELEMENTAL",
+	"description": "Can't Attack.  At the end of your turn, deal 5 damage to a random enemy.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "MissilesSpell",
+			"target": "ENEMY_CHARACTERS",
+			"value": 5,
+			"howMany": 1
+		}
+	},
+	"attributes": {
+		"CANNOT_ATTACK": true
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

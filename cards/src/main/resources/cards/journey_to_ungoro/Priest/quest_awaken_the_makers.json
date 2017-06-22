@@ -1,0 +1,83 @@
+{
+	"name": "Awaken the Makers",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
+	"description": "Quest: Summon 7 Deathrattle minions. Reward: Amara, Warden of Hope.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionSummonedTrigger",
+						"targetPlayer": "SELF",
+						"requiredAttribute": "DEATHRATTLES"
+					},
+					"spell": {
+						"class": "ModifyAttributeSpell",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "PRIEST_QUEST",
+						"value": 1
+					}
+				}
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "PRIEST_QUEST",
+				"value": 1
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionSummonedTrigger",
+						"targetPlayer": "SELF",
+						"requiredAttribute": "DEATHRATTLES"
+					},
+					"spell": {
+						"class": "ConditionalSpell",
+						"spell": {
+							"class": "MetaSpell",
+							"spells": [
+								{
+									"class": "ReceiveCardSpell",
+									"targetPlayer": "SELF",
+									"cards": [
+										"minion_amara_warden_of_hope"
+									]
+								},
+								{
+									"class": "ModifyAttributeSpell",
+									"target": "FRIENDLY_PLAYER",
+									"attribute": "PRIEST_QUEST",
+									"value": -500
+								}
+							]
+						},
+						"condition": {
+							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_PLAYER",
+								"attribute": "PRIEST_QUEST"
+							},
+							"value2": 8
+						}
+					}
+				}
+			}
+		
+		]
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Excess Mana",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Draw a card. (You can only have 10 Mana in your tray.)",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"targetPlayer": "SELF",
+		"value": 1
+	},
+	"collectible": false,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

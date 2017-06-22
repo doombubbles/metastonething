@@ -1,0 +1,33 @@
+{
+	"name": "Bestial Wrath",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Give a friendly Beast +2 Attack and Immune this turn.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"race": "BEAST_MASTERY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "TemporaryAttackSpell",
+				"value": 2
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "IMMUNE",
+				"revertTrigger": {
+					"class": "TurnEndTrigger"
+				}
+			}
+		],
+		"filter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

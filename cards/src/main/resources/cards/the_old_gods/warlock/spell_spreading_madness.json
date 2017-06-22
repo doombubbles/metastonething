@@ -1,0 +1,19 @@
+{
+	"name": "Spreading Madness",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Deal 7 damage randomly split among all minions.",
+	"targetSelection": "NONE",
+	"race": "AFFLICTION",
+	"spell": {
+		"class": "MissilesSpell",
+		"target": "ALL_MINIONS",
+		"value": 1,
+		"howMany": 7
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

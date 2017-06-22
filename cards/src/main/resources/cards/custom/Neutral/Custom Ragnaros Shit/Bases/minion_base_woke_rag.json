@@ -1,0 +1,14 @@
+{
+	"name": "Ragnaros, Awakened",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "ELEMENTAL",
+	"description": "",
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

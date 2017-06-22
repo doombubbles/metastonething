@@ -1,0 +1,83 @@
+{
+	"name": "Sherazin, Seed",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 99,
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "[Permanent] When you play 4 cards in a turn, revive this minion.",
+	"triggers": [
+		{
+			"eventTrigger": {
+				"class": "CardPlayedTrigger",
+				"targetPlayer": "SELF"
+			},
+			"spell": {
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"value": 1,
+				"attribute": "CUSTOM_1"
+			}
+		},
+		{
+			"eventTrigger": {
+				"class": "TurnEndTrigger",
+				"targetPlayer": "SELF"
+			},
+			"spell": {
+				"class": "RemoveAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "CUSTOM_1"
+			}
+		},
+		{
+			"eventTrigger": {
+				"class": "CardPlayedTrigger",
+				"targetPlayer": "SELF"
+			},
+			"spell": {
+				"class": "ConditionalSpell",
+				"spell": {
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "SilenceSpell",
+							"target": "SELF"
+						},
+						{
+							"class": "DestroySpell",
+							"target": "SELF"
+						},
+						{
+							"class": "SummonSpell",
+							"card": "minion_sherazin_corpse_flower"
+						}
+					]
+				},
+				"condition": {
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "CUSTOM_1"
+					},
+					"value2": 4
+				}
+			}
+		}
+	],
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_sherazin_seed"
+	},
+	"attributes": {
+		"STEALTH": true,
+		"CANT_ATTACK": true,
+		"UNTARGETABLE_BY_SPELLS": true
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

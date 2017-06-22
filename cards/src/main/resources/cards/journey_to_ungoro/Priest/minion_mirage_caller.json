@@ -1,0 +1,22 @@
+{
+	"name": "Mirage Caller",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Battlecry: Choose a friendly minion. Summon a 1/1 copy of it.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "SummonOneOneCopySpell"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,15 @@
+{
+	"name": "Un'Goro Pack",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Add 5 random Journey to Un'Goro cards to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.EliseSpell"
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

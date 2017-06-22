@@ -1,0 +1,21 @@
+{
+	"name": "Savagery",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Deal damage equal to your hero's Attack to a minion.",
+	"targetSelection": "MINIONS",
+	"race": "FERAL",
+	"spell": {
+		"class": "DamageSpell",
+		"value": {
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_HERO",
+			"attribute": "ATTACK"
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,71 @@
+{
+	"name": "Kalimos, Primal Lord",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"race": "ELEMENTAL",
+	"description": "Battlecry: If you played an Elemental last turn, cast an Elemental Invocation.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverOptionSpell",
+			"howMany": 4,
+			"spells": [
+				{
+					"name": "Invocation of Air",
+					"description": "Deal 3 damage to all enemy minions.",
+					"class": "DamageSpell",
+					"target": "ENEMY_MINIONS",
+					"value": 3
+				},
+				{
+					"name": "Invocation of Earth",
+					"description": "Fill your board with 1/1 Elementals.",
+					"class": "SummonSpell",
+					"cards": [
+						"token_elemental",
+						"token_elemental",
+						"token_elemental",
+						"token_elemental",
+						"token_elemental",
+						"token_elemental",
+						"token_elemental"
+					]
+				},
+				{
+					"name": "Invocation of Fire",
+					"description": "Deal 6 damage to the enemy hero.",
+					"class": "DamageSpell",
+					"target": "ENEMY_HERO",
+					"value": 6
+				},
+				{
+					"name": "Invocation of Water",
+					"description": "Restore 12 Health to your hero.",
+					"class": "HealSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 12
+				}
+			]
+		},
+		"condition": {
+			"class": "ComparisonCondition",
+			"operation": "GREATER_OR_EQUAL",
+			"value1": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "ELEMENTALS_LAST_TURN"
+			},
+			"value2": 1
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,39 @@
+{
+	"name": "Hallowroot",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. If you have 7 unspent mana crystals at the end of your turn, summon this minion from your deck.",
+	"deckTrigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ConditionalSpell",
+			"spell": {
+				"class": "PutMinionOnBoardFromDeckSpell",
+				"target": "SELF"
+			},
+			"condition": {
+				"class": "ComparisonCondition",
+				"operation": "GREATER_OR_EQUAL",
+				"value1": {
+					"class": "PlayerAttributeValueProvider",
+					"player": "SELF",
+					"playerAttribute": "MANA"
+				},
+				"value2": 7
+			}	
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,21 @@
+{
+	"name": "Infest",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Give your minions \"Deathrattle: Add a random Beast card to your hand.\"",
+	"targetSelection": "NONE",
+	"race": "BEAST_MASTERY",
+	"spell": {
+		"class": "AddDeathrattleSpell",
+		"target": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "ReturnMinionToHandSpell",
+				"target": "SELF"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,81 @@
+{
+	"name": "Lakkari Sacrifice",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Quest: Discard 5 cards. Reward: Nether Portal.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "DiscardTrigger",
+						"targetPlayer": "SELF"
+					},
+					"spell": {
+						"class": "ModifyAttributeSpell",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "WARLOCK_QUEST",
+						"value": 1
+					}
+				}
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "WARLOCK_QUEST",
+				"value": 1
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "DiscardTrigger",
+						"targetPlayer": "SELF"
+					},
+					"spell": {
+						"class": "ConditionalSpell",
+						"spell": {
+							"class": "MetaSpell",
+							"spells": [
+								{
+									"class": "ReceiveCardSpell",
+									"targetPlayer": "SELF",
+									"cards": [
+										"minion_nether_portal"
+									]
+								},
+								{
+									"class": "ModifyAttributeSpell",
+									"target": "FRIENDLY_PLAYER",
+									"attribute": "WARLOCK_QUEST",
+									"value": -500
+								}
+							]
+						},
+						"condition": {
+							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_PLAYER",
+								"attribute": "WARLOCK_QUEST"
+							},
+							"value2": 6
+						}
+					}
+				}
+			}
+		
+		]
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,32 @@
+{
+    "name": "Earthen Scales",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "DRUID",
+    "rarity": "RARE",
+    "description": "Give a friendly minion +1/+1, then gain Armor equal to its Attack.",
+    "targetSelection": "FRIENDLY_MINIONS",
+	"race": "GUARDIAN",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 1,
+				"hpBonus": 1
+			},
+			{
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armorBonus": {
+					"class": "AttributeValueProvider",
+					"target": "TARGET",
+					"attribute": "ATTACK"
+				}
+			}
+		]
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

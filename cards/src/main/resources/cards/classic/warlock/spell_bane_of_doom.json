@@ -1,0 +1,30 @@
+{
+	"name": "Bane of Doom",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Deal 2 damage to a character.  If that kills it, summon a random Demon.",
+	"targetSelection": "ANY",
+	"race": "DEMONOLOGY",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "SummonRandomMinionFilteredSpell",
+			"cardFilter": {
+				"class": "RaceFilter",
+				"race": "DEMON"
+			}
+		},
+		"condition": {
+			"class": "IsDeadCondition"
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

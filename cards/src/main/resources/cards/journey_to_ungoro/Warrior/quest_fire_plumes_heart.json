@@ -1,0 +1,83 @@
+{
+    "name": "Fire Plume's Heart",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "LEGENDARY",
+    "description": "Quest: Summon 7 Taunt Minions. Reward: Sulfuras",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionPlayedTrigger",
+						"targetPlayer": "SELF",
+						"requiredAttribute": "TAUNT"
+					},
+					"spell": {
+						"class": "ModifyAttributeSpell",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "WARRIOR_QUEST",
+						"value": 1
+					}
+				}
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "WARRIOR_QUEST",
+				"value": 1
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionPlayedTrigger",
+						"targetPlayer": "SELF",
+						"requiredAttribute": "TAUNT"
+					},
+					"spell": {
+						"class": "ConditionalSpell",
+						"spell": {
+							"class": "MetaSpell",
+							"spells": [
+								{
+									"class": "ReceiveCardSpell",
+									"targetPlayer": "SELF",
+									"cards": [
+										"weapon_sulfuras"
+									]
+								},
+								{
+									"class": "ModifyAttributeSpell",
+									"target": "FRIENDLY_PLAYER",
+									"attribute": "WARRIOR_QUEST",
+									"value": -500
+								}
+							]
+						},
+						"condition": {
+							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_PLAYER",
+								"attribute": "WARRIOR_QUEST"
+							},
+							"value2": 8
+						}
+					}
+				}
+			}
+		
+		]
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

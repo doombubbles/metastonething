@@ -1,0 +1,47 @@
+{
+	"name": "Inquisitor",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 5,
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Battlecry: Silence a minion. If it's already silenced, destroy it.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "DestroySpell"
+					},
+					"condition": {
+						"class": "AttributeCondition",
+						"attribute": "SILENCED",
+						"operation": "HAS"
+					}
+				},
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "SilenceSpell"
+					},
+					"condition": {
+						"class": "AttributeCondition",
+						"attribute": "SILENCED",
+						"operation": "HAS",
+						"invert": true
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

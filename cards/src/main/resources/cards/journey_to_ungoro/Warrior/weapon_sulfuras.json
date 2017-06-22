@@ -1,0 +1,24 @@
+{
+	"name": "Sulfuras",
+	"baseManaCost": 3,
+	"type": "WEAPON",
+	"damage": 4,
+	"durability": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Your Hero Power becomes 'Deal 8 damage to a random enemy.'",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ChangeHeroPowerSpell",
+			"targetPlayer": "SELF",
+			"card": "hero_power_die_insect"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

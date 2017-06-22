@@ -1,0 +1,41 @@
+{
+	"name": "Chaos Bolt",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Deal 5 damage. At the end of your turn, deal damage equal to the number of Burning Embers you've cast this game.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"trigger": {
+					"eventTrigger": {
+						"class": "TurnEndTrigger",
+						"targetPlayer": "SELF"
+					},
+					"spell": {
+						"class": "DamageSpell",
+						"value": {
+							"class": "AttributeValueProvider",
+							"target": "FRIENDLY_PLAYER",
+							"attribute": "BURNING_EMBER"
+						},
+						"target": "SELF",
+						"ignoreSpellDamage": true
+					},
+					"oneTurn": true
+				}		
+			},
+			{
+				"class": "DamageSpell",
+				"value": 5
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

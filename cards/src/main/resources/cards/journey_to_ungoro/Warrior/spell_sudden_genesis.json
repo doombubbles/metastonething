@@ -1,0 +1,19 @@
+{
+    "name": "Sudden Genesis",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "EPIC",
+    "description": "Summon Copies of your damaged minions.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "SummonCopySpell",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "DamagedFilter"
+		}
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

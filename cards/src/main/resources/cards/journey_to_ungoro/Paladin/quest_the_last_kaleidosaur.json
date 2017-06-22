@@ -1,0 +1,87 @@
+{
+    "name": "The Last Kaleidosaur",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "LEGENDARY",
+    "description": "Quest: Cast 5 spells on your minions. Reward: Galvadon.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "AfterSpellCastedTrigger",
+						"sourcePlayer": "SELF",
+						"targetPlayer": "SELF",
+						"targetEntityType": "MINION",
+						"hostTargetType": "IGNORE_AS_TARGET"
+					},
+					"spell": {
+						"class": "ModifyAttributeSpell",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "PALADIN_QUEST",
+						"value": 1
+					}
+				}
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "PALADIN_QUEST",
+				"value": 1
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "AfterSpellCastedTrigger",
+						"sourcePlayer": "SELF",
+						"targetPlayer": "SELF",
+						"targetEntityType": "MINION",
+						"hostTargetType": "IGNORE_AS_TARGET"
+					},
+					"spell": {
+						"class": "ConditionalSpell",
+						"spell": {
+							"class": "MetaSpell",
+							"spells": [
+								{
+									"class": "ReceiveCardSpell",
+									"targetPlayer": "SELF",
+									"cards": [
+										"minion_galvadon"
+									]
+								},
+								{
+									"class": "ModifyAttributeSpell",
+									"target": "FRIENDLY_PLAYER",
+									"attribute": "PALADIN_QUEST",
+									"value": -500
+								}
+							]
+						},
+						"condition": {
+							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_PLAYER",
+								"attribute": "PALADIN_QUEST"
+							},
+							"value2": 6
+						}
+					}
+				}
+			}
+		
+		]
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

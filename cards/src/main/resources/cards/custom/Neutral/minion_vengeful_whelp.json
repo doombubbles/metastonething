@@ -1,0 +1,37 @@
+{
+	"name": "Vengeful Whelp",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"race": "DRAGON",
+	"description": "Charge. Battlecry: Summon a copies of this minion, and a Leeroy Jenkins for your opponent",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonCopySpell",
+					"target": "SELF",
+					"value": 1
+				},
+				{
+					"class": "SummonSpell",
+					"targetPlayer": "OPPONENT",
+					"cards": [
+						"minion_leeroy_jenkins"
+					]
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"CHARGE": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

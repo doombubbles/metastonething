@@ -1,0 +1,22 @@
+{
+	"name": "Unstable Affliction",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Give all minions 'Deathrattle: Deal 1 damage to all minions.'",
+	"targetSelection": "NONE",
+	"race": "AFFLICTION",
+	"spell": {
+		"class": "AddDeathrattleSpell",
+		"target": "ALL_MINIONS",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_MINIONS",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

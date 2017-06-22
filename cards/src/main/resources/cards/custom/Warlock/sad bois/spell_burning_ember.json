@@ -1,0 +1,34 @@
+{
+	"name": "Burning Ember",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Add a random Destruction card to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "ReceiveRandomCardSpell",
+				"cards": [
+					"spell_conflagrate",
+					"spell_chaos_bolt",
+					"minion_burning_fel_giant",
+					"spell_rain_of_fire",
+					"spell_molten_skin"
+				]
+				
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "BURNING_EMBER",
+				"value": 1
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

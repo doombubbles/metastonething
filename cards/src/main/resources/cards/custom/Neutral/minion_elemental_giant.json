@@ -1,0 +1,24 @@
+{
+	"name": "Elemental Giant",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"race": "ELEMENTAL",
+	"rarity": "EPIC",
+	"description": "Costs (2) less for each Elemntal you played last turn.",
+	"manaCostModifier": {
+		"class": "AlgebraicValueProvider",
+		"operation": "MULTIPLY",
+		"value1": {
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "ELEMENTALS_LAST_TURN"
+		},
+		"value2": 2
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

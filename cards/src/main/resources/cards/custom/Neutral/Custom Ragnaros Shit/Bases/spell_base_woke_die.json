@@ -1,0 +1,15 @@
+{
+	"name": "DIE, Insect!",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Can't Attack. At the end of your turn, deal 8 damage to a random enemy.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

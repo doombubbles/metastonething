@@ -1,0 +1,14 @@
+{
+	"name": "Silverback Matriarch",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Bananas give this minion +2/+2 instead.",
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

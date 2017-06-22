@@ -1,0 +1,17 @@
+{
+	"name": "Freezing Potion",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Freeze a character.",
+	"targetSelection": "ANY",
+	"race": "POTION",
+	"spell": {
+		"class": "AddAttributeSpell",
+		"attribute": "FROZEN"
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

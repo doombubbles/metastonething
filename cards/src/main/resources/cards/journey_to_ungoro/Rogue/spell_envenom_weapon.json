@@ -1,0 +1,27 @@
+{
+    "name": "Envenom Weapon",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "RARE",
+    "description": "Give your weapon Poisonous.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "AddSpellTriggerSpell",
+		"target": "FRIENDLY_WEAPON",
+		"trigger": {
+			"eventTrigger": {
+				"class": "DamageCausedTrigger",
+				"targetEntityType": "MINION",
+				"hostTargetType": "IGNORE_OTHER_SOURCES"
+			},
+			"spell": {
+				"class": "DestroySpell",
+				"target": "EVENT_TARGET"
+			}
+		}
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

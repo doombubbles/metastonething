@@ -1,0 +1,23 @@
+{
+    "name": "Curious Glimmerroot",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "PRIEST",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Look at 3 cards. Guess which one started in your opponent's deck to get a copy of it.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "custom.CuriousSpell",
+			"spell": {
+				"class": "NullSpell"
+			}
+		}
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

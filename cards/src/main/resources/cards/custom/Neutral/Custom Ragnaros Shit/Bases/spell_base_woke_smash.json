@@ -1,0 +1,15 @@
+{
+	"name": "SULFURAS, SMASH!",
+	"baseManaCost": 9,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "At the end of your turn, deal 3 damage to all other minions.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

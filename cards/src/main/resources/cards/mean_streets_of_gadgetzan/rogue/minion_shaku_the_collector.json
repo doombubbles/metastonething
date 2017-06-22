@@ -1,0 +1,30 @@
+{
+	"name": "Shaku, the Collector",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "ROGUE",
+	"rarity": "LEGENDARY",
+	"description": "Stealth. Whenever this minion attacks, add a random card to your hand (from your opponent's class).",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"value": 1,
+			"cardFilter": {
+				"class": "CardFilter",
+				"heroClass": "OPPONENT"
+			}
+		}
+	},
+	"attributes": {
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

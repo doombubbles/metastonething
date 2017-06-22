@@ -1,0 +1,30 @@
+{
+	"name": "Executus, Atoned",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"heroClasses": [
+		"HUNTER",
+		"PALADIN",
+		"WARRIOR"
+	],
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If you're deck contains no duplicates, create a custom Ragnaros.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "custom.CreateRagnarosSpell",
+			"spell": {
+				"class": "NullSpell"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

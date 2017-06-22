@@ -1,0 +1,30 @@
+{
+    "name": "Tortollan Forager",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "DRUID",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Battlecry: Add a random minion with 5 or more Attack to your hand.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"attribute": "BASE_ATTACK",
+				"operation": "GREATER_OR_EQUAL",
+				"value": 5
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

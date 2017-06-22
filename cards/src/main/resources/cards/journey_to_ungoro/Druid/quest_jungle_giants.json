@@ -1,0 +1,93 @@
+{
+    "name": "Jungle Giants",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "DRUID",
+    "rarity": "LEGENDARY",
+    "description": "Quest: Summon 5 minions with 5 or more Attack. Reward: Barnabus",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionSummonedTrigger",
+						"targetPlayer": "SELF",
+						"queueCondition": {
+							"class": "AttributeCondition",
+							"attribute": "ATTACK",
+							"operation": "GREATER_OR_EQUAL",
+							"value": 5
+						}
+					},
+					"spell": {
+						"class": "ModifyAttributeSpell",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "DRUID_QUEST",
+						"value": 1
+					}
+				}
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "DRUID_QUEST",
+				"value": 1
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "MinionSummonedTrigger",
+						"targetPlayer": "SELF",
+						"queueCondition": {
+							"class": "AttributeCondition",
+							"attribute": "ATTACK",
+							"operation": "GREATER_OR_EQUAL",
+							"value": 5
+						}
+					},
+					"spell": {
+						"class": "ConditionalSpell",
+						"spell": {
+							"class": "MetaSpell",
+							"spells": [
+								{
+									"class": "ReceiveCardSpell",
+									"targetPlayer": "SELF",
+									"cards": [
+										"minion_barnabus_the_stomper"
+									]
+								},
+								{
+									"class": "ModifyAttributeSpell",
+									"target": "FRIENDLY_PLAYER",
+									"attribute": "DRUID_QUEST",
+									"value": -500
+								}
+							]
+						},
+						"condition": {
+							"class": "ComparisonCondition",
+							"operation": "GREATER_OR_EQUAL",
+							"value1": {
+								"class": "AttributeValueProvider",
+								"target": "FRIENDLY_PLAYER",
+								"attribute": "DRUID_QUEST"
+							},
+							"value2": 6
+						}
+					}
+				}
+			}
+		
+		]
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

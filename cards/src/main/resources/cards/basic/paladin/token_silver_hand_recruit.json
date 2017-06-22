@@ -1,0 +1,35 @@
+{
+	"name": "Silver Hand Recruit",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"description": "",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "ConditionalEffectSpell",
+			"spell1": {
+				"class": "NullSpell"
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"target": "SELF",
+				"attribute": "CHARGE"
+			},
+			"condition": {
+				"class": "AttributeCondition",
+				"target": "FRIENDLY_HERO",
+				"attribute": "CUSTOM_1",
+				"operation": "HAS"
+			}
+		}
+	},
+	"collectible": false,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,28 @@
+{
+	"name": "Cluthmother Zavas ",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"race": "DEMON",
+	"description": "Whenever you discard this minion, give it +2/+2 and return it to your hand.",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "DiscardTrigger",
+			"target": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardAndDoSomethingSpell",
+			"spell": {
+				"class": "BuffSpell",
+				"value": 10
+			},
+			"card": "minion_clutchmother_zavas_10"
+		}
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

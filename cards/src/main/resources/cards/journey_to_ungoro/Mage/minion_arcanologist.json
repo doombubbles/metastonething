@@ -1,0 +1,28 @@
+{
+	"name": "Arcanologist",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Battlecry: Draw a secret from your deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "FromDeckToHandSpell",
+			"value": 1,
+			"cardFilter": {
+				"class": "CardFilter",
+				"operation": "HAS",
+				"attribute": "SECRET"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

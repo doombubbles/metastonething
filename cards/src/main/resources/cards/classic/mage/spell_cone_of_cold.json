@@ -1,0 +1,32 @@
+{
+	"name": "Cone of Cold",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Freeze a minion and the minions next to it, and deal 1 damage to them.",
+	"race": "FROST",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AdjacentEffectSpell",
+				"spell1": {
+					"class": "DamageSpell",
+					"value": 1
+				}
+			},
+			{
+				"class": "AdjacentEffectSpell",
+				"spell1": {
+					"class": "AddAttributeSpell",
+					"attribute": "FROZEN"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

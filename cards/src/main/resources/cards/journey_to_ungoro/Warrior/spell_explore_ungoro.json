@@ -1,0 +1,15 @@
+{
+    "name": "Explore Un'Goro",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "EPIC",
+    "description": "Replace your deck with copies of \"Discover a card.\"",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.ExploreUngoroSpell"
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

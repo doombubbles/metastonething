@@ -1,0 +1,24 @@
+{
+	"name": "Deadly Shot",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Destroy a random enemy minion.",
+	"targetSelection": "NONE",
+	"race": "MARKSMAN",
+	"spell": {
+		"class": "DestroySpell",
+		"target": "ENEMY_MINIONS",
+		"randomTarget": true
+	},
+	"condition": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "GREATER",
+		"value": 0
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

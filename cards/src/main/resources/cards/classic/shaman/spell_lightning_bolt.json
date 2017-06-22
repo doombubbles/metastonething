@@ -1,0 +1,20 @@
+{
+	"name": "Lightning Bolt",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Deal 3 damage. Overload: (1)",
+	"targetSelection": "ANY",
+	"race": "ELEMENTAL",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 3
+	},
+	"attributes": {
+		"OVERLOAD": 1
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}
