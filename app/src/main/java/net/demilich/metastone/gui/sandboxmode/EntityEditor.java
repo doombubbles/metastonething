@@ -69,7 +69,11 @@ public class EntityEditor extends SandboxEditor {
 				setText(null);
 			} else {
 				setGraphic(null);
-				setText(entry.getValue().toString());
+				if (entry.getValue() != null) {
+					setText(entry.getValue().toString());
+				} else {
+					setText("null");
+				}
 			}
 
 		}

@@ -31,9 +31,6 @@ public class HeroToken extends GameToken {
 	private Label cardsLabel;
 	@FXML
 	private Label manaLabel;
-	
-	@FXML
-	private Label questLabel;
 
 	@FXML
 	private Group armorAnchor;
@@ -90,29 +87,6 @@ public class HeroToken extends GameToken {
 		} else {
 			cardsLabel.setText("Fatigue: " + player.getAttributeValue(Attribute.FATIGUE));
 		}
-		
-		if (player.getAttributeValue(Attribute.PRIEST_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.PRIEST_QUEST) - 1) + "/" + "7");
-		} else if (player.getAttributeValue(Attribute.WARLOCK_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.WARLOCK_QUEST) - 1) + "/" + "5");
-		} else if (player.getAttributeValue(Attribute.SHAMAN_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.SHAMAN_QUEST) - 1) + "/" + "10");
-		} else if (player.getAttributeValue(Attribute.HUNTER_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.HUNTER_QUEST) - 1) + "/" + "7");
-		} else if (player.getAttributeValue(Attribute.PALADIN_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.PALADIN_QUEST) - 1) + "/" + "5");
-		} else if (player.getAttributeValue(Attribute.DRUID_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.DRUID_QUEST) - 1) + "/" + "5");
-		} else if (player.getAttributeValue(Attribute.MAGE_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.MAGE_QUEST) - 1) + "/" + "6");
-		} else if (player.getAttributeValue(Attribute.WARRIOR_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.WARRIOR_QUEST) - 1) + "/" + "7");
-		} else if (player.getAttributeValue(Attribute.ROGUE_QUEST) > 0) {
-			questLabel.setText("Quest: " + (player.getAttributeValue(Attribute.ROGUE_QUEST) - 1) + "/" + "4");
-		}
-		
-		else questLabel.setText("            ");
-		
 		if (player.getAttributeValue(Attribute.OVERLOAD) > 0) {
 			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getAttributeValue(Attribute.OVERLOAD));
 		} else {
