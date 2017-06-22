@@ -23,9 +23,9 @@ public enum AlgebraicOperation {
 			}
 			return num1 / num2;
 		case MAXIMUM:
-			return num2 < num1 ? num2 : num1;
-		case MINIMUM:
 			return num2 > num1 ? num2 : num1;
+		case MINIMUM:
+			return num2 < num1 ? num2 : num1;
 		case MODULO:
 			if (num2 == 0) {
 				num2 = 1;

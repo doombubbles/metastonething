@@ -1,10 +1,8 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.SummonEvent;
-import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 
 public class MinionPlayedTrigger extends MinionSummonedTrigger {
@@ -21,12 +19,6 @@ public class MinionPlayedTrigger extends MinionSummonedTrigger {
 		if (summonEvent.getSource() == null) {
 			return false;
 		}
-		
-		Attribute requiredAttribute = (Attribute) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
-		if (requiredAttribute == Attribute.BASE_MANA_COST && summonEvent.getMinion().getAttributeValue(Attribute.BASE_MANA_COST) != 1) {
-			return false;
-		}
-		
 		return super.fire(summonEvent, host);
 	}
 

@@ -81,7 +81,7 @@ public class GreedyOptimizeTurn extends Behaviour {
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
 		List<Card> discardedCards = new ArrayList<Card>();
 		for (Card card : cards) {
-			if (card.getBaseManaCost() >= 4 && !card.getCardId().contains("quest_")) {
+			if (card.getBaseManaCost() >= 4) {
 				discardedCards.add(card);
 			}
 		}

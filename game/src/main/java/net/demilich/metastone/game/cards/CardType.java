@@ -1,13 +1,15 @@
 package net.demilich.metastone.game.cards;
 
 public enum CardType {
+	CHOOSE_ONE,
+	GROUP,
 	HERO,
+	HERO_POWER,
 	MINION,
 	PERMANENT,
 	SPELL,
 	WEAPON,
-	HERO_POWER,
-	CHOOSE_ONE;
+	;
 	
 	public boolean isCardType(CardType cardType) {
 		if (this == CHOOSE_ONE && cardType == SPELL) {

@@ -80,7 +80,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		requestTrainingData(player);
 		List<Card> discardedCards = new ArrayList<Card>();
 		for (Card card : cards) {
-			if (card.getBaseManaCost() > 3  && !card.getCardId().contains("quest_")) {
+			if (card.getBaseManaCost() > 3) {
 				discardedCards.add(card);
 			}
 		}

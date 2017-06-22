@@ -61,14 +61,6 @@ public abstract class Card extends Entity {
 			attributes.put(Attribute.DECK_TRIGGER, desc.deckTrigger);
 		}
 	}
-	
-	
-	
-	
-	public boolean received;
-	
-	
-	
 
 	@Override
 	public Card clone() {

@@ -11,9 +11,9 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.GroupCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -69,7 +69,7 @@ public class SpellUtils {
 	public static Card getCard(GameContext context, SpellDesc spell) {
 		Card card = null;
 		String cardName = (String) spell.get(SpellArg.CARD);
-		card = CardCatalogue.getCardById(cardName);
+		card = context.getCardById(cardName);
 		if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("PENDING_CARD")) {
 			card = (Card) context.getPendingCard();
 		} else if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("EVENT_CARD")) {
@@ -91,6 +91,17 @@ public class SpellUtils {
 			cards[i] = context.getCardById(cardNames[i]);
 		}
 		return cards;
+	}
+
+	public static SpellDesc[] getGroup(GameContext context, SpellDesc spell) {
+		Card card = null;
+		String cardName = (String) spell.get(SpellArg.GROUP);
+		card = context.getCardById(cardName);
+		if (card != null && card instanceof GroupCard) {
+			GroupCard groupCard = (GroupCard) card;
+			return groupCard.getGroup();
+		}
+		return null;
 	}
 	
 	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {

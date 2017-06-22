@@ -32,21 +32,22 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		}
 		Map<ValueProviderArg, Object> arguments = ValueProviderDesc.build(valueProviderClass);
 
-		parseArgument(ValueProviderArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
-		parseArgument(ValueProviderArg.PLAYER_ATTRIBUTE, jsonData, arguments, ParseValueType.PLAYER_ATTRIBUTE);
 		parseArgument(ValueProviderArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
-		parseArgument(ValueProviderArg.MULTIPLIER, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.MIN, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.MAX, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.OFFSET, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.IF_TRUE, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.IF_FALSE, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(ValueProviderArg.RACE, jsonData, arguments, ParseValueType.RACE);
-		parseArgument(ValueProviderArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(ValueProviderArg.CONDITION, jsonData, arguments, ParseValueType.CONDITION);
 		parseArgument(ValueProviderArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
+		parseArgument(ValueProviderArg.GAME_VALUE, jsonData, arguments, ParseValueType.GAME_VALUE);
+		parseArgument(ValueProviderArg.IF_FALSE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ValueProviderArg.IF_TRUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ValueProviderArg.MAX, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ValueProviderArg.MIN, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ValueProviderArg.MULTIPLIER, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ValueProviderArg.OFFSET, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ValueProviderArg.OPERATION, jsonData, arguments, ParseValueType.ALGEBRAIC_OPERATION);
+		parseArgument(ValueProviderArg.PLAYER_ATTRIBUTE, jsonData, arguments, ParseValueType.PLAYER_ATTRIBUTE);
+		parseArgument(ValueProviderArg.RACE, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(ValueProviderArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
+		parseArgument(ValueProviderArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
+		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ValueProviderArg.VALUE_1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ValueProviderArg.VALUE_2, jsonData, arguments, ParseValueType.VALUE);
 

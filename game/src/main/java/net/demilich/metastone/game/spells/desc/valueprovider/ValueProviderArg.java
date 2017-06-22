@@ -2,22 +2,24 @@ package net.demilich.metastone.game.spells.desc.valueprovider;
 
 public enum ValueProviderArg {
 	CLASS,
-	TARGET,
+	
 	ATTRIBUTE,
-	PLAYER_ATTRIBUTE,
-	VALUE,
-	OFFSET,
-	MULTIPLIER,
-	RACE,
-	TARGET_PLAYER,
-	IF_TRUE,
-	IF_FALSE,
 	CONDITION,
 	FILTER,
+	GAME_VALUE,
+	IF_FALSE,
+	IF_TRUE,
+	MAX,
+	MIN,
+	MULTIPLIER,
+	OFFSET,
 	OPERATION,
+	PLAYER_ATTRIBUTE,
+	RACE,
+	TARGET,
+	TARGET_PLAYER,
+	VALUE,
 	VALUE_1,
 	VALUE_2,
-	MIN,
-	MAX
 
 }

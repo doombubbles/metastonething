@@ -1,17 +1,13 @@
 package net.demilich.metastone.game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -99,12 +95,6 @@ public class Player extends Entity {
 	public String getDeckName() {
 		return deckName;
 	}
-	
-	//public List<MinionCard> roguequest;
-	
-	public Map<String, Integer> roguequest = new HashMap<String, Integer>();
-	
-	public MinionCard lastPlayedMinion;
 
 	@Override
 	public EntityType getEntityType() {
@@ -144,6 +134,10 @@ public class Player extends Entity {
 		}
 		return minions;
 	}
+
+	/*public List<Permanent> getPermanents() {
+		return permanents;
+	}*/
 
 	public HashSet<String> getQuests() {
 		return quests;

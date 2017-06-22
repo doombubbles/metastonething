@@ -1,12 +1,10 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -36,16 +34,12 @@ public class ReceiveCardSpell extends Spell {
 				}
 				if (card != null) {
 					Card clone = card.clone();
-					clone.received = true;
 					context.getLogic().receiveCard(player.getId(), clone);
-					
 				}
 			}
 		} else {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
-
-					card.received = true;
 					context.getLogic().receiveCard(player.getId(), card);
 				}
 			}

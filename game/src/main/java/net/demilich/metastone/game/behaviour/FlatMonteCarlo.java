@@ -45,7 +45,7 @@ public class FlatMonteCarlo extends Behaviour {
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
 		List<Card> discardedCards = new ArrayList<Card>();
 		for (Card card : cards) {
-			if (card.getBaseManaCost() >= 4 && !card.getCardId().contains("quest_")) {
+			if (card.getBaseManaCost() >= 4) {
 				discardedCards.add(card);
 			}
 		}
@@ -56,7 +56,7 @@ public class FlatMonteCarlo extends Behaviour {
 		for (Player player : simulation.getPlayers()) {
 			player.setBehaviour(new PlayRandomBehaviour());
 		}
-		simulation.playFromState();
+		simulation.playTurn();
 		return simulation.getWinningPlayerId() == playerId ? 1 : 0;
 	}
 

@@ -54,6 +54,8 @@ public class GameStatistics implements Cloneable {
 			add(Statistic.WEAPONS_PLAYED, 1);
 		case HERO:
 			break;
+		case GROUP:
+			break;
 		}
 		increaseCardCount(card, turn);
 	}

@@ -1,11 +1,9 @@
 package net.demilich.metastone.game.entities;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -106,7 +104,5 @@ public abstract class Entity extends CustomCloneable {
 	public void setOwner(int ownerIndex) {
 		this.ownerIndex = ownerIndex;
 	}
-	
-	public List<Card> primalfin;
 
 }

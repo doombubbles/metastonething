@@ -18,7 +18,7 @@ public class SourceDeserializer implements JsonDeserializer<SourceDesc> {
 	@Override
 	public SourceDesc deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
 		if (!(json instanceof JsonObject)) {
-			throw new JsonParseException("ValueProvider parser expected an JsonObject but found " + json + " instead");
+			throw new JsonParseException("Source parser expected an JsonObject but found " + json + " instead");
 		}
 		JsonObject jsonData = (JsonObject) json;
 		String cardSourceClassName = CardSource.class.getPackage().getName() + "." + jsonData.get("class").getAsString();
@@ -27,7 +27,7 @@ public class SourceDeserializer implements JsonDeserializer<SourceDesc> {
 			cardSourceClass = (Class<? extends CardSource>) Class.forName(cardSourceClassName);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new JsonParseException("ValueProvider parser encountered an invalid class: " + cardSourceClassName);
+			throw new JsonParseException("Source parser encountered an invalid class: " + cardSourceClassName);
 		}
 		Map<SourceArg, Object> arguments = SourceDesc.build(cardSourceClass);
 

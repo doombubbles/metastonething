@@ -22,6 +22,7 @@ import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
+import net.demilich.metastone.game.cards.desc.GroupCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
@@ -200,9 +201,14 @@ public class CardParser {
 			if (!jsonData.getAsJsonObject().has("targetSelection")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'targetSelection' attribute!");
 			}
-			return gson.fromJson(jsonData, HeroPowerCardDesc.class);	
+			return gson.fromJson(jsonData, HeroPowerCardDesc.class);
 		case HERO:
 			return gson.fromJson(jsonData, HeroCardDesc.class);
+		case GROUP:
+			if (!jsonData.getAsJsonObject().has("group")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'group' attribute!");
+			}
+			return gson.fromJson(jsonData, GroupCardDesc.class);
 		default:
 			logger.error("Unknown cardType: " + type);
 			break;
