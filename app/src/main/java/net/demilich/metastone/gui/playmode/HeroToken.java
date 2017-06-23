@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
+import jdk.nashorn.internal.runtime.Context;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -20,6 +21,8 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
+import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.GameContext;
 
 public class HeroToken extends GameToken {
 
@@ -31,6 +34,9 @@ public class HeroToken extends GameToken {
 	private Label cardsLabel;
 	@FXML
 	private Label manaLabel;
+	
+	@FXML
+	private Label questLabel;
 
 	@FXML
 	private Group armorAnchor;
@@ -87,6 +93,39 @@ public class HeroToken extends GameToken {
 		} else {
 			cardsLabel.setText("Fatigue: " + player.getAttributeValue(Attribute.FATIGUE));
 		}
+		
+		
+		if (!player.getQuests().isEmpty()) {
+			int n = 0;
+			switch ((String) player.getQuests().toArray()[player.getQuests().size() - 1]) {
+				case "quest_awaken_the_makers":
+				case "quest_fire_plumes_heart":
+				case "quest_the_marsh_queen":
+					n = 7;
+					break;
+				case "quest_unite_the_murlocs":
+					n = 10;
+					break;
+				case "quest_jungle_giants":
+				case "quest_the_last_kaleidosaur":
+					n = 5;
+					break;
+				case "quest_lakkari_sacrfice":
+				case "quest_open_the_waygate":
+					n = 6;
+					break;
+				case "quest_the_caverns_below":
+					n = 4;
+					break;
+			}
+			questLabel.setText("Quest: " + (n - player.getAttributeValue(Attribute.QUEST)) + "/" + n);
+			
+			
+		} else questLabel.setText("            "); 
+		
+		
+		
+		
 		if (player.getAttributeValue(Attribute.OVERLOAD) > 0) {
 			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getAttributeValue(Attribute.OVERLOAD));
 		} else {

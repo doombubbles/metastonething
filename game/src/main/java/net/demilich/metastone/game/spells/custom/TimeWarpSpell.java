@@ -12,17 +12,6 @@ public class TimeWarpSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		/*
-		context.fireGameEvent(new TurnEndEvent(context, player.getId()));
-		player.setMaxMana(Math.min(player.getMaxMana() + 1, 10));
-		player.setMana(player.getMaxMana());
-		context.getLogic().drawCard(player.getId(), source);
-		context.fireGameEvent(new TurnStartEvent(context, player.getId()));
-		for (Minion minion : player.getMinions()) {
-			minion.removeAttribute(Attribute.SUMMONING_SICKNESS);
-			
-		}
-		*/
 		context.getLogic().startTurn(player.getId());
 	}
 

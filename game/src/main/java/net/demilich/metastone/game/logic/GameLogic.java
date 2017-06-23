@@ -1300,7 +1300,24 @@ public class GameLogic implements Cloneable {
 	private void mulligan(Player player, boolean begins) {
 		int numberOfStarterCards = begins ? STARTER_CARDS : STARTER_CARDS + 1;
 		List<Card> starterCards = new ArrayList<>();
-		for (int j = 0; j < numberOfStarterCards; j++) {
+
+		int number2 = numberOfStarterCards;
+		Card yupCard = null;
+		
+		for (Card maybeCard : player.getDeck()) {
+			if (maybeCard.getCardId().contains("quest_"))
+			{
+				number2 -= 1;
+				yupCard = maybeCard;
+				starterCards.add(maybeCard);
+				break;
+			}
+		}
+		
+		player.getDeck().remove(yupCard);
+		
+		
+		for (int j = 0; j < number2; j++) {
 			Card randomCard = player.getDeck().getRandom();
 			if (randomCard != null) {
 				player.getDeck().remove(randomCard);

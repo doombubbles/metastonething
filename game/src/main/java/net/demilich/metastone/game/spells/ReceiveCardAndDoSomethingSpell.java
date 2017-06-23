@@ -14,6 +14,7 @@ import net.demilich.metastone.game.targeting.CardLocation;
 public class ReceiveCardAndDoSomethingSpell extends Spell {
 
 	private void castSomethingSpell(GameContext context, Player player, SpellDesc spell, Entity source, Card card) {
+		card.received = true;
 		context.getLogic().receiveCard(player.getId(), card);
 		// card may be null (i.e. try to draw from deck, but already in
 		// fatigue)

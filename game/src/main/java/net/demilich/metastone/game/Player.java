@@ -1,8 +1,10 @@
 package net.demilich.metastone.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
@@ -191,5 +193,7 @@ public class Player extends Entity {
 	public String toString() {
 		return "[PLAYER " + "id: " + getId() + ", name: " + getName() + ", hero: " + getHero() + "]";
 	}
+	
+	public Map<String, Integer> roguequest = new HashMap<String, Integer>();
 
 }

@@ -34,12 +34,14 @@ public class ReceiveCardSpell extends Spell {
 				}
 				if (card != null) {
 					Card clone = card.clone();
+					clone.received = true;
 					context.getLogic().receiveCard(player.getId(), clone);
 				}
 			}
 		} else {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
+					card.received = true;
 					context.getLogic().receiveCard(player.getId(), card);
 				}
 			}

@@ -82,6 +82,7 @@ public enum Attribute {
 	JADE,
 	CUSTOM_2,
 	CUSTOM_3,
+	START_IN_HAND,
 
 	// AI flags
 	MARKED_FOR_DEATH, 
