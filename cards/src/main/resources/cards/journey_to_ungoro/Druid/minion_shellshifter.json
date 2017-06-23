@@ -1,16 +1,15 @@
 {
-    "name": "Shellshifter",
-    "baseManaCost": 4,
-    "type": "MINION",
-    "baseAttack": 3,
-    "baseHp": 3,
-    "heroClass": "DRUID",
-    "rarity": "RARE",
-    "race": "NONE",
-    "description": "Choose One - Transform into a 5/3 with Stealth; or a 3/5 with Taunt.",
+	"name": "Shellshifter",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Choose One - Transform into a 5/3 with Stealth; or a 3/5 with Taunt.",
 	"options": [
 		{
-			"description": "5/3 Stealth",
+			"description": "5/3 with Stealth",
 			"spell": {
 				"class": "TransformMinionSpell",
 				"target": "SELF",
@@ -18,7 +17,7 @@
 			}
 		},
 		{
-			"description": "3/5 Taunt",
+			"description": "3/5 with Taunt",
 			"spell": {
 				"class": "TransformMinionSpell",
 				"target": "SELF",
@@ -27,14 +26,14 @@
 		}
 	],
 	"bothOptions": {
-		"description": "5/5 Stealth Taunt",
+		"description": "5/5 with Stealth and Taunt",
 		"spell": {
 			"class": "TransformMinionSpell",
 			"target": "SELF",
-			"card": "token_shellshifter_both"
+			"card": "token_shellshifter_stealth_taunt"
 		}
 	},
-    "collectible": true,
-    "set": "JOURNEY_TO_UNGORO",
-    "fileFormatVersion": 1
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
 }

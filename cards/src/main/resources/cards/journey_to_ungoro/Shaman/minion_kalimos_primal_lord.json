@@ -52,14 +52,11 @@
 			]
 		},
 		"condition": {
-			"class": "ComparisonCondition",
-			"operation": "GREATER_OR_EQUAL",
-			"value1": {
-				"class": "AttributeValueProvider",
-				"target": "FRIENDLY_PLAYER",
-				"attribute": "ELEMENTALS_LAST_TURN"
-			},
-			"value2": 1
+			"class": "PlayedLastTurnCondition",
+			"filter": {
+				"class": "CardFilter",
+				"race": "ELEMENTAL"
+			}
 		}
 	},
 	"attributes": {

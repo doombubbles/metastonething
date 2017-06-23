@@ -6,10 +6,8 @@
 	"baseHp": 8,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "DEMON",
 	"description": "Taunt. Battlecry: Discard two random cards.",
 	"battlecry": {
-		"targetSelection": "NONE",
 		"spell": {
 			"class": "DiscardSpell",
 			"value": 2

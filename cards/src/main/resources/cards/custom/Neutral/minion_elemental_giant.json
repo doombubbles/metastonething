@@ -9,14 +9,12 @@
 	"rarity": "EPIC",
 	"description": "Costs (2) less for each Elemntal you played last turn.",
 	"manaCostModifier": {
-		"class": "AlgebraicValueProvider",
-		"operation": "MULTIPLY",
-		"value1": {
-			"class": "AttributeValueProvider",
-			"target": "FRIENDLY_PLAYER",
-			"attribute": "ELEMENTALS_LAST_TURN"
+		"class": "PlayedLastTurnValueProvider",
+		"filter": {
+			"class": "CardFilter",
+			"race": "ELEMENTAL"
 		},
-		"value2": 2
+		"multiplier": 2
 	},
 	"collectible": true,
 	"set": "CUSTOM",

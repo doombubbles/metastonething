@@ -1,5 +1,5 @@
 {
-	"name": "Totrollan Shellraiser",
+	"name": "Tortollan Shellraiser",
 	"baseManaCost": 4,
 	"type": "MINION",
 	"baseAttack": 2,
@@ -14,11 +14,11 @@
 		"target": "FRIENDLY_MINIONS",
 		"randomTarget": true
 	},
+	"collectible": true,
 	"attributes": {
 		"DEATHRATTLES": true,
 		"TAUNT": true
 	},
-	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1
 }

@@ -1,23 +1,19 @@
 {
-    "name": "Stampede",
-    "baseManaCost": 1,
-    "type": "SPELL",
-    "heroClass": "HUNTER",
-    "rarity": "EPIC",
-    "description": "Each time you play a Beast this turn, add a random Beast to your hand.",
-    "targetSelection": "NONE",
-	"race": "BEAST_MASTERY",
-    "spell": {
+	"name": "Stampede",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "EPIC",
+	"description": "Whenever you play a Beast this turn, add a random Beast to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
 		"class": "AddSpellTriggerSpell",
 		"target": "FRIENDLY_PLAYER",
 		"trigger": {
 			"eventTrigger": {
-				"class": "AfterMinionPlayedTrigger",
+				"class": "MinionPlayedTrigger",
 				"targetPlayer": "SELF",
-				"queueCondition": {
-					"class": "RaceCondition",
-					"race": "BEAST"
-				}
+				"race": "BEAST"
 			},
 			"spell": {
 				"class": "ReceiveCardSpell",
@@ -29,7 +25,7 @@
 			"oneTurn": true
 		}
 	},
-    "collectible": true,
-    "set": "JOURNEY_TO_UNGORO",
-    "fileFormatVersion": 1
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
 }

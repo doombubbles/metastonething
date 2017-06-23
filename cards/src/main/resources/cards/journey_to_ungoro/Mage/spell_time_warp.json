@@ -7,13 +7,7 @@
 	"description": "Take an extra turn.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "MetaSpell",
-		"spells": [
-			{
-				"class": "custom.TimeWarpSpell"
-			}
-		]
-		
+		"class": "custom.TimeWarpSpell"
 	},
 	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",

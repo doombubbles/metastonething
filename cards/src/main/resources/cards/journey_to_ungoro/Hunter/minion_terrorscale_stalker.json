@@ -1,13 +1,13 @@
 {
-    "name": "Terrorscale Stalker",
-    "baseManaCost": 3,
-    "type": "MINION",
-    "baseAttack": 3,
-    "baseHp": 3,
-    "heroClass": "HUNTER",
-    "rarity": "RARE",
-    "race": "NONE",
-    "description": "Battlecry: Trigger a friendly minion's Deathrattle.",
+	"name": "Terrorscale Stalker",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"race": "BEAST",
+	"description": "Battlecry: Trigger a friendly minion's Deathrattle.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
@@ -22,7 +22,7 @@
 	"attributes": {
 		"BATTLECRY": true
 	},
-    "collectible": true,
-    "set": "JOURNEY_TO_UNGORO",
-    "fileFormatVersion": 1
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
 }

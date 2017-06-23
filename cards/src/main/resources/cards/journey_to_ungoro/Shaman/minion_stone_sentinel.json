@@ -15,25 +15,22 @@
 			"spells": [
 				{
 					"class": "SummonSpell",
-					"card": "token_spirit_wolf",
+					"card": "token_rock_elemental",
 					"boardPositionRelative": "RIGHT"
 				},
 				{
 					"class": "SummonSpell",
-					"card": "token_spirit_wolf",
+					"card": "token_rock_elemental",
 					"boardPositionRelative": "LEFT"
 				}
 			]
 		},
 		"condition": {
-			"class": "ComparisonCondition",
-			"operation": "GREATER_OR_EQUAL",
-			"value1": {
-				"class": "AttributeValueProvider",
-				"target": "FRIENDLY_PLAYER",
-				"attribute": "ELEMENTALS_LAST_TURN"
-			},
-			"value2": 1
+			"class": "PlayedLastTurnCondition",
+			"filter": {
+				"class": "CardFilter",
+				"race": "ELEMENTAL"
+			}
 		}
 	},
 	"attributes": {

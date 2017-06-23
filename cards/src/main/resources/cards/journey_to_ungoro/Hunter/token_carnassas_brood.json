@@ -1,5 +1,5 @@
 {
-	"name": "Carnassa's Brood",
+	"name": "Carnassa's Brood'",
 	"baseManaCost": 1,
 	"type": "MINION",
 	"baseAttack": 3,
@@ -9,6 +9,7 @@
 	"race": "BEAST",
 	"description": "Battlecry: Draw a card.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "DrawCardSpell"
 		}

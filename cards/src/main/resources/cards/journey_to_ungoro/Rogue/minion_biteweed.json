@@ -1,13 +1,12 @@
 {
-    "name": "Biteweed",
-    "baseManaCost": 2,
-    "type": "MINION",
-    "baseAttack": 1,
-    "baseHp": 1,
-    "heroClass": "ROGUE",
-    "rarity": "EPIC",
-    "race": "NONE",
-    "description": "Combo: Gain +1/+1 for each other card you've played this turn.",
+	"name": "Biteweed",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Combo: Gain +1/+1 for each other card you've played this turn.",
 	"battlecry": {
 		"spell": {
 			"class": "BuffSpell",
@@ -23,7 +22,7 @@
 	"attributes": {
 		"COMBO": true
 	},
-    "collectible": true,
-    "set": "JOURNEY_TO_UNGORO",
-    "fileFormatVersion": 1
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
 }

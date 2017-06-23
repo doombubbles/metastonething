@@ -9,12 +9,12 @@
 	"description": "Deathrattle: Go dormant. Play 4 cards in a turn to revive this minion.",
 	"deathrattle": {
 		"class": "SummonSpell",
-		"card": "token_sherazin_seed"
+		"card": "permanent_sherazin_seed"
 	},
+	"collectible": true,
 	"attributes": {
 		"DEATHRATTLES": true
 	},
-	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1
 }

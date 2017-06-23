@@ -13,10 +13,10 @@
 		"cardLocation": "DECK",
 		"value": 1
 	},
+	"collectible": true,
 	"attributes": {
 		"DEATHRATTLES": true
 	},
-	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1
 }

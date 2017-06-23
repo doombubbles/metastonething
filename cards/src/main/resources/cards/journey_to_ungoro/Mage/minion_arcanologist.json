@@ -6,16 +6,15 @@
 	"baseHp": 3,
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
-	"description": "Battlecry: Draw a secret from your deck.",
+	"description": "Battlecry: Draw a Secret from your deck.",
 	"battlecry": {
-		"targetSelection": "NONE",
 		"spell": {
 			"class": "FromDeckToHandSpell",
 			"value": 1,
 			"cardFilter": {
 				"class": "CardFilter",
-				"operation": "HAS",
-				"attribute": "SECRET"
+				"attribute": "SECRET",
+				"operation": "HAS"
 			}
 		}
 	},
