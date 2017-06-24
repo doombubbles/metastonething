@@ -36,7 +36,7 @@ public class RogueQuestTrigger extends GameEventTrigger {
 		
 		Minion minion = (Minion) summonEvent.getMinion();
 
-		Player player = (Player) summonEvent.getEventSource();
+		Player player = (Player) summonEvent.getGameContext().getActivePlayer();
 		
 		
 		int i;
@@ -64,7 +64,7 @@ public class RogueQuestTrigger extends GameEventTrigger {
 		if (i2 > i) {
 			return true;
 		} else return false;
-			
+		
 	
 		
 		

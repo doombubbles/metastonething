@@ -272,6 +272,6 @@ public abstract class Card extends Entity {
 		return String.format("[%s '%s' %s Manacost:%d]", getCardType(), getName(), getReference(), getBaseManaCost());
 	}
 	
-	public boolean received;
+	public boolean received = false;
 
 }
