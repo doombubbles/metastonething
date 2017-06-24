@@ -37,6 +37,12 @@ public class SummonToken extends GameToken {
 
 	@FXML
 	private Shape frozen;
+	
+	@FXML
+	private Shape elusive;
+	
+	@FXML
+	private Shape elusivetaunt;
 
 	private CardTooltip cardTooltip;
 	
@@ -49,6 +55,8 @@ public class SummonToken extends GameToken {
 		tooltip.setGraphic(cardTooltip);
 		Tooltip.install(this, tooltip);
 		frozen.getStrokeDashArray().add(16.0);
+		elusive.getStrokeDashArray().add(16.0);
+		elusivetaunt.getStrokeDashArray().add(16.0);
 	}
 
 	public void setSummon(Summon summon) {
@@ -78,6 +86,8 @@ public class SummonToken extends GameToken {
 		}
 		deathrattle.setVisible(summon.hasAttribute(Attribute.DEATHRATTLES));
 		frozen.setVisible(summon.hasAttribute(Attribute.FROZEN));
+		elusive.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && !summon.hasAttribute(Attribute.TAUNT));
+		elusivetaunt.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && summon.hasAttribute(Attribute.TAUNT));
 		visualizeStealth(summon);
 	}
 
