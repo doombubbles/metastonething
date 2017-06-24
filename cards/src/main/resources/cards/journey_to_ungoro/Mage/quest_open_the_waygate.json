@@ -9,7 +9,7 @@
 	"quest": {
 		"class": "MageQuestTrigger",
 		"targetPlayer": "SELF",
-		"value": 5
+		"value": 6
 	},
 	"spell": {
 		"class": "ReceiveCardSpell",

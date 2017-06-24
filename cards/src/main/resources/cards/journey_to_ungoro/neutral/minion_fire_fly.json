@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "ReceiveCardSpell",
 			"targetPlayer": "SELF",
-			"card": "token_elemental"
+			"card": "token_flame_elemental"
 		}
 	},
 	"attributes": {
