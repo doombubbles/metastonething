@@ -5,7 +5,7 @@
 	"heroClass": "MAGE",
 	"rarity": "EPIC",
 	"description": "Deal 1 damage. Give your minions +1 Attack this turn for each damage dealt.",
-	"targetSelection": "MINIONS",
+	"targetSelection": "ANY",
 	"race": "FIRE",
 	"spell": {
 		"class": "MetaSpell",
@@ -19,7 +19,8 @@
 				"target": "FRIENDLY_MINIONS",
 				"value": {
 					"class": "AttributeValueProvider",
-					"attribute": "LAST_HIT"
+					"attribute": "LAST_HIT",
+					"target": "TARGET"
 				}
 			}
 		]

@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Deal 2 damage. Add a 1/2 Elemental to your hand.",
 	"targetSelection": "ANY",
+	"race": "FIRE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
@@ -16,7 +17,7 @@
 			{
 				"class": "ReceiveCardSpell",
 				"targetPlayer": "SELF",
-				"card": "token_elemental"
+				"card": "token_flame_elemental"
 			}
 		]
 	},
