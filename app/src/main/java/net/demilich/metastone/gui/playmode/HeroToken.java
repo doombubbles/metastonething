@@ -108,14 +108,12 @@ public class HeroToken extends GameToken {
 					break;
 				case "quest_jungle_giants":
 				case "quest_the_last_kaleidosaur":
+				case "quest_the_caverns_below":
+				case "quest_lakkari_sacrfice":
 					n = 5;
 					break;
-				case "quest_lakkari_sacrfice":
 				case "quest_open_the_waygate":
 					n = 6;
-					break;
-				case "quest_the_caverns_below":
-					n = 4;
 					break;
 			}
 			questLabel.setText("Quest: " + (n - player.getAttributeValue(Attribute.QUEST)) + "/" + n);

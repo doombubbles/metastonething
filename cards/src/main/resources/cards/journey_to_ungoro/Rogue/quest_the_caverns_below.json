@@ -4,12 +4,12 @@
 	"type": "SPELL",
 	"heroClass": "ROGUE",
 	"rarity": "LEGENDARY",
-	"description": "Quest: Play 4 minions with the same name. Reward: Crystal Core.",
+	"description": "Quest: Play 5 minions with the same name. Reward: Crystal Core.",
 	"targetSelection": "NONE",
 	"quest": {
 		"class": "RogueQuestTrigger",
 		"targetPlayer": "SELF",
-		"value": 4
+		"value": 5
 	},
 	"spell": {
 		"class": "ReceiveCardSpell",
