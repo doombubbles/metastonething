@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <center>
     <StackPane fx:id="targetAnchor" prefHeight="115.0" prefWidth="108.0">
       <children>
@@ -57,8 +57,18 @@
 	            <Font name="Arial Bold" size="10.0" />
 	          </font>
 	        </Label>
-	            <Group fx:id="weaponAttackAnchor" StackPane.alignment="BOTTOM_LEFT" />
-	            <Group fx:id="weaponDurabilityAnchor" StackPane.alignment="BOTTOM_RIGHT" />
+	            <ImageView fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="2.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
+					<image>
+						<Image url="/img/common/weapon_attack.png" />
+					</image>
+				</ImageView>
+            <Group fx:id="weaponAttackAnchor" StackPane.alignment="BOTTOM_LEFT" />
+	            <ImageView fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_RIGHT">
+					<image>
+						<Image url="/img/common/weapon_durability.png" />
+					</image>
+				</ImageView>
+            <Group fx:id="weaponDurabilityAnchor" StackPane.alignment="BOTTOM_RIGHT" />
 	      </children>
 	      <padding>
 	        <Insets bottom="4.0" left="4.0" top="4.0" />

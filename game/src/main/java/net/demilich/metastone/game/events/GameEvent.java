@@ -23,7 +23,7 @@ public abstract class GameEvent {
 			int counter = ((SpellTrigger) context.getLogic().getQuests(player1).get(context.getLogic().getQuests(player1).size() - 1)).getPrimaryCount();
 			player1.setAttribute(Attribute.QUEST, counter);
 		}
-		Player player2 = context.getPlayer1();
+		Player player2 = context.getPlayer2();
 		if (!player2.getQuests().isEmpty()) {
 			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(context.getLogic().getQuests(player2).size() - 1)).getPrimaryCount();
 			player2.setAttribute(Attribute.QUEST, counter);

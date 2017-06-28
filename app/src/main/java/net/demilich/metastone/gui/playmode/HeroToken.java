@@ -18,6 +18,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.QuestCard;
 import net.demilich.metastone.game.entities.heroes.Hero;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
@@ -109,7 +110,7 @@ public class HeroToken extends GameToken {
 				case "quest_jungle_giants":
 				case "quest_the_last_kaleidosaur":
 				case "quest_the_caverns_below":
-				case "quest_lakkari_sacrfice":
+				case "quest_lakkari_sacrifice":
 					n = 5;
 					break;
 				case "quest_open_the_waygate":
@@ -170,7 +171,13 @@ public class HeroToken extends GameToken {
 			if (card instanceof QuestCard) {
 				secretIcon = new ImageView(IconFactory.getImageUrl("common/quest.png"));
 			} else {
-				secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
+				if (card.getHeroClass() == HeroClass.PALADIN) {
+					secretIcon = new ImageView(IconFactory.getImageUrl("common/secretyellow.png"));
+				} else if (card.getHeroClass() == HeroClass.MAGE) {
+					secretIcon = new ImageView(IconFactory.getImageUrl("common/secretpink.png"));
+				} else if (card.getHeroClass() == HeroClass.HUNTER) {
+					secretIcon = new ImageView(IconFactory.getImageUrl("common/secretgreen.png"));
+				} else secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			}
 			secretsAnchor.getChildren().add(secretIcon);
 
