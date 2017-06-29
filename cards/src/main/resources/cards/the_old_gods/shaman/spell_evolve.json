@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Transform your minions into random minions that cost (1) more.",
 	"targetSelection": "NONE",
+	"race": "ENHANCEMENT",
 	"spell": {
 		"class": "TransformToRandomMinionSpell",
 		"target": "FRIENDLY_MINIONS",

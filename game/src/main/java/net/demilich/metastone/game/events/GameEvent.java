@@ -59,9 +59,10 @@ public abstract class GameEvent {
 			player1.setAttribute(Attribute.QUEST, counter);
 		}
 		Player player2 = context.getPlayer2();
-		if (player2.getQuests().size() >= 1) {
-			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(context.getLogic().getQuests(player2).size() - 1)).getPrimaryCount();
+		if (player2.getQuests().size() >= 1 && !context.gameDecided()) {
+			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(0 /*context.getLogic().getQuests(player2).size() - 1 */ )).getPrimaryCount();
 			player2.setAttribute(Attribute.QUEST, counter);
+			
 		}
 	}
 }

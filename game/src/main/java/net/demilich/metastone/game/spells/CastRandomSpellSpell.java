@@ -48,7 +48,7 @@ public class CastRandomSpellSpell extends Spell {
 		}
 		CardCollection filteredSpells = new CardCollection();
 		for (Card spell : spells) {
-			if (filter == null || filter.matches(context, player, spell)) {
+			if ((filter == null || filter.matches(context, player, spell)) && !spell.getCardId().contains("quest_")) {
 				filteredSpells.add(spell);
 			}
 		}

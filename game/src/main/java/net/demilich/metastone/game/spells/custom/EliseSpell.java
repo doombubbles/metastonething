@@ -50,10 +50,16 @@ public class EliseSpell extends Spell {
 			cards.add(card);
 		}
 		
+		
+		int avail = 10 - player.getHand().getCount();
+		while (avail < cards.getCount()) {
+			cards.removeFirst();
+		}
 		for (Card card : cards) {
 			card.received = true;
-			context.getLogic().receiveCard(player.getId(), card);
+			context.getLogic().receiveCard(player.getId(), card, source);
 		}
+		
 	}
 
 }
