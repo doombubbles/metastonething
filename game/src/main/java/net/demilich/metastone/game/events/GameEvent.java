@@ -17,18 +17,7 @@ public abstract class GameEvent {
 		this.context = context;
 		this.targetPlayerId = targetPlayerId;
 		this.sourcePlayerId = sourcePlayerId;
-		
-		Player player1 = context.getPlayer1();
-		if (!player1.getQuests().isEmpty()) {
-			int counter = ((SpellTrigger) context.getLogic().getQuests(player1).get(context.getLogic().getQuests(player1).size() - 1)).getPrimaryCount();
-			player1.setAttribute(Attribute.QUEST, counter);
-		}
-		Player player2 = context.getPlayer2();
-		if (!player2.getQuests().isEmpty()) {
-			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(context.getLogic().getQuests(player2).size() - 1)).getPrimaryCount();
-			player2.setAttribute(Attribute.QUEST, counter);
-		}
-		
+		updateQuests(context);
 	}
 
 	/**
@@ -61,5 +50,18 @@ public abstract class GameEvent {
 	@Override
 	public String toString() {
 		return "[EVENT " + getClass().getSimpleName() + "]";
+	}
+	
+	public void updateQuests(GameContext context) {
+		Player player1 = context.getPlayer1();
+		if (!player1.getQuests().isEmpty()) {
+			int counter = ((SpellTrigger) context.getLogic().getQuests(player1).get(context.getLogic().getQuests(player1).size() - 1)).getPrimaryCount();
+			player1.setAttribute(Attribute.QUEST, counter);
+		}
+		Player player2 = context.getPlayer2();
+		if (!player2.getQuests().isEmpty()) {
+			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(context.getLogic().getQuests(player2).size() - 1)).getPrimaryCount();
+			player2.setAttribute(Attribute.QUEST, counter);
+		}
 	}
 }

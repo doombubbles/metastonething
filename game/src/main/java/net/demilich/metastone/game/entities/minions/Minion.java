@@ -1,6 +1,10 @@
 package net.demilich.metastone.game.entities.minions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.EntityType;
 
@@ -35,5 +39,7 @@ public class Minion extends Summon {
 		setBaseAttack(baseAttack);
 		setBaseHp(baseHp);
 	}
+	
+	public List<Card> primalfinchampion = new ArrayList<Card>();
 	
 }
