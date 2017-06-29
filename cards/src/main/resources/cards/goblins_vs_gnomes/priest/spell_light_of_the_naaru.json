@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Restore 3 Health. If the target is still damaged, summon a Lightwarden.",
 	"targetSelection": "ANY",
+	"race": "HOLY",
 	"spell": {
 		"class": "ConditionalEffectSpell",
 		"spell1": {

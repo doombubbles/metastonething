@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Double a minion's Attack.",
 	"targetSelection": "MINIONS",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "DoubleAttackSpell"
 	},

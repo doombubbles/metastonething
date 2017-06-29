@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 2 damage to an undamaged minion.",
 	"targetSelection": "MINIONS",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "DamageSpell",
 		"value": 2,

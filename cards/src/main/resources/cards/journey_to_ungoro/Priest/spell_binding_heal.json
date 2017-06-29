@@ -6,6 +6,7 @@
     "rarity": "COMMON",
     "description": "Restore 5 Health to a minion and your hero.",
     "targetSelection": "MINIONS",
+	"race": "HOLY",
     "spell": {
         "class": "MetaSpell",
 		"spells": [

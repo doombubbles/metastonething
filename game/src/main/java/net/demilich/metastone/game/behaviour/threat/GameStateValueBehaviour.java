@@ -37,7 +37,9 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
 		GameContext simulation = context.clone();
+		int queststhen = simulation.getLogic().getQuests(simulation.getPlayer(playerId)).size();
 		simulation.getLogic().performGameAction(playerId, action);
+		int questsnow = simulation.getLogic().getQuests(simulation.getPlayer(playerId)).size();
 		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
 			return heuristic.getScore(simulation, playerId);
 		}
@@ -52,7 +54,9 @@ public class GameStateValueBehaviour extends Behaviour {
 				break;
 			}
 		}
-
+		if (questsnow > queststhen) {
+			return 99999;
+		}
 		return score;
 	}
 
@@ -80,7 +84,7 @@ public class GameStateValueBehaviour extends Behaviour {
 		requestTrainingData(player);
 		List<Card> discardedCards = new ArrayList<Card>();
 		for (Card card : cards) {
-			if (card.getBaseManaCost() > 3) {
+			if (card.getBaseManaCost() > 3 && !card.getCardId().contains("quest_")) {
 				discardedCards.add(card);
 			}
 		}

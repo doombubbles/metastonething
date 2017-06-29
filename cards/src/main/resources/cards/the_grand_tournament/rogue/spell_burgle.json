@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Add 2 random class cards to your hand (from your opponent's class).",
 	"targetSelection": "NONE",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "ReceiveCardSpell",
 		"value": 2,

@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Draw three 1-Cost minions from your deck.",
 	"targetSelection": "NONE",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "FromDeckToHandSpell",
 		"value": 3,

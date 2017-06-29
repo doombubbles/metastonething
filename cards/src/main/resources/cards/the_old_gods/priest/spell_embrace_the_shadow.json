@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Your healing effects deal damage instead this turn.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "AddAttributeSpell",
 		"target": "FRIENDLY_HERO",

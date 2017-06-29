@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Put a copy of a random minion from your opponent's deck into the battlefield.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "SummonRandomMinionFilteredSpell",
 		"card": "token_shadow_of_nothing",

@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Deal 2 damage to a minion. If you have a weapon, give it +2 Attack.",
 	"targetSelection": "MINIONS",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

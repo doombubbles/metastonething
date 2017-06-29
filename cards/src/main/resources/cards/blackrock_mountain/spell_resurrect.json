@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Summon a random friendly minion that died this game.",
 	"targetSelection": "NONE",
+	"race": "HOLY",
 	"spell": {
 		"class": "ResurrectSpell"
 	},

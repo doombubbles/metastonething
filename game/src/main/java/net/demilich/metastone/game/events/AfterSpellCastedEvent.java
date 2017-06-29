@@ -13,6 +13,7 @@ public class AfterSpellCastedEvent extends GameEvent {
 		super(context, target == null ? -1 : target.getOwner(), playerId);
 		this.sourceCard = sourceCard;
 		this.spellTarget = target;
+		updateQuests(context);
 	}
 	
 	@Override

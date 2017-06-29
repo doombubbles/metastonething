@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Put a copy of a random card in your opponent's hand into your hand.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "CopyCardSpell",
 		"value": 1,

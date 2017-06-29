@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Discover a minion. Give it +1/+1.",
 	"targetSelection": "NONE",
+	"race": "HOLY",
 	"spell": {
 		"class": "DiscoverRandomCardSpell",
 		"spell": {

@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Give your minions Stealth until your next turn.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "AddAttributeSpell",
 		"target": "FRIENDLY_MINIONS",

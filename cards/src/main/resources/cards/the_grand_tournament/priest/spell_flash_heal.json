@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Restore 5 Health.",
 	"targetSelection": "ANY",
+	"race": "HOLY",
 	"spell": {
 		"class": "HealSpell",
 		"value": 5

@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Give a minion +2/+4 and Spell Damage +1",
 	"targetSelection": "MINIONS",
+	"race": "DISCIPLINE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

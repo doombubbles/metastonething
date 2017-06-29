@@ -1821,7 +1821,7 @@ public class GameLogic implements Cloneable {
 		} else if (oldMaxHp < target.getMaxHp()) {
 			target.setHp(target.getHp() + target.getMaxHp() - oldMaxHp);
 		}
-
+		target.setAttribute(Attribute.SILENCED, true);
 		log("{} was silenced", target);
 	}
 

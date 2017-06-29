@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 5 damage to the enemy hero.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ENEMY_HERO",

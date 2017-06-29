@@ -6,6 +6,7 @@
     "rarity": "COMMON",
     "description": "Discover a card from your opponent's class.",
     "targetSelection": "NONE",
+	"race": "OUTLAW",
     "spell": {
 		"class": "DiscoverRandomCardSpell",
 		"spell": {

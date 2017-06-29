@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Summon three 1/1 Silver Hand Recruits. Equip a 1/4 Weapon.",
 	"targetSelection": "NONE",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

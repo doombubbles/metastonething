@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 2 damage.",
 	"targetSelection": "ANY",
+	"race": "HOLY",
 	"spell": {
 		"class": "DamageSpell",
 		"value": 2

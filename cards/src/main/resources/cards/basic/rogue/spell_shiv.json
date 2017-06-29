@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 1 damage. Draw a card.",
 	"targetSelection": "ANY",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

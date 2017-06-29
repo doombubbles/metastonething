@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Destroy an enemy minion.",
 	"targetSelection": "ENEMY_MINIONS",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "DestroySpell"
 	},

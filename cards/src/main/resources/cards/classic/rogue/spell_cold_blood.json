@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Give a minion +2 Attack. Combo: +4 Attack instead.",
 	"targetSelection": "MINIONS",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "ComboSpell",
 		"exclusive": true,

@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Deal 2 damage. Combo: Deal 4 damage instead.",
 	"targetSelection": "ANY",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "ComboSpell",
 		"exclusive": true,

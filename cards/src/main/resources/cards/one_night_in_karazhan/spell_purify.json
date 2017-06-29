@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Silence a minion. Draw a card.",
 	"targetSelection": "MINIONS",
+	"race": "DISCIPLINE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

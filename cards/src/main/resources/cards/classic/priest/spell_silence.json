@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Silence a minion.",
 	"targetSelection": "MINIONS",
+	"race": "SHADOW",
 	"spell": {
 		"class": "SilenceSpell"
 	},

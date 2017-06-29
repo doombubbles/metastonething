@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Draw cards until you have as many in hand as your opponent.",
 	"targetSelection": "NONE",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "DrawCardSpell",
 		"value": {

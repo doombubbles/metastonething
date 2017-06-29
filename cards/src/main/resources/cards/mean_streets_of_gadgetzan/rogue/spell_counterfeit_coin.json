@@ -4,8 +4,9 @@
 	"type": "SPELL",
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
-	"description": "Gain 1 Mana this turn only.",
+	"description": "Gain 1 Mana Crystal this turn only.",
 	"targetSelection": "NONE",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "GainManaSpell",
 		"value": 1

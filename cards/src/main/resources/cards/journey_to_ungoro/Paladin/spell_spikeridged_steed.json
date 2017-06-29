@@ -6,6 +6,7 @@
     "rarity": "RARE",
     "description": "Give a minion +2/+6 and Taunt. When it dies, summon a Stegodon.",
 	"targetSelection": "MINIONS",
+	"race": "PROTECTION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Deal 2 damage to the enemy hero. Combo: Return this to your hand next turn.",
 	"targetSelection": "NONE",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "ComboSpell",
 		"spell1": {

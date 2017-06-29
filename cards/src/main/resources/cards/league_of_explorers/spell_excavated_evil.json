@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Deal 3 damage to all minions. Shuffle this card into your opponent's deck.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

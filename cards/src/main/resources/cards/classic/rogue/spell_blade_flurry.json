@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Destroy your weapon and deal its damage to all enemies.",
 	"targetSelection": "NONE",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

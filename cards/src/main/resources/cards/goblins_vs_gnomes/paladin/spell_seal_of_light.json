@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Restore 4 Health to your hero and gain +2 Attack this turn.",
 	"targetSelection": "NONE",
+	"race": "HOLY",
 	"spell": {
 		"class": "MetaSpell",
 		"target": "FRIENDLY_HERO",

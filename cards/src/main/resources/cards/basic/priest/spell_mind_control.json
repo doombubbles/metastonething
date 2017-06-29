@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Take control of an enemy minion.",
 	"targetSelection": "ENEMY_MINIONS",
+	"race": "SHADOW",
 	"spell": {
 		"class": "MindControlSpell"
 	},

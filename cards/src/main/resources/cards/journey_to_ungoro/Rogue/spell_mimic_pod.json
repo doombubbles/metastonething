@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Draw a card, then add a copy of it to your hand.",
 	"targetSelection": "NONE",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "DrawCardAndDoSomethingSpell",
 		"value": 1,

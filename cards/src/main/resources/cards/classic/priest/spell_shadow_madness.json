@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Gain control of an enemy minion with 3 or less Attack until end of turn.",
 	"targetSelection": "ENEMY_MINIONS",
+	"race": "SHADOW",
 	"spell": {
 		"class": "custom.ShadowMadnessSpell",
 		"filter": {

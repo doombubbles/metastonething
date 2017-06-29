@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Destroy a minion with 3 or less Attack.",
 	"targetSelection": "MINIONS",
+	"race": "SHADOW",
 	"spell": {
 		"class": "DestroySpell",
 		"filter": {

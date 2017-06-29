@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Deal 5 damage. Restore 5 Health to your hero.",
 	"targetSelection": "ANY",
+	"race": "HOLY",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

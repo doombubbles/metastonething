@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Silence all enemy minions. Draw a card.",
 	"targetSelection": "NONE",
+	"race": "DISCIPLINE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

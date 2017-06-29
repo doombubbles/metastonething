@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Summon 7 Murlocs that died this game.",
 	"targetSelection": "NONE",
+	"race": "HOLY",
 	"spell": {
 		"class": "ResurrectFromBothSpell",
 		"value": 7,

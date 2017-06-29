@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Give a minion +3 Attack and Divine Shield.",
 	"targetSelection": "MINIONS",
+	"race": "PROTECTION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

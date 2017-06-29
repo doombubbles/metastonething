@@ -12,7 +12,24 @@
 		"spells": [
 			{
 				"class": "DestroySpell",
-				"target": "ALL_MINIONS"
+				"target": "ALL_MINIONS",
+				"filter": {
+					"class": "AndFilter",
+					"filters": [
+						{
+							"class": "SpecificCardFilter",
+							"cardId": "minion_flame_lasher"
+						},
+						{
+							"class": "AttributeFilter",
+							"attribute": "SILENCED",
+							"operation": "HAS",
+							"invert": true
+						}
+					],
+					"invert": true
+				} 
+				
 			},
 			{
 				"class": "DiscardSpell",

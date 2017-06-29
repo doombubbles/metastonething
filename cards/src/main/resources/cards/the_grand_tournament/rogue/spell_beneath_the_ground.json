@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Shuffle 3 Ambushes into your opponent's deck. When drawn, you summon a 4/4 Nerubian.",
 	"targetSelection": "NONE",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "ShuffleToDeckSpell",
 		"targetPlayer": "OPPONENT",

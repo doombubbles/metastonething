@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Give your weapon +2 Attack.",
 	"targetSelection": "NONE",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "BuffWeaponSpell",
 		"target": "FRIENDLY_WEAPON",

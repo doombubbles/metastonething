@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Draw 4 cards.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "DrawCardSpell",
 		"value": 4

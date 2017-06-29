@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 3 damage. Draw a card.",
 	"targetSelection": "ANY",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

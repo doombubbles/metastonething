@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Put a copy of an enemy minion into your hand.",
 	"targetSelection": "ENEMY_MINIONS",
+	"race": "SHADOW",
 	"spell": {
 		"class": "CopyCardSpell"
 	},

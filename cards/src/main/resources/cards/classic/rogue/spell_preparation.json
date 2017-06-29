@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "The next spell you cast this turn costs (3) less.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "CardCostModifierSpell",
 		"target": "FRIENDLY_PLAYER",

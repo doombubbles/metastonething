@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Add two Razorpetals to your hand that deal 1 damage.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "ReceiveCardSpell",
 		"value": 2,

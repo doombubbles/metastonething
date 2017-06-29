@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 1 damage to all enemy minions. Draw a card.",
 	"targetSelection": "NONE",
+	"race": "ASSASSINATION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

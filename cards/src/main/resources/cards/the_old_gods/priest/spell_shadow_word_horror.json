@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Destroy all minions with 2 or less Attack.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "DestroySpell",
 		"target": "ALL_MINIONS",

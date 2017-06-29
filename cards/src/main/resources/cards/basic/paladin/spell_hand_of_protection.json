@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Give a minion Divine Shield.",
 	"targetSelection": "MINIONS",
+	"race": "PROTECTION",
 	"spell": {
 		"class": "AddAttributeSpell",
 		"attribute": "DIVINE_SHIELD"

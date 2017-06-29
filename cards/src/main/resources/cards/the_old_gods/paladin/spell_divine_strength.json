@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Give a minion +1/+2.",
 	"targetSelection": "MINIONS",
+	"race": "PROTECTION",
 	"spell": {
 		"class": "BuffSpell",
 		"attackBonus": 1,

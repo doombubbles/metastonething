@@ -2,11 +2,11 @@
 	"name": "Exarch Yrel",
 	"baseManaCost": 3,
 	"type": "MINION",
-	"baseAttack": 2,
-	"baseHp": 4,
+	"baseAttack": 3,
+	"baseHp": 3,
 	"heroClass": "PALADIN",
 	"rarity": "LEGENDARY",
-	"description": "Friendly spells cast on this minion refund their mana cost.",
+	"description": "Whenver you cast a spell on this minion, refund the mana cost.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterSpellCastedTrigger",

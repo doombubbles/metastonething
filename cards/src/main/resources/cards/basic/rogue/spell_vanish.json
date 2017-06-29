@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Return all minions to their owner's hand.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "ReturnMinionToHandSpell",
 		"target": "ALL_MINIONS"

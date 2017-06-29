@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Your Hero Power becomes 'Deal 2 damage'. If already in Shadowform: 3 damage.",
 	"targetSelection": "NONE",
+	"race": "SHADOW",
 	"spell": {
 		"class": "EitherOrSpell",
 		"targetPlayer": "SELF",

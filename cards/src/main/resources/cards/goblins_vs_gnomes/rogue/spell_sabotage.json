@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Destroy a random enemy minion. Combo: And your opponent's weapon.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "ComboSpell",
 		"spell1": {

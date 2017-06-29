@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Deal 2 damage to all enemies.",
 	"targetSelection": "NONE",
+	"race": "PROTECTION",
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ENEMY_CHARACTERS",

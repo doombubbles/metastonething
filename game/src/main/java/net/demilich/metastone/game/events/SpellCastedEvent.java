@@ -11,6 +11,7 @@ public class SpellCastedEvent extends GameEvent {
 	public SpellCastedEvent(GameContext context, int playerId, Card sourceCard) {
 		super(context, playerId, playerId);
 		this.sourceCard = sourceCard;
+		updateQuests(context);
 	}
 	
 	@Override

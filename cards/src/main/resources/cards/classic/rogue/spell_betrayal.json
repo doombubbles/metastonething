@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "An enemy minion deals its damage to the minions next to it.",
 	"targetSelection": "ENEMY_MINIONS",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "custom.BetrayalSpell"
 	},

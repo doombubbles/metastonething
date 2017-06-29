@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Deal damage to each minion equal to its Attack.",
 	"targetSelection": "NONE",
+	"race": "DISCIPLINE",
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ALL_MINIONS",

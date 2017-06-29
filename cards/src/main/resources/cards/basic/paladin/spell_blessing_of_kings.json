@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Give a minion +4/+4. (+4 Attack/+4 Health)",
 	"targetSelection": "MINIONS",
+	"race": "RETRIBUTION",
 	"spell": {
 		"class": "BuffSpell",
 		"attackBonus": 4,

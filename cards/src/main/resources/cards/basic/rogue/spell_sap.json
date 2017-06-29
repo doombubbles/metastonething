@@ -6,6 +6,7 @@
 	"rarity": "FREE",
 	"description": "Return an enemy minion to your opponent's hand.",
 	"targetSelection": "ENEMY_MINIONS",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "ReturnMinionToHandSpell"
 	},

@@ -6,6 +6,7 @@
 	"rarity": "RARE",
 	"description": "Draw a card. Add two extra copies of it to your hand.",
 	"targetSelection": "NONE",
+	"race": "SUBTLETY",
 	"spell": {
 		"class": "DrawCardAndDoSomethingSpell",
 		"value": 1,

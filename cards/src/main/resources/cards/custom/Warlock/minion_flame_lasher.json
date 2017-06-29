@@ -1,0 +1,14 @@
+{
+	"name": "Flame Lasher",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 6,
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"race": "ELEMENTAL",
+	"description": "Immune to Destruction spells.",
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

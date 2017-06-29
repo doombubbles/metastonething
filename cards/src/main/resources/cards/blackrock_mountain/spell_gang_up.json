@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Choose a minion. Shuffle 3 copies of it into your deck.",
 	"targetSelection": "MINIONS",
+	"race": "OUTLAW",
 	"spell": {
 		"class": "ShuffleToDeckSpell",
 		"howMany": 3

@@ -54,12 +54,12 @@ public abstract class GameEvent {
 	
 	public void updateQuests(GameContext context) {
 		Player player1 = context.getPlayer1();
-		if (!player1.getQuests().isEmpty()) {
+		if (player1.getQuests().size() >= 1) {
 			int counter = ((SpellTrigger) context.getLogic().getQuests(player1).get(context.getLogic().getQuests(player1).size() - 1)).getPrimaryCount();
 			player1.setAttribute(Attribute.QUEST, counter);
 		}
 		Player player2 = context.getPlayer2();
-		if (!player2.getQuests().isEmpty()) {
+		if (player2.getQuests().size() >= 1) {
 			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(context.getLogic().getQuests(player2).size() - 1)).getPrimaryCount();
 			player2.setAttribute(Attribute.QUEST, counter);
 		}

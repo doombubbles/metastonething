@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Give a minion +2 Health. Draw a card.",
 	"targetSelection": "MINIONS",
+	"race": "DISCIPLINE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [

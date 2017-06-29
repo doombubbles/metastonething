@@ -6,6 +6,7 @@
 	"rarity": "COMMON",
 	"description": "Choose a minion. Whenever it attacks, restore 4 Health to your hero.",
 	"targetSelection": "MINIONS",
+	"race": "DISCIPLINE",
 	"spell": {
 		"class": "AddSpellTriggerSpell",
 		"trigger": {
