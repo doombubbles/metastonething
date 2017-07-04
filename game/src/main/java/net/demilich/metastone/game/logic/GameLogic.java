@@ -46,6 +46,7 @@ import net.demilich.metastone.game.events.ArmorGainedEvent;
 import net.demilich.metastone.game.events.BeforeSummonEvent;
 import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.events.CardPlayedEvent;
+import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.events.DamageEvent;
 import net.demilich.metastone.game.events.DiscardEvent;
 import net.demilich.metastone.game.events.DrawCardEvent;
@@ -213,6 +214,11 @@ public class GameLogic implements Cloneable {
 		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
 			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
 		}
+		for (Summon summon : player.getSummons()) {
+			if (summon.getAttribute(Attribute.DOUBLE_RACE_SPELL_DAMAGE) == source.getAttribute(Attribute.RACE)) {
+				spellpower *= 2;
+			}
+		}
 		return baseValue + spellpower;
 	}
 
@@ -251,7 +257,12 @@ public class GameLogic implements Cloneable {
 				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
-		} else if (card.getCardType().isCardType(CardType.MINION)
+		} else if (card.getCardType().isCardType(CardType.SPELL)
+				&& card.hasAttribute(Attribute.COSTS_HEALTH)
+				&& player.getHero().getEffectiveHp() < manaCost) {
+			return false; 
+		}
+		else if (card.getCardType().isCardType(CardType.MINION)
 				&& ((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL)
 				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
@@ -260,7 +271,8 @@ public class GameLogic implements Cloneable {
 				&& !((card.getCardType().isCardType(CardType.SPELL)
 				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH))
 				|| (((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL)
-				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)))) {
+				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))
+				|| card.hasAttribute(Attribute.COSTS_HEALTH))) {
 			return false;
 		}
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
@@ -534,6 +546,10 @@ public class GameLogic implements Cloneable {
 			DamageEvent damageEvent = new DamageEvent(context, target, source, damageDealt);
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damageDealt);
+		} else if (damageDealt < 0) {
+			HealEvent healEvent = new HealEvent(context, player.getId(), target, damage * -1);
+			context.fireGameEvent(healEvent);
+			player.getStatistics().heal(damage * -1);
 		}
 
 		return damageDealt;
@@ -544,10 +560,49 @@ public class GameLogic implements Cloneable {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
 		}
-		int effectiveHp = hero.getHp() + hero.getArmor();
-		hero.modifyArmor(-damage);
-		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
-		hero.setHp(newHp);
+		if (hasAttribute(context.getPlayer(hero.getOwner()), Attribute.HERO_HEALTH_BALANCE)) {
+			
+			int friendlyHp = hero.getHp();
+			int enemyHp = context.getOpponent(context.getPlayer(hero.getOwner())).getHero().getHp();
+			
+			if (hero.getArmor() > 0) {
+				int i = hero.getArmor() - damage;
+				if (i >= 0) {
+					hero.modifyArmor(-damage);
+				} else {
+					damage -= hero.getArmor();
+					hero.modifyArmor(-1 * hero.getArmor());
+				}
+			}
+			if (hero.getArmor() == 0) {
+				if (friendlyHp <= enemyHp) {
+					damage = 0;
+				} else {
+					damage = Math.min(damage, (friendlyHp - enemyHp));
+				}
+			}
+			
+			/*
+			if ((friendlyHp <= enemyHp) && (friendlyEhp <= enemyHp)) {
+				damage = 0;
+			} else if ((friendlyHp <= enemyHp) && !(friendlyEhp <= enemyHp)) {
+				damage = Math.min(damage, (friendlyEhp - enemyHp));
+			} else if 
+			*/
+		}
+		
+		
+		if (damage > 0) {
+			int effectiveHp = hero.getHp() + hero.getArmor();
+			hero.modifyArmor(-damage);
+			int newHp = Math.min(hero.getHp(), effectiveHp - damage);
+			hero.setHp(newHp);
+		} else {
+			hero.setHp(Math.min(hero.getMaxHp(), hero.getHp() - damage));
+		}
+		
+		
+		
 		log(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
 		return damage;
 	}
@@ -1402,7 +1457,12 @@ public class GameLogic implements Cloneable {
 				&& player.getHero().hasAttribute(Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
-		} else {
+		} else if (card.hasAttribute(Attribute.COSTS_HEALTH)) {
+			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
+			damage(player, player.getHero(), modifiedManaCost, card, true);
+		}
+		
+		else {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, modifiedManaCost);
 			modifyCurrentMana(playerId, -modifiedManaCost);
 			player.getStatistics().manaSpent(modifiedManaCost);
@@ -1462,7 +1522,11 @@ public class GameLogic implements Cloneable {
 
 	public void processTargetModifiers(Player player, GameAction action) {
 		HeroPower heroPower = player.getHero().getHeroPower();
-		if (heroPower.getCardId() != CardCatalogue.getCardById("hero_power_steady_shot").getCardId()) {
+		List<String> okPowers = new ArrayList<String>();
+		okPowers.add(CardCatalogue.getCardById("hero_power_steady_shot").getCardId());
+		okPowers.add(CardCatalogue.getCardById("hero_power_ballista_shot").getCardId());
+		okPowers.add(CardCatalogue.getCardById("hero_power_life_tap").getCardId());
+		if (!okPowers.contains(heroPower.getCardId())) {
 			return;
 		}
 		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
@@ -1521,6 +1585,10 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(new DrawCardEvent(context, playerId, card, sourceType, drawn));
 		} else {
 			log("{} has too many cards on his hand, card destroyed: {}", player.getName(), card);
+			if (drawn) {
+				context.fireGameEvent(new CardRevealedEvent(context, playerId, context.getCardById("burn_card"), 0));
+				context.fireGameEvent(new CardRevealedEvent(context, playerId, card, 1.5));
+			}
 			discardCard(player, card);
 		}
 	}
@@ -1761,6 +1829,10 @@ public class GameLogic implements Cloneable {
 		log("Secret was trigged: {}", secret.getSource());
 		player.getSecrets().remove(secret.getSource().getCardId());
 		context.fireGameEvent(new SecretRevealedEvent(context, (SecretCard) secret.getSource(), player.getId()));
+		Card card = secret.getSource().clone();
+		card.removeAttribute(Attribute.SECRET);
+		context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 1.2));
+		context.fireGameEvent(new CardRevealedEvent(context, context.getOpponent(player).getId(), card, 1.2));
 	}
 
 	// TODO: circular dependency. Very ugly, refactor!

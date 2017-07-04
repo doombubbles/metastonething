@@ -103,6 +103,11 @@
 						<Font name="Arial Bold" size="12.0" />
 					</font>
 				</Label>
+				<ImageView fx:id="spell_damage" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" visible="false" StackPane.alignment="CENTER">
+					<image>
+						<Image url="/img/common/spell_damage.png" />
+					</image>
+				</ImageView>
 				<StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
 					<children>
 						<ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
@@ -130,6 +135,16 @@
 							<stops>
 								<Stop color="#f0e80033" />
 								<Stop color="WHITE" offset="1.0" />
+							</stops>
+						</LinearGradient>
+					</fill>
+				</Ellipse>
+				<Ellipse fx:id="immune" radiusX="45.0" radiusY="45.0" stroke="#1AF2E0" strokeType="OUTSIDE" strokeWidth="2.0" visible="false">
+					<fill>
+						<LinearGradient endX="1.0" endY="1.0">
+							<stops>
+								<Stop color="WHITE" offset="1.0" />
+								<Stop color="#1AF2E033" />
 							</stops>
 						</LinearGradient>
 					</fill>

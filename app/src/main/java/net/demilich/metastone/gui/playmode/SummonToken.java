@@ -34,12 +34,18 @@ public class SummonToken extends GameToken {
 	private Text windfury;
 	@FXML
 	private Node deathrattle;
+	
+	@FXML
+	private Node spell_damage;
 
 	@FXML
 	private Shape frozen;
 	
 	@FXML
 	private Shape elusive;
+	
+	@FXML
+	private Node immune;
 	
 	@FXML
 	private Shape elusivetaunt;
@@ -78,6 +84,7 @@ public class SummonToken extends GameToken {
 		taunt.setVisible(summon.hasAttribute(Attribute.TAUNT));
 		defaultToken.setVisible(!summon.hasAttribute(Attribute.TAUNT));
 		divineShield.setVisible(summon.hasAttribute(Attribute.DIVINE_SHIELD));
+		immune.setVisible(summon.hasAttribute(Attribute.IMMUNE));
 		windfury.setVisible(summon.hasAttribute(Attribute.WINDFURY) || summon.hasAttribute(Attribute.MEGA_WINDFURY));
 		if(summon.hasAttribute(Attribute.MEGA_WINDFURY)) {
 			windfury.setText("x4");
@@ -89,6 +96,7 @@ public class SummonToken extends GameToken {
 		elusive.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && !summon.hasAttribute(Attribute.TAUNT));
 		elusivetaunt.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && summon.hasAttribute(Attribute.TAUNT));
 		visualizeStealth(summon);
+		spell_damage.setVisible(summon.hasAttribute(Attribute.SPELL_DAMAGE));
 	}
 
 	private void visualizeStealth(Summon summon) {

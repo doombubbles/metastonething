@@ -52,6 +52,9 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS, jsonData, map, ParseValueType.BOOLEAN);//TODO Remove from Spellstopper
 		parseAttribute(Attribute.TAUNT, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.HERO_HEALTH_BALANCE, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.COSTS_HEALTH, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.DOUBLE_RACE_SPELL_DAMAGE, jsonData, map, ParseValueType.RACE);
 		return map;
 	}
 

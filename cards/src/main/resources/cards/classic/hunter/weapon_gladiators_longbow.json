@@ -3,7 +3,7 @@
 	"baseManaCost": 7,
 	"type": "WEAPON",
 	"damage": 5,
-	"durability": 3,
+	"durability": 2,
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
 	"description": "Your hero is Immune while attacking.",

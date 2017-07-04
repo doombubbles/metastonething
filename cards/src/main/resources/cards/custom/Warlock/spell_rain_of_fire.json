@@ -1,0 +1,19 @@
+{
+	"name": "Rain of Fire",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Deal 2 damage to a random enemy minion five times.",
+	"targetSelection": "NONE",
+	"race": "DESTRUCTION",
+	"spell": {
+		"class": "MissilesSpell",
+		"target": "ENEMY_MINIONS",
+		"howMany": 5,
+		"value": 2
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

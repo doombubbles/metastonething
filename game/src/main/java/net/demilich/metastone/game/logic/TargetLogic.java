@@ -283,6 +283,10 @@ public class TargetLogic {
 			return singleTargetAsList(player);
 		} else if (targetKey == EntityReference.ENEMY_PLAYER) {
 			return singleTargetAsList(context.getOpponent(player));
+		} else if (targetKey == EntityReference.OTHER_ENEMY_MINIONS) {
+			List<Entity> targets = getEntities(context, player, TargetSelection.ENEMY_MINIONS);
+			targets.remove(source);
+			return targets;
 		}
 
 		return singleTargetAsList(findEntity(context, targetKey));

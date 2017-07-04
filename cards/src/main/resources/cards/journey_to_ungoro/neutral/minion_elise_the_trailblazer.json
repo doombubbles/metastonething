@@ -15,6 +15,9 @@
 			"card": "spell_ungoro_pack"
 		}
 	},
+	"attributes": {
+		"BATTLECRY": true
+	},
     "collectible": true,
     "set": "JOURNEY_TO_UNGORO",
     "fileFormatVersion": 1

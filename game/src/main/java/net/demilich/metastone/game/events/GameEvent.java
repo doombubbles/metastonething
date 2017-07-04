@@ -17,7 +17,6 @@ public abstract class GameEvent {
 		this.context = context;
 		this.targetPlayerId = targetPlayerId;
 		this.sourcePlayerId = sourcePlayerId;
-		updateQuests(context);
 	}
 
 	/**
@@ -54,13 +53,13 @@ public abstract class GameEvent {
 	
 	public void updateQuests(GameContext context) {
 		Player player1 = context.getPlayer1();
-		if (player1.getQuests().size() >= 1) {
-			int counter = ((SpellTrigger) context.getLogic().getQuests(player1).get(context.getLogic().getQuests(player1).size() - 1)).getPrimaryCount();
+		if (player1.getQuests().size() >= 1 && !context.gameDecided()) {
+			int counter = ((SpellTrigger) context.getLogic().getQuests(player1).get(0)).getPrimaryCount();
 			player1.setAttribute(Attribute.QUEST, counter);
 		}
 		Player player2 = context.getPlayer2();
 		if (player2.getQuests().size() >= 1 && !context.gameDecided()) {
-			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(0 /*context.getLogic().getQuests(player2).size() - 1 */ )).getPrimaryCount();
+			int counter = ((SpellTrigger) context.getLogic().getQuests(player2).get(0)).getPrimaryCount();
 			player2.setAttribute(Attribute.QUEST, counter);
 			
 		}

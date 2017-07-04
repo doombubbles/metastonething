@@ -1,0 +1,17 @@
+{
+	"name": "Malygos the Spell-Weaver",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 6,
+	"baseHp": 10,
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"race": "DRAGON",
+	"description": "Your Hero Power deals 2 extra damage.",
+	"attributes": {
+		"HERO_POWER_DAMAGE": 2
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

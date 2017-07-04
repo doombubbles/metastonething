@@ -66,6 +66,9 @@ public class HeroToken extends GameToken {
 
 	@FXML
 	private Shape frozen;
+	
+	@FXML
+	private ImageView immune;
 
 	public HeroToken() {
 		super("HeroToken.fxml");
@@ -83,7 +86,7 @@ public class HeroToken extends GameToken {
 		target.setStyle(cssBorder);
 	}
 
-	public void setHero(Player player) {
+	public void setHero(Player player, GameContext context) {
 		Hero hero = player.getHero();
 		setScoreValue(attackAnchor, hero.getAttack());
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard().getCardId()));
@@ -134,7 +137,7 @@ public class HeroToken extends GameToken {
 		updateHeroPower(hero);
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
-		updateStatus(hero);
+		updateStatus(hero, context);
 	}
 
 	private void updateArmor(int armor) {
@@ -191,8 +194,13 @@ public class HeroToken extends GameToken {
 		}
 	}
 
-	private void updateStatus(Hero hero) {
+	private void updateStatus(Hero hero, GameContext context) {
 		frozen.setVisible(hero.hasAttribute(Attribute.FROZEN));
+		immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
+	}
+	
+	public boolean hasAttribute(Player player, Attribute attr, GameContext context) {
+		return context.getLogic().hasAttribute(player, attr);
 	}
 
 	private void updateWeapon(Weapon weapon) {

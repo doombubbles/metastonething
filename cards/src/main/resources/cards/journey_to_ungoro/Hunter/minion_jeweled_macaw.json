@@ -9,7 +9,7 @@
 	"race": "BEAST",
 	"description": "Battlecry: Add a random Beast to your hand.",
 	"battlecry": {
-		"targetSelection": "FRIENDLY_MINIONS",
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "ReceiveCardSpell",
 			"cardFilter": {

@@ -1,0 +1,31 @@
+{
+	"name": "Nozdormu the Timeless One",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If you're holding a Dragon, transform into Dragon form.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "token_nozdormu_the_timeless_one"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

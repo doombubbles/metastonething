@@ -1,6 +1,6 @@
 {
 	"name": "Power Word: Tentacles",
-	"baseManaCost": 4,
+	"baseManaCost": 5,
 	"type": "SPELL",
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",

@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.spells.trigger;
 
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
 import net.demilich.metastone.game.events.GameEvent;
@@ -17,12 +18,15 @@ public class SpellCastedTrigger extends GameEventTrigger {
 
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
-		//SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
 		SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
-		
 		
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && spellCastedEvent.getSourceCard().getRace() != race) {
+			return false;
+		}
+		
+		EntityType targetEntityType = (EntityType) desc.get(EventTriggerArg.TARGET_ENTITY_TYPE);
+		if (targetEntityType != null && (spellCastedEvent.getEventTarget() == null || targetEntityType != spellCastedEvent.getEventTarget().getEntityType())) {
 			return false;
 		}
 		

@@ -1,6 +1,6 @@
 {
 	"name": "Mass Dispel",
-	"baseManaCost": 3,
+	"baseManaCost": 4,
 	"type": "SPELL",
 	"heroClass": "PRIEST",
 	"rarity": "RARE",

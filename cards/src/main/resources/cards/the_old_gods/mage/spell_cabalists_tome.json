@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Add 3 random Mage spells to your hand.",
 	"targetSelection": "NONE",
+	"race": "ARCANE",
 	"spell": {
 		"class": "ReceiveCardSpell",
 		"value": 3,

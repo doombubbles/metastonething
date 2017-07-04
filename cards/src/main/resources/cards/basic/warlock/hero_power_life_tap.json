@@ -8,10 +8,10 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
+		"target": "FRIENDLY_HERO",
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"target": "FRIENDLY_HERO",
 				"value": 2
 			},
 			{

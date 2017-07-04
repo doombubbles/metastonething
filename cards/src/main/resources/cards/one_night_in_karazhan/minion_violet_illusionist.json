@@ -9,7 +9,7 @@
 	"description": "During your turn, your Hero is immune.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "BoardChangedTrigger"
+			"class": "GameStateChangedTrigger"
 		},
 		"spell": {
 			"class": "EitherOrSpell",

@@ -1,0 +1,31 @@
+{
+	"name": "Lakkari Aggonizer",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Your next Hero Power this turn targets an enemy instead.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "FRIENDLY_HERO",
+			"attribute": "HERO_POWER_CAN_TARGET_MINIONS",
+			"revertTrigger": {
+				"class": "InspireTrigger",
+				"targetPlayer": "SELF"
+			},
+			"secondaryRevertTrigger": {
+				"class": "TurnEndTrigger"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

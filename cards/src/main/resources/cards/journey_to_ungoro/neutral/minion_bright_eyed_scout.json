@@ -1,0 +1,29 @@
+{
+	"name": "Bright-Eyed Scout",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"description": "Battlecry: Draw a card. Change its costs to (5).",
+	"battlecry": {
+		"spell": {
+			"class": "DrawCardAndDoSomethingSpell",
+			"spell": {
+				"class": "CardCostModifierSpell",
+				"cardCostModifier": {
+					"class": "CardCostModifier",
+					"operation": "SET",
+					"value": 5
+				}
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

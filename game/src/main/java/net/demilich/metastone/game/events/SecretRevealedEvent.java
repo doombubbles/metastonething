@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.events;
 
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Entity;
 

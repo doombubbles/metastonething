@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "PALADIN",
 	"rarity": "LEGENDARY",
-	"description": "Battlecry: Set all other minions' Attack and Health to 3.",
+	"description": "Taunt. Battlecry: Set all other minions' Attack and Health to 3.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {

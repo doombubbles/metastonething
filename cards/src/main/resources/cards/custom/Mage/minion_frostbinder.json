@@ -1,8 +1,8 @@
 {
 	"name": "Frostbinder",
-	"baseManaCost": 3,
+	"baseManaCost": 2,
 	"type": "MINION",
-	"baseAttack": 2,
+	"baseAttack": 1,
 	"baseHp": 4,
 	"heroClass": "MAGE",
 	"rarity": "RARE",

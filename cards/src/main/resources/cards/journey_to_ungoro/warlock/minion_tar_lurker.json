@@ -1,0 +1,35 @@
+{
+	"name": "Tar Lurker",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 8,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"race": "ELEMENTAL",
+	"description": "Has +3 Attack during your opponent's turn.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "ConditionalAttackBonusSpell",
+			"target": "SELF",
+			"value": {
+				"class": "ConditionalValueProvider",
+				"ifTrue": 0,
+				"ifFalse": 3,
+				"condition": {
+					"class": "OwnedByPlayerCondition",
+					"targetPlayer": "ACTIVE"
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"attributes": {
+		"TAUNT": true
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

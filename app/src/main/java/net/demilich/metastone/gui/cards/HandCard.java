@@ -1,5 +1,7 @@
 package net.demilich.metastone.gui.cards;
 
+import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
@@ -8,9 +10,12 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.gui.IconFactory;
 
 public class HandCard extends CardToken {
@@ -55,7 +60,34 @@ public class HandCard extends CardToken {
 		} else {
 			tooltipContent.setCard(context, card, player);
 		}
+		
+		if (card.getCardId() == CardCatalogue.getCardById("spell_glacial_spike").getCardId()) {
+			Map<String, Map<Integer, Integer>> cardIds = player.getStatistics().getCardsPlayed();
+			int count = 0;
+			for (String cardId : cardIds.keySet()) {
+				if ((Race) context.getCardById(cardId).getAttribute(Attribute.RACE) == Race.FROST) {
+					for (Integer turn : cardIds.get(cardId).keySet()) {
+						count += cardIds.get(cardId).get(turn);
+					}
+				}
+			}
+			tooltipContent.descriptionLabel.setText(card.getDescription() + " [" + count + "]");
+		}
+		if (card.getCardId() == CardCatalogue.getCardById("spell_crusade").getCardId()) {
+			Map<String, Map<Integer, Integer>> minionIds = player.getStatistics().getMinionsSummoned();
+			int count = 0;
+			for (String minionId : minionIds.keySet()) {
+				if (minionId == context.getCardById("token_silver_hand_recruit").getCardId())
+					for (Integer turn : minionIds.get(minionId).keySet()) {
+						count += minionIds.get(minionId).get(turn);
+					}
 
+			}
+			tooltipContent.descriptionLabel.setText(card.getDescription() + " [" + count + "]");
+		}
+		
+		
+		
 		hideCard(player.hideCards());
 
 		if (player.hideCards()) {

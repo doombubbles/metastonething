@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "FREE",
-	"description": "Deal 6 damage. Draw a card.",
+	"description": "Deal 5 damage. Draw a card.",
 	"targetSelection": "ANY",
 	"race": "BALANCE",
 	"spell": {
@@ -12,7 +12,7 @@
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"value": 6
+				"value": 5
 			},
 			{
 				"class": "DrawCardSpell",

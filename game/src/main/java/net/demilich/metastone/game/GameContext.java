@@ -175,6 +175,7 @@ public class GameContext implements Cloneable, IDisposable {
 			logic.panicDump();
 			throw e;
 		}
+		gameEvent.updateQuests(this);
 		
 	}
 

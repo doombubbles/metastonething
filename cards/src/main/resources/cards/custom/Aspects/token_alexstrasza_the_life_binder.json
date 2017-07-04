@@ -1,0 +1,17 @@
+{
+	"name": "Alexstrasza the Life-Binder",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"race": "DRAGON",
+	"description": "Your Hero's Health can't fall below your opponent's Health.",
+	"attributes": {
+		"HERO_HEALTH_BALANCE": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

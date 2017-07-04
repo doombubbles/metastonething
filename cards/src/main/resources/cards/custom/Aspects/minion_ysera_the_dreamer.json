@@ -1,0 +1,31 @@
+{
+	"name": "Ysera the Dreamer",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 9,
+	"heroClass": "DRUID",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If you're holding a Dragon, transform into Dragon form.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "token_ysera_the_dreamer"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

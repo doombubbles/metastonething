@@ -29,8 +29,7 @@ public class ShuffleToDeckSpell extends Spell {
 			}
 			card = result.getRandom();
 		} else {
-			String cardId = (String) desc.get(SpellArg.CARD);
-			card = context.getCardById(cardId);						
+			card = SpellUtils.getCard(context, desc);				
 		}
 
 		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);

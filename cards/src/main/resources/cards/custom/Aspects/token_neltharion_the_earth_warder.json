@@ -1,0 +1,21 @@
+{
+	"name": "Neltharion the Earth-Warder",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"race": "DRAGON",
+	"description": "Deathrattle: Destroy all minions.",
+	"deathrattle": {
+		"class": "DestroySpell",
+		"target": "ALL_MINIONS"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

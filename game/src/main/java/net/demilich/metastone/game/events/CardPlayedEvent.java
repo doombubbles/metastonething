@@ -11,6 +11,7 @@ public class CardPlayedEvent extends GameEvent {
 	public CardPlayedEvent(GameContext context, int playerId, Card card) {
 		super(context, playerId, -1);
 		this.card = card;
+		context.setEventCard(card);
 	}
 
 	public Card getCard() {

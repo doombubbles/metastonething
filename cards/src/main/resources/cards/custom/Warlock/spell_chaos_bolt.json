@@ -1,0 +1,36 @@
+{
+	"name": "Chaos Bolt",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Deal 5 damage. Costs Health instead of Mana.",
+	"targetSelection": "ANY",
+	"race": "DESTRUCTION",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 5,
+		"filter": {
+			"class": "AndFilter",
+			"filters": [
+				{
+					"class": "SpecificCardFilter",
+					"cardId": "minion_flame_lasher"
+				},
+				{
+					"class": "AttributeFilter",
+					"attribute": "SILENCED",
+					"operation": "HAS",
+					"invert": true
+				}
+			],
+			"invert": true
+		}
+	},
+	"attributes": {
+		"COSTS_HEALTH": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

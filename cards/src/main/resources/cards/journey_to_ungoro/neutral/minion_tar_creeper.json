@@ -7,7 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"race": "ELEMENTAL",
-	"description": "Has +2 Attack during your opponent's turn.",
+	"description": "Taunt. Has +2 Attack during your opponent's turn.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "GameStateChangedTrigger"
