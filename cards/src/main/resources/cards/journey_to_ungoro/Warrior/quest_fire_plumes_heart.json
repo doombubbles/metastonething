@@ -7,7 +7,7 @@
 	"description": "Quest: Summon 7 Taunt Minions. Reward: Sulfuras.",
 	"targetSelection": "NONE",
 	"quest": {
-		"class": "MinionSummonedTrigger",
+		"class": "MinionPlayedTrigger",
 		"targetPlayer": "SELF",
 		"queueCondition": {
 			"class": "AttributeCondition",

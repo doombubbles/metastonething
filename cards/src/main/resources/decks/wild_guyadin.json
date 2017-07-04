@@ -4,7 +4,6 @@
     "spell_lost_in_the_jungle",
     "minion_shielded_minibot",
     "minion_shielded_minibot",
-    "minion_hydrologist",
     "spell_equality",
     "spell_equality",
     "spell_muster_for_battle",
@@ -29,7 +28,8 @@
     "spell_spikeridged_steed",
     "minion_tirion_fordring",
     "spell_lay_on_hands",
-    "minion_ragnaros_lightlord"
+    "minion_ragnaros_lightlord",
+    "spell_crusade"
   ],
   "name": "Wild Guyadin",
   "heroClass": "PALADIN",
