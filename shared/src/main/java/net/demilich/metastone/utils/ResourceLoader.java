@@ -139,6 +139,7 @@ public class ResourceLoader {
 
 		ClassLoader cl = ClassLoader.getSystemClassLoader();
 		URL[] urls = ((URLClassLoader) cl).getURLs();
+		
 		URL cardsUrl = null;
 		String jarFileName = null;
 		for (URL url : urls) {
