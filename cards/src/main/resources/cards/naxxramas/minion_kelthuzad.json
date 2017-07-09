@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
 	"description": "At the end of the turn, summon all friendly minions that died this turn.",
+	"race": "UNDEAD",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnEndTrigger",

@@ -107,6 +107,9 @@ public class HeroToken extends GameToken {
 				case "quest_the_marsh_queen":
 					n = 7;
 					break;
+				case "quest_the_omega_rune":
+					n = 8;
+					break;
 				case "quest_unite_the_murlocs":
 					n = 10;
 					break;
@@ -123,7 +126,10 @@ public class HeroToken extends GameToken {
 			questLabel.setText("Quest: " + (n - player.getAttributeValue(Attribute.QUEST)) + "/" + n);
 			
 			
-		} else questLabel.setText("            "); 
+		} else if (player.hasAttribute(Attribute.CTHUN_ATTACK_BUFF)) {
+			questLabel.setText("C'Thun: " + (player.getAttributeValue(Attribute.CTHUN_ATTACK_BUFF) + 6));
+		}
+		else questLabel.setText("            "); 
 		
 		
 		

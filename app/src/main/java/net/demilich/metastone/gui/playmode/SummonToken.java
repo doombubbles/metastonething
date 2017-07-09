@@ -36,6 +36,9 @@ public class SummonToken extends GameToken {
 	private Node deathrattle;
 	
 	@FXML
+	private Node poisonous;
+	
+	@FXML
 	private Node spell_damage;
 
 	@FXML
@@ -92,6 +95,7 @@ public class SummonToken extends GameToken {
 			windfury.setText("x2");
 		}
 		deathrattle.setVisible(summon.hasAttribute(Attribute.DEATHRATTLES));
+		poisonous.setVisible(summon.hasAttribute(Attribute.POISONOUS));
 		frozen.setVisible(summon.hasAttribute(Attribute.FROZEN));
 		elusive.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && !summon.hasAttribute(Attribute.TAUNT));
 		elusivetaunt.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && summon.hasAttribute(Attribute.TAUNT));

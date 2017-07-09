@@ -1,0 +1,24 @@
+{
+	"name": "Plague Eruptor",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"race": "UNDEAD",
+	"description": "Summon a 1/1 Raging Ghoul with Charge that dies at the end of your turn.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_raging_ghoul",
+			"boardPositionRelative": "RIGHT"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

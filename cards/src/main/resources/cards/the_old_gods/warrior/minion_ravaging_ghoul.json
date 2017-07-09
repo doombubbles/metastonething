@@ -7,6 +7,7 @@
 	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
 	"description": "Battlecry: Deal 1 damage to all other minions.",
+	"race": "UNDEAD",
 	"battlecry": {
 		"spell": {
 			"class": "DamageSpell",

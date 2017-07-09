@@ -1,0 +1,58 @@
+{
+	"name": "Deathspeaker Selendre",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Infect a minion with all 3 Diseases.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"trigger": {
+					"eventTrigger": {
+						"class": "TurnEndTrigger"
+					},
+					"spell": {
+						"class": "DamageSpell",
+						"target": "SELF",
+						"value": 2
+					}
+				}
+			},
+			{
+				"class": "AddDeathrattleSpell",
+				"spell": {
+					"class": "SummonSpell",
+					"card": "token_crypt_fiend",
+					"targetPlayer": "OPPONENT"
+				}
+
+			},
+			{
+				"class": "MetaSpell",
+				"spells": [
+					{
+						"class": "BuffSpell",
+						"attackBonus": -3
+					},
+					{
+						"class": "AddAttributeSpell",
+						"attribute": "FROZEN"
+					}
+				]
+			}
+			
+		]
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

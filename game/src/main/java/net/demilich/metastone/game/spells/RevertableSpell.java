@@ -23,7 +23,7 @@ public abstract class RevertableSpell extends Spell {
 			EventTriggerDesc secondTriggerDesc = (EventTriggerDesc) desc.get(SpellArg.SECOND_REVERT_TRIGGER);
 			GameEventTrigger secondRevertTrigger = secondTriggerDesc != null ? secondTriggerDesc.create() : null;
 			SpellDesc revert = getReverseSpell(desc, target.getReference());
-			SpellTrigger removeTrigger = new SpellTrigger(revertTrigger, secondRevertTrigger, revert, true);
+			SpellTrigger removeTrigger = new SpellTrigger(revertTrigger, secondRevertTrigger, revert, true, false);
 			context.getLogic().addGameEventListener(player, removeTrigger, target);
 		}
 	}

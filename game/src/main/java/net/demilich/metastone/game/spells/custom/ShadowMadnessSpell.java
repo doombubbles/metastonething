@@ -46,7 +46,7 @@ public class ShadowMadnessSpell extends MindControlSpell {
 		SpellDesc reverseMindcontrolSpell = MindControlSpell.create(EntityReference.SELF, TargetPlayer.OPPONENT, false);
 		GameEventTrigger silenceTrigger = new SilenceTrigger(EventTriggerDesc.createEmpty(SilenceTrigger.class));
 		GameEventTrigger turnEndTrigger = new TurnEndTrigger(EventTriggerDesc.createEmpty(TurnEndTrigger.class));
-		SpellTrigger returnOnSilence = new SpellTrigger(silenceTrigger, turnEndTrigger, reverseMindcontrolSpell, true);
+		SpellTrigger returnOnSilence = new SpellTrigger(silenceTrigger, turnEndTrigger, reverseMindcontrolSpell, true, false);
 		context.getLogic().addGameEventListener(player, returnOnSilence, target);
 	}
 

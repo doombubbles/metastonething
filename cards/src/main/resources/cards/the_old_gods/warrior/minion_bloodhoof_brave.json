@@ -19,7 +19,8 @@
 	},
 	"attributes": {
 		"ENRAGABLE": true,
-		"TAUNT": true
+		"TAUNT": true,
+		"ENRAGED_ATTACK": 3
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",

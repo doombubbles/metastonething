@@ -15,6 +15,8 @@ public enum HeroClass {
 	SHAMAN,
 	WARLOCK,
 	WARRIOR,
+	
+	DEATH_KNIGHT,
 
 	SELF,
 	OPPONENT,

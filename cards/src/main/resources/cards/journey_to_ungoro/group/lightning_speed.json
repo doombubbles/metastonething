@@ -1,0 +1,15 @@
+{
+	"name": "Lightning Speed",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Windfury",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

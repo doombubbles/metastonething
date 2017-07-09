@@ -1,0 +1,29 @@
+{
+	"name": "Obliterate",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"description": "Gain +1 Attack and Immune while Attacking this turn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"target": "FRIENDLY_HERO",
+		"spells": [
+			{
+				"class": "BuffHeroSpell",
+				"attackBonus": 1
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "IMMUNE_WHILE_ATTACKING",
+				"revertTrigger": {
+					"class": "TurnEndTrigger"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

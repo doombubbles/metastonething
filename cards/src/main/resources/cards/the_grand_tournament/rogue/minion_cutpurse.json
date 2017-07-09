@@ -7,6 +7,7 @@
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
 	"description": "Whenever this minion attacks a hero, add the Coin to your hand.",
+	"race": "UNDEAD",
 	"trigger": {
 		"eventTrigger": {
 			"class": "PhysicalAttackTrigger",

@@ -1,0 +1,31 @@
+{
+	"name": "Blood Elemental",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 3,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "COMMON",
+	"race": "ELEMENTAL",
+	"description": "Battlecry: If you played an Elemental last turn, add a Blood Rune to your hand.",
+	"battlecry": {
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"targetPlayer": "SELF",
+			"card": "spell_blood_rune"
+		},
+		"condition": {
+			"class": "PlayedLastTurnCondition",
+			"filter": {
+				"class": "CardFilter",
+				"race": "ELEMENTAL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

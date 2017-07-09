@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.entities.minions;
 
 public enum Race {
-	NONE, BEAST, MURLOC, PIRATE, DEMON, DRAGON, TOTEM, MECH, ALL, ELEMENTAL,
+	NONE, BEAST, MURLOC, PIRATE, DEMON, DRAGON, TOTEM, MECH, ALL, ELEMENTAL, UNDEAD,
 	
 	PORTAL,
 	POTION,
@@ -37,5 +37,8 @@ public enum Race {
 	
 	FERAL,
 	BALANCE,
-	GUARDIAN
+	GUARDIAN,
+	
+	BLOOD,
+	UNHOLY,
 }

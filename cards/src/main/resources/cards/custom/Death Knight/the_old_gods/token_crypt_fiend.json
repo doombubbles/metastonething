@@ -1,0 +1,14 @@
+{
+	"name": "Crypt Fiend",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"race": "UNDEAD",
+	"description": "",
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

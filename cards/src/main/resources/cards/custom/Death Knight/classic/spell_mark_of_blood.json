@@ -1,0 +1,29 @@
+{
+	"name": "Mark of Blood",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "COMMON",
+	"description": "Choose a minion. When it dies, restore 8 Health to your hero.",
+	"targetSelection": "MINIONS",
+	"race": "BLOOD",
+	"spell": {
+		"class": "AddSpellTriggerSpell",
+		"trigger": {
+			"eventTrigger": {
+				"class": "MinionDeathTrigger",
+				"targetPlayer": "SELF",
+				"hostTargetType": "IGNORE_OTHER_SOURCES"
+			},
+			"spell": {
+				"class": "HealSpell",
+				"value": 8,
+				"target": "FRIENDLY_HERO"
+			},
+			"persistentOwner": true
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

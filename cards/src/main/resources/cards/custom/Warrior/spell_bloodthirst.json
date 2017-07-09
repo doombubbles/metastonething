@@ -9,25 +9,47 @@
 	"race": "FURY",
 	"spell": {
 		"class": "MetaSpell",
+		"target": "FRIENDLY_MINIONS",
 		"spells": [
 			{
 				"class": "AddSpellTriggerSpell",
-				"target": "FRIENDLY_MINIONS",
 				"trigger": {
 					"eventTrigger": {
 						"class": "EnrageChangedTrigger"
 					},
 					"spell": {
 						"class": "EnrageSpell",
-						"target": "SELF",
-						"attackBonus": 3
+						"target": "SELF"
 					}
 				}
 			},
 			{
 				"class": "AddAttributeSpell",
-				"target": "FRIENDLY_MINIONS",
 				"attribute": "ENRAGABLE"
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"attribute": "ENRAGED_ATTACK",
+				"value": 3,
+				"operation": "ADD"
+			},
+			{
+				"class": "ConditionalSpell",
+				"spell": {
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "AddAttributeSpell",
+							"attribute": "ENRAGED"
+						},
+						{
+							"class": "EnrageSpell"
+						}
+					]
+				},
+				"condition": {
+					"class": "IsDamagedCondition"
+				}
 			}
 		]
 	},

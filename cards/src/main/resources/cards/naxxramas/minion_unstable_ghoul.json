@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Taunt. Deathrattle: Deal 1 damage to all minions.",
+	"race": "UNDEAD",
 	"deathrattle": {
 		"class": "DamageSpell",
 		"target": "ALL_MINIONS",

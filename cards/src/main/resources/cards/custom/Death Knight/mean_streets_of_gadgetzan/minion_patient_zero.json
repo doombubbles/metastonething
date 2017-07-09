@@ -1,0 +1,86 @@
+{
+	"name": "Patient Zero",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"race": "UNDEAD",
+	"description": "Battlecry: Infect this minion with a random Disease.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "RandomlyCastSpell",
+			"target": "SELF",
+			"spells": [
+				{
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "AddSpellTriggerSpell",
+							"trigger": {
+								"eventTrigger": {
+									"class": "TurnEndTrigger"
+								},
+								"spell": {
+									"class": "DamageSpell",
+									"target": "SELF",
+									"value": 2
+								}
+							}
+						},
+						{
+							"class": "custom.RevealCardSpell",
+							"card": "blood_plague",
+							"value": 1
+						}
+					]
+				},
+				{
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "AddDeathrattleSpell",
+							"spell": {
+								"class": "SummonSpell",
+								"card": "token_crypt_fiend",
+								"targetPlayer": "OPPONENT"
+							}
+						},
+						{
+							"class": "custom.RevealCardSpell",
+							"card": "crypt_fever",
+							"value": 1
+						}
+					]
+				},
+				{
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "BuffSpell",
+							"attackBonus": -3
+						},
+						{
+							"class": "AddAttributeSpell",
+							"attribute": "FROZEN"
+						},
+						{
+							"class": "custom.RevealCardSpell",
+							"card": "frost_fever",
+							"value": 1
+						}
+					]
+				}
+				
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

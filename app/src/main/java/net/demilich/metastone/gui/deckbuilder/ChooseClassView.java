@@ -48,6 +48,9 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 	private Button collectionButton;
 	
 	@FXML
+	private Button deathKnightButton;
+	
+	@FXML
 	private CheckBox arbitraryCheckBox;
 	
 	private boolean arbitrary;
@@ -77,6 +80,8 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 		shamanButton.setOnAction(this);
 		mageButton.setOnAction(this);
 		priestButton.setOnAction(this);
+		
+		deathKnightButton.setOnAction(this);
 
 		collectionButton.setOnAction(this);
 	}
@@ -102,6 +107,8 @@ public class ChooseClassView extends BorderPane implements EventHandler<ActionEv
 			newDeck = new Deck(HeroClass.MAGE, arbitrary);
 		} else if (event.getSource() == priestButton) {
 			newDeck = new Deck(HeroClass.PRIEST, arbitrary);
+		}else if (event.getSource() == deathKnightButton) {
+				newDeck = new Deck(HeroClass.DEATH_KNIGHT, arbitrary);
 		} else if (event.getSource() == collectionButton) {
 			newDeck = new MetaDeck();
 		}

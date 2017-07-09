@@ -1,0 +1,35 @@
+{
+	"name": "Deathspeaker Zealot",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"description": "Battlecry and Deathrattle: Add a random basic Rune to your hand.",
+	"battlecry": {
+		"spell": {
+			"class": "ReceiveRandomCardSpell",
+			"cards": [
+				"spell_blood_rune",
+				"spell_frost_rune",
+				"spell_unholy_rune"
+			]
+		}
+	},
+	"deathrattle": {
+		"class": "ReceiveRandomCardSpell",
+		"cards": [
+			"spell_blood_rune",
+			"spell_frost_rune",
+			"spell_unholy_rune"
+		]
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

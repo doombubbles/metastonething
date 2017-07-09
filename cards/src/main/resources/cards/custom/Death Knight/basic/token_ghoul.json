@@ -1,0 +1,14 @@
+{
+	"name": "Ghoul",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"race": "UNDEAD",
+	"description": "",
+	"collectible": false,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

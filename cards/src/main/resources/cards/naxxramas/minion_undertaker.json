@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Whenever you summon a minion with Deathrattle, gain +1 Attack",
+	"race": "UNDEAD",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",

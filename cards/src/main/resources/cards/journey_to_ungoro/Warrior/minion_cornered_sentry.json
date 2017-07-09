@@ -14,9 +14,9 @@
 			"class": "SummonSpell",
 			"targetPlayer": "OPPONENT",
 			"cards": [
-				"token_sheep",
-				"token_sheep",
-				"token_sheep"
+				"token_raptor",
+				"token_raptor",
+				"token_raptor"
 			]
 		}
 	},

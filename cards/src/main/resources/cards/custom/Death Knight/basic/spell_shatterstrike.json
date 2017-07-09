@@ -1,0 +1,22 @@
+{
+	"name": "Shatterstrike",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"description": "Destroy all frozen minions.",
+	"targetSelection": "NONE",
+	"race": "FROST",
+	"spell": {
+		"class": "DestroySpell",
+		"target": "ALL_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "FROZEN",
+			"operation": "HAS"
+		}
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

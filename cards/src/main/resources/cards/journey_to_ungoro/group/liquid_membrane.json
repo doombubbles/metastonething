@@ -1,0 +1,15 @@
+{
+	"name": "Liquid Membrane",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Can't be targeted by spells or hero powers",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

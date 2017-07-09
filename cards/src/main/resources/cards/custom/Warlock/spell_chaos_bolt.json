@@ -1,15 +1,15 @@
 {
 	"name": "Chaos Bolt",
-	"baseManaCost": 5,
+	"baseManaCost": 7,
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
-	"description": "Deal 5 damage. Costs Health instead of Mana.",
+	"description": "Deal 8 damage.",
 	"targetSelection": "ANY",
 	"race": "DESTRUCTION",
 	"spell": {
 		"class": "DamageSpell",
-		"value": 5,
+		"value": 8,
 		"filter": {
 			"class": "AndFilter",
 			"filters": [
@@ -26,9 +26,6 @@
 			],
 			"invert": true
 		}
-	},
-	"attributes": {
-		"COSTS_HEALTH": true
 	},
 	"collectible": true,
 	"set": "CUSTOM",

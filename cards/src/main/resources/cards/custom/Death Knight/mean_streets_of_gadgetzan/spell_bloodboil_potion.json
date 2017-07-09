@@ -1,0 +1,21 @@
+{
+	"name": "Bloodboil Potion",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"description": "Restore 4 health to your hero for each minion that died this turn.",
+	"targetSelection": "NONE",
+	"race": "POTION",
+	"spell": {
+		"class": "HealSpell",
+		"target": "FRIENDLY_HERO",
+		"value": {
+			"class": "DeadMinionsThisTurn",
+			"multiplier": 4
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

@@ -37,6 +37,8 @@ public class MetaHero extends HeroCard {
 			return (HeroCard) CardCatalogue.getCardById("hero_guldan");
 		case WARRIOR:
 			return (HeroCard) CardCatalogue.getCardById("hero_garrosh");
+		case DEATH_KNIGHT:
+			return (HeroCard) CardCatalogue.getCardById("hero_arthas");
 		default:
 			break;
 		}

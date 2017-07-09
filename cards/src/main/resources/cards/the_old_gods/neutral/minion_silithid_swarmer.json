@@ -10,7 +10,7 @@
 	"description": "Can only attack if your Hero attacked this turn.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "BoardChangedTrigger"
+			"class": "GameStateChangedTrigger"
 		},
 		"spell": {
 			"class": "EitherOrSpell",

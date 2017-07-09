@@ -1,0 +1,29 @@
+{
+	"name": "Icecrown Portal",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "COMMON",
+	"description": "Freeze an enemy. Summon a random 3-Cost minion.",
+	"targetSelection": "ENEMY_CHARACTERS",
+	"race": "PORTAL",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "FROZEN"
+			},
+			{
+				"class": "SummonRandomMinionFilteredSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": 3
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

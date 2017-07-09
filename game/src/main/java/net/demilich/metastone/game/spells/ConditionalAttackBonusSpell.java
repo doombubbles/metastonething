@@ -27,6 +27,8 @@ public class ConditionalAttackBonusSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int attackBonus = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
-		target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, attackBonus);
+		if (target.hasAttribute(Attribute.ENRAGED)) {
+			target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, attackBonus + target.getAttributeValue(Attribute.ENRAGED_ATTACK));
+		} else target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, attackBonus);
 	}
 }

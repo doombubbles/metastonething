@@ -1,0 +1,20 @@
+{
+	"name": "Nerubian Egg",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 2,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Summon a 3/3 Crypt Fiend.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_crypt_fiend"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

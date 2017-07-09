@@ -1,0 +1,49 @@
+{
+	"name": "Prince Keleseth",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: If your deck contains no 2-Cost cards, give all minions in your deck deck +1/+1.",
+	"battlecry": {
+		"spell": {
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_PLAYER",
+			"trigger": {
+				"eventTrigger": {
+					"class": "CardDrawnTrigger",
+					"targetPlayer": "SELF",
+					"queueCondition": {
+						"class": "CardPropertyCondition",
+						"target": "EVENT_TARGET",
+						"cardType": "MINION"
+					}
+				},
+				"spell": {
+					"class": "BuffSpell",
+					"target": "EVENT_TARGET",
+					"attackBonus": 1,
+					"hpBonus": 1
+				}
+			},
+			"condition": {
+				"class": "DeckContainsCondition",
+				"cardFilter": {
+					"class": "AttributeFilter",
+					"attribute": "BASE_MANA_COST",
+					"operation": "EQUAL",
+					"value": 2
+				},
+				"invert": true
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

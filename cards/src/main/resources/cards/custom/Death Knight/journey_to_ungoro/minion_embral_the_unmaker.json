@@ -1,0 +1,32 @@
+{
+	"name": "Embral the Unmaker",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "LEGENDARY",
+	"race": "ELEMENTAL",
+	"description": "Deathrattle: Add a random Rune to your hand for each spell you casted while this was alive",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "AddDeathrattleSpell",
+			"target": "SELF",
+			"spell": {
+				"class": "ReceiveRandomCardSpell",
+				"cards": [
+					"spell_blood_rune",
+					"spell_frost_rune",
+					"spell_unholy_rune"
+				]
+			}
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

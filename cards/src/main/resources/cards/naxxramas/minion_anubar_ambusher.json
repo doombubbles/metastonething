@@ -7,6 +7,7 @@
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
 	"description": "Deathrattle: Return a friendly minion to your hand.",
+	"race": "UNDEAD",
 	"deathrattle": {
 		"class": "ReturnMinionToHandSpell",
 		"target": "FRIENDLY_MINIONS",

@@ -18,7 +18,8 @@
 		}
 	},
 	"attributes": {
-		"ENRAGABLE": true
+		"ENRAGABLE": true,
+		"ENRAGED_ATTACK": 2
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",

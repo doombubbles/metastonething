@@ -28,6 +28,7 @@ import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.cards.desc.PermanentCardDesc;
 import net.demilich.metastone.game.cards.desc.QuestCardDesc;
+import net.demilich.metastone.game.cards.desc.ReplaceHeroCardDesc;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.desc.SpellDeserializer;
@@ -204,6 +205,17 @@ public class CardParser {
 			return gson.fromJson(jsonData, HeroPowerCardDesc.class);
 		case HERO:
 			return gson.fromJson(jsonData, HeroCardDesc.class);
+		case REPLACE_HERO:
+			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("description")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("hero")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'hero' attribute!");
+			}
+			return gson.fromJson(jsonData, ReplaceHeroCardDesc.class);
 		case GROUP:
 			if (!jsonData.getAsJsonObject().has("group")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'group' attribute!");

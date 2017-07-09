@@ -1,0 +1,41 @@
+{
+	"name": "Corrupted Ashbringer",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 5,
+	"durability": 3,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "LEGENDARY",
+	"description": "When your hero takes fatal damage, set its health to 15 and destroy this weapon.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "FatalDamageTrigger",
+			"sourcePlayer": "BOTH",
+			"targetPlayer": "SELF",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ModifyDamageSpell",
+					"operation": "SET",
+					"value": 0
+				},
+				{
+					"class": "SetHeroHpSpell",
+					"value": 15,
+					"target": "FRIENDLY_HERO"
+				},
+				{
+					"class": "DestroySpell",
+					"target": "FRIENDLY_WEAPON"
+				}
+			]
+		}
+	},
+	
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

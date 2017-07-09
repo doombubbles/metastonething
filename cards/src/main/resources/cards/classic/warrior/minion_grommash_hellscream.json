@@ -19,7 +19,8 @@
 	},
 	"attributes": {
 		"CHARGE": true,
-		"ENRAGABLE": true
+		"ENRAGABLE": true,
+		"ENRAGED_ATTACK": 6
 	},
 	"collectible": true,
 	"set": "CLASSIC",

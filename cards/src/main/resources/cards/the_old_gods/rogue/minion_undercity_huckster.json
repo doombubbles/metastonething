@@ -7,6 +7,7 @@
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
 	"description": "Deathrattle: Add a random class card to your hand (from your opponent's class).",
+	"race": "UNDEAD",
 	"deathrattle": {
 		"class": "ReceiveCardSpell",
 		"value": 1,

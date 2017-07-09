@@ -16,7 +16,7 @@
 		"spell": {
 			"class": "DamageSpell",
 			"value": 3,
-			"target": "FRIENDLY_PLAYER"
+			"target": "FRIENDLY_HERO"
 		}
 	},
     "collectible": true,

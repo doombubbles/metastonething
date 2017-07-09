@@ -145,7 +145,7 @@ public abstract class Actor extends Entity {
 	}
 
 	public boolean isWounded() {
-		return getHp() != getMaxHp();
+		return getHp() < getMaxHp();
 	}
 
 	public void modifyAuraHpBonus(int value) {

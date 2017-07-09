@@ -11,7 +11,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "SetHeroHpSpell",
-			"target": "FIRNEDLY_HERO",
+			"target": "FRIENDLY_HERO",
 			"value": 40
 		}
 	},

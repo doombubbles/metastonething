@@ -11,6 +11,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "DiscoverOptionSpell",
+			"reveal": true,
 			"spells": [
 				{
 					"name": "Crackling Shield",
@@ -37,18 +38,8 @@
 					"name": "Poison Spit",
 					"description": "Poisonous",
 					"target": "SELF",
-					"class": "AddSpellTriggerSpell",
-					"trigger": {
-						"eventTrigger": {
-							"class": "DamageCausedTrigger",
-							"targetEntityType": "MINION",
-							"hostTargetType": "IGNORE_OTHER_SOURCES"
-						},
-						"spell": {
-							"class": "DestroySpell",
-							"target": "EVENT_TARGET"
-						}
-					}
+					"class": "AddAttributeSpell",
+					"attribute": "POISONOUS"
 				},
 				{
 					"name": "Liquid Membrane",

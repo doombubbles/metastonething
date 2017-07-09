@@ -1,0 +1,78 @@
+{
+	"name": "Seer of Endless Ice",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"description": "Battlecry: If your C'Thun has at least 10 Attack, add 3 Frost Runes to your hand.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ReceiveCardSpell",
+					"card": "spell_frost_rune"
+				},
+				{
+					"class": "ReceiveCardSpell",
+					"card": "spell_frost_rune"
+				},
+				{
+					"class": "ReceiveCardSpell",
+					"card": "spell_frost_rune"
+				}
+			]
+		},
+		"condition": {
+			"class": "OrCondition",
+			"conditions": [
+				{
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_MINIONS",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10
+				},
+				{
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "HighestAttributeValueProvider",
+						"target": "FRIENDLY_HAND",
+						"attribute": "ATTACK",
+						"filter": {
+							"class": "SpecificCardFilter",
+							"cardId": "minion_cthun"
+						}
+					},
+					"value2": 10
+				},
+				{
+					"class": "ComparisonCondition",
+					"operation": "GREATER_OR_EQUAL",
+					"value1": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "CTHUN_ATTACK_BUFF"
+					},
+					"value2": 4
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

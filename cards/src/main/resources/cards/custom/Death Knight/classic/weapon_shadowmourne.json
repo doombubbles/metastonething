@@ -1,0 +1,33 @@
+{
+	"name": "Shadowmourne",
+	"baseManaCost": 3,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 3,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "EPIC",
+	"description": "After this kills a minion, restore Health to your hero equal to its Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO",
+			"fireCondition": {
+				"class": "IsDeadCondition"
+			}
+		},
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "EVENT_TARGET",
+				"attribute": "ATTACK"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

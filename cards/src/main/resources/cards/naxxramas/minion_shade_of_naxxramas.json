@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"description": "Stealth. At the start of your turn, gain +1/+1",
+	"race": "UNDEAD",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",

@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Whenever this minion takes damage, draw a card.",
+	"race": "UNDEAD",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageReceivedTrigger",

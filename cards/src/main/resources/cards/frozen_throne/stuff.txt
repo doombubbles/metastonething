@@ -1,0 +1,8 @@
+Shallow Gravedigger
+Mana Cost: 3
+Attack: 3
+Health: 1
+Type: Minion
+Rarity: Rare
+Class: Neutral
+Text: Deathrattle: Add a random Deathrattle minion to your hand.

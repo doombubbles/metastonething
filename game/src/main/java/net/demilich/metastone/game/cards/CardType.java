@@ -9,6 +9,7 @@ public enum CardType {
 	PERMANENT,
 	SPELL,
 	WEAPON,
+	REPLACE_HERO,
 	;
 	
 	public boolean isCardType(CardType cardType) {

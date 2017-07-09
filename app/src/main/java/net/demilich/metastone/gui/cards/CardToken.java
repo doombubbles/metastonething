@@ -10,12 +10,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.ReplaceHeroCard;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.gui.DigitFactory;
 import net.demilich.metastone.gui.IconFactory;
@@ -81,9 +83,9 @@ public class CardToken extends BorderPane {
 
 		boolean isMinionOrWeaponCard = card.getCardType().isCardType(CardType.MINION) || card.getCardType().isCardType(CardType.WEAPON);
 		attackAnchor.setVisible(isMinionOrWeaponCard);
-		hpAnchor.setVisible(isMinionOrWeaponCard);
+		hpAnchor.setVisible(isMinionOrWeaponCard || card.getCardType().isCardType(CardType.REPLACE_HERO));
 		attackIcon.setVisible(isMinionOrWeaponCard);
-		hpIcon.setVisible(isMinionOrWeaponCard);
+		hpIcon.setVisible(isMinionOrWeaponCard || card.getCardType().isCardType(CardType.REPLACE_HERO));
 		if (card.getCardType().isCardType(CardType.MINION)) {
 			MinionCard minionCard = (MinionCard) card;
 			setScoreValue(attackAnchor, minionCard.getAttack() + minionCard.getBonusAttack(), minionCard.getBaseAttack());
@@ -92,6 +94,9 @@ public class CardToken extends BorderPane {
 			WeaponCard weaponCard = (WeaponCard) card;
 			setScoreValue(attackAnchor, weaponCard.getDamage() + weaponCard.getBonusDamage(), weaponCard.getBaseDamage());
 			setScoreValue(hpAnchor, weaponCard.getDurability() + weaponCard.getBonusDurability(), weaponCard.getBaseDurability());
+		} else if (card.getCardType().isCardType(CardType.REPLACE_HERO)) {
+			ReplaceHeroCard replaceHeroCard = (ReplaceHeroCard) card;
+			setScoreValue(hpAnchor, replaceHeroCard.armor);
 		}
 	}
 

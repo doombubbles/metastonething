@@ -2,22 +2,38 @@
 	"name": "Vrykul Warbringer",
 	"baseManaCost": 3,
 	"type": "MINION",
-	"baseAttack": 4,
-	"baseHp": 3,
+	"baseAttack": 3,
+	"baseHp": 4,
 	"heroClass": "WARRIOR",
 	"rarity": "EPIC",
-	"description": "After you cast a Fury spell, deal 1 damage to all other minions.",
-	"trigger": {
-		"eventTrigger": {
-			"class": "AfterSpellCastedTrigger",
-			"sourcePlayer": "SELF",
-			"race": "FURY"
+	"description": "Your Fury spells can't reduce your minions below 1 health.",
+	"triggers": [
+		{
+			"eventTrigger": {
+				"class": "SpellCastedTrigger",
+				"sourcePlayer": "SELF",
+				"race": "FURY"
+			},
+			"spell": {
+				"class": "AddAttributeSpell",
+				"target": "FRIENDLY_MINIONS",
+				"attribute": "CANNOT_REDUCE_HP_BELOW_1"
+			}
 		},
-		"spell": {
-			"class": "DamageSpell",
-			"target": "OTHER_MINIONS"
+		{
+			"eventTrigger": {
+				"class": "AfterSpellCastedTrigger",
+				"sourcePlayer": "SELF",
+				"race": "FURY"
+			},
+			"spell": {
+				"class": "RemoveAttributeSpell",
+				"target": "FRIENDLY_MINIONS",
+				"attribute": "CANNOT_REDUCE_HP_BELOW_1"
+			}
 		}
-	},
+		
+	],
 	"collectible": true,
 	"set": "CUSTOM",
 	"fileFormatVersion": 1

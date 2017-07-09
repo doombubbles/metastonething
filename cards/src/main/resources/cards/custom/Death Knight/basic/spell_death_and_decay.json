@@ -1,0 +1,18 @@
+{
+	"name": "Death and Decay",
+	"baseManaCost": 10,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"description": "Deal 6 damage to all enemies.",
+	"targetSelection": "NONE",
+	"race": "UNHOLY",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ENEMY_CHARACTERS",
+		"value": 6
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

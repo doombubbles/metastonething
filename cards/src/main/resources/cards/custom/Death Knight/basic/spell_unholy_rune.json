@@ -1,0 +1,20 @@
+{
+	"name": "Unholy Rune",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"description": "Summon two 1/1 Ghouls.",
+	"targetSelection": "NONE",
+	"race": "UNHOLY",
+	"spell": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_ghoul",
+			"token_ghoul"
+		]
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

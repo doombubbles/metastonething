@@ -19,6 +19,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.DiscoverAction;
+import net.demilich.metastone.game.actions.PlayReplaceHeroCardAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.HeroPowerAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
@@ -73,6 +74,11 @@ public class HumanActionPromptView extends VBox {
 		case DISCOVER:
 			DiscoverAction discover = (DiscoverAction) action;
 			actionString = "DISCOVER " + discover.getSpell().getSpellClass().getSimpleName();
+			break;
+		case REPLACE_HERO:
+			PlayReplaceHeroCardAction raction = (PlayReplaceHeroCardAction) action;
+			card = context.resolveCardReference(raction.getCardReference());
+			actionString = "Replace Hero: " + card.getName();
 			break;
 		default:
 			return "<unknown action " + action.getActionType() + ">";

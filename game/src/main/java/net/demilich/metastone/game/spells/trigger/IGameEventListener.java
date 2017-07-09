@@ -33,6 +33,8 @@ public interface IGameEventListener {
 	public abstract boolean hasPersistentOwner();
 
 	public abstract boolean oneTurnOnly();
+	
+	public abstract boolean oneTimeOnly();
 
 	public abstract boolean isDelayed();
 

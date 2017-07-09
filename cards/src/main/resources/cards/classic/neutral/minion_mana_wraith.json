@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "RARE",
 	"description": "ALL minions cost (1) more.",
+	"race": "UNDEAD",
 	"cardCostModifier": {
 		"class": "CardCostModifier",
 		"cardType": "MINION",

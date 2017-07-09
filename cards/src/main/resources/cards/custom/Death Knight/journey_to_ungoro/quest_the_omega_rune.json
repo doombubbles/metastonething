@@ -1,0 +1,43 @@
+{
+	"name": "The Omega Rune",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "LEGENDARY",
+	"description": "Quest: Cast 8 runes. Reward: The Etymidian.",
+	"targetSelection": "NONE",
+	"quest": {
+		"class": "SpellCastedTrigger",
+		"sourcePlayer": "SELF",
+		"queueCondition": {
+			"class": "OrCondition",
+			"target": "EVENT_TARGET",
+			"conditions": [
+				{
+					"class": "CardPropertyCondition",
+					"cardId": "spell_blood_rune"
+				},
+				{
+					"class": "CardPropertyCondition",
+					"cardId": "spell_frost_rune"
+				},
+				{
+					"class": "CardPropertyCondition",
+					"cardId": "spell_unholy_rune"
+				},
+				{
+					"class": "CardPropertyCondition",
+					"cardId": "spell_death_rune"
+				}
+			]
+		},
+		"value": 8
+	},
+	"spell": {
+		"class": "ReceiveCardSpell",
+		"card": "token_the_etymidian"
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

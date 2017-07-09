@@ -1,0 +1,55 @@
+{
+	"name": "Darkmaw Devilsaur",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Battlecry: Next time you cast a spell, restore this minion to full health.",
+	"battelcry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_PLAYER",
+			"trigger": {
+				"eventTrigger": {
+					"class": "SpellCastedTrigger",
+					"targetPlayer": "SELF"
+				},
+				"spell": {
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "HealSpell",
+							"value": {
+								"class": "AttributeValueProvider",
+								"attribute": "MAX_HP"
+							},
+							"target": "FRIENDLY_MINIONS",
+							"filter": {
+								"class": "AttributeFilter",
+								"attribute": "CUSTOM_4",
+								"operation": "HAS"
+							}
+						},
+						{
+							"class": "custom.RevealCardSpell",
+							"value": 1,
+							"card": "minion_darkmaw_devilsaur"
+						}
+					]
+				},
+				"oneTime": true
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"CUSTOM_4": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

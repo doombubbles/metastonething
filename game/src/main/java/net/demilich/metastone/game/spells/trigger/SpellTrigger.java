@@ -19,20 +19,22 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private SpellDesc spell;
 	private EntityReference hostReference;
 	private final boolean oneTurn;
+	private final boolean oneTime;
 	private boolean expired;
 	private boolean persistentOwner;
 	private int turnDelay;
 
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay) {
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay, boolean oneTime) {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
 		this.oneTurn = oneTurn;
 		this.turnDelay = turnDelay;
+		this.oneTime = oneTime;
 	}
 	
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn) {
-		this(primaryTrigger, secondaryTrigger, spell, oneTurn, 0);
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, boolean oneTime) {
+		this(primaryTrigger, secondaryTrigger, spell, oneTurn, 0, oneTime);
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell) {
@@ -40,7 +42,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell, boolean oneTime, int turnDelay) {
-		this(trigger, null, spell, oneTime, turnDelay);
+		this(trigger, null, spell, oneTime, turnDelay, oneTime);
 	}
 
 	@Override
@@ -211,6 +213,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	
 	public boolean oneTurnOnly() {
 		return oneTurn;
+	}
+	
+	public boolean oneTimeOnly() {
+		return oneTime;
 	}
 	
 	public boolean canFireCondition(GameEvent event) {

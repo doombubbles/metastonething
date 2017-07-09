@@ -204,6 +204,11 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	public boolean oneTurnOnly() {
 		return false;
 	}
+	
+	@Override
+	public boolean oneTimeOnly() {
+		return false;
+	}
 
 	@Override
 	public boolean isDelayed() {

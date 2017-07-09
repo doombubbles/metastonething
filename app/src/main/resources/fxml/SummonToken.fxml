@@ -110,6 +110,11 @@
 				</ImageView>
 				<StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
 					<children>
+						<ImageView fx:id="poisonous" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
+							<image>
+								<Image url="/img/common/poison.png" />
+							</image>
+						</ImageView>
 						<ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
 							<image>
 								<Image url="/img/common/deathrattle.png" />

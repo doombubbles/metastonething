@@ -1,0 +1,37 @@
+{
+	"name": "Epidemic",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"description": "Choose a minion. Deal 3 damage to all other minions.",
+	"targetSelection": "MINIONS",
+	"race": "UNHOLY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "THIS_ONE"
+			},
+			{
+				"class": "DamageSpell",
+				"target": "ALL_MINIONS",
+				"value": 3,
+				"filter": {
+					"class": "AttributeFilter",
+					"operation": "HAS",
+					"attribute": "THIS_ONE",
+					"invert": true
+				}
+			},
+			{
+				"class": "RemoveAttributeSpell",
+				"attribute": "THIS_ONE"
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

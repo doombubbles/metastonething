@@ -1,0 +1,150 @@
+{
+	"name": "The Etymidian",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "LEGENDARY",
+	"description": "Taunt. Battlecry: The next 5 times you cast a spell, destroy a random enemy minion.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_PLAYER",
+			"trigger": {
+				"eventTrigger": {
+					"class": "AfterSpellCastedTrigger",
+					"targetPlayer": "SELF"
+				},
+				"spell": {
+					"class": "MetaSpell",
+					"spells": [
+						{
+							"class": "DestroySpell",
+							"target": "ENEMY_MINIONS",
+							"randomTarget": true
+						},
+						{
+							"class": "custom.RevealCardSpell",
+							"value": 1,
+							"card": "token_the_etymidian"
+						},
+						{
+							"class": "AddSpellTriggerSpell",
+							"target": "FRIENDLY_PLAYER",
+							"trigger": {
+								"eventTrigger": {
+									"class": "AfterSpellCastedTrigger",
+									"targetPlayer": "SELF"
+								},
+								"spell": {
+									"class": "MetaSpell",
+									"spells": [
+										{
+											"class": "DestroySpell",
+											"target": "ENEMY_MINIONS",
+											"randomTarget": true
+										},
+										{
+											"class": "custom.RevealCardSpell",
+											"value": 1,
+											"card": "token_the_etymidian"
+										},
+										{
+											"class": "AddSpellTriggerSpell",
+											"target": "FRIENDLY_PLAYER",
+											"trigger": {
+												"eventTrigger": {
+													"class": "AfterSpellCastedTrigger",
+													"targetPlayer": "SELF"
+												},
+												"spell": {
+													"class": "MetaSpell",
+													"spells": [
+														{
+															"class": "DestroySpell",
+															"target": "ENEMY_MINIONS",
+															"randomTarget": true
+														},
+														{
+															"class": "custom.RevealCardSpell",
+															"value": 1,
+															"card": "token_the_etymidian"
+														},
+														{
+															"class": "AddSpellTriggerSpell",
+															"target": "FRIENDLY_PLAYER",
+															"trigger": {
+																"eventTrigger": {
+																	"class": "AfterSpellCastedTrigger",
+																	"targetPlayer": "SELF"
+																},
+																"spell": {
+																	"class": "MetaSpell",
+																	"spells": [
+																		{
+																			"class": "DestroySpell",
+																			"target": "ENEMY_MINIONS",
+																			"randomTarget": true
+																		},
+																		{
+																			"class": "custom.RevealCardSpell",
+																			"value": 1,
+																			"card": "token_the_etymidian"
+																		},
+																		{
+																			"class": "AddSpellTriggerSpell",
+																			"target": "FRIENDLY_PLAYER",
+																			"trigger": {
+																				"eventTrigger": {
+																					"class": "AfterSpellCastedTrigger",
+																					"targetPlayer": "SELF"
+																				},
+																				"spell": {
+																					"class": "MetaSpell",
+																					"spells": [
+																						{
+																							"class": "DestroySpell",
+																							"target": "ENEMY_MINIONS",
+																							"randomTarget": true
+																						},
+																						{
+																							"class": "custom.RevealCardSpell",
+																							"value": 1,
+																							"card": "token_the_etymidian"
+																						}
+																					]
+																				},
+																				"oneTime": true
+																			}
+																		}
+																	]
+																},
+																"oneTime": true
+															}
+														}
+													]
+												},
+												"oneTime": true
+											}
+										}
+									]
+								},
+								"oneTime": true
+							}
+						}
+					]
+				},
+				"oneTime": true
+			}
+		}
+	},
+	"attributes": {
+		"TAUNT": true,
+		"BATTLECRY": true
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

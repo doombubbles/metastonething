@@ -7,6 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "COMMON",
 	"description": "Enrage: Your weapon has +2 Attack.",
+	"race": "UNDEAD",
 	"aura": {
 		"class": "EnrageAura",
 		"target": "FRIENDLY_WEAPON",

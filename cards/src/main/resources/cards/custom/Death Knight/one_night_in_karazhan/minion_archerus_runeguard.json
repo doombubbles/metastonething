@@ -1,0 +1,27 @@
+{
+	"name": "Archerus Runeguard",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "COMMON",
+	"description": "Whenever this attacks and kills a minion, add an Unholy Rune to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
+			"fireCondition": {
+				"class": "IsDeadCondition"
+			}
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "spell_unholy_rune"
+		}
+	},
+	"collectible": true,
+	"set": "ONE_NIGHT_IN_KARAZHAN",
+	"fileFormatVersion": 1
+}

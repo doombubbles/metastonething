@@ -1,0 +1,23 @@
+{
+	"name": "Iceborn Knight",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 6,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"description": "Can't be Frozen.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "RemoveAttributeSpell",
+			"target": "SELF",
+			"attribute": "FROZEN"
+		}
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

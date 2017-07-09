@@ -84,8 +84,14 @@ public class TriggerManager implements Cloneable, IDisposable {
 			if (trigger.isExpired()) {
 				removeTriggers.add(trigger);
 			}
+			
+			if (trigger.oneTimeOnly()) {
+				removeTriggers.add(trigger);
+			}
 		}
-
+		
+		
+		
 		for (IGameEventListener trigger : removeTriggers) {
 			triggers.remove(trigger);
 		}

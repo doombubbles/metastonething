@@ -34,7 +34,8 @@
 				"cardFilter": {
 					"class": "CardFilter",
 					"race": "FROST",
-					"cardType": "SPELL"
+					"cardType": "SPELL",
+					"heroClass": "MAGE"
 				}
 			}
 		},

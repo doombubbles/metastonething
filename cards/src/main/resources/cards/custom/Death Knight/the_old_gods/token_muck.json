@@ -1,0 +1,16 @@
+{
+	"name": "Muck",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "RARE",
+	"description": "Taunt.",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

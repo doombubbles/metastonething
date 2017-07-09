@@ -1,0 +1,26 @@
+{
+	"name": "I Know a Place",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Discover a Portal card.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DiscoverCardSpell",
+		"cards": [
+			"spell_icecrown_portal",
+			"spell_moonglage_portal",
+			"spell_maelstrom_portal",
+			"spell_ironforge_portal",
+			"spell_firelands_portal",
+			"spell_silvermoon_portal"
+		],
+		"spell": {
+			"class": "ReceiveCardSpell"
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

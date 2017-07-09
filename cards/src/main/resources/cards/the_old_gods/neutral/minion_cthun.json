@@ -52,6 +52,19 @@
 						"target": "FRIENDLY_PLAYER",
 						"attribute": "CTHUN_TAUNT"
 					}
+				},
+				{
+					"class": "ConditionalSpell",
+					"spell": {
+						"class": "AddAttributeSpell",
+						"target": "SELF",
+						"attribute": "FROZEN"
+					},
+					"condition": {
+						"class": "AttributeCondition",
+						"target": "FRIENDLY_PLAYER",
+						"attribute": "CTHUN_FROZEN"
+					}
 				}
 			]
 		}

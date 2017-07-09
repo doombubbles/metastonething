@@ -215,7 +215,7 @@ public class GameLogic implements Cloneable {
 			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
 		}
 		for (Summon summon : player.getSummons()) {
-			if (summon.getAttribute(Attribute.DOUBLE_RACE_SPELL_DAMAGE) == source.getAttribute(Attribute.RACE)) {
+			if (summon.hasAttribute(Attribute.DOUBLE_RACE_SPELL_DAMAGE) && summon.getAttribute(Attribute.DOUBLE_RACE_SPELL_DAMAGE) == source.getAttribute(Attribute.RACE)) {
 				spellpower *= 2;
 			}
 		}
@@ -546,11 +546,33 @@ public class GameLogic implements Cloneable {
 			DamageEvent damageEvent = new DamageEvent(context, target, source, damageDealt);
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damageDealt);
+			
+			if (target.getEntityType() == EntityType.MINION) {
+				if (source.hasAttribute(Attribute.POISONOUS)) {
+					destroy(target);
+				} else if (sourceCard != null) {
+					if (sourceCard.hasAttribute(Attribute.POISONOUS)) {
+						destroy(target);
+					}
+				}
+			}
+			
 		} else if (damageDealt < 0) {
 			HealEvent healEvent = new HealEvent(context, player.getId(), target, damage * -1);
 			context.fireGameEvent(healEvent);
 			player.getStatistics().heal(damage * -1);
 		}
+		
+		
+		if (source.hasAttribute(Attribute.LIFESTEAL)) {
+			heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
+		} else if (sourceCard != null) {
+			if (sourceCard.hasAttribute(Attribute.LIFESTEAL)) {
+				heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
+			}
+		}
+		
+		
 
 		return damageDealt;
 	}

@@ -7,7 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"race": "ALL",
-	"description": "Counts as a Beast, Murloc, Pirate, Demon, Dragon, Totem, Mech and Elemental.",
+	"description": "Counts as a Beast, Murloc, Pirate, Demon, Dragon, Totem, Mech, Undead and Elemental.",
 	"collectible": true,
 	"set": "CUSTOM",
 	"fileFormatVersion": 1
