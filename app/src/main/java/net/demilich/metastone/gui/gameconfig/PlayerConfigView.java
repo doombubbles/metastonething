@@ -146,7 +146,10 @@ public class PlayerConfigView extends VBox {
 	}
 
 	private void selectHero(HeroCard heroCard) {
-		Image heroPortrait = new Image(IconFactory.getHeroIconUrl(heroCard.getCardId()));
+		Image heroPortrait;
+		if (heroCard.getHeroClass() == HeroClass.DECK_COLLECTION) {
+			heroPortrait = new Image(IconFactory.getHeroIconUrl("unknown"));
+		} else heroPortrait = new Image(IconFactory.getHeroIconUrl(heroCard.getCardId()));
 		heroIcon.setImage(heroPortrait);
 		heroNameLabel.setText(heroCard.getName());
 		getPlayerConfig().setHeroCard(heroCard);

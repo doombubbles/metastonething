@@ -246,21 +246,20 @@ public class SpellUtils {
 		return false;
 	}
 
-	public static int howManyMinionsDiedThisTurn(GameContext context) {
+	public static int howManyMinionsDiedThisTurn(GameContext context, Player player) {
 		int currentTurn = context.getTurn();
 		int count = 0;
-		for (Player player : context.getPlayers()) {
-			for (Entity deadEntity : player.getGraveyard()) {
-				if (deadEntity.getEntityType() != EntityType.MINION) {
-					continue;
-				}
-
-				if (deadEntity.getAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
-					count++;
-				}
-
+		for (Entity deadEntity : player.getGraveyard()) {
+			if (deadEntity.getEntityType() != EntityType.MINION) {
+				continue;
 			}
+
+			if (deadEntity.getAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
+				count++;
+			}
+
 		}
+		
 		return count;
 	}
 	

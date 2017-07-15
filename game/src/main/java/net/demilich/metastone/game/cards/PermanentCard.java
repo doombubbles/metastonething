@@ -8,6 +8,7 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayPermanentCardAction;
+import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.cards.desc.PermanentCardDesc;
 import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -58,6 +59,7 @@ public class PermanentCard extends SummonCard {
 		}
 		if (desc.aura != null) {
 			permanent.addSpellTrigger(desc.aura.create());
+			permanent.setAttribute(Attribute.AURA, true);
 		}
 		if (desc.cardCostModifier != null) {
 			permanent.setCardCostModifier(desc.cardCostModifier.create());
@@ -76,6 +78,10 @@ public class PermanentCard extends SummonCard {
 
 	public Permanent summon() {
 		return createPermanent();
+	}
+	
+	public PermanentCardDesc getDesc() {
+		return desc;
 	}
 
 }

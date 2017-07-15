@@ -6,16 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "RARE",
-	"description": "Your Beasts have Charge.",
-	"aura": {
-		"class": "AttributeAura",
-		"target": "FRIENDLY_MINIONS",
-		"attribute": "IMMUNE",
-		"filter": {
-			"class": "SpecificCardFilter",
-			"cardId": "minion_ebon_queen"
-		}
-	},
+	"description": "Ebon Queen is Immune",
 	"collectible": false,
 	"set": "ONE_NIGHT_IN_KARAZHAN",
 	"fileFormatVersion": 1

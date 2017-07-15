@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells.trigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -28,10 +29,10 @@ public class FatalDamageTrigger extends PreDamageTrigger {
 			switch (victim.getEntityType()) {
 			case HERO:
 				Hero hero = (Hero) victim;
-				return hero.getEffectiveHp() <= event.getGameContext().getDamageStack().peek();
+				return hero.getEffectiveHp() <= event.getGameContext().getDamageStack().peek() && !hero.hasAttribute(Attribute.IMMUNE);
 			case MINION:
 				Minion minion = (Minion) victim;
-				return minion.getHp() <= event.getGameContext().getDamageStack().peek();
+				return minion.getHp() <= event.getGameContext().getDamageStack().peek() && !minion.hasAttribute(Attribute.IMMUNE);
 			default:
 				logger.warn("Invalid entity type in FatalDamageTrigger: {}", victim);
 				break;

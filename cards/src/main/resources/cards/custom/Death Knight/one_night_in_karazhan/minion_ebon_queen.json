@@ -24,8 +24,46 @@
 			]
 		}
 	},
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "EitherOrSpell",
+			"spell1": {
+				"class": "AddAttributeSpell",
+				"target": "SELF",
+				"attribute": "IMMUNE"
+			},
+			"spell2": {
+				"class": "RemoveAttributeSpell",
+				"target": "SELF",
+				"attribute": "IMMUNE"
+			},
+			"condition": {
+				"class": "HasEntityCondition",
+				"target": "FRIENDLY_MINIONS",
+				"filter": {
+					"class": "AndFilter",
+					"filters": [
+						{
+							"class": "SpecificCardFilter",
+							"cardId": "token_ebon_rook"
+						},
+						{
+							"class": "AttributeFilter",
+							"attribute": "SILENCED",
+							"operation": "HAS",
+							"invert": true
+						}
+					]
+				}
+			}
+		}
+	},
 	"attributes": {
-		"BATTLECRY": true
+		"BATTLECRY": true,
+		"HIDE_TRIGGER": true
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",

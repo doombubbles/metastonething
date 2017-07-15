@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "FREE",
-	"description": "Can't be Frozen.",
+	"description": "Taunt. Can't be Frozen.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "GameStateChangedTrigger"
@@ -16,6 +16,10 @@
 			"target": "SELF",
 			"attribute": "FROZEN"
 		}
+	},
+	"attributes": {
+		"TAUNT": true,
+		"HIDE_TRIGGER": true
 	},
 	"collectible": true,
 	"set": "BASIC",

@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "COMMON",
-	"description": "Deal 4 damage and Freeze a character. Add a Frost Rune to your hand.",
+	"description": "Deal 4 damage. Add a Frost Rune to your hand.",
 	"targetSelection": "ANY",
 	"race": "FROST",
 	"spell": {
@@ -13,10 +13,6 @@
 			{
 				"class": "DamageSpell",
 				"value": 4
-			},
-			{
-				"class": "AddAttributeSpell",
-				"attribute": "FROZEN"
 			},
 			{
 				"class": "ReceiveCardSpell",

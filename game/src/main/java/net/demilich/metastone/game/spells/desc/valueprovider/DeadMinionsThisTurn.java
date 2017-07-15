@@ -13,7 +13,7 @@ public class DeadMinionsThisTurn extends ValueProvider {
 
 	@Override
 	protected int provideValue(GameContext context, Player player, Entity target, Entity host) {
-		return SpellUtils.howManyMinionsDiedThisTurn(context);
+		return SpellUtils.howManyMinionsDiedThisTurn(context, player);
 	}
 
 }

@@ -13,12 +13,23 @@
    <padding>
       <Insets top="20.0" />
    </padding>
-   <right>
+   <left>
       <VBox spacing="2.0">
          <children>
             <CheckBox styleClass="name-small" fx:id="arbitraryCheckBox" mnemonicParsing="false" text="Arbitrary Deck?" />
          </children>
       </VBox>
+   </left>
+   <right>
+   		<Button fx:id="deathKnightButton" contentDisplay="TOP" mnemonicParsing="false" styleClass="class-button" text="Death Knight" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/img/classes/death_knight.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </right>
    <center>
       <GridPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
@@ -117,15 +128,6 @@
             <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/img/classes/deck_collection.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="deathKnightButton" contentDisplay="TOP" mnemonicParsing="false" styleClass="class-button" text="Death Knight" prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="/img/classes/death_knight.png" />
                </image>
             </ImageView>
          </graphic>

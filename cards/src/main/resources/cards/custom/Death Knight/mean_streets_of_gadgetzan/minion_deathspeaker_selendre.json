@@ -8,7 +8,7 @@
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Infect a minion with all 3 Diseases.",
 	"battlecry": {
-		"targetSelection": "MINIONS",
+		"targetSelection": "ALL_MINIONS",
 		"class": "MetaSpell",
 		"spells": [
 			{

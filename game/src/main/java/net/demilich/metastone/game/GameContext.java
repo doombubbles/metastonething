@@ -446,6 +446,7 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public void play() {
 		logger.debug("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
+		logger.info("Game starts: " + getPlayer1().getName() + " VS. " + getPlayer2().getName());
 		init();
 		while (!gameDecided()) {
 			startTurn(activePlayer);

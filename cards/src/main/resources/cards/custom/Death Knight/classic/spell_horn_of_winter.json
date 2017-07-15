@@ -24,7 +24,7 @@
 				"trigger": {
 					"eventTrigger": {
 						"class": "AfterSpellCastedTrigger",
-						"targetPlayer": "SELF"
+						"sourcePlayer": "SELF"
 					},
 					"spell": {
 						"class": "AddSpellTriggerSpell",
@@ -32,7 +32,7 @@
 						"trigger": {
 							"eventTrigger": {
 								"class": "AfterSpellCastedTrigger",
-								"targetPlayer": "SELF"
+								"sourcePlayer": "SELF"
 							},
 							"spell": {
 								"class": "MetaSpell",

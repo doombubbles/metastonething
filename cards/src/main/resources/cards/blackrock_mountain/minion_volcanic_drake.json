@@ -9,7 +9,8 @@
 	"race": "DRAGON",
 	"description": "Costs (1) less for each minion that died this turn.",
 	"manaCostModifier": {
-		"class": "DeadMinionsThisTurn"
+		"class": "DeadMinionsThisTurn",
+		"targetPlayer": "BOTH"
 	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",

@@ -6,6 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "SHAMAN",
 	"rarity": "LEGENDARY",
+	"race": "ELEMENTAL",
 	"description": "When your spells deal damage, restore that much Health to your hero.",
 	"trigger": {
 		"eventTrigger": {

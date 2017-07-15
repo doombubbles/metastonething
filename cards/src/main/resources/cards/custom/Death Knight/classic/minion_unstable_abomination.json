@@ -2,18 +2,19 @@
 	"name": "Unstable Abomination",
 	"baseManaCost": 5,
 	"type": "MINION",
-	"baseAttack": 5,
+	"baseAttack": 4,
 	"baseHp": 4,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "RARE",
-	"description": "Deathrattle: Deal 4 damage randomly split among enemy characters.",
+	"description": "Taunt. Deathrattle: Deal 4 damage randomly split among enemy characters.",
 	"deathrattle": {
 		"class": "MissilesSpell",
 		"target": "ENEMY_CHARACTERS",
 		"howMany": 4
 	},
 	"attributes": {
-		"DEATHRATTLES": true
+		"DEATHRATTLES": true,
+		"TAUNT": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",

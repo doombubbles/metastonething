@@ -10,6 +10,7 @@
 		"ROGUE",
 		"SHAMAN"
 	],
+	"race": "ELEMENTAL",
 	"rarity": "COMMON",
 	"description": "Battlecry: Summon a Jade Golem.",
 	"battlecry": {

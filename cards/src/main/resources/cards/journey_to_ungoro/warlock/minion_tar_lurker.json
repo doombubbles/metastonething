@@ -28,7 +28,8 @@
 	},
 	"collectible": true,
 	"attributes": {
-		"TAUNT": true
+		"TAUNT": true,
+		"HIDE_TRIGGER": true
 	},
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1

@@ -11,6 +11,10 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.PermanentCard;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.minions.Summon;
@@ -37,6 +41,12 @@ public class SummonToken extends GameToken {
 	
 	@FXML
 	private Node poisonous;
+	
+	@FXML
+	private Node lifesteal;
+	
+	@FXML
+	private Node trigger;
 	
 	@FXML
 	private Node spell_damage;
@@ -96,11 +106,15 @@ public class SummonToken extends GameToken {
 		}
 		deathrattle.setVisible(summon.hasAttribute(Attribute.DEATHRATTLES));
 		poisonous.setVisible(summon.hasAttribute(Attribute.POISONOUS));
+		lifesteal.setVisible(summon.hasAttribute(Attribute.LIFESTEAL));
 		frozen.setVisible(summon.hasAttribute(Attribute.FROZEN));
-		elusive.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && !summon.hasAttribute(Attribute.TAUNT));
-		elusivetaunt.setVisible(summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) && summon.hasAttribute(Attribute.TAUNT));
+		trigger.setVisible(summon.hasSpellTrigger() && !summon.hasAttribute(Attribute.AURA) && !summon.hasAttribute(Attribute.HIDE_TRIGGER));
+		elusive.setVisible((summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) || summon.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS)) && !summon.hasAttribute(Attribute.TAUNT));
+		elusivetaunt.setVisible((summon.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) || summon.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS))  && summon.hasAttribute(Attribute.TAUNT));
 		visualizeStealth(summon);
 		spell_damage.setVisible(summon.hasAttribute(Attribute.SPELL_DAMAGE));
+		
+		
 	}
 
 	private void visualizeStealth(Summon summon) {

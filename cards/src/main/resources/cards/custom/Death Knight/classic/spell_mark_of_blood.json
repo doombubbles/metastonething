@@ -4,23 +4,15 @@
 	"type": "SPELL",
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "COMMON",
-	"description": "Choose a minion. When it dies, restore 8 Health to your hero.",
+	"description": "Give a minion 'Deathrattle: restore 8 Health to your hero'.",
 	"targetSelection": "MINIONS",
 	"race": "BLOOD",
 	"spell": {
-		"class": "AddSpellTriggerSpell",
-		"trigger": {
-			"eventTrigger": {
-				"class": "MinionDeathTrigger",
-				"targetPlayer": "SELF",
-				"hostTargetType": "IGNORE_OTHER_SOURCES"
-			},
-			"spell": {
-				"class": "HealSpell",
-				"value": 8,
-				"target": "FRIENDLY_HERO"
-			},
-			"persistentOwner": true
+		"class": "AddDeathrattleSpell",
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 8
 		}
 	},
 	"collectible": true,

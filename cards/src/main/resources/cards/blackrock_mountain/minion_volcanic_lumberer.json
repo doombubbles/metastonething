@@ -8,7 +8,8 @@
 	"rarity": "RARE",
 	"description": "Taunt. Costs (1) less for each minion that died this turn.",
 	"manaCostModifier": {
-		"class": "DeadMinionsThisTurn"
+		"class": "DeadMinionsThisTurn",
+		"targetPlayer": "BOTH"
 	},
 	"attributes": {
 		"TAUNT": true

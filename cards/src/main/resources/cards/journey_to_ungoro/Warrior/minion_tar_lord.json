@@ -27,7 +27,8 @@
 		}
 	},
 	"attributes": {
-		"TAUNT": true
+		"TAUNT": true,
+		"HIDE_TRIGGER": true
 	},
     "collectible": true,
     "set": "JOURNEY_TO_UNGORO",

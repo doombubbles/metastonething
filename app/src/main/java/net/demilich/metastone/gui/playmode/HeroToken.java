@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -66,6 +67,12 @@ public class HeroToken extends GameToken {
 
 	@FXML
 	private Shape frozen;
+	
+	@FXML
+	private Node trigger;
+	
+	@FXML
+	private Node deathrattle;
 	
 	@FXML
 	private ImageView immune;
@@ -221,6 +228,8 @@ public class HeroToken extends GameToken {
 			tooltipContent.setCard(weapon.getSourceCard());
 			tooltip.setGraphic(tooltipContent);
 			Tooltip.install(weaponPane, tooltip);
+			deathrattle.setVisible(weapon.hasAttribute(Attribute.DEATHRATTLES));
+			trigger.setVisible(weapon.hasSpellTrigger());
 		}
 	}
 

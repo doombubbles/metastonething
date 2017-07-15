@@ -4,7 +4,7 @@
 	"type": "HERO_POWER",
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "FREE",
-	"description": "Gain +1 Attack and Immune while Attacking this turn.",
+	"description": "Gain +1 Attack and Immune until you attack this turn.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -16,9 +16,15 @@
 			},
 			{
 				"class": "AddAttributeSpell",
-				"attribute": "IMMUNE_WHILE_ATTACKING",
+				"attribute": "IMMUNE",
 				"revertTrigger": {
 					"class": "TurnEndTrigger"
+				},
+				"secondaryRevertTrigger": {
+					"class": "AfterPhysicalAttackTrigger",
+					"sourcePlayer": "SELF",
+					"targetPlayer": "BOTH",
+					"sourceEntityType": "HERO"
 				}
 			}
 		]

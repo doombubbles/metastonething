@@ -6,6 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
+	"race": "ELEMENTAL",
 	"description": "After you target another friendly minion with a spell, cast it on this one.",
 	"trigger": {
 		"eventTrigger": {

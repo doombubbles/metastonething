@@ -9,7 +9,6 @@
 	"race": "UNHOLY",
     "spell": {
 		"class": "MetaSpell",
-		"target": "ALL_MINIONS",
 		"spells": [
 			{
 				"class": "DiscoverOptionSpell",
@@ -19,6 +18,7 @@
 						"name": "Blood Plague",
 						"description": "Give a minion 'At the end of each turn, take 2 damage.'",
 						"class": "AddSpellTriggerSpell",
+						"target": "ALL_MINIONS",
 						"trigger": {
 							"eventTrigger": {
 								"class": "TurnEndTrigger"
@@ -34,7 +34,7 @@
 						"name": "Crypt Virus",
 						"description": "Give a minion 'Deathrattle: Summon a 3/3 Crypt Fiend for your opponent.'",
 						"class": "AddDeathrattleSpell",
-						"class": "AddDeathrattleSpell",
+						"target": "ALL_MINIONS",
 						"spell": {
 							"class": "SummonSpell",
 							"card": "token_crypt_fiend",
@@ -45,6 +45,7 @@
 						"name": "Frost Fever",
 						"description": "Freeze a minion and reduce its attack by 3.",
 						"class": "MetaSpell",
+						"target": "ALL_MINIONS",
 						"spells": [
 							{
 								"class": "BuffSpell",
@@ -60,6 +61,7 @@
 			},
 			{
 				"class": "AddAttributeSpell",
+				"target": "ALL_MINIONS",
 				"attribute": "DISEASED"
 			}
 			

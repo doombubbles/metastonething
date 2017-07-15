@@ -3,7 +3,7 @@
 	"baseManaCost": 7,
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
-	"rarity": "EPIC",
+	"rarity": "COMMON",
 	"description": "Deal 8 damage.",
 	"targetSelection": "ANY",
 	"race": "DESTRUCTION",

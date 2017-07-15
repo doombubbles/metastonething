@@ -4,11 +4,11 @@
 	"type": "HERO_POWER",
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
-	"description": "The next card you play gains Lifesteal.",
+	"description": "The next card you play this turn gains Lifesteal.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "AddSpellTriggerSpell",
-		"target": "FRIENDLY_PLAYER",
+		"target": "FRIENDLY_HERO",
 		"trigger": {
 			"eventTrigger": {
 				"class": "CardPlayedTrigger",
@@ -18,9 +18,10 @@
 				"class": "AddAttributeSpell",
 				"target": "EVENT_TARGET",
 				"attribute": "LIFESTEAL"
-			}
-		},
-		"oneTime": true
+			},
+			"oneTime": true,
+			"oneTurn": true
+		}
 	},
 	"collectible": false,
 	"set": "CUSTOM",

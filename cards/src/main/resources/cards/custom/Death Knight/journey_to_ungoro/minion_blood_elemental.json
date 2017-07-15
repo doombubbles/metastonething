@@ -7,7 +7,7 @@
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "COMMON",
 	"race": "ELEMENTAL",
-	"description": "Battlecry: If you played an Elemental last turn, add a Blood Rune to your hand.",
+	"description": "Battlecry: If an enemy minion died this turn, add a Blood Rune to your hand.",
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveCardSpell",
@@ -15,11 +15,13 @@
 			"card": "spell_blood_rune"
 		},
 		"condition": {
-			"class": "PlayedLastTurnCondition",
-			"filter": {
-				"class": "CardFilter",
-				"race": "ELEMENTAL"
-			}
+			"class": "ComparisonCondition",
+			"value1": {
+				"class": "DeadMinionsThisTurn",
+				"targetPlayer": "OPPONENT"
+			},
+			"value2": 0,
+			"operation": "GREATER"
 		}
 	},
 	"attributes": {

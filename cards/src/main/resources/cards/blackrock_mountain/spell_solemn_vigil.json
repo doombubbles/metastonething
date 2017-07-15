@@ -12,7 +12,8 @@
 		"value": 2
 	},
 	"manaCostModifier": {
-		"class": "DeadMinionsThisTurn"
+		"class": "DeadMinionsThisTurn",
+		"targetPlayer": "BOTH"
 	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",

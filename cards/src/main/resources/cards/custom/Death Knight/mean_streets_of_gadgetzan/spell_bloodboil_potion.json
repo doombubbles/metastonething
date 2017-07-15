@@ -12,7 +12,8 @@
 		"target": "FRIENDLY_HERO",
 		"value": {
 			"class": "DeadMinionsThisTurn",
-			"multiplier": 4
+			"multiplier": 4,
+			"targetPlayer": "BOTH"
 		}
 	},
 	"collectible": true,
