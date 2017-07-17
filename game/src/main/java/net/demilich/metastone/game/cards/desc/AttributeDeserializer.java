@@ -59,7 +59,6 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.LIFESTEAL, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.AURA, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.POISONOUS, jsonData, map, ParseValueType.BOOLEAN);
-		parseAttribute(Attribute.HIDE_TRIGGER, jsonData, map, ParseValueType.BOOLEAN);
 		return map;
 	}
 

@@ -62,8 +62,7 @@
 		}
 	},
 	"attributes": {
-		"BATTLECRY": true,
-		"HIDE_TRIGGER": true
+		"BATTLECRY": true
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",

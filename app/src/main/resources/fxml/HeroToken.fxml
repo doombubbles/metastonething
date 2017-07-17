@@ -20,6 +20,11 @@
             <Image url="/img/heroes/garrosh.png" />
           </image>
         </ImageView>
+        <ImageView fx:id="shadowform" fitHeight="150" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="0.0" translateY="0.0" visible="false">
+          <image>
+            <Image url="/img/common/shadowform.png" />
+          </image>
+        </ImageView>
         <ImageView fx:id="immune" fitHeight="150" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="0.0" translateY="0.0" visible="false">
           <image>
             <Image url="/img/common/immune_hero.png" />

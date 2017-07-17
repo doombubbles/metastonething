@@ -76,6 +76,9 @@ public class HeroToken extends GameToken {
 	
 	@FXML
 	private ImageView immune;
+	
+	@FXML
+	private ImageView shadowform;
 
 	public HeroToken() {
 		super("HeroToken.fxml");
@@ -209,6 +212,7 @@ public class HeroToken extends GameToken {
 
 	private void updateStatus(Hero hero, GameContext context) {
 		frozen.setVisible(hero.hasAttribute(Attribute.FROZEN));
+		shadowform.setVisible(hero.hasAttribute(Attribute.SHADOWFORM));
 		immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
 	}
 	
