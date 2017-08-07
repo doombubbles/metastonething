@@ -1,0 +1,32 @@
+{
+    "name": "Skelemancer",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Deathrattle: If it's your opponent's turn, summon an 8/8 Skeleton.",
+    "deathrattle": {
+        "class": "ConditionalSpell",
+		"spell": {
+			"class": "CreateSummonSpell",
+			"attackBonus": 8,
+			"hpBonus": 8,
+			"name": "Skeleton",
+			"mana": 8
+		},
+		"condition": {
+			"class": "OwnedByPlayerCondition",
+			"targetPlayer": "ACTIVE",
+			"invert": true
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

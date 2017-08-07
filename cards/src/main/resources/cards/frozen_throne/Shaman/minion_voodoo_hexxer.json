@@ -1,0 +1,28 @@
+{
+    "name": "Voodoo Hexxer",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 7,
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Taunt. Freeze any character damaged by this minnon.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageCausedTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "EVENT_TARGET",
+			"attribute": "FROZEN"
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

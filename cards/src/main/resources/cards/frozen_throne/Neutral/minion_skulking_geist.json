@@ -1,0 +1,71 @@
+{
+    "name": "Skulking Geist",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Destroy all 1-Cost spells in both hands and decks.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "RemoveCardSpell",
+					"target": "FRIENDLY_DECK",
+					"filter": {
+						"class": "CardFilter",
+						"cardType": "SPELL",
+						"attribute": "BASE_MANA_COST",
+						"operation": "EQUAL",
+						"value": 1
+					}
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "ENEMY_DECK",
+					"targetPlayer": "OPPONENT",
+					"filter": {
+						"class": "CardFilter",
+						"cardType": "SPELL",
+						"attribute": "BASE_MANA_COST",
+						"operation": "EQUAL",
+						"value": 1
+					}
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "FRIENDLY_HAND",
+					"filter": {
+						"class": "CardFilter",
+						"cardType": "SPELL",
+						"attribute": "BASE_MANA_COST",
+						"operation": "EQUAL",
+						"value": 1
+					}
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "ENEMY_HAND",
+					"targetPlayer": "OPPONENT",
+					"filter": {
+						"class": "CardFilter",
+						"cardType": "SPELL",
+						"attribute": "BASE_MANA_COST",
+						"operation": "EQUAL",
+						"value": 1
+					}
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

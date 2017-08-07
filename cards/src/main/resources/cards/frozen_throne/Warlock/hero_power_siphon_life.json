@@ -1,0 +1,19 @@
+{
+	"name": "Siphon Life",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Deal 3 damage. Lifesteal.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 3
+	},
+	"attribute": {
+		"LIFESTEAL": true
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,29 @@
+{
+	"name": "Shadowreaper Anduin",
+	"baseManaCost": 8,
+	"type": "REPLACE_HERO",
+	"armor": 5,
+	"heroClass": "PRIEST",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Destroy all minions with 5 or more Attack.",
+	"hero": "hero_shadowreaper_anduin",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DestroySpell",
+			"target": "ALL_MINIONS",
+			"filter": {
+				"class": "AttributeFilter",
+				"attribute": "ATTACK",
+				"operation": "GREATER_OR_EQUAL",
+				"value": 5
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

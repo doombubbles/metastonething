@@ -1,0 +1,28 @@
+{
+    "name": "Eternal Servitude",
+    "baseManaCost": 4,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "description": "Discover a friendly minion that died this game. Summon it.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "DiscoverRandomCardSpell",
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "SELF"
+		},
+		"cardFilter": {
+			"class": "GraveyardFilter",
+			"targetPlayer": "SELF"
+		}
+    },
+	"condition": {
+		"class": "GraveyardCountCondition",
+		"operation": "GREATER",
+		"value": 0
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

@@ -795,6 +795,9 @@ public class GameLogic implements Cloneable {
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
+		if (hasAttribute(player, Attribute.DOUBLE_END_TURN)) {
+			context.fireGameEvent(new TurnEndEvent(context, playerId));
+		}
 		CardCollection dumb = new CardCollection();
 		for (Card card : player.getHand()) {
 			if (card.hasAttribute(Attribute.ONE_TURN)) {

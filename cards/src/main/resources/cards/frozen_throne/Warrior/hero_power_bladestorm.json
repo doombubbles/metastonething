@@ -1,0 +1,17 @@
+{
+	"name": "Bladestorm",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"description": "Deal 1 damage to all minions.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": 1
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

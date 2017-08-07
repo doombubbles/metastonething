@@ -1,0 +1,29 @@
+{
+    "name": "Vryghoul",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Deathrattle: If it's your opponent's turn, summon a 2/2 Ghoul.",
+    "deathrattle": {
+        "class": "ConditionalSpell",
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_ghouly"
+		},
+		"condition": {
+			"class": "OwnedByPlayerCondition",
+			"targetPlayer": "ACTIVE",
+			"invert": true
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

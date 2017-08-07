@@ -94,6 +94,7 @@ public enum Attribute {
 	NO_DURABILITY,
 	ONE_TURN,
 	LAST_HEAL,
+	DOUBLE_END_TURN,
 	
 	CUSTOM_1,
 	CUSTOM_2,

@@ -1,0 +1,27 @@
+{
+	"name": "Bloodreaver Gul'Dan",
+	"baseManaCost": 10,
+	"type": "REPLACE_HERO",
+	"armor": 5,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon all friendly Demons that died this game.",
+	"hero": "hero_bloodreaver_guldan",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ResurrectSpell",
+			"value": 7,
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DEMON"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

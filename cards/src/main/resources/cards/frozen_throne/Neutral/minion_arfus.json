@@ -1,0 +1,30 @@
+{
+    "name": "Arfus",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "BEAST",
+    "description": "Deathrattle Add a random Death Knight card to your hand.",
+    "deathrattle": {
+        "class": "ReceiveRandomCardSpell",
+		"cards": [
+			"spell_obliterate",
+			"spell_army_of_the_dead",
+			"spell_anti_magic_shell",
+			"spell_death_and_decay",
+			"spell_death_coil",
+			"spell_death_grip",
+			"spell_doom_pact",
+			"weapon_frostmourne"
+		]
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,18 @@
+{
+    "name": "Snowfury Giant",
+    "baseManaCost": 11,
+    "type": "MINION",
+    "baseAttack": 8,
+    "baseHp": 8,
+    "heroClass": "SHAMAN",
+    "rarity": "EPIC",
+    "race": "ELEMENTAL",
+    "description": "Costs (1) less for each Mana Crystal you've Overloaded this game.",
+	"manaCostModifier": {
+		"class": "PlayerAttributeValueProvider",
+		"playerAttribute": "OVERLOADED_MANA"
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

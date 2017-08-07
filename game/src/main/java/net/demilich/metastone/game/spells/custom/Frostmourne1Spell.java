@@ -19,8 +19,7 @@ public class Frostmourne1Spell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		 Card minion = ((Minion) context.resolveSingleTarget(context.getEventTargetStack().peek())).getSourceCard();
-		 SpellDesc spell = AddDeathrattleSpell.create(EntityReference.FRIENDLY_WEAPON, SummonSpell.create((SummonCard) minion));
-		 SpellUtils.castChildSpell(context, player, spell, source, player.getHero().getWeapon());
+		 player.getHero().getWeapon().addDeathrattle(SummonSpell.create((SummonCard) minion));
 	}
 
 }

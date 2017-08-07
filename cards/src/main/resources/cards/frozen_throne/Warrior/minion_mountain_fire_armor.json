@@ -1,0 +1,30 @@
+{
+    "name": "Mountain Fire Armor",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 3,
+    "heroClass": "WARRIOR",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Deathrattle: If it is your opponent's turn, Gain 6 Armor.",
+    "deathrattle": {
+        "class": "ConditionalSpell",
+		"spell": {
+			"class": "BuffHeroSpell",
+			"target": "FRIENDLY_HERO",
+			"armorBonus": 6
+		},
+		"condition": {
+			"class": "OwnedByPlayerCondition",
+			"targetPlayer": "ACTIVE",
+			"invert": true
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

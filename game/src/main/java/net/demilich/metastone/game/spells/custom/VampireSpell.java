@@ -14,7 +14,7 @@ public class VampireSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Player opponent = context.getOpponent(player);
-		int value = desc.getInt(SpellArg.VALUE, 1);
+		int value = desc.getValue(SpellArg.HOW_MANY, context, opponent, target, target, 1);
 		for (int i = 0; i < value; i++) {
 			Card card = player.getDeck().get(0);
 			context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 1.2 + 1.2 * i));

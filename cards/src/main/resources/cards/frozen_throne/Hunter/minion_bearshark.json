@@ -1,0 +1,17 @@
+{
+    "name": "Bearshark",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 3,
+    "heroClass": "HUNTER",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Can't be targeted by spells of Hero Powers.",
+	"attributes": {
+		"UNTARGETABLE_BY_SPELLS": true
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

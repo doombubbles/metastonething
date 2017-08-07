@@ -1,0 +1,24 @@
+{
+	"name": "Avalanche",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Freeze a minion and deal 3 damage to adjacent ones.",
+	"race": "FROST",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "AdjacentEffectSpell",
+		"spell1": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN"
+		},
+		"spell2": {
+			"class": "DamageSpell",
+			"value": 3
+		}
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

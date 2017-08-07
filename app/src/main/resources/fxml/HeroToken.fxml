@@ -90,9 +90,9 @@
 				</ImageView>
             <Group fx:id="weaponDurabilityAnchor" StackPane.alignment="BOTTOM_RIGHT" />
           	<StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
-	      		<ImageView fx:id="trigger" fitWidth="18.0" translateY="8.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
+          		<ImageView fx:id="deathrattle" fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" translateY="10.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
 					<image>
-						<Image url="/img/common/trigger.png" />
+						<Image url="/img/common/deathrattle.png" />
 					</image>
 				</ImageView>
 				<ImageView fx:id="lifesteal" fitHeight="20.0" translateY="8.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
@@ -105,11 +105,12 @@
 						<Image url="/img/common/poison.png" />
 					</image>
 				</ImageView>
-				<ImageView fx:id="deathrattle" fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" translateY="10.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
+				<ImageView fx:id="trigger" fitWidth="18.0" translateY="8.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
 					<image>
-						<Image url="/img/common/deathrattle.png" />
+						<Image url="/img/common/trigger.png" />
 					</image>
 				</ImageView>
+				
 	      	</StackPane>
 	      </children>
 	      <padding>

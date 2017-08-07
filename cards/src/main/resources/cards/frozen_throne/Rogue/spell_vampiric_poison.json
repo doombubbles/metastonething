@@ -1,0 +1,20 @@
+{
+    "name": "Vampiric Poison",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "COMMON",
+    "description": "Give your weapon Lifesteal.",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_WEAPON",
+		"attribute": "LIFESTEAL"
+	},
+	"condition": {
+		"class": "HasWeaponCondition"
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

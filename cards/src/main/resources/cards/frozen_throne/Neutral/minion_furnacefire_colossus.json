@@ -1,0 +1,24 @@
+{
+    "name": "Furnacefire Colossus",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Discard all weapons from your hand and gain their stats.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "custom.FurnacefireSpell",
+			"target": "SELF"
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

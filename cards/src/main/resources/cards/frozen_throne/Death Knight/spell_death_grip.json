@@ -1,0 +1,15 @@
+{
+    "name": "Death Grip",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "DEATH_KNIGHT",
+    "rarity": "FREE",
+    "description": "Steal a minnion from your opponent's deck and add it to your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "custom.DeathGripSpell"
+	},
+    "collectible": false,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,16 @@
+{
+	"name": "Grave Vengeance",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 5,
+	"durability": 3,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Lifesteal.",
+	"attributes": {
+		"LIFESTEAL": true
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}
