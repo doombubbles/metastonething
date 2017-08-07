@@ -160,12 +160,12 @@ public class HeroToken extends GameToken {
 					n = 10;
 					break;
 				case "quest_jungle_giants":
-				case "quest_the_last_kaleidosaur":
 				case "quest_the_caverns_below":
-				case "quest_lakkari_sacrifice":
 					n = 5;
 					break;
 				case "quest_open_the_waygate":
+				case "quest_lakkari_sacrifice":
+				case "quest_the_last_kaleidosaur":
 					n = 6;
 					break;
 			}

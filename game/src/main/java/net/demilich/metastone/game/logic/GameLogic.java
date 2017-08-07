@@ -1737,7 +1737,7 @@ public class GameLogic implements Cloneable {
 		removeSpellTriggers(entity, true);
 	}
 
-	private void removeSpellTriggers(Entity entity, boolean removeAuras) {
+	public void removeSpellTriggers(Entity entity, boolean removeAuras) {
 		EntityReference entityReference = entity.getReference();
 		for (IGameEventListener trigger : context.getTriggersAssociatedWith(entityReference)) {
 			if (!removeAuras && trigger instanceof Aura) {

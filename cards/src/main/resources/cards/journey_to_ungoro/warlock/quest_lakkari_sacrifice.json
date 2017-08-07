@@ -4,12 +4,12 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
-	"description": "Quest: Discard 5 cards. Reward: Nether Portal.",
+	"description": "Quest: Discard 6 cards. Reward: Nether Portal.",
 	"targetSelection": "NONE",
 	"quest": {
 		"class": "DiscardTrigger",
 		"targetPlayer": "SELF",
-		"value": 5
+		"value": 6
 	},
 	"spell": {
 		"class": "ReceiveCardSpell",

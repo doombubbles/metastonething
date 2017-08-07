@@ -1,9 +1,9 @@
 {
 	"name": "Piranha Launcher",
-	"baseManaCost": 3,
+	"baseManaCost": 5,
 	"type": "WEAPON",
 	"damage": 2,
-	"durability": 3,
+	"durability": 4,
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
 	"description": "After your Hero attacks, summon a 1/1 Piranha.",

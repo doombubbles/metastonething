@@ -1,14 +1,14 @@
 {
-	"name": "Shuffle 3 Relics",
+	"name": "Shuffle 2 Relics",
 	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Shuffle 3 Jade Relics into your deck.",
+	"description": "Shuffle 2 Jade Relics into your deck.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ShuffleToDeckSpell",
-		"howMany": 3,
+		"howMany": 2,
 		"target": "NONE",
 		"card": "spell_jade_relic"
 	},

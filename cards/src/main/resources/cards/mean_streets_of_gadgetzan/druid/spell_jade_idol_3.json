@@ -1,17 +1,17 @@
 {
-	"name": "Summon Jade Golem and Shuffle 3",
+	"name": "Summon Jade Golem and Add 2",
 	"baseManaCost": 1,
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Summon a Jade Golem. Shuffle 3 Jade Relics into your deck.",
+	"description": "Summon a Jade Golem. Shuffle 2 Jade Relics into your deck.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
 			{
 				"class": "ShuffleToDeckSpell",
-				"howMany": 3,
+				"howMany": 2,
 				"target": "NONE",
 				"card": "spell_jade_relic"
 			},

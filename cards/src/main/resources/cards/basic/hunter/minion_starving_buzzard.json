@@ -1,8 +1,8 @@
 {
 	"name": "Starving Buzzard",
-	"baseManaCost": 4,
+	"baseManaCost": 5,
 	"type": "MINION",
-	"baseAttack": 2,
+	"baseAttack": 3,
 	"baseHp": 2,
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
