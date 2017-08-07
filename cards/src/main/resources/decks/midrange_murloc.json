@@ -2,6 +2,8 @@
   "cards": [
     "minion_vilefin_inquisitor",
     "minion_vilefin_inquisitor",
+    "minion_murloc_tidecaller",
+    "minion_murloc_tidecaller",
     "minion_hydrologist",
     "minion_hydrologist",
     "minion_rockpool_hunter",
@@ -12,8 +14,6 @@
     "minion_murloc_warleader",
     "minion_aldor_peacekeeper",
     "minion_aldor_peacekeeper",
-    "minion_faceless_deceiver",
-    "minion_faceless_deceiver",
     "minion_stonehill_defender",
     "minion_stonehill_defender",
     "minion_gentle_megasaur",
@@ -25,9 +25,9 @@
     "spell_blessing_of_kings",
     "spell_spikeridged_steed",
     "minion_sunkeeper_tarim",
+    "spell_spikeridged_steed",
     "minion_the_curator",
     "minion_tirion_fordring",
-    "minion_ragnaros_lightlord",
     "spell_lay_on_hands",
     "minion_primordial_drake"
   ],

@@ -10,8 +10,9 @@
     "description": "Whenever you play a minion, deal 1 damage to it.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF"
+			"class": "AfterMinionPlayedTrigger",
+			"targetPlayer": "SELF",
+			"hostTargetType": "IGNORE_AS_TARGET"
 		},
 		"spell": {
 			"class": "DamageSpell",

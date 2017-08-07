@@ -29,7 +29,7 @@
 			}
 		}
 	},
-	"collectible": true,
+	"collectible": false,
 	"set": "FROZEN_THRONE",
 	"fileFormatVersion": 1
 }
