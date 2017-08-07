@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -56,6 +57,10 @@ public class GameStatistics implements Cloneable {
 			break;
 		case GROUP:
 			break;
+		}
+		
+		if (card.hasAttribute(Attribute.OVERLOAD)) {
+			add(Statistic.OVERLOADED_MANA, card.getAttributeValue(Attribute.OVERLOAD));
 		}
 		increaseCardCount(card, turn);
 	}

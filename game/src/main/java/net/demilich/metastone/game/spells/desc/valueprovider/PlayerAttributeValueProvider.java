@@ -33,6 +33,8 @@ public class PlayerAttributeValueProvider extends ValueProvider {
 			return player.getSecrets().size() - player.getQuests().size();
 		case SPELLS_CAST:
 			return (int) player.getStatistics().getLong(Statistic.SPELLS_CAST);
+		case OVERLOADED_MANA:
+			return (int) player.getStatistics().getLong(Statistic.OVERLOADED_MANA);
 		default:
 			break;
 		}

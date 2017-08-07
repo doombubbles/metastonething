@@ -86,6 +86,7 @@ import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.types.Quest;
 import net.demilich.metastone.game.spells.trigger.types.Secret;
+import net.demilich.metastone.game.statistics.Statistic;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -437,7 +438,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void changeHero(Player player, Hero hero) {
+	public void changeHero(Player player, Hero hero, boolean refresh) {
 		hero.setId(player.getHero().getId());
 		if (hero.getHeroClass() == null || hero.getHeroClass() == HeroClass.ANY) {
 			hero.setHeroClass(player.getHero().getHeroClass());

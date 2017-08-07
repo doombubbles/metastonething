@@ -32,7 +32,7 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 		HeroCard heroCard = (HeroCard) context.getCardById(replaceHeroCard.hero).clone();
 		heroCard.setAttribute(Attribute.HP, context.getPlayer(playerId).getHero().getHp());
 		heroCard.setAttribute(Attribute.ARMOR, player.getHero().getArmor() + replaceHeroCard.armor);
-		context.getLogic().changeHero(player, heroCard.createHero());
+		context.getLogic().changeHero(player, heroCard.createHero(), false);
 		
 		Actor actor = (Actor) player.getHero();
 		

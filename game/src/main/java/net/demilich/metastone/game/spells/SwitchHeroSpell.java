@@ -26,7 +26,7 @@ public class SwitchHeroSpell extends Spell {
 		String heroCardId = (String) desc.get(SpellArg.CARD);
 		HeroCard heroCard = (HeroCard) context.getCardById(heroCardId).clone();
 		heroCard.setAttribute(Attribute.HP, hero.getHp());
-		context.getLogic().changeHero(player, heroCard.createHero());
+		context.getLogic().changeHero(player, heroCard.createHero(), true);
 	}
 
 }
