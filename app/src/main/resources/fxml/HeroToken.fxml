@@ -30,6 +30,16 @@
             <Image url="/img/common/immune_hero.png" />
           </image>
         </ImageView>
+         <ImageView fx:id="stealth" fitHeight="150" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="0.0" translateY="0.0" visible="false">
+          <image>
+            <Image url="/img/common/stealth.png" />
+          </image>
+        </ImageView>
+         <ImageView fx:id="glow2" fitHeight="150" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="0.0" translateY="0.0" visible="false">
+          <image>
+            <Image url="/img/common/glow2.png" />
+          </image>
+        </ImageView>
         <ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
           <image>
             <Image url="/img/common/health_value_icon.png" />
@@ -85,7 +95,17 @@
 						<Image url="/img/common/trigger.png" />
 					</image>
 				</ImageView>
-				<ImageView fx:id="deathrattle" fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" translateY="13.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
+				<ImageView fx:id="lifesteal" fitHeight="20.0" translateY="8.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
+					<image>
+						<Image url="/img/common/heart.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="poisonous" fitHeight="28.0" fitWidth="28.0" translateY="8.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
+					<image>
+						<Image url="/img/common/poison.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="deathrattle" fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" translateY="10.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
 					<image>
 						<Image url="/img/common/deathrattle.png" />
 					</image>
@@ -109,6 +129,7 @@
             <children>
             <StackPane fx:id="heroPowerPane" prefHeight="-1.0" prefWidth="-1.0">
 	      	 <children>
+	      	  <Ellipse fx:id="glow" fill="#ffffff00" radiusX="30.0" radiusY="30.0" smooth="true" pickOnBounds="true" translateY="2.0"  stroke="#32CD32" strokeType="OUTSIDE" strokeWidth="4.0" visible="false" />
               <ImageView id="heropower" fx:id="heroPowerIcon" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
                 <image>
                   <Image url="/img/powers/armor_up.png" />

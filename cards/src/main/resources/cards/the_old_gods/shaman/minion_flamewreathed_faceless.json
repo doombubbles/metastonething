@@ -6,9 +6,9 @@
 	"baseHp": 7,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Overload: (3)",
+	"description": "Overload: (2)",
 	"attributes": {
-		"OVERLOAD": 3
+		"OVERLOAD": 2
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",

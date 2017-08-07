@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -28,8 +29,14 @@ public class SummonSpecialSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
-		String name = (String) desc.get(SpellArg.NAME); 
-		Race race = Race.valueOf(desc.getString(SpellArg.SECONDARY_NAME));
+		String name = target.getName();
+		if (desc.get(SpellArg.NAME) != null) {
+			name = (String) desc.get(SpellArg.NAME);
+		}
+		Race race = (Race) target.getAttribute(Attribute.RACE);
+		if (desc.get(SpellArg.SECONDARY_NAME) != null) {
+			race = Race.valueOf(desc.getString(SpellArg.SECONDARY_NAME));
+		}
 		int attack = desc.getInt(SpellArg.ATTACK_BONUS);
 		int hp = desc.getInt(SpellArg.HP_BONUS);
 		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
@@ -64,9 +71,9 @@ public class SummonSpecialSpell extends Spell {
 			newMinion.setRace(race);
 			Minion minion = newMinion.summon();
 			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false)) {
-				minion.setAttack(1 + attack);
-				minion.setHp(1 + hp);
-				minion.setMaxHp(1 + hp);
+				minion.setAttack(attack);
+				minion.setHp(hp);
+				minion.setMaxHp(hp);
 				
 			}
 		}

@@ -1,0 +1,20 @@
+{
+    "name": "Nerubian Unraveler",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Spells cost (2) more.",
+	"cardCostModifier": {
+		"class": "CardCostModifier",
+		"cardType": "SPELL",
+		"targetPlayer": "BOTH",
+		"value": 2
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

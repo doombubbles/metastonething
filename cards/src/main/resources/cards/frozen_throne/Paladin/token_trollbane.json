@@ -1,0 +1,14 @@
+{
+	"name": "Trollbane",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"race": "UNDEAD",
+	"description": "",
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

@@ -1,8 +1,8 @@
 {
 	"name": "Forbidden Ancient",
-	"baseManaCost": 1,
+	"baseManaCost": 0,
 	"type": "MINION",
-	"baseAttack": 1,
+	"baseAttack": 0,
 	"baseHp": 1,
 	"heroClass": "DRUID",
 	"rarity": "EPIC",

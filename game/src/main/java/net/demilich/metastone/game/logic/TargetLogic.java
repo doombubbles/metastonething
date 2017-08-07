@@ -277,8 +277,12 @@ public class TargetLogic {
 			}
 		} else if (targetKey == EntityReference.FRIENDLY_HAND) {
 			return new ArrayList<>(player.getHand().toList());
+		} else if (targetKey == EntityReference.FRIENDLY_DECK) {
+			return new ArrayList<>(player.getDeck().toList());
 		} else if (targetKey == EntityReference.ENEMY_HAND) {
 			return new ArrayList<>(context.getOpponent(player).getHand().toList());
+		} else if (targetKey == EntityReference.ENEMY_DECK) {
+			return new ArrayList<>(context.getOpponent(player).getDeck().toList());
 		} else if (targetKey == EntityReference.FRIENDLY_PLAYER) {
 			return singleTargetAsList(player);
 		} else if (targetKey == EntityReference.ENEMY_PLAYER) {

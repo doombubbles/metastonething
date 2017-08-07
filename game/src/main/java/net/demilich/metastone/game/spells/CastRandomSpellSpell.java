@@ -19,6 +19,7 @@ import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.ChooseOneCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.events.OverloadEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -43,12 +44,13 @@ public class CastRandomSpellSpell extends Spell {
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
+		Boolean tryAgain = desc.getBool(SpellArg.EXCLUSIVE);
 		if (cardSource != null) {
 			spells = cardSource.getCards(context, player);
 		}
 		CardCollection filteredSpells = new CardCollection();
 		for (Card spell : spells) {
-			if ((filter == null || filter.matches(context, player, spell)) && !spell.getCardId().contains("quest_")) {
+			if ((filter == null || filter.matches(context, player, spell))) {
 				filteredSpells.add(spell);
 			}
 		}
@@ -67,10 +69,15 @@ public class CastRandomSpellSpell extends Spell {
 			// In case Yogg changes sides, this should case who the spells are being cast for.
 			player = context.getPlayer(source.getOwner());
 			// If Yogg is removed from the board, stop casting spells.
-			if (!player.getSummons().contains(source)) {
+			if (!player.getSummons().contains(source) && !source.getEntityType().equals(EntityType.CARD)) {
 				break;
 			}
 			Card randomCard = filteredSpells.getRandom();
+			if (tryAgain) {
+				while (!((SpellCard) randomCard).canBeCast(context, player)) {
+					randomCard = filteredSpells.getRandom();
+				}
+			}
 			logger.debug("Yogg-Saron chooses to play " + randomCard.getName());
 			CardRevealedEvent revealEvent = new CardRevealedEvent(context, player.getId(), randomCard, 1.2 * (i + 1));
 			context.fireGameEvent(revealEvent);
@@ -119,7 +126,6 @@ public class CastRandomSpellSpell extends Spell {
 			// your opponent has died, but should if you do. But, it works for now.
 			context.getLogic().checkForDeadEntities();
 		}
-
 		opponent.removeAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION);
 		originalPlayer.removeAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION);
 		// *ahem* Back to normal.

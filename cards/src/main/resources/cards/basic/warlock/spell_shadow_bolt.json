@@ -9,23 +9,7 @@
 	"race": "DESTRUCTION",
 	"spell": {
 		"class": "DamageSpell",
-		"value": 4,
-		"filter": {
-			"class": "AndFilter",
-			"filters": [
-				{
-					"class": "SpecificCardFilter",
-					"cardId": "minion_flame_lasher"
-				},
-				{
-					"class": "AttributeFilter",
-					"attribute": "SILENCED",
-					"operation": "HAS",
-					"invert": true
-				}
-			],
-			"invert": true
-		}
+		"value": 4
 	},
 	"collectible": true,
 	"set": "BASIC",

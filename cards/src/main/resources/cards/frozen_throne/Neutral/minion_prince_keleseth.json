@@ -9,24 +9,13 @@
 	"description": "Battlecry: If your deck contains no 2-Cost cards, give all minions in your deck deck +1/+1.",
 	"battlecry": {
 		"spell": {
-			"class": "AddSpellTriggerSpell",
-			"target": "FRIENDLY_PLAYER",
-			"trigger": {
-				"eventTrigger": {
-					"class": "CardDrawnTrigger",
-					"targetPlayer": "SELF",
-					"queueCondition": {
-						"class": "CardPropertyCondition",
-						"target": "EVENT_TARGET",
-						"cardType": "MINION"
-					}
-				},
-				"spell": {
-					"class": "BuffSpell",
-					"target": "EVENT_TARGET",
-					"attackBonus": 1,
-					"hpBonus": 1
-				}
+			"class": "BuffSpell",
+			"target": "FRIENDLY_DECK",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
 			},
 			"condition": {
 				"class": "DeckContainsCondition",

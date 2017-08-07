@@ -10,23 +10,7 @@
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ALL_CHARACTERS",
-		"value": 3,
-		"filter": {
-			"class": "AndFilter",
-			"filters": [
-				{
-					"class": "SpecificCardFilter",
-					"cardId": "minion_flame_lasher"
-				},
-				{
-					"class": "AttributeFilter",
-					"attribute": "SILENCED",
-					"operation": "HAS",
-					"invert": true
-				}
-			],
-			"invert": true
-		}
+		"value": 3
 	},
 	"collectible": true,
 	"set": "BASIC",

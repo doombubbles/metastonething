@@ -6,6 +6,7 @@
 	"rarity": "EPIC",
 	"description": "Deal 15 damage to a minion and 3 damage to adjacent ones.",
 	"targetSelection": "MINIONS",
+	"race": "FIRE",
 	"spell": {
 		"class": "AdjacentEffectSpell",
 		"spell1": {

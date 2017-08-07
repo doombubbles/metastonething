@@ -4,14 +4,14 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"description": "Deal 7 damage randomly split among all minions.",
+	"description": "Deal 9 damage randomly split among all characters.",
 	"targetSelection": "NONE",
 	"race": "AFFLICTION",
 	"spell": {
 		"class": "MissilesSpell",
-		"target": "ALL_MINIONS",
+		"target": "ALL_CHARACTERS",
 		"value": 1,
-		"howMany": 7
+		"howMany": 9
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",

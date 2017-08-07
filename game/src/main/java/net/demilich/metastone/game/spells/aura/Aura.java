@@ -99,8 +99,6 @@ public class Aura extends SpellTrigger {
 			} else if (!affects(context, owner, target, resolvedTargets) && affectedEntities.contains(target.getId())) {
 				context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference(), true);
 				affectedEntities.remove(target.getId());
-				context.fireGameEvent(new BoardChangedEvent(context));
-				
 			}
 		}
 		
@@ -114,7 +112,6 @@ public class Aura extends SpellTrigger {
 			context.getLogic().castSpell(getOwner(), removeAuraEffect, getHostReference(), target.getReference(), true);
 		}
 		affectedEntities.clear();
-		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
 	public EntityFilter getEntityFilter() {

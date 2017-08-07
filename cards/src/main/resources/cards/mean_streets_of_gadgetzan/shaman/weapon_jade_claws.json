@@ -44,7 +44,7 @@
 		}
 	},
 	"attributes": {
-		"BATTLECRIES": true,
+		"BATTLECRY": true,
 		"OVERLOAD": 1
 	},
 	"collectible": true,

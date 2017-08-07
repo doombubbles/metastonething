@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.behaviour.human;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.demilich.metastone.game.GameContext;
@@ -34,6 +35,16 @@ public class HumanActionOptions {
 
 	public List<GameAction> getValidActions() {
 		return validActions;
+	}
+	
+	public boolean matchesExistingGroup(GameAction action, Collection<ActionGroup> existingActionGroups) {
+		for (ActionGroup actionGroup : existingActionGroups) {
+			if (actionGroup.getPrototype().isSameActionGroup(action)) {
+				actionGroup.add(action);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

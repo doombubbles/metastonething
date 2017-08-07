@@ -236,6 +236,9 @@ public class GameContext implements Cloneable, IDisposable {
 					return tempCard.clone();
 				}
 			}
+			if (cardId.equalsIgnoreCase("EVENT_CARD")) {
+				card = getEventCard();
+			}
 		}
 		return card;
 	}

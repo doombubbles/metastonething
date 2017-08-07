@@ -31,6 +31,12 @@ public class HeroCard extends Card {
 				hero.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}
+		
+		if (desc.aura != null) {
+			hero.addSpellTrigger(desc.aura.create());
+			hero.setAttribute(Attribute.AURA, true);
+		}
+		
 		hero.setRace(desc.race);
 		return hero;
 	}

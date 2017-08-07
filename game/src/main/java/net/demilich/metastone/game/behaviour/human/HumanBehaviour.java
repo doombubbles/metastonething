@@ -68,5 +68,9 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 		this.mulliganCards = mulliganCards;
 		waitingForInput = false;
 	}
+	
+	public boolean isWaiting() {
+		return waitingForInput;
+	}
 
 }

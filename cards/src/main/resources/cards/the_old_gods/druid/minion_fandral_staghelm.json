@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "DRUID",
 	"rarity": "LEGENDARY",
-	"description": "Your Choose One cards have both effects combined.",
+	"description": "Your Choose One effects have both options combined.",
 	"attributes": {
 		"BOTH_CHOOSE_ONE_OPTIONS": true
 	},

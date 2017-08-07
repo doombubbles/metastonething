@@ -4,17 +4,33 @@
 	"type": "SPELL",
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "RARE",
-	"description": "Restore 4 health to your hero for each minion that died this turn.",
-	"targetSelection": "NONE",
+	"description": "Deal 5 damage. Next time you cast a spell, counter it.",
+	"targetSelection": "ANY",
 	"race": "POTION",
 	"spell": {
-		"class": "HealSpell",
-		"target": "FRIENDLY_HERO",
-		"value": {
-			"class": "DeadMinionsThisTurn",
-			"multiplier": 4,
-			"targetPlayer": "BOTH"
-		}
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 5
+			},
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "SpellCastedTrigger",
+						"sourcePlayer": "SELF"
+					},
+					"spell": {
+						"class": "AddAttributeSpell",
+						"target": "EVENT_TARGET",
+						"attribute": "COUNTERED"
+					},
+					"oneTime": true
+				}
+			}
+		]
 	},
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",

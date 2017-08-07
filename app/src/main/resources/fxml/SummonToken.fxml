@@ -58,6 +58,46 @@
 					</points>
 				</Polygon>
 				<Ellipse fx:id="frozen" fill="#ffffff00" radiusX="50.0" radiusY="30.0" smooth="false" stroke="#0e90e8" strokeDashOffset="10.0" strokeType="OUTSIDE" strokeWidth="5.0" visible="false" />
+				<Ellipse fx:id="canAttack" fill="#ffffff00" radiusX="40.0" radiusY="40.0" smooth="false" stroke="32CD32" strokeType="OUTSIDE" strokeWidth="2.0" visible="false" />
+				<Polygon fx:id="canAttackTaunt" fill="#ffffff00" stroke="32CD32" strokeType="OUTSIDE" strokeWidth="2.0" translateY="2.5" visible="false">
+					<points>
+						<Double fx:value="-45.0" />
+						<Double fx:value="-15.0" />
+						
+						<Double fx:value="0.0" />
+						<Double fx:value="-20.0" />
+						
+						<Double fx:value="45.0" />
+						<Double fx:value="-15.0" />
+						
+						<Double fx:value="45.0" />
+						<Double fx:value="10.0" />
+						
+						<Double fx:value="40.0" />
+						<Double fx:value="40.0" />
+						
+						<Double fx:value="35.0" />
+						<Double fx:value="47.5" />
+						
+						<Double fx:value="20.0" />
+						<Double fx:value="60.0" />
+						
+						<Double fx:value="0.0" />
+						<Double fx:value="70.0" />
+						
+						<Double fx:value="-20.0" />
+						<Double fx:value="60.0" />
+						
+						<Double fx:value="-35.0" />
+						<Double fx:value="47.5" />
+						
+						<Double fx:value="-40.0" />
+						<Double fx:value="40.0" />
+						
+						<Double fx:value="-45.0" />
+						<Double fx:value="10.0" />
+					</points>
+				</Polygon>
 				<Ellipse fx:id="elusive" fill="#ffffff00" radiusX="40.0" radiusY="40.0" smooth="false" stroke="CCE510" strokeDashOffset="10.0" strokeType="OUTSIDE" strokeWidth="5.0" visible="false" />
 				<Polygon fx:id="elusivetaunt" fill="#ffffff00" stroke="CCE510" strokeType="OUTSIDE" strokeWidth="5.0" translateY="2.5" visible="false">
 					<points>
@@ -110,12 +150,12 @@
 				</ImageView>
 				<StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
 					<children>
-						<ImageView fx:id="trigger" fitWidth="18.0" translateY="0.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
+						<ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
 							<image>
-								<Image url="/img/common/trigger.png" />
+								<Image url="/img/common/deathrattle.png" />
 							</image>
 						</ImageView>
-						<ImageView fx:id="lifesteal" fitHeight="24.0" translateY="0.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="BOTTOM_CENTER">
+						<ImageView fx:id="lifesteal" fitHeight="24.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
 							<image>
 								<Image url="/img/common/heart.png" />
 							</image>
@@ -125,11 +165,12 @@
 								<Image url="/img/common/poison.png" />
 							</image>
 						</ImageView>
-						<ImageView fx:id="deathrattle" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateY="8.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
+						<ImageView fx:id="trigger" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
 							<image>
-								<Image url="/img/common/deathrattle.png" />
+								<Image url="/img/common/trigger.png" />
 							</image>
 						</ImageView>
+						
 						<ImageView fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
 							<image>
 								<Image url="/img/common/attack_value_icon.png" />

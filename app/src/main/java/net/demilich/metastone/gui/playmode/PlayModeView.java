@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 
 public class PlayModeView extends BorderPane {
@@ -82,6 +83,10 @@ public class PlayModeView extends BorderPane {
 			sidePane.getChildren().clear();
 			sidePane.getChildren().add(backButton);
 		}
+	}
+	
+	public void doCardActionStuff(HumanActionOptions options) {
+		boardView.doCardActionStuff(options);
 	}
 
 }

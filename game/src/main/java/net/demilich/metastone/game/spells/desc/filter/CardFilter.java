@@ -81,6 +81,10 @@ public class CardFilter extends EntityFilter {
 			return false;
 		}
 		
+		if (card.hasAttribute(Attribute.QUEST)) {
+			return false;
+		}
+		
 		if (desc.contains(FilterArg.ATTRIBUTE) && desc.contains(FilterArg.OPERATION)) {
 			Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 			Operation operation = (Operation) desc.get(FilterArg.OPERATION);
@@ -88,10 +92,18 @@ public class CardFilter extends EntityFilter {
 				return card.hasAttribute(attribute);
 			}
 	
-			int targetValue = desc.getInt(FilterArg.VALUE);
+			int targetValue = desc.getValue(FilterArg.VALUE, context, player, entity, entity, 0);
 			int actualValue = card.getAttributeValue(attribute);
 	
 			return SpellUtils.evaluateOperation(operation, actualValue, targetValue);
+		}
+		
+		if (desc.contains(FilterArg.CARD_ID)) {
+			String requiredCardId = desc.getString(FilterArg.CARD_ID);
+			if (requiredCardId.equalsIgnoreCase("EVENT_CARD")) {
+				requiredCardId = context.getEventCard().getCardId();
+			}
+			return card.getCardId().equalsIgnoreCase(requiredCardId);
 		}
 
 		return true;

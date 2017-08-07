@@ -2,22 +2,30 @@
 	"name": "Scourgelord Tyrannus",
 	"baseManaCost": 3,
 	"type": "MINION",
-	"baseAttack": 3,
+	"baseAttack": 2,
 	"baseHp": 2,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "LEGENDARY",
 	"race": "UNDEAD",
-	"description": "Battlecry: Summon a 1/1 Rimefang.",
-	"battlecry": {
+	"description": "At the end of your turn, deal 1 damage to a random enemy for each Undead you control.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
 		"spell": {
-			"class": "SummonSpell",
-			"targetPlayer": "SELF",
-			"card": "token_rimefang",
-			"boardPositionRelative": "RIGHT"
+			"class": "MissilesSpell",
+			"target": "ENEMY_CHARACTERS",
+			"value": 1,
+			"howMany": {
+				"class": "EntityCounter",
+				"target": "FRIENDLY_MINIONS",
+				"filter": {
+					"class": "RaceFilter",
+					"race": "UNDEAD"
+				}
+			}
 		}
-	},
-	"attributes": {
-		"BATTLECRY": true
 	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",

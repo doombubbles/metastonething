@@ -1,21 +1,48 @@
 package net.demilich.metastone.gui.cards;
 
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.actions.BattlecryAction;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.human.ActionGroup;
+import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
+import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SpellCard;
+import net.demilich.metastone.game.cards.WeaponCard;
+import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.IconFactory;
 
 public class HandCard extends CardToken {
@@ -30,6 +57,8 @@ public class HandCard extends CardToken {
 	private CardTooltip tooltipContent;
 	private Tooltip tooltip;
 
+	private HumanActionOptions options;
+	
 	public HandCard() {
 		super("HandCard.fxml");
 		hideCard(true);
@@ -48,9 +77,11 @@ public class HandCard extends CardToken {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
+		super.evaluateGlow(context, card, player);
 		if (tooltipContent == null) {
 			tooltip = new Tooltip();
 			tooltipContent = new CardTooltip();
@@ -86,7 +117,19 @@ public class HandCard extends CardToken {
 			tooltipContent.descriptionLabel.setText(card.getDescription() + " [" + count + "]");
 		}
 		
-		
+		super.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				play(event);
+			}
+			
+		});
+		super.setOnMouseMoved(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				gloww();
+			}
+		});
 		
 		hideCard(player.hideCards());
 
@@ -96,5 +139,58 @@ public class HandCard extends CardToken {
 			tooltip = null;
 		}
 	}
-
+	
+	public void setOptions(HumanActionOptions actionOptions) {
+		options = actionOptions;
+	}
+	
+	public void play(MouseEvent mouseEvent) {
+		if (options != null) {
+			GameContext context = options.getContext();
+			
+			super.evaluateGlow(context, card, context.getActivePlayer());
+			
+			HandCard handCard = (HandCard) mouseEvent.getSource();
+			Card card = handCard.getCard();
+			if (card.getOwner() != context.getActivePlayerId()) {
+				return;
+			}
+			if (options.getValidActions().size() < 2 || !options.getBehaviour().isWaiting()) {
+				return;
+			}
+			Collection<ActionGroup> actionGroups = new ArrayList<>();
+			for (GameAction action : options.getValidActions()) {
+				if (!options.matchesExistingGroup(action, actionGroups)) {
+					ActionGroup newActionGroup = new ActionGroup(action);
+					actionGroups.add(newActionGroup);
+				}
+			}
+			ActionGroup yeah = null;
+			for (ActionGroup actionGroup : actionGroups) {
+				GameAction action = actionGroup.getPrototype();
+				if (context.resolveSingleTarget(action.getSource()) == card) {
+					yeah = actionGroup;
+				}
+			}
+			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
+				options.getBehaviour().onActionSelected(yeah.getPrototype());
+				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
+			} else {
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah);
+				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
+				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
+			}
+			
+		}
+	}
+	
+	public void gloww() {
+		if (options != null) {
+			GameContext context = options.getContext();
+			if (context.getTurn() > 1 || !context.getActivePlayer().getStatistics().getCardsPlayed().isEmpty()) {
+				return;
+			}
+			super.evaluateGlow(context, card, context.getActivePlayer());
+		}
+	}
 }

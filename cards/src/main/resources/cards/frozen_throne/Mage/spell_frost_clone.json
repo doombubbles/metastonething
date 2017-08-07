@@ -1,0 +1,21 @@
+{
+    "name": "Frost Clone",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "COMMON",
+    "description": "Secret: After your opponent plays a minion, put 2 copies of it into your hand.",
+    "race": "FROST",
+	"trigger": {
+		"class": "MinionPlayedTrigger",
+		"targetPlayer": "OPPONENT"
+	},
+	"spell": {
+		"class": "CopyCardSpell",
+		"target": "EVENT_TARGET",
+		"value": 2
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

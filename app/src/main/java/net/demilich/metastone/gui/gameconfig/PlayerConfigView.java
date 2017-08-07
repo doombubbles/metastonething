@@ -25,10 +25,12 @@ import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
+import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
@@ -99,9 +101,20 @@ public class PlayerConfigView extends VBox {
 				if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
 					continue;
 				}
-				if (deckFormat != null && deckFormat.isInFormat(deck)) {
-					deckList.add(deck);
+				MetaDeck metaDeck = (MetaDeck) deck;
+				List<Deck> metaDecks = new ArrayList<Deck>();
+				metaDeck.getDecks().forEach(p -> {
+					metaDecks.add(p);
+				});
+				for (Deck dick : metaDecks) {
+					if (deckFormat == null || !deckFormat.isInFormat(deck) || (dick.getHeroClass().equals(HeroClass.DEATH_KNIGHT) && !deckFormat.isInFormat(CardSet.CUSTOM))) {
+						metaDeck.getDecks().remove(dick);
+					}
 				}
+				if (deckFormat != null && deckFormat.isInFormat(deck)) {
+					deckList.add((Deck) metaDeck);
+				}
+				
 			}
 		} else {
 			Deck randomDeck = DeckFactory.getRandomDeck(heroClass, deckFormat);

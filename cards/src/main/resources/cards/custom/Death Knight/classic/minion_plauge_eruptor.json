@@ -3,7 +3,7 @@
 	"baseManaCost": 2,
 	"type": "MINION",
 	"baseAttack": 2,
-	"baseHp": 2,
+	"baseHp": 1,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "RARE",
 	"race": "UNDEAD",

@@ -9,7 +9,7 @@
     "race": "NONE",
     "description": "Deathrattle: Add a random Deathrattle minion to your hand.",
 	"deathrattle": {
-		"class": "ReceiveRandomCardSpell",
+		"class": "ReceiveCardSpell",
 		"targetPlayer": "SELF",
 		"cardFilter": {
 			"class": "CardFilter",

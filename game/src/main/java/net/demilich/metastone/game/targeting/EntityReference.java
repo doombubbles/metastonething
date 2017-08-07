@@ -39,6 +39,8 @@ public class EntityReference {
 	public static final EntityReference EVENT_CARD = new EntityReference(-45);
 	
 	public static final EntityReference OTHER_ENEMY_MINIONS = new EntityReference(-77);
+	public static final EntityReference FRIENDLY_DECK = new EntityReference(-78);
+	public static final EntityReference ENEMY_DECK = new EntityReference(-79);
 
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {

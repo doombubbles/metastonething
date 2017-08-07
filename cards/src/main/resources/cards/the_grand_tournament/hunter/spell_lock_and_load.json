@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
-	"description": "Each time you cast a spell this turn, add a random Marksman spell to your hand.",
+	"description": "Each time you cast a spell this turn, add a random Hunter card to your hand.",
 	"targetSelection": "NONE",
 	"race": "MARKSMAN",
 	"spell": {
@@ -19,14 +19,13 @@
 				"class": "ReceiveCardSpell",
 				"cardFilter": {
 					"class": "CardFilter",
-					"cardType": "SPELL",
-					"race": "MARKSMAN"
+					"heroClass": "HUNTER"
 				}
 			},
 			"oneTurn": true
 		}
 	},
 	"collectible": true,
-	"set": "CUSTOM",
+	"set": "THE_GRAND_TOURNAMENT",
 	"fileFormatVersion": 1
 }

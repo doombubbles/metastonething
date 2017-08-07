@@ -59,7 +59,7 @@ public class SandboxModeMediator extends Mediator<GameNotification>implements Ev
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
 			HumanActionOptions actionOptions = (HumanActionOptions) notification.getBody();
-			Platform.runLater(() -> view.getActionPromptView().setActions(actionOptions));
+			Platform.runLater(() -> view.getActionPromptView().setActions(actionOptions, true));
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
 			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();

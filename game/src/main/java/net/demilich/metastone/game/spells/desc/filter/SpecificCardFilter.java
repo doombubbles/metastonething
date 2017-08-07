@@ -20,8 +20,10 @@ public class SpecificCardFilter extends EntityFilter {
 		} else if (entity instanceof Actor) {
 			cardId = ((Actor) entity).getSourceCard().getCardId();
 		}
-
 		String requiredCardId = desc.getString(FilterArg.CARD_ID);
+		if (requiredCardId.equalsIgnoreCase("EVENT_CARD")) {
+			requiredCardId = context.getEventCard().getCardId();
+		}
 		return cardId.equalsIgnoreCase(requiredCardId);
 	}
 

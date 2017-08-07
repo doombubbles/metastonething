@@ -1,0 +1,23 @@
+{
+    "name": "Gnomeferatu",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 3,
+    "heroClass": "WARLOCK",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Remove the top card from your opponent's deck.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "custom.VampireSpell"
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

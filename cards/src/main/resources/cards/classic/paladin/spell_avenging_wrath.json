@@ -1,6 +1,6 @@
 {
 	"name": "Avenging Wrath",
-	"baseManaCost": 5,
+	"baseManaCost": 6,
 	"type": "SPELL",
 	"heroClass": "PALADIN",
 	"rarity": "EPIC",

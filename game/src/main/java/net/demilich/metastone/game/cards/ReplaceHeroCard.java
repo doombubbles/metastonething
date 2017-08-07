@@ -34,7 +34,7 @@ public class ReplaceHeroCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		return new PlayReplaceHeroCardAction(getCardReference());
+		return new PlayReplaceHeroCardAction(getCardReference(), battlecry);
 	}
 
 }

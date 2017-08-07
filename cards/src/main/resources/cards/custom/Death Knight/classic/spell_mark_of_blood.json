@@ -8,11 +8,22 @@
 	"targetSelection": "MINIONS",
 	"race": "BLOOD",
 	"spell": {
-		"class": "AddDeathrattleSpell",
-		"spell": {
-			"class": "HealSpell",
-			"target": "FRIENDLY_HERO",
-			"value": 8
+		"class": "AddSpellTriggerSpell",
+		"trigger": {
+			"eventTrigger": {
+				"class": "GameStateChangedTrigger"
+			},
+			"spell": {
+				"class": "AddDeathrattleSpell",
+				"target": "SELF",
+				"spell": {
+					"class": "HealSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 8
+				}
+			},
+			"persistentOwner": true,
+			"oneTime": true
 		}
 	},
 	"collectible": true,

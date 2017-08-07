@@ -21,7 +21,8 @@
 				"cards": [
 					"spell_blood_rune",
 					"spell_frost_rune",
-					"spell_unholy_rune"
+					"spell_unholy_rune",
+					"spell_death_rune"
 				]
 			}
 		}

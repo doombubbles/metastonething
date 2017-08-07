@@ -10,8 +10,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
-			"targetPlayer": "SELF",
-			"requiredAttribute": "DEATHRATTLES"
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "DamageSpell",

@@ -66,7 +66,7 @@ public class BattlecryAction extends GameAction {
 		context.getLogic().castSpell(playerId, getSpell(), getSource(), target, getTargetRequirement(), false);
 	}
 
-	private Condition getCondition() {
+	public Condition getCondition() {
 		return condition;
 	}
 

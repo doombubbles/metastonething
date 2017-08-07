@@ -1,7 +1,6 @@
 {
   "cards": [
     "spell_arcane_missiles",
-    "spell_arcane_missiles",
     "spell_mirror_image",
     "minion_mana_wyrm",
     "minion_mana_wyrm",
@@ -29,6 +28,7 @@
     "minion_kabal_crystal_runner",
     "spell_firelands_portal",
     "spell_firelands_portal",
+    "minion_archmage_vargoth",
     "minion_yogg_saron_hopes_end"
   ],
   "name": "Arcane",

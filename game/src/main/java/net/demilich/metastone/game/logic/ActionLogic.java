@@ -35,10 +35,12 @@ public class ActionLogic {
 		if (!hero.canAttackThisTurn()) {
 			return heroAttackActions;
 		}
-		rollout(new PhysicalAttackAction(hero.getReference()), context, player, heroAttackActions);
+		rollout(hero, context, player, heroAttackActions);
 
 		return heroAttackActions;
 	}
+
+	
 
 	private List<GameAction> getHeroPowerActions(GameContext context, Player player) {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
@@ -51,11 +53,16 @@ public class ActionLogic {
 		}
 		if (heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
 			IChooseOneCard chooseOneCard = (IChooseOneCard) heroPower;
-			for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
-				rollout(chooseOneAction, context, player, heroPowerActions);
+			if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+				rollout(chooseOneCard.playBothOptions(), context, player, heroPowerActions);
+			} else {
+				for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+					rollout(chooseOneAction, context, player, heroPowerActions);
+				}
 			}
+			
 		} else {
-			rollout(heroPower.play(), context, player, heroPowerActions);
+			rollout(heroPower, context, player, heroPowerActions);
 		}
 
 		return heroPowerActions;
@@ -70,7 +77,7 @@ public class ActionLogic {
 				continue;
 			}
 
-			rollout(new PhysicalAttackAction(minion.getReference()), context, player, physicalAttackActions);
+			rollout(minion, context, player, physicalAttackActions);
 		}
 		return physicalAttackActions;
 	}
@@ -96,7 +103,7 @@ public class ActionLogic {
 					}
 				}
 			} else {
-				rollout(card.play(), context, player, playCardActions);
+				rollout(card, context, player, playCardActions);
 			}
 
 		}
@@ -134,5 +141,47 @@ public class ActionLogic {
 			}
 		}
 	}
-
+	
+	public void rollout(Minion minion, GameContext context, Player player, Collection<GameAction> actions) {
+		GameAction action = new PhysicalAttackAction(minion.getReference());
+		action.setSource(minion.getReference());
+		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
+			actions.add(action);
+		} else {
+			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
+				GameAction rolledOutAction = action.clone();
+				rolledOutAction.setTarget(validTarget);
+				actions.add(rolledOutAction);
+			}
+		}
+	}
+	
+	public void rollout(Card card, GameContext context, Player player, Collection<GameAction> actions) {
+		GameAction action = card.play();
+		action.setSource(card.getReference());
+		context.getLogic().processTargetModifiers(player, action);
+		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
+			actions.add(action);
+		} else {
+			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
+				GameAction rolledOutAction = action.clone();
+				rolledOutAction.setTarget(validTarget);
+				actions.add(rolledOutAction);
+			}
+		}
+	}
+	private void rollout(Hero hero, GameContext context, Player player, List<GameAction> heroAttackActions) {
+		GameAction action = new PhysicalAttackAction(hero.getReference());
+		action.setSource(hero.getReference());
+		context.getLogic().processTargetModifiers(player, action);
+		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
+			heroAttackActions.add(action);
+		} else {
+			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
+				GameAction rolledOutAction = action.clone();
+				rolledOutAction.setTarget(validTarget);
+				heroAttackActions.add(rolledOutAction);
+			}
+		}
+	}
 }

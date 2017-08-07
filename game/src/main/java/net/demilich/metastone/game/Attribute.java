@@ -89,7 +89,11 @@ public enum Attribute {
 	THIS_ONE,
 	LIFESTEAL,
 	POISONOUS,
-	
+	FREEZE_POWER,
+	KRYPTONITE,
+	NO_DURABILITY,
+	ONE_TURN,
+	LAST_HEAL,
 	
 	CUSTOM_1,
 	CUSTOM_2,
@@ -97,8 +101,8 @@ public enum Attribute {
 	CUSTOM_4,
 	CUSTOM_5,
 	CUSTOM_6,
-	
 	CUSTOM_7,
+	
 	CUSTOM_8,
 	CUSTOM_9,
 	CUSTOM_10,

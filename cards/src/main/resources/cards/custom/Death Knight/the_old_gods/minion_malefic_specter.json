@@ -6,12 +6,12 @@
 	"baseHp": 2,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "COMMON",
-	"description": "Deathrattle: Give adjacent Undead +2 Attack.",
+	"description": "Deathrattle: Give friendly Undead +1 Attack.",
 	"race": "UNDEAD",
 	"deathrattle": {
 		"class": "BuffSpell",
-		"target": "ADJACENT_MINIONS",
-		"attackBonus": 2,
+		"target": "FRIENDLY_MINIONS",
+		"attackBonus": 1,
 		"filter": {
 			"class": "RaceFilter",
 			"race": "UNDEAD"

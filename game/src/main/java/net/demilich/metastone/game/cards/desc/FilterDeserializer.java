@@ -31,7 +31,7 @@ public class FilterDeserializer implements JsonDeserializer<FilterDesc> {
 		}
 		Map<FilterArg, Object> arguments = FilterDesc.build(filterClass);
 
-		parseArgument(FilterArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(FilterArg.VALUE, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(FilterArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(FilterArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
 		parseArgument(FilterArg.RACE, jsonData, arguments, ParseValueType.RACE);

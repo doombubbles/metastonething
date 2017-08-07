@@ -7,6 +7,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
@@ -46,8 +47,12 @@ public class DiscardSpell extends Spell {
 			if (randomHandCard == null) {
 				return;
 			}
+			player.getDiscarded().add(randomHandCard.clone());
 			context.getLogic().discardCard(player, randomHandCard);
 			discardableCards.remove(randomHandCard);
+			context.fireGameEvent(new CardRevealedEvent(context, context.getPlayer1().getId(), randomHandCard.clone(), (1 + i) * 1.2));
+			context.fireGameEvent(new CardRevealedEvent(context, context.getPlayer2().getId(), randomHandCard.clone(), (1 + i) * 1.2));
+			
 		}
 	}
 

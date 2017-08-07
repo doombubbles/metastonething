@@ -32,7 +32,16 @@ public class FacelessSpell extends Spell {
 		clone.removeAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS);
 		clone.clearSpellTriggers();
 		clone.setCardCostModifier(null);
-
+		
+		int attack = desc.get(SpellArg.ATTACK_BONUS) != null ? desc.getInt(SpellArg.ATTACK_BONUS) : -1;
+		int hp = desc.get(SpellArg.HP_BONUS) != null ? desc.getInt(SpellArg.HP_BONUS) : -1;
+		if (attack >= 0) {
+			clone.setAttack(attack);
+		}
+		if (hp >= 0) {
+			clone.setHp(hp);
+			clone.setMaxHp(hp);
+		}
 		Minion sourceActor = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
 		SpellDesc transformSpell = TransformMinionSpell.create(clone);
 		if (context.getEnvironment().get(Environment.TRANSFORM_REFERENCE) != null) {

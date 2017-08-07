@@ -71,6 +71,8 @@ public enum GameNotification {
 	ADD_DECK_TO_META_DECK,
 	REMOVE_DECK_FROM_META_DECK,
 	DELETE_DECK,
+	
+	HIDE_ACTIONS,
 
 	// sandbox notifications
 	SELECT_PLAYER,

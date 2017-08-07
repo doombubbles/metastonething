@@ -53,7 +53,9 @@ public class CreateSummonSpell extends Spell {
 			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false) && successfulSummonSpell != null) {
 				SpellUtils.castChildSpell(context, player, successfulSummonSpell, source, minion);
 			}
-			SpellUtils.castChildSpell(context, player, spell, source, target);
+			if (spell != null) {
+				SpellUtils.castChildSpell(context, player, spell, source, target);
+			}
 		}
 	}
 }

@@ -159,8 +159,8 @@ public class HumanActionPromptView extends VBox {
 			});
 			return button;
 		}
-		HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(),
-				actionGroup);
+		HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), actionGroup);
+		
 		button.setOnAction(event -> {
 			NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
 			setVisible(false);
@@ -199,14 +199,23 @@ public class HumanActionPromptView extends VBox {
 		return false;
 	}
 
-	public void setActions(HumanActionOptions options) {
+	public void setActions(HumanActionOptions options, boolean visible) {
 		getChildren().removeAll(existingButtons);
 		existingButtons.clear();
-
+		
+		Collection<ActionGroup> actionGroups = groupActions(options);
+		for (ActionGroup actionGroup : actionGroups) {
+			if (actionGroup.getPrototype().getActionType().equals(ActionType.BATTLECRY)) {
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), options.getContext(), options.getPlayer().getId(), actionGroup);
+				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
+				return;
+			}
+		}
+		
 		Collection<Node> buttons = createActionButtons(options);
 		existingButtons.addAll(buttons);
 		getChildren().addAll(buttons);
-		setVisible(true);
+		setVisible(visible);
 	}
 
 }

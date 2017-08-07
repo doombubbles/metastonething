@@ -3,18 +3,21 @@
 	"baseManaCost": 5,
 	"type": "MINION",
 	"baseAttack": 4,
-	"baseHp": 4,
+	"baseHp": 3,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "FREE",
 	"race": "UNDEAD",
-	"description": "Whenever one of your other minions dies, draw a card.",
+	"description": "Whenever one of your other minions dies, deal 3 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "DrawCardSpell"
+			"class": "MissilesSpell",
+			"target": "ENEMY_CHARACTERS",
+			"value": 3,
+			"howMany": 1
 		}
 	},
 	"collectible": true,

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
@@ -29,6 +30,7 @@ public class Player extends Entity {
 	private final CardCollection hand = new CardCollection();
 	private final List<Entity> setAsideZone = new ArrayList<>();
 	private final List<Entity> graveyard = new ArrayList<>();
+	private final List<Card> discarded = new ArrayList<>();
 	private final List<Summon> summons = new ArrayList<>();
 	private final HashSet<String> secrets = new HashSet<>();
 	private final HashSet<String> quests = new HashSet<>();
@@ -52,6 +54,7 @@ public class Player extends Entity {
 		this.hand.addAll(otherPlayer.getHand().clone());
 		this.summons.addAll(otherPlayer.getSummons().stream().map(Summon::clone).collect(Collectors.toList()));
 		this.graveyard.addAll(otherPlayer.getGraveyard().stream().map(Entity::clone).collect(Collectors.toList()));
+		this.discarded.addAll(otherPlayer.getDiscarded().stream().map(Card::clone).collect(Collectors.toList()));
 		this.setAsideZone.addAll(otherPlayer.getSetAsideZone().stream().map(Entity::clone).collect(Collectors.toList()));
 		this.secrets.addAll(otherPlayer.secrets);
 		this.quests.addAll(otherPlayer.quests);
@@ -105,6 +108,10 @@ public class Player extends Entity {
 
 	public List<Entity> getGraveyard() {
 		return graveyard;
+	}
+	
+	public List<Card> getDiscarded() {
+		return discarded;
 	}
 
 	public CardCollection getHand() {

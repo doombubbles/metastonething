@@ -1,0 +1,42 @@
+{
+    "name": "Ice Breaker",
+    "baseManaCost": 3,
+    "type": "WEAPON",
+    "damage": 1,
+    "durability": 3,
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "description": "Destroy all Frozen minions that are damaged by this weapon.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO",
+			"targetEntityType": "MINION"
+		},
+		"spell": {
+			"class": "ConditionalSpell",
+			"target": "EVENT_TARGET",
+			"spell": {
+				"class": "DestroySpell"
+			},
+			"condition": {
+				"class": "AndCondition",
+				"conditions": [
+					{
+						"class": "AttributeCondition",
+						"attribute": "FROZEN",
+						"operation": "HAS"
+					},
+					{
+						"class": "IsDamagedCondition"
+					}
+				]
+			}
+		}
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

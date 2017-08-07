@@ -10,6 +10,7 @@
     "minion_humongous_razorleaf",
     "spell_molten_skin",
     "minion_humongous_razorleaf",
+    "spell_spreading_madness",
     "minion_twilight_drake",
     "minion_twilight_drake",
     "minion_defender_of_argus",
@@ -20,7 +21,6 @@
     "minion_faceless_shambler",
     "minion_elise_the_trailblazer",
     "spell_rain_of_fire",
-    "minion_zavos",
     "spell_siphon_soul",
     "minion_abyssal_enforcer",
     "minion_lord_jaraxxus",
@@ -28,8 +28,8 @@
     "minion_mountain_giant",
     "spell_soulstone",
     "spell_soulstone",
-    "minion_molten_giant",
-    "minion_molten_giant"
+    "minion_fel_giant",
+    "minion_fel_giant"
   ],
   "name": "Handlock New",
   "heroClass": "WARLOCK",

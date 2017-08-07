@@ -1,0 +1,20 @@
+{
+    "name": "Cruel Dinomancer",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "WARLOCK",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Deathrattle: Summon a random minion you discarded this game.",
+	"deathrattle": {
+		"class": "custom.DynoSpell"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

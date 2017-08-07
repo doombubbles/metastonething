@@ -19,6 +19,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.Actor;
@@ -180,6 +181,7 @@ public class GameBoardView extends BorderPane {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
+			updateHandCards(context, context.getPlayer1(), p1Cards);
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
 			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
@@ -273,5 +275,27 @@ public class GameBoardView extends BorderPane {
 				summonTokens[i].setVisible(false);
 			}
 		}
+	}
+	
+	
+	public void doCardActionStuff(HumanActionOptions options) {
+		GameContext context = options.getContext();
+		Player player = context.getActivePlayer();
+		HandCard[] handCards = p1Cards;
+		for (int i = 0; i < handCards.length; i++) {
+			if (i < player.getHand().getCount()) {
+				handCards[i].setOptions(options);
+			}
+		}
+		SummonToken[] summonTokens = p1Minions;
+		List<Summon> summons = player.getSummons();
+		for (int i = 0; i < summonTokens.length; i++) {
+			if (i < summons.size()) {
+				Summon summon = summons.get(i);
+				summonTokens[i].setOptions(options);
+			} 
+		}
+		p1Hero.setOptions(options);
+		p2Hero.setOptions(options);
 	}
 }

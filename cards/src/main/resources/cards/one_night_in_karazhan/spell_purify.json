@@ -4,8 +4,8 @@
 	"type": "SPELL",
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",
-	"description": "Silence a minion. Draw a card.",
-	"targetSelection": "MINIONS",
+	"description": "Silence a friendly minion. Draw a card.",
+	"targetSelection": "FRIENDLY_MINIONS",
 	"race": "DISCIPLINE",
 	"spell": {
 		"class": "MetaSpell",

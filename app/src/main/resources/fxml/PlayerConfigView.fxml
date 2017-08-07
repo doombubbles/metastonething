@@ -21,7 +21,7 @@
       <ComboBox fx:id="behaviourBox" prefWidth="150.0" />
       <Separator prefWidth="200.0" />
       <Label styleClass="name-small" text="Deck:" />
-      <ComboBox fx:id="deckBox" prefWidth="150.0" />
+      <ComboBox fx:id="deckBox" prefWidth="150.0" visibleRowCount="15" />
       <Separator prefWidth="200.0" />
       <CheckBox fx:id="hideCardsCheckBox" mnemonicParsing="false" styleClass="name-small" text="Hide cards" />
    </children>

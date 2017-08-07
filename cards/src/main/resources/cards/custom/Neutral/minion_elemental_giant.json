@@ -1,6 +1,6 @@
 {
-	"name": "Elemental Giant",
-	"baseManaCost": 10,
+	"name": "Gemstone Giant",
+	"baseManaCost": 12,
 	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,

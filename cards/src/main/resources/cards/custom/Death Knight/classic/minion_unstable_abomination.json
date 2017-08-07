@@ -1,8 +1,8 @@
 {
-	"name": "Unstable Abomination",
+	"name": "Unstable Aberration",
 	"baseManaCost": 5,
 	"type": "MINION",
-	"baseAttack": 4,
+	"baseAttack": 3,
 	"baseHp": 4,
 	"heroClass": "DEATH_KNIGHT",
 	"rarity": "RARE",

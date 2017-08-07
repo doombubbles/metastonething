@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"description": "Your Hero can only take 1 damage at a time next turn. Draw a card.",
+	"description": "Draw a card. Your Hero can only take 1 damage at a time next turn.",
 	"targetSelection": "NONE",
 	"race": "SURVIVAL",
 	"spell": {

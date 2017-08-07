@@ -1,0 +1,31 @@
+{
+    "name": "Blackguard",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 9,
+    "heroClass": "PALADIN",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Whenever your hero is healed, deal that much damage to a random enemy minion.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "HealingTrigger",
+			"targetPlayer": "SELF",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ENEMY_MINIONS",
+			"randomTarget": true,
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "LAST_HEAL"
+			}
+		}
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

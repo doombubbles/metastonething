@@ -6,6 +6,7 @@
     "rarity": "EPIC",
     "description": "Discover a spell. Reduce its Cost by (2).",
     "targetSelection": "NONE",
+	"race": "ARCANE",
     "spell": {
         "class": "DiscoverRandomCardSpell",
 		"spell": {

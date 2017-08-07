@@ -1,9 +1,9 @@
 {
 	"name": "Charged Hammer",
-	"baseManaCost": 3,
+	"baseManaCost": 4,
 	"type": "WEAPON",
 	"damage": 2,
-	"durability": 3,
+	"durability": 4,
 	"heroClass": "SHAMAN",
 	"rarity": "EPIC",
 	"description": "Deathrattle: Your Hero Power becomes 'Deal 2 damage.'",

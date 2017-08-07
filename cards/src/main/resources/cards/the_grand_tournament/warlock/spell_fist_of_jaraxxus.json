@@ -11,23 +11,7 @@
 		"class": "MissilesSpell",
 		"target": "ENEMY_CHARACTERS",
 		"value": 4,
-		"howMany": 1,
-		"filter": {
-			"class": "AndFilter",
-			"filters": [
-				{
-					"class": "SpecificCardFilter",
-					"cardId": "minion_flame_lasher"
-				},
-				{
-					"class": "AttributeFilter",
-					"attribute": "SILENCED",
-					"operation": "HAS",
-					"invert": true
-				}
-			],
-			"invert": true
-		}
+		"howMany": 1
 	},
 	"passiveTrigger": {
 		"eventTrigger": {
@@ -38,23 +22,7 @@
 			"class": "MissilesSpell",
 			"target": "ENEMY_CHARACTERS",
 			"value": 4,
-			"howMany": 1,
-			"filter": {
-				"class": "AndFilter",
-				"filters": [
-					{
-						"class": "SpecificCardFilter",
-						"cardId": "minion_flame_lasher"
-					},
-					{
-						"class": "AttributeFilter",
-						"attribute": "SILENCED",
-						"operation": "HAS",
-						"invert": true
-					}
-				],
-				"invert": true
-			}
+			"howMany": 1
 		}
 	},
 	"collectible": true,

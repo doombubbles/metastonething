@@ -5,16 +5,17 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.targeting.CardLocation;
 
 public class RemoveCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		if (target == null) {
-			return;
-		}
 		Card card = (Card) target;
-		context.getLogic().removeCard(player.getId(), card);
+		if (card.getLocation() == CardLocation.DECK) {
+			context.getLogic().removeCardFromDeck(player.getId(), card);
+		} else context.getLogic().removeCard(player.getId(), card);
+		
 	}
 
 }

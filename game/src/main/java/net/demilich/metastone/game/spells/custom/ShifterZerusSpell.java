@@ -26,6 +26,7 @@ public class ShifterZerusSpell extends Spell {
 
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		Card newCard = SpellUtils.getRandomCard(CardCatalogue.query(context.getDeckFormat()), filterCard -> cardFilter.matches(context, player, filterCard));
+		newCard.setName("'" + newCard.getName() + "'");
 		context.getLogic().replaceCard(player.getId(), card, newCard);
 		
 		Map<EventTriggerArg, Object> arguments = EventTriggerDesc.build(TurnStartTrigger.class);

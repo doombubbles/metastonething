@@ -5,6 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.SpellUtils;
 
@@ -22,10 +23,10 @@ public class AttributeFilter extends EntityFilter {
 			return entity.hasAttribute(attribute);
 		}
 
-		int targetValue = desc.getInt(FilterArg.VALUE);
+		int targetValue = desc.getValue(FilterArg.VALUE, context, player, entity, entity, 0);
 		
 		int actualValue = -1;
-		if (attribute == Attribute.ATTACK) {
+		if (attribute == Attribute.ATTACK && entity.getEntityType() != EntityType.CARD) {
 			if (entity instanceof Weapon) {
 				actualValue = ((Weapon) entity).getWeaponDamage();
 			} else {

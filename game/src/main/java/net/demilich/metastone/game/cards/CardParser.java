@@ -20,6 +20,7 @@ import net.demilich.metastone.game.cards.desc.AuraDeserializer;
 import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
+import net.demilich.metastone.game.cards.desc.ChooseHeroCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
 import net.demilich.metastone.game.cards.desc.GroupCardDesc;
@@ -215,7 +216,11 @@ public class CardParser {
 			if (!jsonData.getAsJsonObject().has("hero")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'hero' attribute!");
 			}
-			return gson.fromJson(jsonData, ReplaceHeroCardDesc.class);
+			if (jsonData.getAsJsonObject().has("options")) {
+				return gson.fromJson(jsonData, ChooseHeroCardDesc.class);
+			} else {
+				return gson.fromJson(jsonData, ReplaceHeroCardDesc.class);
+			}
 		case GROUP:
 			if (!jsonData.getAsJsonObject().has("group")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'group' attribute!");

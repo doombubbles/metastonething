@@ -17,8 +17,11 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class PlayReplaceHeroCardAction extends PlayCardAction {
 
-	public PlayReplaceHeroCardAction(CardReference cardReference) {
+	private final BattlecryAction battlecry;
+	
+	public PlayReplaceHeroCardAction(CardReference cardReference, BattlecryAction battlecry) {
 		super(cardReference);
+		this.battlecry = battlecry;
 		setActionType(ActionType.REPLACE_HERO);
 	}
 
@@ -33,7 +36,7 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 		
 		Actor actor = (Actor) player.getHero();
 		
-		BattlecryAction battlecry = replaceHeroCard.battlecry;
+		BattlecryAction battlecry = this.battlecry;
 		GameAction battlecryAction = null;
 		battlecry.setSource(actor.getReference());
 		if (battlecry.getTargetRequirement() != TargetSelection.NONE) {

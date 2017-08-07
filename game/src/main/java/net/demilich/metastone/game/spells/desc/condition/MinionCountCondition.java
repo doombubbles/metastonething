@@ -34,7 +34,7 @@ public class MinionCountCondition extends Condition {
 			break;
 		}
 		
-		int targetValue = desc.getInt(ConditionArg.VALUE);
+		int targetValue = (int) desc.get(ConditionArg.VALUE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		return SpellUtils.evaluateOperation(operation, minionCount, targetValue);
 	}

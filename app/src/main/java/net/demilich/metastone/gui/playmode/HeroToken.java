@@ -1,7 +1,11 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -9,12 +13,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Shape;
-import jdk.nashorn.internal.runtime.Context;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.human.ActionGroup;
+import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
+import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.QuestCard;
@@ -24,10 +38,14 @@ import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.game.GameContext;
 
 public class HeroToken extends GameToken {
-
+	
+	@FXML
+	private StackPane targetAnchor;
+	
 	@FXML
 	private Group attackAnchor;
 	@FXML
@@ -61,6 +79,11 @@ public class HeroToken extends GameToken {
 	private Group heroPowerAnchor;
 	@FXML
 	private ImageView heroPowerIcon;
+	@FXML
+	private Shape glow;
+	
+	@FXML
+	private ImageView glow2;
 
 	@FXML
 	private Pane secretsAnchor;
@@ -75,10 +98,23 @@ public class HeroToken extends GameToken {
 	private Node deathrattle;
 	
 	@FXML
+	private Node lifesteal;
+	
+	@FXML
+	private Node poisonous;
+	
+	@FXML
 	private ImageView immune;
 	
 	@FXML
 	private ImageView shadowform;
+	
+	@FXML
+	private ImageView stealth;
+	
+	private Hero hero;
+	
+	private HumanActionOptions options;
 
 	public HeroToken() {
 		super("HeroToken.fxml");
@@ -97,7 +133,7 @@ public class HeroToken extends GameToken {
 	}
 
 	public void setHero(Player player, GameContext context) {
-		Hero hero = player.getHero();
+		hero = player.getHero();
 		setScoreValue(attackAnchor, hero.getAttack());
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard().getCardId()));
 		portrait.setImage(portraitImage);
@@ -141,7 +177,7 @@ public class HeroToken extends GameToken {
 		}
 		else questLabel.setText("            "); 
 		
-		
+		glow2.setVisible(hero == context.getPlayer1().getHero() && hero.canAttackThisTurn());
 		
 		
 		if (player.getAttributeValue(Attribute.OVERLOAD) > 0) {
@@ -151,9 +187,23 @@ public class HeroToken extends GameToken {
 		}
 		updateArmor(hero.getArmor());
 		updateHeroPower(hero);
+		glow.setVisible(hero == context.getPlayer1().getHero() && hero == context.getActivePlayer().getHero() && context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower().getCardReference()));
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
 		updateStatus(hero, context);
+		
+		heroPowerIcon.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				heroPower(event);
+			}
+		});
+		targetAnchor.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				attack(event);
+			}
+		});
 	}
 
 	private void updateArmor(int armor) {
@@ -172,13 +222,14 @@ public class HeroToken extends GameToken {
 		tooltipContent.setCard(card);
 		tooltip.setGraphic(tooltipContent);
 		Tooltip.install(heroPowerIcon, tooltip);
-		
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard().getCardId()));
 		portrait.setImage(portraitImage);
 	}
 
 	public void updateHeroPowerCost(GameContext context, Player player) {
+		heroPowerAnchor.setVisible(player.getHero().getHeroPower().getBaseManaCost() != 0);
 		setScoreValueLowerIsBetter(heroPowerAnchor, context.getLogic().getModifiedManaCost(player, player.getHero().getHeroPower()), player.getHero().getHeroPower().getBaseManaCost());
+		
 	}
 
 	private void updateSecrets(Player player) {
@@ -213,6 +264,7 @@ public class HeroToken extends GameToken {
 	private void updateStatus(Hero hero, GameContext context) {
 		frozen.setVisible(hero.hasAttribute(Attribute.FROZEN));
 		shadowform.setVisible(hero.hasAttribute(Attribute.SHADOWFORM));
+		stealth.setVisible(hero.hasAttribute(Attribute.STEALTH));
 		immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
 	}
 	
@@ -234,7 +286,109 @@ public class HeroToken extends GameToken {
 			Tooltip.install(weaponPane, tooltip);
 			deathrattle.setVisible(weapon.hasAttribute(Attribute.DEATHRATTLES));
 			trigger.setVisible(weapon.hasSpellTrigger());
+			poisonous.setVisible(weapon.hasAttribute(Attribute.POISONOUS));
+			lifesteal.setVisible(weapon.hasAttribute(Attribute.LIFESTEAL));
 		}
+	}
+	
+	public void setOptions(HumanActionOptions targetOptions) {
+		options = targetOptions;
+	}
+	
+	private void heroPower(Event event) {
+		if (options != null) {
+			GameContext context = options.getContext();
+			if (hero != context.getActivePlayer().getHero() || !options.getBehaviour().isWaiting()) {
+				return;
+			}
+			
+			Collection<ActionGroup> actionGroups = new ArrayList<>();
+			for (GameAction action : options.getValidActions()) {
+				if (!options.matchesExistingGroup(action, actionGroups)) {
+					ActionGroup newActionGroup = new ActionGroup(action);
+					actionGroups.add(newActionGroup);
+				}
+			}
+			ActionGroup yeah = null;
+			for (ActionGroup actionGroup : actionGroups) {
+				GameAction action = actionGroup.getPrototype();
+				if (context.resolveSingleTarget(action.getSource()) == hero.getHeroPower()) {
+					yeah = actionGroup;
+				}
+			}
+			if (yeah == null) {
+				return;
+			}
+			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
+				options.getBehaviour().onActionSelected(yeah.getPrototype());
+				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
+			} else {
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah);
+				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
+				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
+			}
+		}
+	}
+	
+	private void attack(Event mouseEvent) {
+		if (options != null) {
+			GameContext context = options.getContext();
+			if (hero != context.getActivePlayer().getHero() || !options.getBehaviour().isWaiting()) {
+				return;
+			}
+			
+			Collection<ActionGroup> actionGroups = new ArrayList<>();
+			for (GameAction action : options.getValidActions()) {
+				if (!options.matchesExistingGroup(action, actionGroups)) {
+					ActionGroup newActionGroup = new ActionGroup(action);
+					actionGroups.add(newActionGroup);
+				}
+			}
+			ActionGroup yeah = null;
+			for (ActionGroup actionGroup : actionGroups) {
+				GameAction action = actionGroup.getPrototype();
+				if (context.resolveSingleTarget(action.getSource()) == hero) {
+					yeah = actionGroup;
+				}
+			}
+			if (yeah == null) {
+				return;
+			}
+			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
+				options.getBehaviour().onActionSelected(yeah.getPrototype());
+				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
+			} else {
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah);
+				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
+				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
+			}
+		}
+	}
+	
+	private void endTurn(KeyEvent keyEvent) {
+		if (options != null) {
+			GameContext context = options.getContext();
+			if (hero != context.getActivePlayer().getHero()) {
+				return;
+			}
+			
+			Collection<ActionGroup> actionGroups = new ArrayList<>();
+			for (GameAction action : options.getValidActions()) {
+				if (!options.matchesExistingGroup(action, actionGroups)) {
+					ActionGroup newActionGroup = new ActionGroup(action);
+					actionGroups.add(newActionGroup);
+				}
+			}
+			ActionGroup yeah = null;
+			for (ActionGroup actionGroup : actionGroups) {
+				GameAction action = actionGroup.getPrototype();
+				if (action.getActionType() == ActionType.END_TURN) {
+					yeah = actionGroup;
+				}
+			}
+			options.getBehaviour().onActionSelected(yeah.getPrototype());
+		}
+		
 	}
 
 }

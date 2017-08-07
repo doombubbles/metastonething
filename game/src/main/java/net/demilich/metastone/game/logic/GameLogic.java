@@ -43,6 +43,8 @@ import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
 import net.demilich.metastone.game.events.AfterSpellCastedEvent;
 import net.demilich.metastone.game.events.AfterSummonEvent;
 import net.demilich.metastone.game.events.ArmorGainedEvent;
+import net.demilich.metastone.game.events.AttributeGainedEvent;
+import net.demilich.metastone.game.events.AttributeLostEvent;
 import net.demilich.metastone.game.events.BeforeSummonEvent;
 import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.events.CardPlayedEvent;
@@ -180,6 +182,7 @@ public class GameLogic implements Cloneable {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
 		}
 		entity.setAttribute(attr);
+		context.fireGameEvent(new AttributeGainedEvent(context, entity, attr));
 		log("Applying attr {} to {}", attr, entity);
 	}
 
@@ -280,6 +283,9 @@ public class GameLogic implements Cloneable {
 			int heroPowerUsages = getGreatestAttributeValue(player, Attribute.HERO_POWER_USAGES);
 			if (heroPowerUsages == 0) {
 				heroPowerUsages = 1;
+			} 
+			if (hasAttribute(player, Attribute.KRYPTONITE) || hasAttribute(context.getOpponent(player), Attribute.KRYPTONITE)) {
+				return false;
 			}
 			if (heroPowerUsages != INFINITE && power.hasBeenUsed() >= heroPowerUsages) {
 				return false;
@@ -515,6 +521,9 @@ public class GameLogic implements Cloneable {
 				damage = applySpellpower(player, source, baseDamage);
 			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyHeroPowerDamage(player, damage);
+				if (hasAttribute(player, Attribute.FREEZE_POWER)) {
+					applyAttribute(target, Attribute.FROZEN);
+				}
 			}
 			if (sourceCard.getCardType().isCardType(CardType.SPELL) || sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
@@ -781,9 +790,19 @@ public class GameLogic implements Cloneable {
 			handleFrozen(summon);
 		}
 		player.removeAttribute(Attribute.COMBO);
+		player.removeAttribute(Attribute.CUSTOM_7);
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
+		CardCollection dumb = new CardCollection();
+		for (Card card : player.getHand()) {
+			if (card.hasAttribute(Attribute.ONE_TURN)) {
+				dumb.add(card);
+			}
+		}
+		for (Card card : dumb) {
+			removeCard(player.getId(), card);
+		}
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.isExpired()) {
@@ -892,7 +911,13 @@ public class GameLogic implements Cloneable {
 			Hero hero = (Hero) attacker;
 			Weapon weapon = hero.getWeapon();
 			if (weapon != null && weapon.isActive()) {
-				modifyDurability(hero.getWeapon(), -1);
+				modifyDurability(hero.getWeapon(), hasAttribute(context.getPlayer(hero.getOwner()), Attribute.NO_DURABILITY) ? 0 : -1);
+				if (weapon.hasAttribute(Attribute.POISONOUS) && attackerDamage > 0) {
+					destroy(defender);
+				}
+				if (weapon.hasAttribute(Attribute.LIFESTEAL) && attackerDamage > 0) {
+					heal(player, hero, attackerDamage, (Actor) weapon);
+				}
 			}
 		}
 		attacker.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, -1);
@@ -1172,7 +1197,7 @@ public class GameLogic implements Cloneable {
 		default:
 			break;
 		}
-
+		target.setAttribute(Attribute.LAST_HEAL, healing);
 		if (success) {
 			HealEvent healEvent = new HealEvent(context, player.getId(), target, healing);
 			context.fireGameEvent(healEvent);
@@ -1188,6 +1213,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		hero.setHp(newHp);
+		hero.setAttribute(Attribute.CUSTOM_7);
 		return newHp != oldHp;
 	}
 
@@ -1469,7 +1495,7 @@ public class GameLogic implements Cloneable {
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
-
+		card.setName(context.getCardById(card.getCardId()).getName());
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
 				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
@@ -1638,6 +1664,7 @@ public class GameLogic implements Cloneable {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
 		}
 		entity.removeAttribute(attr);
+		context.fireGameEvent(new AttributeLostEvent(context, entity, attr));
 		log("Removing attribute {} from {}", attr, entity);
 	}
 
@@ -2133,6 +2160,10 @@ public class GameLogic implements Cloneable {
 		power.markUsed();
 		player.getStatistics().cardPlayed(power, context.getTurn());
 		context.fireGameEvent(new HeroPowerUsedEvent(context, playerId, power));
+	}
+	
+	public void info (String string) {
+		logger.info(string);
 	}
 
 }

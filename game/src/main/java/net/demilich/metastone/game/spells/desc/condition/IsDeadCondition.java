@@ -19,14 +19,21 @@ public class IsDeadCondition extends Condition {
 		Entity entity = null;
 		if (entityReference == null) {
 			entity = target;
+			return entity.isDestroyed();
 		} else {
 			List<Entity> entities = context.resolveTarget(player, source, entityReference);
 			if (entities == null || entities.isEmpty()) {
 				return false;
 			}
-			entity = entities.get(0);
+			int i = 0;
+			for (Entity ent : entities) {
+				if (ent.isDestroyed()) {
+					i += 1;
+				}
+			}
+			return i > 0;
 		}
-		return entity.isDestroyed();
+		
 	}
 
 }

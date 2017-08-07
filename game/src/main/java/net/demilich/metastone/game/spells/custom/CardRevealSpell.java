@@ -16,8 +16,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class CardRevealSpell extends Spell {
 
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		double value = desc.get(SpellArg.VALUE) != null ? desc.getInt(SpellArg.VALUE) / 10 : 0;
 		Card card = CardCatalogue.getCardById(desc.getString(SpellArg.CARD));
-		context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 0));
+		context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, value));
 	}
 
 }

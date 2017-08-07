@@ -1,6 +1,8 @@
-Bloodbloom
-Mana Cost: 2
-Type: Spell
-Rarity: Epic
+Cruel Dinomancer
+Mana Cost: 6
+Attack: 5
+Health: 5
+Type: Minion
+Rarity: Rare
 Class: Warlock
-Text: Your next spell this turn costs Health instead of Mana.
+Text: Deathrattle: Summon a random minion you discarded this game.

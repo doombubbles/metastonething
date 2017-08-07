@@ -1,0 +1,17 @@
+{
+    "name": "Glacial Mysteries",
+    "baseManaCost": 8,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "EPIC",
+    "description": "Put one of each Secret from your deck into the battlefield.",
+    "race": "FROST",
+	"targetSelection": "NONE",
+    "spell": {
+        "class": "PutRandomSecretIntoPlaySpell",
+		"howMany": 99
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

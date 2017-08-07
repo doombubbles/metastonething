@@ -19,7 +19,6 @@
     "spell_frost_nova",
     "secret_ice_block",
     "secret_ice_block",
-    "minion_frozen_orb",
     "spell_arcane_intellect",
     "spell_arcane_intellect",
     "minion_acolyte_of_pain",
@@ -29,6 +28,7 @@
     "minion_archmage_vargoth",
     "spell_glacial_spike",
     "spell_glacial_spike",
+    "spell_flamestrike",
     "minion_alexstrasza"
   ],
   "name": "Frost",
