@@ -92,31 +92,6 @@ public class HandCard extends CardToken {
 			tooltipContent.setCard(context, card, player);
 		}
 		
-		if (card.getCardId() == CardCatalogue.getCardById("spell_glacial_spike").getCardId()) {
-			Map<String, Map<Integer, Integer>> cardIds = player.getStatistics().getCardsPlayed();
-			int count = 0;
-			for (String cardId : cardIds.keySet()) {
-				if ((Race) context.getCardById(cardId).getAttribute(Attribute.RACE) == Race.FROST) {
-					for (Integer turn : cardIds.get(cardId).keySet()) {
-						count += cardIds.get(cardId).get(turn);
-					}
-				}
-			}
-			tooltipContent.descriptionLabel.setText(card.getDescription() + " [" + count + "]");
-		}
-		if (card.getCardId() == CardCatalogue.getCardById("spell_crusade").getCardId()) {
-			Map<String, Map<Integer, Integer>> minionIds = player.getStatistics().getMinionsSummoned();
-			int count = 0;
-			for (String minionId : minionIds.keySet()) {
-				if (minionId == context.getCardById("token_silver_hand_recruit").getCardId())
-					for (Integer turn : minionIds.get(minionId).keySet()) {
-						count += minionIds.get(minionId).get(turn);
-					}
-
-			}
-			tooltipContent.descriptionLabel.setText(card.getDescription() + " [" + count + "]");
-		}
-		
 		super.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
