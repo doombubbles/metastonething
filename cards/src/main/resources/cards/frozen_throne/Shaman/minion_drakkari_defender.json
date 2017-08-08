@@ -9,7 +9,8 @@
     "race": "NONE",
     "description": "Taunt. Overload: (3)",
 	"attributes": {
-		"OVERLOAD": 3
+		"OVERLOAD": 3,
+		"TAUNT": true
 	},
     "collectible": true,
     "set": "FROZEN_THRONE",

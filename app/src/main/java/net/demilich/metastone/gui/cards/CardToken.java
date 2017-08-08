@@ -200,7 +200,7 @@ public class CardToken extends BorderPane {
 					if (minion.summon().getBattlecry().getCondition() != null) {
 						Condition condition = minion.summon().getBattlecry().getCondition();
 						if (minion.summon().getBattlecry().getTargetRequirement() == TargetSelection.NONE) {
-							if (condition.isFulfilled(context, player, (Entity) player, null)) {
+							if (condition.isFulfilled(context, player, minion, minion)) {
 								glow("YELLOW");
 							}
 						} else {
