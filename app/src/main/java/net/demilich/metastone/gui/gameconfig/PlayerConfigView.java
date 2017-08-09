@@ -106,13 +106,14 @@ public class PlayerConfigView extends VBox {
 				metaDeck.getDecks().forEach(p -> {
 					metaDecks.add(p);
 				});
+				MetaDeck metaDick = metaDeck;
 				for (Deck dick : metaDecks) {
-					if (deckFormat == null || !deckFormat.isInFormat(deck) || (dick.getHeroClass().equals(HeroClass.DEATH_KNIGHT) && !deckFormat.isInFormat(CardSet.CUSTOM))) {
-						metaDeck.getDecks().remove(dick);
+					if (deckFormat == null || !deckFormat.isInFormat(dick)) {
+						metaDick.getDecks().remove(dick);
 					}
 				}
 				if (deckFormat != null && deckFormat.isInFormat(deck)) {
-					deckList.add((Deck) metaDeck);
+					deckList.add((Deck) metaDick);
 				}
 				
 			}

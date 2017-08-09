@@ -10,7 +10,7 @@
 		"class": "DamageSpell",
 		"value": 3
 	},
-	"attribute": {
+	"attributes": {
 		"LIFESTEAL": true
 	},
 	"collectible": false,

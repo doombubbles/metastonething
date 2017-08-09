@@ -21,7 +21,7 @@ public class ChangeHeroSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		String heroCardId = (String) desc.get(SpellArg.CARD);
 		HeroCard heroCard = (HeroCard) context.getCardById(heroCardId);
-		context.getLogic().changeHero(player, heroCard.createHero(), true);
+		context.getLogic().changeHero(player, heroCard.createHero());
 	}
 
 }

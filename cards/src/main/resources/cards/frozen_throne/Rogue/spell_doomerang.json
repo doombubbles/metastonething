@@ -9,6 +9,9 @@
     "spell": {
         "class": "custom.DoomerangSpell"
     },
+	"condition": {
+		"class": "HasWeaponCondition"
+	},
     "collectible": true,
     "set": "FROZEN_THRONE",
     "fileFormatVersion": 1

@@ -11,12 +11,10 @@
 		"spells": [
 			{
 				"class": "SetAttackSpell",
-				"target": "ALL_OTHER_MINIONS",
 				"value": 3
 			},
 			{
 				"class": "SetHpSpell",
-				"target": "ALL_OTHER_MINIONS",
 				"value": 3
 			}
 		]

@@ -186,7 +186,7 @@ public class CardToken extends BorderPane {
 	public void evaluateGlow(GameContext context, Card card, Player player) {
 		glow("NOPE");
 		String bad = "spell_execute, spell_shadow_word_pain, spell_shadow_word_death, spell_potion_of_madness, spell_shadow_madness, spell_flame_cannon, spell_breath_of_sindragosa, "
-				+ "minion_don_hancho, minion_grimestreet_smuggler, minion_shaky_zipgunner";
+				+ "minion_don_hancho, minion_grimestreet_smuggler, minion_shaky_zipgunner, minion_grimestreet_outfitter";
 		if (context.getLogic().canPlayCard(player.getId(), card.getCardReference()) && context.getActivePlayer() == player) {
 			glow("GREEN");
 			if (bad.contains(card.getCardId())) {
@@ -201,7 +201,9 @@ public class CardToken extends BorderPane {
 						Condition condition = minion.summon().getBattlecry().getCondition();
 						if (minion.summon().getBattlecry().getTargetRequirement() == TargetSelection.NONE) {
 							if (condition.isFulfilled(context, player, minion, minion)) {
-								glow("YELLOW");
+								if (!bad.contains(card.getCardId())) { 
+									glow("YELLOW");
+								}
 							}
 						} else {
 							List<Entity> validTargets = context.getLogic().getValidTargets(player.getId(), battlecry);
@@ -211,7 +213,9 @@ public class CardToken extends BorderPane {
 									i += condition.isFulfilled(context, player, context.resolveSingleTarget(card.getReference()), entity) ? 1 : 0;
 								}
 								if (i > 0) {
-									glow("YELLOW");
+									if (!bad.contains(card.getCardId())) { 
+										glow("YELLOW");
+									}
 								}
 							}
 						}
@@ -220,7 +224,9 @@ public class CardToken extends BorderPane {
 						EntityFilter filter = minion.summon().getBattlecry().getEntityFilter();
 						if (minion.summon().getBattlecry().getTargetRequirement() == TargetSelection.NONE) {
 							if (filter.matches(context, player, minion)) {
-								glow("YELLOW");
+								if (!bad.contains(card.getCardId())) { 
+									glow("YELLOW");
+								}
 							}
 						} else {
 							List<Entity> validTargets = context.getLogic().getValidTargets(player.getId(), battlecry);
@@ -230,7 +236,9 @@ public class CardToken extends BorderPane {
 									i += filter.matches(context, player, entity) ? 1 : 0;
 								}
 								if (i > 0) {
-									glow("YELLOW");
+									if (!bad.contains(card.getCardId())) { 
+										glow("YELLOW");
+									}
 								}
 							}
 						}

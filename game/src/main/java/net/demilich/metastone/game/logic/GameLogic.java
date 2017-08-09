@@ -438,7 +438,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
-	public void changeHero(Player player, Hero hero, boolean refresh) {
+	public void changeHero(Player player, Hero hero) {
 		hero.setId(player.getHero().getId());
 		if (hero.getHeroClass() == null || hero.getHeroClass() == HeroClass.ANY) {
 			hero.setHeroClass(player.getHero().getHeroClass());
@@ -448,7 +448,6 @@ public class GameLogic implements Cloneable {
 		hero.setOwner(player.getId());
 		hero.setWeapon(player.getHero().getWeapon());
 		player.setHero(hero);
-		refreshAttacksPerRound(hero);
 	}
 
 	public void checkForDeadEntities() {
