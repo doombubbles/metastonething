@@ -5,6 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
 import net.demilich.metastone.game.spells.AddSecretSpell;
+import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.types.Secret;
@@ -12,11 +13,14 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class SecretCard extends SpellCard {
 
+	private BattlecryDesc instant;
+	
 	public SecretCard(SecretCardDesc desc) {
 		super(desc);
 		GameEventTrigger trigger = desc.trigger.create();
 		setSecret(new Secret(trigger, desc.spell, this));
 		setAttribute(Attribute.SECRET);
+		this.instant = desc.instant;
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {
@@ -27,6 +31,10 @@ public class SecretCard extends SpellCard {
 		SpellDesc spell = AddSecretSpell.create(secret);
 		setTargetRequirement(TargetSelection.NONE);
 		setSpell(spell);
+	}
+	
+	public BattlecryDesc getInstant() {
+		return instant;
 	}
 
 }

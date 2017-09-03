@@ -78,6 +78,7 @@ import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.aura.Aura;
+import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.SpellFactory;
@@ -294,7 +295,10 @@ public class GameLogic implements Cloneable {
 		} else if (card.getCardType().isCardType(CardType.MINION)) {
 			return canSummonMoreMinions(player);
 		}
-
+		if (card instanceof SecretCard) {
+			SecretCard secretCard = (SecretCard) card;
+			return secretCard.canBeCast(context, player);
+		}
 		if (card instanceof SpellCard) {
 			SpellCard spellCard = (SpellCard) card;
 			return spellCard.canBeCast(context, player);
@@ -307,7 +311,25 @@ public class GameLogic implements Cloneable {
 	}
 
 	public boolean canPlaySecret(Player player, SecretCard card) {
-		return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getCardId());
+		if (hasAttribute(player, Attribute.INSTANT_TRAPS)) {
+			TargetSelection targetRequirement = card.getInstant().getTargetSelection();
+			//info("" + targetRequirement);
+			if (targetRequirement == null) {
+				targetRequirement = TargetSelection.NONE;
+			}
+			Player opponent = context.getOpponent(player);
+			switch (targetRequirement) {
+			case ENEMY_MINIONS:
+				return context.getMinionCount(opponent) > 0;
+			case FRIENDLY_MINIONS:
+				return context.getMinionCount(player) > 0;
+			case MINIONS:
+				return context.getTotalMinionCount() > 0;
+			default:
+				break;
+			}
+			return true;
+		} else return player.getSecrets().size() < MAX_SECRETS && !player.getSecrets().contains(card.getCardId());
 	}
 
 	public boolean canSummonMoreMinions(Player player) {
@@ -374,8 +396,7 @@ public class GameLogic implements Cloneable {
 		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell);
 	}
 
-	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
-			TargetSelection targetSelection, boolean childSpell) {
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, TargetSelection targetSelection, boolean childSpell) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -439,6 +460,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void changeHero(Player player, Hero hero) {
+		int attacks = player.getHero().getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
 		hero.setId(player.getHero().getId());
 		if (hero.getHeroClass() == null || hero.getHeroClass() == HeroClass.ANY) {
 			hero.setHeroClass(player.getHero().getHeroClass());
@@ -448,6 +470,7 @@ public class GameLogic implements Cloneable {
 		hero.setOwner(player.getId());
 		hero.setWeapon(player.getHero().getWeapon());
 		player.setHero(hero);
+		player.getHero().setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
 
 	public void checkForDeadEntities() {
@@ -574,10 +597,14 @@ public class GameLogic implements Cloneable {
 		
 		
 		if (source.hasAttribute(Attribute.LIFESTEAL)) {
-			heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
+			if (hasAttribute(player, Attribute.INVERT_HEALING)) {
+				damage(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, context.getPlayer(source.getOwner()).getHero());
+			}else heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
 		} else if (sourceCard != null) {
 			if (sourceCard.hasAttribute(Attribute.LIFESTEAL)) {
-				heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
+				if (hasAttribute(player, Attribute.INVERT_HEALING)) {
+					damage(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, context.getPlayer(source.getOwner()).getHero());
+				}else heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
 			}
 		}
 		
@@ -587,39 +614,14 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageHero(Hero hero, int damage) {
+		if (hero.hasAttribute(Attribute.DIVINE_SHIELD)) {
+			removeAttribute(hero, Attribute.DIVINE_SHIELD);
+			log("{}'s DIVINE SHIELD absorbs the damage", hero);
+			return 0;
+		}
 		if (hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
-		}
-		if (hasAttribute(context.getPlayer(hero.getOwner()), Attribute.HERO_HEALTH_BALANCE)) {
-			
-			int friendlyHp = hero.getHp();
-			int enemyHp = context.getOpponent(context.getPlayer(hero.getOwner())).getHero().getHp();
-			
-			if (hero.getArmor() > 0) {
-				int i = hero.getArmor() - damage;
-				if (i >= 0) {
-					hero.modifyArmor(-damage);
-				} else {
-					damage -= hero.getArmor();
-					hero.modifyArmor(-1 * hero.getArmor());
-				}
-			}
-			if (hero.getArmor() == 0) {
-				if (friendlyHp <= enemyHp) {
-					damage = 0;
-				} else {
-					damage = Math.min(damage, (friendlyHp - enemyHp));
-				}
-			}
-			
-			/*
-			if ((friendlyHp <= enemyHp) && (friendlyEhp <= enemyHp)) {
-				damage = 0;
-			} else if ((friendlyHp <= enemyHp) && !(friendlyEhp <= enemyHp)) {
-				damage = Math.min(damage, (friendlyEhp - enemyHp));
-			} else if 
-			*/
 		}
 		
 		
@@ -790,7 +792,7 @@ public class GameLogic implements Cloneable {
 			handleFrozen(summon);
 		}
 		player.removeAttribute(Attribute.COMBO);
-		player.removeAttribute(Attribute.CUSTOM_7);
+		player.getHero().removeAttribute(Attribute.CUSTOM_7);
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
@@ -799,6 +801,7 @@ public class GameLogic implements Cloneable {
 		}
 		CardCollection dumb = new CardCollection();
 		for (Card card : player.getHand()) {
+			card.setLocation(CardLocation.HAND);
 			if (card.hasAttribute(Attribute.ONE_TURN)) {
 				dumb.add(card);
 			}
@@ -1500,12 +1503,10 @@ public class GameLogic implements Cloneable {
 		Card card = context.resolveCardReference(cardReference);
 		card.setName(context.getCardById(card.getCardId()).getName());
 		int modifiedManaCost = getModifiedManaCost(player, card);
-		if (card.getCardType().isCardType(CardType.SPELL)
-				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+		if (card.getCardType().isCardType(CardType.SPELL) && player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
-		} else if (((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL)
-				&& player.getHero().hasAttribute(Attribute.MURLOCS_COST_HEALTH)) {
+		} else if (((card.getRace() == Race.MURLOC || card.getRace() == Race.ALL)) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
 		} else if (card.hasAttribute(Attribute.COSTS_HEALTH)) {
@@ -1559,13 +1560,14 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void playSecret(Player player, Secret secret) {
-		playSecret(player, secret, true);
+		playSecret(player, secret, false);
 	}
 
 	public void playSecret(Player player, Secret secret, boolean fromHand) {
 		log("{} has a new secret activated: {}", player.getName(), secret.getSource());
 		addGameEventListener(player, secret, player.getHero());
 		player.getSecrets().add(secret.getSource().getCardId());
+		
 		if (fromHand) {
 			context.fireGameEvent(new SecretPlayedEvent(context, player.getId(), (SecretCard) secret.getSource()));
 		}

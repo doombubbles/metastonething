@@ -12,7 +12,7 @@ public class DoomerangSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		int damage = context.getLogic().damage(player, (Actor) target, player.getHero().getWeapon().getAttributeValue(Attribute.ATTACK), source, false);
+		int damage = context.getLogic().damage(player, (Actor) target, player.getHero().getWeapon().getAttributeValue(Attribute.ATTACK), source, true);
 		if (player.getHero().getWeapon().hasAttribute(Attribute.LIFESTEAL)) {
 			context.getLogic().heal(player, player.getHero(), damage, source);
 		}

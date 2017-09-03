@@ -170,7 +170,7 @@ public class SummonToken extends GameToken {
 		canAttack.setVisible(false);
 		canAttackTaunt.setVisible(false);
 		if (options != null) {
-			if (options.getContext().getPlayer1().getSummons().contains(summon) && summon.getOwner() == options.getContext().getActivePlayer().getId()) {
+			if (options.getContext().getPlayer1().getSummons().contains(summon) && options.getContext().getPlayer1() == options.getContext().getActivePlayer()) {
 				canAttack.setVisible(summon.canAttackThisTurn() && !summon.hasAttribute(Attribute.TAUNT));
 				canAttackTaunt.setVisible(summon.canAttackThisTurn() && summon.hasAttribute(Attribute.TAUNT));
 			}

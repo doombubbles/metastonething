@@ -8,6 +8,8 @@ import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
@@ -28,6 +30,7 @@ public abstract class CardDesc {
 	public ValueProviderDesc manaCostModifier;
 	public TriggerDesc passiveTrigger;
 	public TriggerDesc deckTrigger;
+	public ConditionDesc glow;
 
 	public abstract Card createInstance();
 

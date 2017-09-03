@@ -1,8 +1,13 @@
 package net.demilich.metastone.game.actions;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.SecretCard;
+import net.demilich.metastone.game.events.SecretPlayedEvent;
+import net.demilich.metastone.game.events.SecretRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.trigger.types.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -21,7 +26,15 @@ public class PlaySpellCardAction extends PlayCardAction {
 
 	@Override
 	public void play(GameContext context, int playerId) {
-		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), getTargetRequirement(), false);
+		Card card = (Card) context.resolveSingleTarget(cardReference);
+		TargetSelection targetRequirement = getTargetRequirement();
+		if (card instanceof SecretCard && context.getLogic().hasAttribute(context.getPlayer(playerId), Attribute.INSTANT_TRAPS)) {
+			spell = ((SecretCard) card).getInstant().spell;
+			targetRequirement = ((SecretCard) card).getInstant().getTargetSelection() != null ? ((SecretCard) card).getInstant().getTargetSelection() : TargetSelection.NONE;
+			context.fireGameEvent(new SecretRevealedEvent(context, ((SecretCard) card), playerId));
+			context.fireGameEvent(new SecretPlayedEvent(context, playerId, (SecretCard) card));
+		}
+		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), targetRequirement, false);
 	}
 
 	public SpellDesc getSpell() {

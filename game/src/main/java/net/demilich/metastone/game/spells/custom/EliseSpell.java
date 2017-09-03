@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.custom;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -16,47 +17,23 @@ public class EliseSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCollection ungoro = new CardCollection();
+		CardCollection guarantee = new CardCollection();
 		for (Card card : CardCatalogue.getAll()) {
 			if (card.getCardSet() == CardSet.JOURNEY_TO_UNGORO && !card.getCardId().contains("quest") && card.isCollectible()) {
-				ungoro.add(card);/*
-				if (card.getRarity() == Rarity.LEGENDARY) {
-					ungoro.add(card);
+				ungoro.add(card);
+				if (card.getRarity() == Rarity.EPIC || card.getRarity() == Rarity.LEGENDARY) {
+					guarantee.add(card);
 				}
-				*/
 			}
 		}
-		
 		CardCollection cards = new CardCollection();
-		cards.add(ungoro.getRandom());
-		cards.add(ungoro.getRandom());
-		cards.add(ungoro.getRandom());
-		cards.add(ungoro.getRandom());
-		cards.add(ungoro.getRandom());
-		
-		int i = 0;
-		
-		for (Card card : ungoro) {
-			if (card.getRarity() == Rarity.EPIC || card.getRarity() == Rarity.LEGENDARY) {
-				i += 1;
-			}
+		cards.add(guarantee.getRandom());
+		for (int i = 0; i < 4; i++) {
+			cards.add(ungoro.getRandom());
 		}
-		
-		while (i < 1) {
-			cards.removeFirst();
-			Card card = ungoro.getRandom();
-			if (card.getRarity() == Rarity.EPIC || card.getRarity() == Rarity.LEGENDARY) {
-				i += 1;
-			}
-			cards.add(card);
-		}
-		
-		
-		int avail = 10 - player.getHand().getCount();
-		while (avail < cards.getCount()) {
-			cards.removeFirst();
-		}
+		cards.shuffle();
 		for (Card card : cards) {
-			card.received = true;
+			card.setAttribute(Attribute.RECEIVED);
 			context.getLogic().receiveCard(player.getId(), card, source);
 		}
 		

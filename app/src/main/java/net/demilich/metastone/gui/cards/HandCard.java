@@ -10,6 +10,7 @@ import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
@@ -19,7 +20,13 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.Attribute;
@@ -39,7 +46,9 @@ import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.condition.ConditionArg;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
@@ -81,7 +90,7 @@ public class HandCard extends CardToken {
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
-		super.evaluateGlow(context, card, player);
+		evaluateGlow(context, card, player);
 		if (tooltipContent == null) {
 			tooltip = new Tooltip();
 			tooltipContent = new CardTooltip();
@@ -123,8 +132,6 @@ public class HandCard extends CardToken {
 		if (options != null) {
 			GameContext context = options.getContext();
 			
-			super.evaluateGlow(context, card, context.getActivePlayer());
-			
 			HandCard handCard = (HandCard) mouseEvent.getSource();
 			Card card = handCard.getCard();
 			if (card.getOwner() != context.getActivePlayerId()) {
@@ -140,13 +147,30 @@ public class HandCard extends CardToken {
 					actionGroups.add(newActionGroup);
 				}
 			}
+			List<ActionGroup> yeahs = new ArrayList<ActionGroup>();
 			ActionGroup yeah = null;
 			for (ActionGroup actionGroup : actionGroups) {
 				GameAction action = actionGroup.getPrototype();
 				if (context.resolveSingleTarget(action.getSource()) == card) {
-					yeah = actionGroup;
+					yeahs.add(actionGroup);
 				}
 			}
+			if (yeahs.size() > 1 && card.hasAttribute(Attribute.CHOOSE_ONE)) {
+				switch (mouseEvent.getButton()) {
+				case PRIMARY:
+						yeahs.remove(1);
+					break;
+				case SECONDARY:
+						yeahs.remove(0);
+					break;
+				}
+				
+			}
+			if (yeahs.isEmpty()) {
+				return;
+			}
+			yeah = yeahs.get(0);
+			
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
 				options.getBehaviour().onActionSelected(yeah.getPrototype());
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
@@ -165,7 +189,74 @@ public class HandCard extends CardToken {
 			if (context.getTurn() > 1 || !context.getActivePlayer().getStatistics().getCardsPlayed().isEmpty()) {
 				return;
 			}
-			super.evaluateGlow(context, card, context.getActivePlayer());
+			evaluateGlow(context, card, context.getActivePlayer());
+		}
+	}
+	
+	public void glow(String s) {
+		switch (s) {
+			case "YELLOW":
+				super.setBorder(new Border(new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2), new Insets(-1.0))));
+				break;
+			case "GREEN":
+				super.setBorder(new Border(new BorderStroke(Color.GREEN, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2), new Insets(-1.0))));
+				break;
+			case "NOPE":
+				super.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(1))));
+				break;
+		}
+		
+	}
+	public void evaluateGlow(GameContext context, Card card, Player player) {
+		glow("NOPE");
+		if (context.getLogic().canPlayCard(player.getId(), card.getCardReference()) && context.getActivePlayer() == player) {
+			glow("GREEN");
+			if (card.hasAttribute(Attribute.COMBO) && player.hasAttribute(Attribute.COMBO)) {
+				glow("YELLOW");
+				return;
+			}
+			if (card.getGlow() != null) {
+				int i = 0;
+				Player targetPlayer = player;
+				if (card.getGlow().get(ConditionArg.TARGET_PLAYER) != null) {
+					switch ((TargetPlayer) card.getGlow().get(ConditionArg.TARGET_PLAYER)) {
+					case ACTIVE:
+						targetPlayer = context.getActivePlayer();
+						break;
+					case BOTH:
+						targetPlayer = context.getOpponent(player);
+						if (card.getGlow().get(ConditionArg.TARGET) != null) {
+							for (Entity entity : context.resolveTarget(player, card, (EntityReference) card.getGlow().get(ConditionArg.TARGET))) {
+								i += card.getGlow().create().isFulfilled(context, player, card, entity) ? 1 : 0;
+							} 
+						} else i += card.getGlow().create().isFulfilled(context, player, card, null) ? 1 : 0;
+						break;
+					case INACTIVE:
+						targetPlayer = context.getOpponent(context.getActivePlayer());
+						break;
+					case OPPONENT:
+						targetPlayer = context.getOpponent(player);
+						break;
+					case SELF:
+						targetPlayer = player;
+						break;
+					default:
+						break;
+					}
+				}
+				if (card.getGlow().get(ConditionArg.TARGET) != null) {
+					for (Entity entity : context.resolveTarget(player, card, (EntityReference) card.getGlow().get(ConditionArg.TARGET))) {
+						i += card.getGlow().create().isFulfilled(context, targetPlayer, card, entity) ? 1 : 0;
+					}
+				} else i += card.getGlow().create().isFulfilled(context, targetPlayer, card, null) ? 1 : 0;
+				
+				
+				if (i > 0) {
+					glow("YELLOW");
+				}
+				
+				
+			}
 		}
 	}
 }

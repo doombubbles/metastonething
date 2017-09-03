@@ -25,7 +25,7 @@ public class ManaBindSpell extends Spell {
 		Card targetCard = (Card) target;
 		Card receiveCard = targetCard.getCopy();
 		receiveCard.setAttribute(Attribute.MANA_COST_MODIFIER, -1 * (receiveCard.getAttributeValue(Attribute.BASE_MANA_COST)));
-		receiveCard.received = true;
+		receiveCard.setAttribute(Attribute.RECEIVED);
 		context.getLogic().receiveCard(player.getId(), receiveCard);
 	}
 

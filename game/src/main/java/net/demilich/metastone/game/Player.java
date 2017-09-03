@@ -34,6 +34,8 @@ public class Player extends Entity {
 	private final List<Summon> summons = new ArrayList<>();
 	private final HashSet<String> secrets = new HashSet<>();
 	private final HashSet<String> quests = new HashSet<>();
+	
+	private final CardCollection startingDeck;
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -64,6 +66,7 @@ public class Player extends Entity {
 		this.lockedMana = otherPlayer.lockedMana;
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
+		this.startingDeck = otherPlayer.getStartingDeck();
 	}
 
 	public Player(PlayerConfig config) {
@@ -75,6 +78,7 @@ public class Player extends Entity {
 		this.deckName = selectedDeck.getName();
 		setBehaviour(config.getBehaviour().clone());
 		setHideCards(config.hideCards());
+		this.startingDeck = selectedDeck.getCardsCopy();
 	}
 
 	@Override
@@ -150,6 +154,10 @@ public class Player extends Entity {
 
 	public HashSet<String> getQuests() {
 		return quests;
+	}
+	
+	public CardCollection getStartingDeck() {
+		return startingDeck;
 	}
 
 	public List<Summon> getSummons() {

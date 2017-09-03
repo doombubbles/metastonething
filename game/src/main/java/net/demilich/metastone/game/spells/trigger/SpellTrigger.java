@@ -76,9 +76,9 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 
 	@Override
 	public boolean interestedIn(GameEventType eventType) {
-		boolean result = primaryTrigger.interestedIn() == eventType || primaryTrigger.interestedIn() == GameEventType.ALL;
+		boolean result = primaryTrigger.interestedIn() == eventType || (primaryTrigger.interestedIn() == GameEventType.ALL && !eventType.equals(GameEventType.ATTRIBUTE_GAINED) && !eventType.equals(GameEventType.ATTRIBUTE_LOST));
 		if (secondaryTrigger != null) {
-			result |= secondaryTrigger.interestedIn() == eventType || secondaryTrigger.interestedIn() == GameEventType.ALL;
+			result |= secondaryTrigger.interestedIn() == eventType || (secondaryTrigger.interestedIn() == GameEventType.ALL && !eventType.equals(GameEventType.ATTRIBUTE_GAINED) && !eventType.equals(GameEventType.ATTRIBUTE_LOST));
 		}
 		return result;
 	}
@@ -167,6 +167,9 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			return false;
 		}
 		if (trigger.interestedIn() != event.getEventType() && trigger.interestedIn() != GameEventType.ALL) {
+			return false;
+		}
+		if (trigger.interestedIn() == GameEventType.ALL&& (event.getEventType().equals(GameEventType.ATTRIBUTE_GAINED) || event.getEventType().equals(GameEventType.ATTRIBUTE_LOST))) {
 			return false;
 		}
 		return trigger.fires(event, host);

@@ -16,7 +16,6 @@ public class QuestCard extends SpellCard {
 		super(desc);
 		GameEventTrigger trigger = desc.quest.create();
 		setQuest(new Quest(trigger, desc.spell, this));
-		setAttribute(Attribute.QUEST);
 	}
 
 	public boolean canBeCast(GameContext context, Player player) {

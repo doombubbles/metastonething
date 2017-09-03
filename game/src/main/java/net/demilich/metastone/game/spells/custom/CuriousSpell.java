@@ -30,55 +30,27 @@ public class CuriousSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		
 		CardCollection cards = new CardCollection();
-		CardCollection potentialCards = new CardCollection();
-		CardCollection add = new CardCollection();
-		CardCollection remove = new CardCollection();
-		potentialCards = CardCatalogue.query(context.getDeckFormat());
-		for (Card card : potentialCards) {
-			if (card.getHeroClass() != context.getOpponent(player).getHero().getHeroClass() && card.getHeroClass() != HeroClass.ANY) {
-				remove.add(card);
-			} else if (card.getHeroClass() == context.getOpponent(player).getHero().getHeroClass()) {
-				add.add(card);
-				add.add(card);
-				add.add(card);
-			}
-		}
-		potentialCards.removeAll(p -> remove.contains(p));
-		potentialCards.addAll(add);
-		
 		Player opponent = context.getOpponent(player);
-		Card random1 = opponent.getDeck().getRandom();
-		Card random2 = potentialCards.getRandom();
-		Card random3 = potentialCards.getRandom();
+		CardCollection potentialCards = CardCatalogue.query(context.getDeckFormat());
+		CardCollection deck = opponent.getStartingDeck();
+		deck.removeAll(p -> p.getHeroClass() == HeroClass.ANY);
+		if (deck.isEmpty()) {
+			deck = context.getOpponent(player).getStartingDeck();
+			potentialCards.removeAll(p -> (p.getHeroClass() != opponent.getHero().getHeroClass() || p.getHeroClass() != opponent.getHero().getHeroClass()));
+		} else potentialCards.removeAll(p -> p.getHeroClass() != opponent.getHero().getHeroClass());
+		potentialCards.shuffle();
+		Card realCard = deck.getRandom();
+		Card wrongCard1 = potentialCards.get(0);
+		Card wrongCard2 = potentialCards.get(1);
+		cards.add(realCard);
+		cards.add(wrongCard1);
+		cards.add(wrongCard2);
+		cards.shuffle();
 		
-		double i = Math.random();
-		if (i < 0.33) {
-			cards.add(random1);
-			cards.add(random2);
-			cards.add(random3);
-		} else if (i > .66) {
-			cards.add(random2);
-			cards.add(random1);
-			cards.add(random3);
-		} else {
-			cards.add(random2);
-			cards.add(random3);
-			cards.add(random1);
+		if (SpellUtils.getDiscover(context, player, desc, cards).getCard() == realCard) {
+			context.getLogic().receiveCard(player.getId(), realCard);
 		}
-
-		
-		
-		Card chosenCard = SpellUtils.getDiscover(context, player, desc, cards).getCard();
-		
-		if (chosenCard == random1) {
-			context.getLogic().receiveCard(player.getId(), chosenCard);
-		}
-		
-		
-		
-		return;
 	}
 
 }

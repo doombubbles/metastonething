@@ -2,6 +2,9 @@ package net.demilich.metastone.gui;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
@@ -131,10 +134,16 @@ public class IconFactory {
 	}
 	*/
 	
-	public static String getHeroIconUrl(String heroID) {
+	public static String getHeroIconUrl(Card heroCard) {
 		String iconPath = RESOURCE_PATH + "/img/heroes/";
-
-		String hero = heroID.replace("hero_", "");
+		String hero;
+		if (heroCard != null) {
+			if (heroCard.getCardSet() == CardSet.CUSTOM) {
+				iconPath = RESOURCE_PATH + "/img/heroes/custom/";
+			}
+			hero = heroCard.getCardId().replace("hero_", "");
+		} else hero = "unknown";
+		
 		/*
 		hero.replace("_druid", "");
 		hero.replace("_shaman", "");
@@ -153,6 +162,10 @@ public class IconFactory {
 	
 	public static String getHeroPowerIconUrl(HeroPower heroPower) {
 		String iconPath = RESOURCE_PATH + "/img/powers/";
+		if (heroPower.getCardSet() == CardSet.CUSTOM) {
+			iconPath = RESOURCE_PATH + "/img/powers/custom/";
+		}
+		
 		
 		String power = heroPower.getCardId().replace("hero_power_", "");
 		

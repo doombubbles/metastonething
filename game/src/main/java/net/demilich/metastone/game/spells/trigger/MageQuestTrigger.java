@@ -23,7 +23,7 @@ public class MageQuestTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		SpellCard card = (SpellCard) event.getEventSource();
- 		if ((card.received == true || !card.isCollectible()) && event.getGameContext().getActivePlayerId() == event.getSourcePlayerId()) {
+ 		if ((card.hasAttribute(Attribute.RECEIVED)|| !card.isCollectible()) && event.getGameContext().getActivePlayerId() == event.getSourcePlayerId()) {
 			return true;
 		} else return false;
 	}

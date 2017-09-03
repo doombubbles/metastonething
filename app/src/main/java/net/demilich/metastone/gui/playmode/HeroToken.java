@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.playmode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -92,6 +93,9 @@ public class HeroToken extends GameToken {
 	private Shape frozen;
 	
 	@FXML
+	private Shape divineShield;
+	
+	@FXML
 	private Node trigger;
 	
 	@FXML
@@ -135,7 +139,7 @@ public class HeroToken extends GameToken {
 	public void setHero(Player player, GameContext context) {
 		hero = player.getHero();
 		setScoreValue(attackAnchor, hero.getAttack());
-		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard().getCardId()));
+		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard()));
 		portrait.setImage(portraitImage);
 		setScoreValue(hpAnchor, hero.getHp(), hero.getAttributeValue(Attribute.BASE_HP), hero.getMaxHp());
 		if (!player.getDeck().isEmpty()) {
@@ -146,7 +150,8 @@ public class HeroToken extends GameToken {
 		
 		
 		if (!player.getQuests().isEmpty()) {
-			int n = 0;
+			int n = context.getCardById((String) player.getQuests().toArray()[player.getQuests().size() - 1]).getAttributeValue(Attribute.QUEST);
+			/*
 			switch ((String) player.getQuests().toArray()[player.getQuests().size() - 1]) {
 				case "quest_awaken_the_makers":
 				case "quest_fire_plumes_heart":
@@ -169,6 +174,7 @@ public class HeroToken extends GameToken {
 					n = 6;
 					break;
 			}
+			*/
 			questLabel.setText("Quest: " + (n - player.getAttributeValue(Attribute.QUEST)) + "/" + n);
 			
 			
@@ -195,7 +201,8 @@ public class HeroToken extends GameToken {
 		heroPowerIcon.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
-				heroPower(event);
+				MouseEvent Event = (MouseEvent) event;
+				heroPower(Event);
 			}
 		});
 		targetAnchor.setOnMouseClicked(new EventHandler<Event>() {
@@ -222,7 +229,7 @@ public class HeroToken extends GameToken {
 		tooltipContent.setCard(card);
 		tooltip.setGraphic(tooltipContent);
 		Tooltip.install(heroPowerIcon, tooltip);
-		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard().getCardId()));
+		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getSourceCard()));
 		portrait.setImage(portraitImage);
 	}
 
@@ -266,6 +273,7 @@ public class HeroToken extends GameToken {
 		shadowform.setVisible(hero.hasAttribute(Attribute.SHADOWFORM));
 		stealth.setVisible(hero.hasAttribute(Attribute.STEALTH));
 		immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
+		divineShield.setVisible(hero.hasAttribute(Attribute.DIVINE_SHIELD));
 	}
 	
 	public boolean hasAttribute(Player player, Attribute attr, GameContext context) {
@@ -295,13 +303,12 @@ public class HeroToken extends GameToken {
 		options = targetOptions;
 	}
 	
-	private void heroPower(Event event) {
+	private void heroPower(MouseEvent event) {
 		if (options != null) {
 			GameContext context = options.getContext();
 			if (hero != context.getActivePlayer().getHero() || !options.getBehaviour().isWaiting()) {
 				return;
 			}
-			
 			Collection<ActionGroup> actionGroups = new ArrayList<>();
 			for (GameAction action : options.getValidActions()) {
 				if (!options.matchesExistingGroup(action, actionGroups)) {
@@ -309,16 +316,34 @@ public class HeroToken extends GameToken {
 					actionGroups.add(newActionGroup);
 				}
 			}
+			List<ActionGroup> yeahs = new ArrayList<ActionGroup>();
 			ActionGroup yeah = null;
 			for (ActionGroup actionGroup : actionGroups) {
 				GameAction action = actionGroup.getPrototype();
 				if (context.resolveSingleTarget(action.getSource()) == hero.getHeroPower()) {
-					yeah = actionGroup;
+					yeahs.add(actionGroup);
 				}
 			}
-			if (yeah == null) {
+			
+			if (yeahs.size() > 1 && hero.getHeroPower().hasAttribute(Attribute.CHOOSE_ONE)) {
+				switch (event.getButton()) {
+				case PRIMARY:
+						yeahs.remove(1);
+					break;
+				case SECONDARY:
+						yeahs.remove(0);
+					break;
+				default:
+					break;
+				}
+				
+			}
+			if (yeahs.isEmpty()) {
 				return;
 			}
+			yeah = yeahs.get(0);
+			
+			
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
 				options.getBehaviour().onActionSelected(yeah.getPrototype());
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);

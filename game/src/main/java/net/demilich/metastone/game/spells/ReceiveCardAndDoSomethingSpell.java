@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -14,7 +15,7 @@ import net.demilich.metastone.game.targeting.CardLocation;
 public class ReceiveCardAndDoSomethingSpell extends Spell {
 
 	private void castSomethingSpell(GameContext context, Player player, SpellDesc spell, Entity source, Card card) {
-		card.received = true;
+		card.setAttribute(Attribute.RECEIVED);
 		context.getLogic().receiveCard(player.getId(), card);
 		// card may be null (i.e. try to draw from deck, but already in
 		// fatigue)

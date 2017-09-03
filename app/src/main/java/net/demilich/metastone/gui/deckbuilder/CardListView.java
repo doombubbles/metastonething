@@ -60,7 +60,17 @@ public class CardListView extends VBox implements EventHandler<MouseEvent> {
 
 		}
 		if (card != null) {
-			NotificationProxy.sendNotification(GameNotification.REMOVE_CARD_FROM_DECK, card);
+			switch (event.getButton()) {
+				case PRIMARY:
+					NotificationProxy.sendNotification(GameNotification.REMOVE_CARD_FROM_DECK, card);
+					break;
+				case SECONDARY:
+					NotificationProxy.sendNotification(GameNotification.ADD_CARD_TO_DECK, card);
+					break;
+			default:
+				break;
+			}
+			
 		}
 	}
 

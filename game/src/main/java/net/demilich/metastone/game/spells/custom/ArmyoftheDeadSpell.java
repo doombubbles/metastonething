@@ -16,12 +16,15 @@ public class ArmyoftheDeadSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int j = 0;
 		for (int i = 0; i < 5; i++) {
 			Card card = player.getDeck().get(0);
-			context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 1.2 + 1.2 * i));
 			if (card.getCardType().equals(CardType.MINION)) {
 				SpellDesc summonSpell = SummonSpell.create((MinionCard) card);
 				SpellUtils.castChildSpell(context, player, summonSpell, source, target);
+			} else {
+				context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 1.2 + 1.2 * j));
+				j++;
 			}
 			player.getDeck().removeFirst();
 		}

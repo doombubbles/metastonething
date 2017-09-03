@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -30,6 +31,16 @@
             <Image url="/img/common/immune_hero.png" />
           </image>
         </ImageView>
+        <Ellipse fx:id="divineShield" radiusX="60.0" radiusY="60.0" stroke="BLACK" strokeType="INSIDE" translateY="2.5" visible="false">
+			<fill>
+				<LinearGradient endX="1.0" endY="1.0">
+					<stops>
+						<Stop color="#f0e80033" />
+						<Stop color="WHITE" offset="1.0" />
+					</stops>
+				</LinearGradient>
+			</fill>
+		</Ellipse>
          <ImageView fx:id="stealth" fitHeight="150" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="0.0" translateY="0.0" visible="false">
           <image>
             <Image url="/img/common/stealth.png" />

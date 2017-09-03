@@ -2,6 +2,7 @@ package net.demilich.metastone.game.actions;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -30,7 +31,11 @@ public class PlayMinionCardAction extends PlayCardAction {
 
 	@Override
 	protected void play(GameContext context, int playerId) {
-		MinionCard minionCard = (MinionCard) context.getPendingCard();
+		MinionCard minionCard = context.getPendingCard().getCardType() == CardType.MINION ? (MinionCard) context.getPendingCard() : null;
+		if (minionCard == null) {
+			context.getLogic().info("" + context.getPendingCard().getName());
+			return;
+		}
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
 		Minion minion = minionCard.summon();
 		if (battlecry != null) {

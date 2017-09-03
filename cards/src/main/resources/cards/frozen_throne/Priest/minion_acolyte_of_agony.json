@@ -9,7 +9,7 @@
     "race": "NONE",
     "description": "Lifesteal",
 	"attributes": {
-		"LIFESTEAl": true
+		"LIFESTEAL": true
 	},
     "collectible": true,
     "set": "FROZEN_THRONE",

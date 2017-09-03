@@ -18,5 +18,9 @@ public abstract class Condition {
 		boolean invert = desc.getBool(ConditionArg.INVERT);
 		return isFulfilled(context, player, desc, source, target) != invert;
 	}
+	
+	public ConditionDesc getDesc() {
+		return desc;
+	}
 
 }

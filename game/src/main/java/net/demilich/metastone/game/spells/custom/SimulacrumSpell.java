@@ -26,8 +26,7 @@ public class SimulacrumSpell extends Spell {
 				cards2.add(card);
 			}
 		}
-		
-		context.getLogic().receiveCard(player.getId(), cards2.getRandom());
+		context.getLogic().receiveCard(player.getId(), context.getCardById(cards2.getRandom().getCardId()));
 	}
 
 }

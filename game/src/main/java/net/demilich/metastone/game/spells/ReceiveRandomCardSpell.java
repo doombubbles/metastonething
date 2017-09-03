@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -24,7 +25,7 @@ public class ReceiveRandomCardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Card[] cards = SpellUtils.getCards(context, desc);
 		Card randomCard = cards[context.getLogic().random(cards.length)];
-		randomCard.received = true;
+		randomCard.setAttribute(Attribute.RECEIVED);
 		context.getLogic().receiveCard(player.getId(), randomCard);
 	}
 

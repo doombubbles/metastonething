@@ -2,6 +2,12 @@ package net.demilich.metastone.gui.playmode.animation;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.stage.Window;
 import javafx.util.Duration;
@@ -27,14 +33,21 @@ public class CardPlayedToken {
 		popup.setY(parent.getY() + parent.getHeight() * 0.5 - cardToken.getHeight() * 0.5);
 
 		cardToken.setCard(card);
-
+		
 		NotificationProxy.sendNotification(GameNotification.ANIMATION_STARTED);
 		FadeTransition animation = new FadeTransition(Duration.seconds(1.2), cardToken);
+		cardToken.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				animation.jumpTo(Duration.seconds(1.2));
+			}
+		});
 		animation.setDelay(Duration.seconds(0.6f));
 		animation.setOnFinished(this::onComplete);
 		animation.setFromValue(1);
 		animation.setToValue(0);
 		animation.play();
+		
 	}
 
 	private void onComplete(ActionEvent event) {

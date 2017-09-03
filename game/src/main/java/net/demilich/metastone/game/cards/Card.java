@@ -12,6 +12,8 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
@@ -30,6 +32,7 @@ public abstract class Card extends Entity {
 	private BattlecryDesc battlecry;
 	private ValueProvider manaCostModifier;
 	private final String cardId;
+	private final ConditionDesc glow;
 
 	public Card(CardDesc desc) {
 		cardId = desc.id;
@@ -40,6 +43,7 @@ public abstract class Card extends Entity {
 		cardSet = desc.set;
 		rarity = desc.rarity;
 		heroClass = desc.heroClass;
+		glow = desc.glow;
 		if (desc.heroClasses != null) {
 			heroClasses = desc.heroClasses;
 		}
@@ -136,6 +140,10 @@ public abstract class Card extends Entity {
 	@Override
 	public EntityType getEntityType() {
 		return EntityType.CARD;
+	}
+	
+	public ConditionDesc getGlow() {
+		return glow;
 	}
 
 	public CardLocation getLocation() {
@@ -271,7 +279,5 @@ public abstract class Card extends Entity {
 	public String toString() {
 		return String.format("[%s '%s' %s Manacost:%d]", getCardType(), getName(), getReference(), getBaseManaCost());
 	}
-	
-	public boolean received = false;
 
 }

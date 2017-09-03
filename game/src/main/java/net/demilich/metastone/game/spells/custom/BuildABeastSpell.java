@@ -24,17 +24,18 @@ public class BuildABeastSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		GameContext simulation = context.clone();
 		CardCollection cards1 = new CardCollection();
 		CardCollection cards2 = new CardCollection();
 		for (Card card : CardCatalogue.query(context.getDeckFormat())) {
 			if (card.getCardType() == CardType.MINION && card.getRace() == Race.BEAST && card.getBaseManaCost() <= 5 && (card.hasHeroClass(HeroClass.HUNTER) || card.hasHeroClass(HeroClass.ANY))) {
-				SummonCard beast = (SummonCard) card;
-				if (!beast.hasAttribute(Attribute.BATTLECRY) && !beast.hasAttribute(Attribute.DEATHRATTLES) && beast.summon().getSpellTriggers().isEmpty() && !card.hasAttribute(Attribute.MANA_COST_MODIFIER)) {
+				MinionCard beast = (MinionCard) card;
+				if (!beast.hasAttribute(Attribute.BATTLECRY) && !beast.hasAttribute(Attribute.DEATHRATTLES) && beast.summon().getSpellTriggers().isEmpty() && beast.summon().getCardCostModifier() == null) {
 					cards2.add(card);
 				} else cards1.add(card);
 			}
 		}
+		
+		
 		
 		CardCollection results1 = new CardCollection();
 		CardCollection results2 = new CardCollection();
@@ -65,7 +66,7 @@ public class BuildABeastSpell extends Spell {
 		card3.setAttribute(Attribute.HP, (card1.getAttributeValue(Attribute.HP) + card2.getAttributeValue(Attribute.HP)));
 		card3.setAttribute(Attribute.ATTACK, (card1.getAttributeValue(Attribute.ATTACK) + card2.getAttributeValue(Attribute.ATTACK)));
 		card3.setAttribute(Attribute.BASE_MANA_COST, (card1.getAttributeValue(Attribute.BASE_MANA_COST) + card2.getAttributeValue(Attribute.BASE_MANA_COST)));
-		card3.setDescription(card1.getDescription() + " " + card2.getDescription());
+		card3.setDescription(card2.getDescription() + " " + card1.getDescription());
 		context.getLogic().receiveCard(player.getId(), card3);
 	}
 

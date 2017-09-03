@@ -52,7 +52,6 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS, jsonData, map, ParseValueType.BOOLEAN);//TODO Remove from Spellstopper
 		parseAttribute(Attribute.TAUNT, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
-		parseAttribute(Attribute.HERO_HEALTH_BALANCE, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.COSTS_HEALTH, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DOUBLE_RACE_SPELL_DAMAGE, jsonData, map, ParseValueType.RACE);
 		parseAttribute(Attribute.ENRAGED_ATTACK, jsonData, map, ParseValueType.INTEGER);
@@ -65,6 +64,9 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.ONE_TURN, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CUSTOM_7, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DOUBLE_END_TURN, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.RECEIVED, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.INSTANT_TRAPS, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.QUEST, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
 

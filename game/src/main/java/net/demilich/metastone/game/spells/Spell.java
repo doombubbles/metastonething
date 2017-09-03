@@ -31,7 +31,11 @@ public abstract class Spell {
 			// cast in on all targets
 
 			for (Entity target : validTargets) {
+				
+				
 				context.getEnvironment().put(Environment.SPELL_TARGET, target.getReference());
+				
+				
 				castForPlayer(context, player, desc, source, target);
 				context.getEnvironment().remove(Environment.SPELL_TARGET);
 			}

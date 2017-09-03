@@ -47,8 +47,8 @@ public abstract class ValueProvider {
 			break;
 		}
 		int multiplier = desc.contains(ValueProviderArg.MULTIPLIER) ? desc.getInt(ValueProviderArg.MULTIPLIER) : 1;
-		int offset = desc.contains(ValueProviderArg.OFFSET) ? desc.getInt(ValueProviderArg.OFFSET) : 0;
-		int value = provideValue(context, providingPlayer, target, host) * multiplier + offset;
+		int offset = desc.getValue(ValueProviderArg.OFFSET, context, providingPlayer, target, host, 0);
+		int value = (provideValue(context, providingPlayer, target, host) * multiplier) + offset;
 		return value;
 	}
 

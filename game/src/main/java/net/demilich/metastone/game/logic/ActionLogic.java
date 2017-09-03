@@ -13,6 +13,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.IChooseOneCard;
+import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -35,12 +36,12 @@ public class ActionLogic {
 		if (!hero.canAttackThisTurn()) {
 			return heroAttackActions;
 		}
-		rollout(hero, context, player, heroAttackActions);
+		GameAction action = new PhysicalAttackAction(hero.getReference());
+		action.setSource(hero.getReference());
+		rollout(action, context, player, heroAttackActions);
 
 		return heroAttackActions;
 	}
-
-	
 
 	private List<GameAction> getHeroPowerActions(GameContext context, Player player) {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
@@ -54,15 +55,20 @@ public class ActionLogic {
 		if (heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
 			IChooseOneCard chooseOneCard = (IChooseOneCard) heroPower;
 			if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
-				rollout(chooseOneCard.playBothOptions(), context, player, heroPowerActions);
+				GameAction chooseOneAction = chooseOneCard.playBothOptions();
+				chooseOneAction.setSource(heroPower.getReference());
+				rollout(chooseOneAction, context, player, heroPowerActions);
 			} else {
 				for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+					chooseOneAction.setSource(heroPower.getReference());
 					rollout(chooseOneAction, context, player, heroPowerActions);
 				}
 			}
 			
 		} else {
-			rollout(heroPower, context, player, heroPowerActions);
+			GameAction action = heroPower.play();
+			action.setSource(heroPower.getReference());
+			rollout(action, context, player, heroPowerActions);
 		}
 
 		return heroPowerActions;
@@ -76,8 +82,9 @@ public class ActionLogic {
 			if (!minion.canAttackThisTurn()) {
 				continue;
 			}
-
-			rollout(minion, context, player, physicalAttackActions);
+			GameAction action = new PhysicalAttackAction(minion.getReference());
+			action.setSource(minion.getReference());
+			rollout(action, context, player, physicalAttackActions);
 		}
 		return physicalAttackActions;
 	}
@@ -96,14 +103,24 @@ public class ActionLogic {
 				IChooseOneCard chooseOneCard = (IChooseOneCard) card;
 				if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS) && chooseOneCard.hasBothOptions()) {
 					GameAction chooseOneAction = chooseOneCard.playBothOptions();
+					chooseOneAction.setSource(card.getReference());
 					rollout(chooseOneAction, context, player, playCardActions);
 				} else {
 					for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+						chooseOneAction.setSource(card.getReference());
 						rollout(chooseOneAction, context, player, playCardActions);
 					}
 				}
+			} else if (card.hasAttribute(Attribute.SECRET) && context.getLogic().hasAttribute(player, Attribute.INSTANT_TRAPS)) {
+				SecretCard secretCard = (SecretCard) card;
+				GameAction action = secretCard.play();
+				action.setSource(secretCard.getReference());
+				action.setTargetRequirement(secretCard.getInstant().getTargetSelection() != null ? secretCard.getInstant().getTargetSelection() : TargetSelection.NONE);
+				rollout(action, context, player, playCardActions);
 			} else {
-				rollout(card, context, player, playCardActions);
+				GameAction action = card.play();
+				action.setSource(card.getReference());
+				rollout(action, context, player, playCardActions);
 			}
 
 		}
@@ -141,47 +158,5 @@ public class ActionLogic {
 			}
 		}
 	}
-	
-	public void rollout(Minion minion, GameContext context, Player player, Collection<GameAction> actions) {
-		GameAction action = new PhysicalAttackAction(minion.getReference());
-		action.setSource(minion.getReference());
-		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
-			actions.add(action);
-		} else {
-			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
-				GameAction rolledOutAction = action.clone();
-				rolledOutAction.setTarget(validTarget);
-				actions.add(rolledOutAction);
-			}
-		}
-	}
-	
-	public void rollout(Card card, GameContext context, Player player, Collection<GameAction> actions) {
-		GameAction action = card.play();
-		action.setSource(card.getReference());
-		context.getLogic().processTargetModifiers(player, action);
-		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
-			actions.add(action);
-		} else {
-			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
-				GameAction rolledOutAction = action.clone();
-				rolledOutAction.setTarget(validTarget);
-				actions.add(rolledOutAction);
-			}
-		}
-	}
-	private void rollout(Hero hero, GameContext context, Player player, List<GameAction> heroAttackActions) {
-		GameAction action = new PhysicalAttackAction(hero.getReference());
-		action.setSource(hero.getReference());
-		context.getLogic().processTargetModifiers(player, action);
-		if (action.getTargetRequirement() == TargetSelection.NONE || action.getTargetRequirement() == TargetSelection.AUTO) {
-			heroAttackActions.add(action);
-		} else {
-			for (Entity validTarget : targetLogic.getValidTargets(context, player, action)) {
-				GameAction rolledOutAction = action.clone();
-				rolledOutAction.setTarget(validTarget);
-				heroAttackActions.add(rolledOutAction);
-			}
-		}
-	}
+
 }

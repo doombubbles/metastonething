@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -34,14 +35,14 @@ public class ReceiveCardSpell extends Spell {
 				}
 				if (card != null) {
 					Card clone = card.clone();
-					clone.received = true;
+					clone.setAttribute(Attribute.RECEIVED);
 					context.getLogic().receiveCard(player.getId(), clone);
 				}
 			}
 		} else {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
-					card.received = true;
+					card.setAttribute(Attribute.RECEIVED);
 					context.getLogic().receiveCard(player.getId(), card);
 				}
 			}
