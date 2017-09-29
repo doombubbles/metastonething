@@ -9,16 +9,15 @@
 	"quest": {
 		"class": "MinionPlayedTrigger",
 		"targetPlayer": "SELF",
-		"queueCondition": {
-			"class": "AttributeCondition",
-			"attribute": "TAUNT",
-			"operation": "HAS"
-		},
+		"requiredAttribute": "TAUNT",
 		"value": 7
 	},
 	"spell": {
 		"class": "ReceiveCardSpell",
 		"card": "weapon_sulfuras"
+	},
+	"attributes": {
+		"QUEST": 7
 	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",

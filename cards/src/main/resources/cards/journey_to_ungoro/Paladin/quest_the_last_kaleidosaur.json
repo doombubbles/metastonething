@@ -4,18 +4,21 @@
 	"type": "SPELL",
 	"heroClass": "PALADIN",
 	"rarity": "LEGENDARY",
-	"description": "Quest: Cast 6 spells on your minions. Reward: Galvadon.",
+	"description": "Quest: Cast 5 spells on your minions. Reward: Galvadon.",
 	"targetSelection": "NONE",
 	"quest": {
 		"class": "AfterSpellCastedTrigger",
 		"sourcePlayer": "SELF",
 		"targetPlayer": "SELF",
 		"targetEntityType": "MINION",
-		"value": 6
+		"value": 5
 	},
 	"spell": {
 		"class": "ReceiveCardSpell",
 		"card": "token_galvadon"
+	},
+	"attributes": {
+		"QUEST": 5
 	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",

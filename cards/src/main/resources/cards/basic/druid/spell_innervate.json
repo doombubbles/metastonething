@@ -4,12 +4,12 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "FREE",
-	"description": "Gain 2 Mana Crystals this turn only.",
+	"description": "Gain 1 Mana Crystals this turn only.",
 	"targetSelection": "NONE",
 	"race": "RESTORATION",
 	"spell": {
 		"class": "GainManaSpell",
-		"value": 2
+		"value": 1
 	},
 	"collectible": true,
 	"set": "BASIC",

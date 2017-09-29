@@ -15,6 +15,9 @@
 		"class": "ReceiveCardSpell",
 		"card": "spell_crystal_core"
 	},
+	"attributes": {
+		"QUEST": 5
+	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1

@@ -1,6 +1,6 @@
 {
 	"name": "Hex",
-	"baseManaCost": 3,
+	"baseManaCost": 4,
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",

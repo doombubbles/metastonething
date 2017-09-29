@@ -1,16 +1,16 @@
 {
-    "name": "Crackling Razormaw",
-    "baseManaCost": 2,
+    "name": "Thunder Lizard",
+    "baseManaCost": 3,
     "type": "MINION",
     "baseAttack": 3,
-    "baseHp": 2,
-    "heroClass": "HUNTER",
+    "baseHp": 3,
+    "heroClass": "ANY",
     "rarity": "COMMON",
     "race": "BEAST",
-    "description": "Battlecry: Adapt a friendly Beast",
-	"battlecry": {
-		"targetSelection": "FRIENDLY_MINIONS",
-		"spell": {
+    "description": "Battlecry: If you played an elmental last turn, Adapt.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
 			"class": "DiscoverOptionSpell",
 			"reveal": true,
 			"spells": [
@@ -18,23 +18,27 @@
 					"name": "Crackling Shield",
 					"description": "Divine Shield",
 					"class": "AddAttributeSpell",
-					"attribute": "DIVINE_SHIELD"
+					"attribute": "DIVINE_SHIELD",
+					"target": "SELF"
 				},
 				{
 					"name": "Lightning Speed",
 					"description": "Winfury",
 					"class": "AddAttributeSpell",
-					"attribute": "WINDFURY"
+					"attribute": "WINDFURY",
+					"target": "SELF"
 				},
 				{
 					"name": "Massive",
 					"description": "Taunt",
 					"class": "AddAttributeSpell",
-					"attribute": "TAUNT"
+					"attribute": "TAUNT",
+					"target": "SELF"
 				},
 				{
 					"name": "Poison Spit",
 					"description": "Poisonous",
+					"target": "SELF",
 					"class": "AddAttributeSpell",
 					"attribute": "POISONOUS"
 				},
@@ -42,23 +46,27 @@
 					"name": "Liquid Membrane",
 					"description": "Can't be targeted by spells our Hero Powers.",
 					"class": "AddAttributeSpell",
-					"attribute": "UNTARGETABLE_BY_SPELLS"
+					"attribute": "UNTARGETABLE_BY_SPELLS",
+					"target": "SELF"
 				},
 				{
 					"name": "Flaming Claws",
 					"description": "+3 Attack",
+					"target": "SELF",
 					"class": "BuffSpell",
 					"attackBonus": 3
 				},
 				{
 					"name": "Rocky Carapace",
 					"description": "+3 Health",
+					"target": "SELF",
 					"class": "BuffSpell",
 					"hpBonus": 3
 				},
 				{
 					"name": "Volcanic Might",
 					"description": "+1/+1",
+					"target": "SELF",
 					"class": "BuffSpell",
 					"attackBonus": 1,
 					"hpBonus": 1
@@ -71,7 +79,8 @@
 					"revertTrigger": {
 						"class": "TurnStartTrigger",
 						"targetPlayer": "SELF"
-					}
+					},
+					"target": "SELF"
 				},
 				{
 					"name": "Living Spores",
@@ -83,26 +92,29 @@
 							"token_plant",
 							"token_plant"
 						]
-					}
+					},
+					"target": "SELF"
 				}
-			],
+			]
+		},
+		"condition": {
+			"class": "PlayedLastTurnCondition",
 			"filter": {
-				"class": "RaceFilter",
-				"race": "BEAST"
+				"class": "CardFilter",
+				"race": "ELEMENTAL"
 			}
 		}
-		
-	},
+    },
 	"glow": {
-		"class": "MinionOnBoardCondition",
-		"cardFilter": {
-			"class": "RaceFilter",
-			"race": "BEAST"
+		"class": "PlayedLastTurnCondition",
+		"filter": {
+			"class": "CardFilter",
+			"race": "ELEMENTAL"
 		}
 	},
-	"attributes": {
-		"BATTLECRY": true
-	},
+    "attributes": {
+        "BATTLECRY": true
+    },
     "collectible": true,
     "set": "JOURNEY_TO_UNGORO",
     "fileFormatVersion": 1

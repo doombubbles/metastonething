@@ -104,6 +104,12 @@
 			"value": 2
 		}
     },
+	"glow": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "SELF",
+		"operation": "GREATER_OR_EQUAL",
+		"value": 2
+	},
     "attributes": {
         "BATTLECRY": true
     },

@@ -15,6 +15,9 @@
 		"class": "ReceiveCardSpell",
 		"card": "spell_time_warp"
 	},
+	"attributes": {
+		"QUEST": 6
+	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1

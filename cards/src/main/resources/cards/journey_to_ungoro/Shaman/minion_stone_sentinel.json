@@ -33,6 +33,13 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "PlayedLastTurnCondition",
+		"filter": {
+			"class": "CardFilter",
+			"race": "ELEMENTAL"
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

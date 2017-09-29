@@ -21,6 +21,9 @@
 		"class": "ReceiveCardSpell",
 		"card": "token_barnabus_the_stomper"
 	},
+	"attributes": {
+		"QUEST": 5
+	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1

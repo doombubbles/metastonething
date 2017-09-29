@@ -15,7 +15,7 @@
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "minion_murloc_tinyfin",
+			"card": "token_primalfin",
 			"boardPositionRelative": "RIGHT"
 		}
 	},

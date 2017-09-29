@@ -11,15 +11,52 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "DiscoverRandomCardSpell",
-			"spell": {
-				"class": "ReceiveCardSpell",
-				"targetPlayer": "SELF"
+			"class": "EitherOrSpell",
+			"spell1": {
+				"class": "DiscoverRandomCardSpell",
+				"spell": {
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "SELF"
+				},
+				"cardFilter": {
+					"class": "CardFilter",
+					"operation": "HAS",
+					"attribute": "SECRET"
+				}
 			},
-			"cardFilter": {
-				"class": "CardFilter",
-				"operation": "HAS",
-				"attribute": "SECRET"
+			"spell2": {
+				"class": "DiscoverRandomCardSpell",
+				"spell": {
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "SELF"
+				},
+				"cardFilter": {
+					"class": "CardFilter",
+					"operation": "HAS",
+					"attribute": "SECRET",
+					"heroClass": "PALADIN"
+				}
+			},
+			"condition": {
+				"class": "OrCondition",
+				"conditions": [
+					{
+						"class": "HasEntityCondition",
+						"target": "FRIENDLY_HERO",
+						"filter": {
+							"class": "CardFilter",
+							"heroClass": "MAGE"
+						}
+					},
+					{
+						"class": "HasEntityCondition",
+						"target": "FRIENDLY_HERO",
+						"filter": {
+							"class": "CardFilter",
+							"heroClass": "HUNTER"
+						}
+					}
+				]
 			}
 		}
 	},

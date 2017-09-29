@@ -4,11 +4,21 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
-	"description": "Open a permanent portal that summons 3/2 Imps.",
+	"description": "When you play or discard this, open a permanent portal that summons 3/2 Imps.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
 		"card": "permanent_nether_portal"
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "DiscardTrigger",
+			"target": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "permanent_nether_portal"
+		}
 	},
 	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",
