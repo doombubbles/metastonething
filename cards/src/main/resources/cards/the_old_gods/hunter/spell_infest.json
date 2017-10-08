@@ -11,8 +11,11 @@
 		"class": "AddDeathrattleSpell",
 		"target": "FRIENDLY_MINIONS",
 		"spell": {
-			"class": "ReturnMinionToHandSpell",
-				"target": "SELF"
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
+			}
 		}
 	},
 	"collectible": true,

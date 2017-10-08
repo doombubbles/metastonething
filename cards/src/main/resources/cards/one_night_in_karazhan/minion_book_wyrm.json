@@ -27,6 +27,28 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "AndCondition",
+		"conditions": [
+			{
+				"class": "HoldsCardCondition",
+				"cardFilter": {
+					"class": "CardFilter",
+					"race": "DRAGON"
+				}
+			},
+			{
+				"class": "MinionOnBoardCondition",
+				"target": "ENEMY_MINIONS",
+				"cardFilter": {
+					"class": "AttributeFilter",
+					"attribute": "ATTACK",
+					"operation": "LESS_OR_EQUAL",
+					"value": 3
+				}
+			}
+		]
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

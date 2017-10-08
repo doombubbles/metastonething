@@ -9,6 +9,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
 public class CastRepeatedlySpell extends Spell {
 
@@ -25,6 +26,7 @@ public class CastRepeatedlySpell extends Spell {
 		int iterations = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
+		EntityFilter filter = (EntityFilter) desc.get(SpellArg.FILTER);
 		
 		for (int i = 0; i < iterations; i++) {
 			if (target == null) {
@@ -33,7 +35,7 @@ public class CastRepeatedlySpell extends Spell {
 					return;
 				}
 			} else {
-				List<Entity> targets = context.resolveTarget(player, source, desc.getTarget());
+				List<Entity> targets = SpellUtils.getValidTargets(context, player, context.resolveTarget(player, source, desc.getTarget()), filter);
 				if (targets.isEmpty()) {
 					return;
 				}

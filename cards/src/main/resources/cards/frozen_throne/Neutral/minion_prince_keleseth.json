@@ -6,8 +6,9 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"description": "Battlecry: If your deck contains no 2-Cost cards, give all minions in your deck deck +1/+1.",
+	"description": "Battlecry: If your deck has no 2-Cost cards, give all minions in your deck +1/+1.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "BuffSpell",
 			"target": "FRIENDLY_DECK",
@@ -16,18 +17,28 @@
 			"filter": {
 				"class": "CardFilter",
 				"cardType": "MINION"
-			},
-			"condition": {
-				"class": "DeckContainsCondition",
-				"cardFilter": {
-					"class": "AttributeFilter",
-					"attribute": "BASE_MANA_COST",
-					"operation": "EQUAL",
-					"value": 2
-				},
-				"invert": true
 			}
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 2
+			},
+			"invert": true
 		}
+	},
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "AttributeFilter",
+			"attribute": "BASE_MANA_COST",
+			"operation": "EQUAL",
+			"value": 2
+		},
+		"invert": true
 	},
 	"attributes": {
 		"BATTLECRY": true

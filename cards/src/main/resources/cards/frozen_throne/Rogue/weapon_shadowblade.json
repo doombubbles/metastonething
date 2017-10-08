@@ -11,7 +11,7 @@
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "AddAttributeSpell",
-			"target": "FRIENDLY_PLAYER",
+			"target": "FRIENDLY_HERO",
 			"attribute": "IMMUNE",
 			"revertTrigger": {
 				"class": "TurnEndTrigger"

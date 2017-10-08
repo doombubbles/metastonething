@@ -25,6 +25,16 @@
 			} 
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "OTHER_FRIENDLY_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 5
+		} 
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

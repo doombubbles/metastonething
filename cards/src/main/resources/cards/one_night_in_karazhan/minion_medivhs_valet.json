@@ -17,6 +17,9 @@
 			"class": "ControlsSecretCondition"
 		}
 	},
+	"glow": {
+		"class": "ControlsSecretCondition"
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

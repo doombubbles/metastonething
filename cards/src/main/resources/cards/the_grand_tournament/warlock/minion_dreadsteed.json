@@ -7,20 +7,10 @@
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
 	"race": "DEMON",
-	"description": "Deathrattle: At the end of the turn, summon a Dreadsteed.",
+	"description": "Deathrattle: Summon a Dreadsteed.",
 	"deathrattle": {
-		"class": "AddSpellTriggerSpell",
-		"target": "FRIENDLY_HERO",
-		"trigger": {
-			"eventTrigger": {
-				"class": "TurnEndTrigger"
-			},
-			"spell": {
-				"class": "SummonSpell",
-				"card": "minion_dreadsteed"
-			},
-			"oneTurn": true
-		}
+		"class": "SummonSpell",
+		"card": "minion_dreadsteed"
 	},
 	"attributes": {
 		"DEATHRATTLES": true

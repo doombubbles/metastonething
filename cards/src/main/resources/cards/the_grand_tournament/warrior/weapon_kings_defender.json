@@ -24,6 +24,15 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "TAUNT",
+			"operation": "HAS"
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

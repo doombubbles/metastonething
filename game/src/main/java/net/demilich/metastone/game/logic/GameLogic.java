@@ -1502,6 +1502,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		card.setName(context.getCardById(card.getCardId()).getName());
+		card.removeAttribute(Attribute.ONE_TURN);
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL) && player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);

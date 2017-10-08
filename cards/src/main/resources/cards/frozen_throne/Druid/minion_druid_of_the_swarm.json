@@ -14,7 +14,7 @@
 			"spell": {
 				"class": "TransformMinionSpell",
 				"target": "SELF",
-				"card": "token_crypt_spider"
+				"card": "token_druid_of_the_swarm_spider"
 			}
 		},
 		{
@@ -22,7 +22,7 @@
 			"spell": {
 				"class": "TransformMinionSpell",
 				"target": "SELF",
-				"card": "token_scarab_beetle"
+				"card": "token_druid_of_the_swarm_scarab"
 			}
 		}
 	],
@@ -31,7 +31,7 @@
 		"spell": {
 			"class": "TransformMinionSpell",
 			"target": "SELF",
-			"card": "token_who_knows"
+			"card": "token_druid_of_the_swarm_both"
 		}
 	},
     "collectible": true,

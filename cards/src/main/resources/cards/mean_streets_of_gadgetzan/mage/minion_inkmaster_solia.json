@@ -27,6 +27,9 @@
 			"class": "HighlanderDeckCondition"
 		}
 	},
+	"glow": {
+		"class": "HighlanderDeckCondition"
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

@@ -9,7 +9,7 @@
 	"spell": {
 		"class": "BuffHeroSpell",
 		"target": "FRIENDLY_HERO",
-		"hpBonus": 3
+		"armorBonus": 3
 	},
 	"collectible": false,
 	"set": "FROZEN_THRONE",

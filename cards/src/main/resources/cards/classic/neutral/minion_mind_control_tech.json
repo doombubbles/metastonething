@@ -20,6 +20,12 @@
 			"value": 4
 		}
 	},
+	"glow": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "GREATER_OR_EQUAL",
+		"value": 4
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

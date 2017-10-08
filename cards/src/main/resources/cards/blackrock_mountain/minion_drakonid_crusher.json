@@ -23,6 +23,13 @@
 			"value": 15
 		}
 	},
+	"glow": {
+		"class": "AttributeCondition",
+		"target": "ENEMY_HERO",
+		"attribute": "HP",
+		"operation": "LESS_OR_EQUAL",
+		"value": 15
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

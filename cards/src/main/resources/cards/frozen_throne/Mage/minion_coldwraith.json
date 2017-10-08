@@ -26,6 +26,15 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "ENEMY_CHARACTERS",
+		"filter": {
+			"class": "AttributeFilter",
+			"operation": "HAS",
+			"attribute": "FROZEN"
+		}
+	},
 	"attribute": {
 		"BATTLECRY": true
 	},

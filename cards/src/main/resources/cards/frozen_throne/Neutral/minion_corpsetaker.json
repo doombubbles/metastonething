@@ -80,6 +80,43 @@
 			]
 		}
     },
+	"glow": {
+		"class": "OrCondition",
+		"conditions": [
+			{
+				"class": "DeckContainsCondition",
+					"cardFilter": {
+						"class": "AttributeFilter",
+						"attribute": "TAUNT",
+						"operation": "HAS"
+					}
+			},
+			{
+				"class": "DeckContainsCondition",
+					"cardFilter": {
+						"class": "AttributeFilter",
+						"attribute": "DIVINE_SHIELD",
+						"operation": "HAS"
+					}
+			},
+			{
+				"class": "DeckContainsCondition",
+					"cardFilter": {
+						"class": "AttributeFilter",
+						"attribute": "LIFESTEAL",
+						"operation": "HAS"
+					}
+			},
+			{
+				"class": "DeckContainsCondition",
+					"cardFilter": {
+						"class": "AttributeFilter",
+						"attribute": "WINDFURY",
+						"operation": "HAS"
+					}
+			}
+		]
+	},
     "attributes": {
         "BATTLECRY": true
     },

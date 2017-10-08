@@ -29,6 +29,13 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "MinionOnBoardCondition",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "MURLOC"
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

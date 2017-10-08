@@ -32,6 +32,13 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "HoldsCardCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "DRAGON"
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

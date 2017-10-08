@@ -7,35 +7,44 @@
     "heroClass": "ANY",
     "rarity": "LEGENDARY",
     "race": "NONE",
-    "description": "Battlecry: If your deck has no 4-Cost cards, gain Lifesteal and Taunt.",
+    "description": "Battlecry: If your deck has no 4-Cost cards, give your minions Lifesteal and Taunt.",
     "battlecry": {
         "targetSelection": "NONE",
-        "class": "ConditionalSpell",
-			"spell": {
-				"class": "MetaSpell",
-				"target": "SELF",
-				"spells": [
-					{
-						"class": "AddAttributeSpell",
-						"attribute": "LIFESTEAL"
-					},
-					{
-						"class": "AddAttributeSpell",
-						"attribute": "TAUNT"
-					}
-				]
-			},
-			"condition": {
-				"class": "DeckContainsCondition",
-				"cardFilter": {
-					"class": "AttributeFilter",
-					"attribute": "BASE_MANA_COST",
-					"operation": "EQUAL",
-					"value": 4
+        "spell": {
+			"class": "MetaSpell",
+			"target": "FRIENDLY_MINIONS",
+			"spells": [
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "LIFESTEAL"
 				},
-				"invert": true
-			}
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			]
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 4
+			},
+			"invert": true
+		}
     },
+	"glow": {
+		"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 4
+			},
+			"invert": true
+	},
     "attributes": {
         "BATTLECRY": true
     },

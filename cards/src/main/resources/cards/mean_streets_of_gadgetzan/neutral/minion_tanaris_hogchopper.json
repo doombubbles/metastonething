@@ -20,6 +20,12 @@
 			"value": 0
 		}
 	},
+	"glow": {
+		"class": "CardCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "EQUAL",
+		"value": 0
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

@@ -7,13 +7,12 @@
     "heroClass": "SHAMAN",
     "rarity": "LEGENDARY",
     "race": "NONE",
-    "description": "Whenever another minion is Frozen, add a copy of it to your hand.",
+    "description": "Whenever a minion is Frozen, add a copy of it to your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "AttributeGainedTrigger",
 			"targetEntityType": "MINION",
-			"requiredAttribute": "FROZEN",
-			"hostTargetType": "IGNORE_AS_TARGET"
+			"requiredAttribute": "FROZEN"
 		},
 		"spell": {
 			"class": "CopyCardSpell",

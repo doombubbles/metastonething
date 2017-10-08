@@ -25,6 +25,13 @@
 			"race": "BEAST"
 		}
 	},
+	"glow": {
+		"class": "MinionOnBoardCondition",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1

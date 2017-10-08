@@ -1,0 +1,30 @@
+{
+	"name": "Diabologist",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "WARLOCK",
+	"rarity": "COMMON",
+	"description": "Battlecry: Discover a card you've discarded this game.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverFilteredCardSpell",
+			"cardSource": {
+				"class": "DiscardSource",
+				"targetPlayer": "SELF"
+			},
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

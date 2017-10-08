@@ -28,7 +28,7 @@
 	"attributes": {
 		"ONE_TURN": true
 	},
-    "collectible": true,
+    "collectible": false,
     "set": "FROZEN_THRONE",
     "fileFormatVersion": 1
 }

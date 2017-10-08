@@ -9,7 +9,15 @@
     "race": "NONE",
     "description": "Deathrattle: Summon a random minion you discarded this game.",
 	"deathrattle": {
-		"class": "custom.DynoSpell"
+		"class": "SummonRandomMinionFilteredSpell",
+		"cardSource": {
+			"class": "DiscardSource",
+			"targetPlayer": "SELF"
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		}
 	},
 	"attributes": {
 		"DEATHRATTLES": true

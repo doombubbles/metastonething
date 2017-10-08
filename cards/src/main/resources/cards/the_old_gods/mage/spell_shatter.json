@@ -21,6 +21,15 @@
 			"operation": "HAS"
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "ENEMY_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"operation": "HAS",
+			"attribute": "FROZEN"
+		} 
+	},
 	"collectible": true,
 	"set": "THE_OLD_GODS",
 	"fileFormatVersion": 1

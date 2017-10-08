@@ -8,18 +8,28 @@
 	"targetSelection": "ANY",
 	"race": "BEAST_MASTERY",
 	"spell": {
-		"class": "DamageSpell",
-		"value": {
-			"class": "ConditionalValueProvider",
-			"ifTrue": 5,
-			"ifFalse": 3,
-			"condition": {
-				"class": "MinionOnBoardCondition",
-				"cardFilter": {
-					"class": "RaceFilter",
-					"race": "BEAST"
-				}
+		"class": "EitherOrSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 5
+		},
+		"spell2": {
+			"class": "DamageSpell",
+			"value": 3
+		},
+		"condition": {
+			"class": "MinionOnBoardCondition",
+			"cardFilter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
 			}
+		}
+	},
+	"glow": {
+		"class": "MinionOnBoardCondition",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
 		}
 	},
 	"collectible": true,

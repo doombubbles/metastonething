@@ -24,6 +24,16 @@
 			} 
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "HP",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 6
+		} 
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

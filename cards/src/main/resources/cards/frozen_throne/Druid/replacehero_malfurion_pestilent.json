@@ -13,8 +13,8 @@
 			"spell": {
 				"class": "SummonSpell",
 				"cards": [
-					"token_crypt_spider",
-					"token_crypt_spider"
+					"token_frost_widow",
+					"token_frost_widow"
 				]
 			}
 		},
@@ -34,8 +34,8 @@
 		"spell": {
 			"class": "SummonSpell",
 			"cards": [
-				"token_crypt_spider",
-				"token_crypt_spider",
+				"token_frost_widow",
+				"token_frost_widow",
 				"token_scarab_beetle",
 				"token_scarab_beetle"
 			]

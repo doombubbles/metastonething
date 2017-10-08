@@ -12,7 +12,7 @@
 		"class": "CardCostModifier",
 		"cardType": "SPELL",
 		"targetPlayer": "OPPONENT",
-		"value": -1
+		"value": 1
 	},
     "collectible": true,
     "set": "FROZEN_THRONE",

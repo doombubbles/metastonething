@@ -56,6 +56,49 @@
 			]
 		}
 	},
+	"glow": {
+		"class": "OrCondition",
+		"conditions": [
+			{
+				"class": "ComparisonCondition",
+				"operation": "GREATER_OR_EQUAL",
+				"value1": {
+					"class": "HighestAttributeValueProvider",
+					"target": "FRIENDLY_MINIONS",
+					"attribute": "ATTACK",
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				"value2": 10
+			},
+			{
+				"class": "ComparisonCondition",
+				"operation": "GREATER_OR_EQUAL",
+				"value1": {
+					"class": "HighestAttributeValueProvider",
+					"target": "FRIENDLY_HAND",
+					"attribute": "ATTACK",
+					"filter": {
+						"class": "SpecificCardFilter",
+						"cardId": "minion_cthun"
+					}
+				},
+				"value2": 10
+			},
+			{
+				"class": "ComparisonCondition",
+				"operation": "GREATER_OR_EQUAL",
+				"value1": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "CTHUN_ATTACK_BUFF"
+				},
+				"value2": 4
+			}
+		]
+	},
 	"attributes": {
 		"BATTLECRY": true,
 		"TAUNT": true

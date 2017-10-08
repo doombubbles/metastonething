@@ -4,8 +4,8 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
-	"description": "Deal 4 damage.",
-	"targetSelection": "ANY",
+	"description": "Deal 4 damage to a minion.",
+	"targetSelection": "MINIONS",
 	"race": "DESTRUCTION",
 	"spell": {
 		"class": "DamageSpell",

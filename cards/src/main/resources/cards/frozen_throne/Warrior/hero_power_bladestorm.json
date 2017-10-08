@@ -2,14 +2,40 @@
 	"name": "Bladestorm",
 	"baseManaCost": 2,
 	"type": "HERO_POWER",
-	"heroClass": "PALADIN",
+	"heroClass": "WARRIOR",
 	"rarity": "FREE",
-	"description": "Deal 1 damage to all minions.",
+	"description": "Deal 1 damage to all minions. If any die, refresh this.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "DamageSpell",
-		"target": "ALL_MINIONS",
-		"value": 1
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"target": "ALL_MINIONS",
+				"value": 1
+			},
+			{
+				"class": "ConditionalSpell",
+				"spell": {
+					"class": "AddSpellTriggerSpell",
+					"target": "FRIENDLY_PLAYER",
+					"trigger": {
+						"eventTrigger": {
+							"class": "GameStateChangedTrigger"
+						},
+						"spell": {
+							"class": "RefreshHeroPowerSpell",
+							"targetPlayer": "SELF"
+						},
+						"oneTime": true
+					}
+				},
+				"condition": {
+					"class": "IsDeadCondition",
+					"target": "ALL_MINIONS"
+				}
+			}
+		]
 	},
 	"collectible": false,
 	"set": "FROZEN_THRONE",

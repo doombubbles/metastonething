@@ -1,10 +1,10 @@
 {
-	"name": "3+1 damage and draw a card",
+	"name": "4 damage and draw a card",
 	"baseManaCost": 2,
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "Deal 3 damage to a minion, then 1 damage and draw a card",
+	"description": "4 damage and draw a card",
 	"targetSelection": "MINIONS",
 	"race": "BALANCE",
 	"spell": {
@@ -12,11 +12,11 @@
 		"spells": [
 			{
 				"class": "DamageSpell",
-				"value": 3
+				"value": 1
 			},
 			{
 				"class": "DamageSpell",
-				"value": 1
+				"value": 3
 			},
 			{
 				"class": "DrawCardSpell",

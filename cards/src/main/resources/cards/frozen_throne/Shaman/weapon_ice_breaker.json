@@ -1,6 +1,6 @@
 {
     "name": "Ice Breaker",
-    "baseManaCost": 3,
+    "baseManaCost": 2,
     "type": "WEAPON",
     "damage": 1,
     "durability": 3,

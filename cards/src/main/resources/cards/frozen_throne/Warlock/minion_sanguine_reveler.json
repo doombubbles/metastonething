@@ -25,6 +25,9 @@
 			]
 		}
     },
+	"glow": {
+		"class": "MinionOnBoardCondition"
+	},
     "attributes": {
         "BATTLECRY": true
     },

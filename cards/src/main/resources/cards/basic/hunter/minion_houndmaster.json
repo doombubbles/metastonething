@@ -28,6 +28,13 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "MinionOnBoardCondition",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

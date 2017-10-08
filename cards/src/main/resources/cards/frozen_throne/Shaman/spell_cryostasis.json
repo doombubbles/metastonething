@@ -4,14 +4,15 @@
     "type": "SPELL",
     "heroClass": "SHAMAN",
     "rarity": "EPIC",
-    "description": "Give a minion +3/+3 and Freeze it.",
+    "description": "Give a minion +3/+4 and Freeze it.",
     "targetSelection": "MINIONS",
     "spell": {
         "class": "MetaSpell",
 		"spells": [
 			{
 				"class": "BuffSpell",
-				"value": 2
+				"attackBonus": 3,
+				"hpBonus": 4
 			},
 			{
 				"class": "AddAttributeSpell",

@@ -26,6 +26,16 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "FRIENDLY_WEAPON",
+		"filter": {
+			"class": "AttributeFilter",
+			"attribute": "ATTACK",
+			"value": 3,
+			"operation": "GREATER_OR_EQUAL"
+		}
+	},
 	"attributes": {
 		"BATTLECRY": true
 	},

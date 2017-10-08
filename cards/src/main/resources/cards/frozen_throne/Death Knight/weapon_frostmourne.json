@@ -13,6 +13,7 @@
 			"sourcePlayer": "SELF",
 			"targetPlayer": "BOTH",
 			"sourceEntityType": "HERO",
+			"targetEntityType": "MINION",
 			"fireCondition": {
 				"class": "IsDeadCondition"
 			}
@@ -21,7 +22,7 @@
 			"class": "custom.Frostmourne1Spell"
 		}
 	},
-	"collectible": true,
+	"collectible": false,
 	"set": "FROZEN_THRONE",
 	"fileFormatVersion": 1
 }

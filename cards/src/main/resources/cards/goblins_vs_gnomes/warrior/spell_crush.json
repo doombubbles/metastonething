@@ -22,6 +22,13 @@
 			}
 		}
 	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "DamagedFilter"
+		}
+	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",
 	"fileFormatVersion": 1
