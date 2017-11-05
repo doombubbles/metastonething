@@ -1,0 +1,28 @@
+{
+    "name": "Dran'ghul",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "HUNTER",
+    "rarity": "LEGENDARY",
+    "race": "BEAST",
+    "description": "Lifesteal. Battlecry: Give your Beasts 'Deathrattle: Summon Dran'ghul'.",
+    "battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddDeathrattleSpell",
+			"target": "FRIENDLY_MINIONS",
+			"spell": {
+				"class": "SummonSpell",
+				"card": "minion_dranghul"
+			}
+		}
+	},
+    "attributes": {
+		"LIFESTEAL": true
+    },
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

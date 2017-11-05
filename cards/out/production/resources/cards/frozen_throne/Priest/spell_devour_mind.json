@@ -1,0 +1,17 @@
+{
+    "name": "Devour Mind",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "description": "Copy 3 cards in your opponent's deck and add them to your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "CopyCardSpell",
+		"value": 3,
+		"cardLocation": "DECK"
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

@@ -45,6 +45,9 @@ public class EventTriggerDeserializer implements JsonDeserializer<EventTriggerDe
 		parseArgument(EventTriggerArg.TARGET_ENTITY_TYPE, jsonData, arguments, ParseValueType.ENTITY_TYPE);
 		parseArgument(EventTriggerArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(EventTriggerArg.VALUE, jsonData, arguments, ParseValueType.VALUE);
+		parseArgument(EventTriggerArg.RESET, jsonData, arguments, ParseValueType.BOOLEAN);
+		parseArgument(EventTriggerArg.IN_ONE_TURN, jsonData, arguments, ParseValueType.BOOLEAN);
+		parseArgument(EventTriggerArg.TOTAL, jsonData, arguments, ParseValueType.BOOLEAN);
 
 		return new EventTriggerDesc(arguments);
 	}

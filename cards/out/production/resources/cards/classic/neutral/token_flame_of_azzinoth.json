@@ -1,0 +1,14 @@
+{
+	"name": "Flame of Azzinoth",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"race": "ELEMENTAL",
+	"description": "",
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

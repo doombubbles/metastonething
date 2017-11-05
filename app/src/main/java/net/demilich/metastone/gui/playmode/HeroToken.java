@@ -187,9 +187,9 @@ public class HeroToken extends GameToken {
 		
 		
 		if (player.getAttributeValue(Attribute.OVERLOAD) > 0) {
-			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getAttributeValue(Attribute.OVERLOAD));
+			manaLabel.setText(player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getAttributeValue(Attribute.OVERLOAD));
 		} else {
-			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
+			manaLabel.setText(player.getMana() + "/" + player.getMaxMana());
 		}
 		updateArmor(hero.getArmor());
 		updateHeroPower(hero);

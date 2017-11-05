@@ -1,0 +1,17 @@
+{
+	"name": "Pyroblast",
+	"baseManaCost": 10,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"description": "Deal 10 damage.",
+	"race": "FIRE",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 10
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

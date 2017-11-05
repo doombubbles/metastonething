@@ -1,0 +1,16 @@
+{
+	"name": "Molten Reflection",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Choose a friendly minion. Summon a copy of it.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"race": "FIRE",
+	"spell": {
+		"class": "CloneMinionSpell"
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

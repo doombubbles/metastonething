@@ -20,6 +20,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
+import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class ActionLogic {

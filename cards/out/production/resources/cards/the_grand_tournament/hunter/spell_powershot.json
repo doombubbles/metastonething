@@ -1,0 +1,24 @@
+{
+	"name": "Powershot",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Deal 2 damage to a minion and the minions next to it.",
+	"targetSelection": "MINIONS",
+	"race": "MARKSMAN",
+	"spell": {
+		"class": "AdjacentEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "DamageSpell",
+			"value": 2
+		}
+	},
+	"collectible": true,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

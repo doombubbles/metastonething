@@ -1,0 +1,25 @@
+{
+    "name": "Abominable Bowman",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 7,
+    "heroClass": "HUNTER",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Deathrattle: Summon a random friendly Beast that died this game.",
+    "deathrattle": {
+        "class": "ResurrectSpell",
+		"value": 1,
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "BEAST"
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

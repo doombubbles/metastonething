@@ -12,6 +12,7 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.SummonSpell;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class MoatLurkerSpell extends Spell {
@@ -28,7 +29,10 @@ public class MoatLurkerSpell extends Spell {
 		SpellDesc addDeathrattleSpell = AddDeathrattleSpell.create(deathrattle);
 		SpellDesc destroySpell = DestroySpell.create(target.getReference());
 		SpellUtils.castChildSpell(context, player, destroySpell, source, target);
-		SpellUtils.castChildSpell(context, player, addDeathrattleSpell, source, source);
+		for (int i = 1; i <= desc.getInt(SpellArg.HOW_MANY, 1); i++) {
+			SpellUtils.castChildSpell(context, player, addDeathrattleSpell, source, source);
+		}
+
 	}
 
 }

@@ -1,0 +1,13 @@
+{
+	"name": "Defias Bandit",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,23 @@
+{
+	"name": "Dragonling Mechanic",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Battlecry: Summon a 2/1 Mechanical Dragonling.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_mechanical_dragonling",
+			"boardPositionRelative": "RIGHT"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

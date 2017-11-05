@@ -1,0 +1,34 @@
+{
+    "name": "Spikeridged Steed",
+    "baseManaCost": 6,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "Give a minion +2/+6 and Taunt. When it dies, summon a Stegodon.",
+	"targetSelection": "MINIONS",
+	"race": "PROTECTION",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 2,
+				"hpBonus": 6
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			},
+			{
+				"class": "AddDeathrattleSpell",
+				"spell": {
+					"class": "SummonSpell",
+					"card": "minion_stegodon"
+				}
+			}
+		]
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,31 @@
+{
+	"name": "4 damage and draw a card",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "4 damage and draw a card",
+	"targetSelection": "MINIONS",
+	"race": "BALANCE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 1
+			},
+			{
+				"class": "DamageSpell",
+				"value": 3
+			},
+			{
+				"class": "DrawCardSpell",
+				"targetPlayer": "SELF",
+				"value": "1"
+			}
+		]
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

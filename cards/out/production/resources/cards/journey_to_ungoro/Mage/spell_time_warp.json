@@ -1,0 +1,15 @@
+{
+	"name": "Time Warp",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"description": "Take an extra turn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.TimeWarpSpell"
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

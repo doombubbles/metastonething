@@ -1,0 +1,17 @@
+{
+	"name": "Draw 3 cards",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Draw 3 cards",
+	"targetSelection": "NONE",
+	"race": "RESTORATION",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 3
+	},
+	"collectible": false,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -87,7 +87,7 @@ public class CastSemiRandomSpellSpell extends Spell {
 				
 				if (spellCard.hasAttribute(Attribute.OVERLOAD)) {
 					player.modifyAttribute(Attribute.OVERLOAD, spellCard.getAttributeValue(Attribute.OVERLOAD));
-					context.fireGameEvent(new OverloadEvent(context, player.getId(), spellCard));
+					context.fireGameEvent(new OverloadEvent(context, player.getId(), spellCard, spellCard.getAttributeValue(Attribute.OVERLOAD)));
 				}
 			}
 			context.getLogic().checkForDeadEntities();

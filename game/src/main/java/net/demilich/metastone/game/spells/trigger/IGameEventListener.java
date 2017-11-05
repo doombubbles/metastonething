@@ -42,7 +42,7 @@ public interface IGameEventListener {
 
 	public abstract boolean hasCounter();
 
-	public abstract void countDown();
+	public abstract void countDown(GameEvent event);
 
 	public abstract void expire();
 	

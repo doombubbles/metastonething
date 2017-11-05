@@ -11,6 +11,8 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 
+import java.util.List;
+
 public class TransformCardSpell extends Spell {
 
 	public static Logger logger = LoggerFactory.getLogger(TransformCardSpell.class);
@@ -25,9 +27,14 @@ public class TransformCardSpell extends Spell {
 			// card, card.getLocation());
 			return;
 		}
+		Card newCard = null;
+		if (desc.get(SpellArg.CARD) != null) {
+			newCard = context.getCardById((String) desc.get(SpellArg.CARD));
+		} else if (desc.get(SpellArg.CARDS) != null){
+			String[] cards = (String[]) desc.get(SpellArg.CARDS);
+			newCard = context.getCardById(cards[context.getLogic().random(cards.length)]);
+		}
 
-		String cardId = (String) desc.get(SpellArg.CARD);
-		Card newCard = context.getCardById(cardId);
 		context.getLogic().receiveCard(player.getId(), newCard);
 	}
 

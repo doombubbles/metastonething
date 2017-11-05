@@ -1,0 +1,28 @@
+{
+    "name": "Vinecleaver",
+    "baseManaCost": 7,
+    "type": "WEAPON",
+    "damage": 4,
+    "durability": 3,
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "After you attack, summon two 1/1 Silver Hand Recruits.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"cards": [
+				"token_silver_hand_recruit",
+				"token_silver_hand_recruit"
+			]
+		}
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

@@ -119,7 +119,7 @@ public class CastRandomSpellSpell extends Spell {
 				// If the card has Overload, then start overloading...
 				if (spellCard.hasAttribute(Attribute.OVERLOAD)) {
 					player.modifyAttribute(Attribute.OVERLOAD, spellCard.getAttributeValue(Attribute.OVERLOAD));
-					context.fireGameEvent(new OverloadEvent(context, player.getId(), spellCard));
+					context.fireGameEvent(new OverloadEvent(context, player.getId(), spellCard, spellCard.getAttributeValue(Attribute.OVERLOAD)));
 				}
 			}
 			// Technically, this is only half correct. Yogg-Saron should not stop if

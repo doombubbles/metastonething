@@ -90,6 +90,8 @@ public class HandCard extends CardToken {
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
+		super.nameLabel.getStyleClass().remove("thickBorder");
+		super.nameLabel.getStyleClass().add("thinBorder");
 		evaluateGlow(context, card, player);
 		if (tooltipContent == null) {
 			tooltip = new Tooltip();

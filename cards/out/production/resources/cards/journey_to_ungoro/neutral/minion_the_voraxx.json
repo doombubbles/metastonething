@@ -1,0 +1,28 @@
+{
+    "name": "The Voraxx",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "After you cast a spell on this minion, summon a 1/1 Plant and cast another copy on it.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterSpellCastedTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "SELF",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "custom.VoraxxSpell",
+			"boardPositionRelative": "RIGHT",
+			"card": "PENDING_CARD"
+		}
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

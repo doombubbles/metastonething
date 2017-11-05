@@ -47,6 +47,18 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 		return getInt(EventTriggerArg.VALUE);
 	}
 
+	public boolean inOneTurn() {
+		return getBool(EventTriggerArg.IN_ONE_TURN);
+	}
+
+	public boolean doesReset() {
+		return getBool(EventTriggerArg.RESET);
+	}
+
+	public boolean isTotal() {
+		return getBool(EventTriggerArg.TOTAL);
+	}
+
 	@SuppressWarnings("unchecked")
 	public Class<? extends GameEventTrigger> getTriggerClass() {
 		return (Class<? extends GameEventTrigger>) get(EventTriggerArg.CLASS);

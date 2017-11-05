@@ -595,16 +595,22 @@ public class GameLogic implements Cloneable {
 			player.getStatistics().heal(damage * -1);
 		}
 		
+		if (source.getEntityType() == EntityType.CARD) {
+			if (((Card) source).getCardType().equals(CardType.HERO_POWER)) {
+				source = player.getHero().getHeroPower();
+			}
+		}
 		
 		if (source.hasAttribute(Attribute.LIFESTEAL)) {
 			if (hasAttribute(player, Attribute.INVERT_HEALING)) {
 				damage(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, context.getPlayer(source.getOwner()).getHero());
-			}else heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
+			} else heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
 		} else if (sourceCard != null) {
 			if (sourceCard.hasAttribute(Attribute.LIFESTEAL)) {
+				info("yo2");
 				if (hasAttribute(player, Attribute.INVERT_HEALING)) {
 					damage(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, context.getPlayer(source.getOwner()).getHero());
-				}else heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
+				} else heal(player, context.getPlayer(source.getOwner()).getHero() , damageDealt, source);
 			}
 		}
 		
@@ -938,7 +944,7 @@ public class GameLogic implements Cloneable {
 		player.getHero().modifyArmor(armor);
 		player.getStatistics().armorGained(armor);
 		if (armor > 0) {
-			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
+			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero(), armor));
 		}
 	}
 
@@ -1037,10 +1043,10 @@ public class GameLogic implements Cloneable {
 				minValue = costModifier.getMinValue();
 			}
 		}
+		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		if (card.hasAttribute(Attribute.MANA_COST_MODIFIER)) {
 			manaCost += card.getAttributeValue(Attribute.MANA_COST_MODIFIER);
 		}
-		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
 	}
 
@@ -1527,7 +1533,7 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(cardPlayedEvent);
 
 		if (card.hasAttribute(Attribute.OVERLOAD)) {
-			context.fireGameEvent(new OverloadEvent(context, playerId, card));
+			context.fireGameEvent(new OverloadEvent(context, playerId, card, card.getAttributeValue(Attribute.OVERLOAD)));
 		}
 
 		removeCard(playerId, card);

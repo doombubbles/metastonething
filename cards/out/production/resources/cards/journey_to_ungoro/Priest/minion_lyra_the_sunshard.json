@@ -1,0 +1,28 @@
+{
+    "name": "Lyra the Sunshard",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 5,
+    "heroClass": "PRIEST",
+    "rarity": "LEGENDARY",
+    "race": "ELEMENTAL",
+    "description": "Whenever you cast a spell, add a random Priest spell to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "PRIEST"
+			}
+		}
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

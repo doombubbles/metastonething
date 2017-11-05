@@ -1,0 +1,52 @@
+{
+    "name": "Crystal Core",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "LEGENDARY",
+    "description": "For the rest of the game, your minions are 5/5",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "AddSpellTriggerSpell",
+				"target": "FRIENDLY_PLAYER",
+				"trigger": {
+					"eventTrigger": {
+						"class": "BeforeMinionSummonedTrigger",
+						"targetPlayer": "SELF"
+					},
+					"spell": {
+						"class": "MetaSpell",
+						"spells": [
+							{
+								"class": "SetAttackSpell",
+								"target": "EVENT_TARGET",
+								"value": 5
+							},
+							{
+								"class": "SetHpSpell",
+								"target": "EVENT_TARGET",
+								"value": 5
+							}
+						]
+					}
+				}
+			},
+			{
+				"class": "SetAttackSpell",
+				"target": "FRIENDLY_MINIONS",
+				"value": 5
+			},
+			{
+				"class": "SetHpSpell",
+				"target": "FRIENDLY_MINIONS",
+				"value": 5
+			}
+		]
+	},
+    "collectible": false,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

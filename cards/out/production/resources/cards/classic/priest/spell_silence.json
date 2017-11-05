@@ -1,0 +1,16 @@
+{
+	"name": "Silence",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Silence a minion.",
+	"targetSelection": "MINIONS",
+	"race": "SHADOW",
+	"spell": {
+		"class": "SilenceSpell"
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

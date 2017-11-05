@@ -1,0 +1,45 @@
+{
+    "name": "Prince Taldaram",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry: If your deck has no 3-Cost cards, summon a 3/3 copy of a minion.",
+    "battlecry": {
+        "targetSelection": "MINIONS",
+        "spell": {
+			"class": "SummonOneOneCopySpell",
+			"attackBonus": 3,
+			"hpBonus": 3
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 3
+			},
+			"invert": true
+		}
+    },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "AttributeFilter",
+			"attribute": "BASE_MANA_COST",
+			"operation": "EQUAL",
+			"value": 3
+		},
+		"invert": true
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

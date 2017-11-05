@@ -1,0 +1,25 @@
+{
+    "name": "Primordial Drake",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 8,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "DRAGON",
+    "description": "Taunt. Battlecry: Deal 2 damage to all other minions.",
+    "battlecry": {
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_OTHER_MINIONS",
+			"value": 2
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true,
+		"TAUNT": true
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

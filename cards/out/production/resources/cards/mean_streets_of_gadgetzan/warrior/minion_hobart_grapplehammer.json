@@ -1,0 +1,30 @@
+{
+	"name": "Hobart Grapplehammer",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: For the rest of the game, your weapons have +1 Attack.",
+	"battlecry": {
+		"spell": {
+			"class": "AddSpellTriggerSpell",
+			"target": "FRIENDLY_PLAYER",
+			"trigger": {
+				"eventTrigger": {
+					"class": "WeaponEquippedTrigger",
+					"targetPlayer": "SELF"
+				},
+				"spell": {
+					"class": "BuffWeaponSpell",
+					"target": "FRIENDLY_WEAPON",
+					"attackBonus": 1
+				}
+			}
+		}
+	},
+	"collectible": true,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

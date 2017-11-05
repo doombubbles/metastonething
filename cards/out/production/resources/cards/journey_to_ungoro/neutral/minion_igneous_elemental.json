@@ -1,0 +1,30 @@
+{
+    "name": "Igneous Elemental",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "ELEMENTAL",
+    "description": "Deathrattle: Add two 1/2 Elementals to your hand.",
+	"deathrattle": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "ReceiveCardSpell",
+				"card": "token_flame_elemental"
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "token_flame_elemental"
+			}
+		]
+	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

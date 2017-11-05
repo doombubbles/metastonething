@@ -1,0 +1,36 @@
+{
+	"name": "Shatter",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Freeze a minion. If it was already Frozen, destroy it.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "EitherOrSpell",
+		"spell1": {
+			"class": "DestroySpell"
+		},
+		"spell2": {
+			"class": "AddAttributeSpell",
+			"attribute": "FROZEN"
+		},
+		"condition": {
+			"class": "AttributeCondition",
+			"attribute": "FROZEN",
+			"operation": "HAS"
+		}
+	},
+	"glow": {
+		"class": "HasEntityCondition",
+		"target": "ENEMY_MINIONS",
+		"filter": {
+			"class": "AttributeFilter",
+			"operation": "HAS",
+			"attribute": "FROZEN"
+		} 
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

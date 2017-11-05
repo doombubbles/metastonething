@@ -17,4 +17,7 @@ public enum EventTriggerArg {
 	TARGET_PLAYER,
 	TARGET,
 	VALUE,
+	IN_ONE_TURN,
+	RESET,
+	TOTAL
 }

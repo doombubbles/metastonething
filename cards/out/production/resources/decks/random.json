@@ -1,0 +1,19 @@
+{
+  "name": "[Random]",
+  "heroClass": "DECK_COLLECTION",
+  "arbitrary": false,
+  "decks": [
+    "Aggro",
+    "Big Priest",
+    "Control",
+    "Highlander",
+    "Pirate",
+    "Midrange Murloc",
+    "Midrange",
+    "Jade",
+    "Tempo",
+    "Tempo ",
+    "Token Evolve",
+    "Zoo"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+	"name": "Death's Shadow",
+	"baseManaCost": 0,
+	"type": "HERO_POWER",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "During your turn, add a 'Shadow Reflection' to your hand.",
+	"targetSelection": "AUTO",
+	"spell": {
+		"class": "ReceiveCardSpell",
+		"card": "spell_shadow_reflection"
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Snowflipper Penguin",
+    "baseManaCost": 0,
+    "type": "MINION",
+    "baseAttack": 1,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "",
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

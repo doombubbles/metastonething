@@ -1,0 +1,18 @@
+{
+	"name": "Arcane Explosion",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Deal 1 damage to all enemy minions.",
+	"targetSelection": "NONE",
+	"race": "ARCANE",
+	"spell": {
+		"class": "DamageSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 1
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,54 @@
+{
+    "name": "Prince Valanar",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry: If your deck has no 4-Cost cards, give your minions Lifesteal and Taunt.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"target": "FRIENDLY_MINIONS",
+			"spells": [
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "LIFESTEAL"
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			]
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 4
+			},
+			"invert": true
+		}
+    },
+	"glow": {
+		"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 4
+			},
+			"invert": true
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

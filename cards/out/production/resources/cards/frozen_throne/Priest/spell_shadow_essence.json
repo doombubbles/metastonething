@@ -1,0 +1,21 @@
+{
+    "name": "Shadow Essence",
+    "baseManaCost": 6,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "description": "Summon a 5/5 copy of a random minion in your deck.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "SummonOneOneCopySpell",
+		"cardSource": {
+			"class": "DeckSource",
+			"targetPlayer": "SELF"
+		},
+		"attackBonus": 5,
+		"hpBonus": 5
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

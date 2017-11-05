@@ -1,0 +1,25 @@
+{
+    "name": "Unwilling Sacrifice",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "RARE",
+    "description": "Choose a friendly minion, Destroy it and a random enemy minion.",
+    "targetSelection": "FRIENDLT_MINIONS",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "DestroySpell",
+				"target": "ENEMY_MINIONS",
+				"randomTarget": true
+			}
+		]
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

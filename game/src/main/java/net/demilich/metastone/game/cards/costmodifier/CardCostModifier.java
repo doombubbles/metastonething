@@ -234,7 +234,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	}
 
 	@Override
-	public void countDown() {
+	public void countDown(GameEvent event) {
 		
 	}
 

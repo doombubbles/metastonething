@@ -221,3 +221,66 @@
 	-fx-background-radius: 10;
 }
 
+.warrior .text {
+    -fx-stroke: #BE0700;
+    -fx-fill: black;
+}
+
+.druid .text {
+    -fx-stroke: #A63A00;
+    -fx-fill: black;
+}
+
+.shaman .text {
+    -fx-stroke: #202F96;
+    -fx-fill: black;
+}
+
+.mage .text {
+    -fx-stroke: #4464D7;
+    -fx-fill: black;
+}
+
+.hunter .text {
+    -fx-stroke: #009300;
+    -fx-fill: black;
+}
+
+.paladin .text {
+    -fx-stroke: #FE7C00;
+    -fx-fill: black;
+}
+
+.druid .text {
+    -fx-stroke: #A63A00;
+    -fx-fill: black;
+}
+
+.rogue .text {
+    -fx-stroke: #393946;
+    -fx-fill: black;
+}
+
+.priest .text {
+    -fx-stroke: #A0AFBE;
+    -fx-fill: black;
+}
+
+.warlock .text {
+    -fx-stroke: #76218D;
+    -fx-fill: black;
+}
+
+.deathKnight .text {
+    -fx-stroke: black;
+    -fx-stroke-style: dashed;
+    -fx-fill: black;
+}
+
+.thinBorder .text {
+    -fx-stroke-width: .5;
+}
+
+.thickBorder .text {
+    -fx-stroke-width: 1;
+}

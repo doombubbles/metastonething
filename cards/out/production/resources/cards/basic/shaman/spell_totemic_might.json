@@ -1,0 +1,22 @@
+{
+	"name": "Totemic Might",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"description": "Give your Totems +2 Health.",
+	"targetSelection": "NONE",
+	"race": "ENHANCEMENT",
+	"spell": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
+		"hpBonus": 2,
+		"filter": {
+			"class": "RaceFilter",
+			"race": "TOTEM"
+		}
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

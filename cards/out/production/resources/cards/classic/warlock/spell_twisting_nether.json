@@ -1,0 +1,17 @@
+{
+	"name": "Twisting Nether",
+	"baseManaCost": 8,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Destroy all minions.",
+	"targetSelection": "NONE",
+	"race": "DESTRUCTION",
+	"spell": {
+		"class": "DestroySpell",
+		"target": "ALL_MINIONS"
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

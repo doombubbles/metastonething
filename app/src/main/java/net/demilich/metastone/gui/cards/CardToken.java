@@ -10,13 +10,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
@@ -30,6 +26,7 @@ import net.demilich.metastone.game.cards.ReplaceHeroCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
@@ -93,6 +90,7 @@ public class CardToken extends BorderPane {
 		this.card = card;
 		nameLabel.setText(card.getName());
 		setRarity(card.getRarity());
+		setHeroClass(card.getHeroClass());
 		if (context != null || player != null) {
 			int modifiedManaCost = context.getLogic().getModifiedManaCost(player, card);
 			setScoreValueLowerIsBetter(manaCostAnchor, modifiedManaCost, card.getBaseManaCost());
@@ -119,6 +117,56 @@ public class CardToken extends BorderPane {
 		}
 	}
 
+	public void setHeroClass(HeroClass heroClass) {
+		nameLabel.getStyleClass().add("thickBorder");
+		nameLabel.getStyleClass().remove("mage");
+		nameLabel.getStyleClass().remove("paladin");
+		nameLabel.getStyleClass().remove("priest");
+		nameLabel.getStyleClass().remove("druid");
+		nameLabel.getStyleClass().remove("hunter");
+		nameLabel.getStyleClass().remove("shaman");
+		nameLabel.getStyleClass().remove("deathKnight");
+		nameLabel.getStyleClass().remove("rogue");
+		nameLabel.getStyleClass().remove("warlock");
+		nameLabel.getStyleClass().remove("warrior");
+		switch (heroClass) {
+			case DRUID:
+				nameLabel.getStyleClass().add("druid");
+				break;
+			case MAGE:
+				nameLabel.getStyleClass().add("mage");
+				break;
+			case PALADIN:
+				nameLabel.getStyleClass().add("paladin");
+				break;
+			case PRIEST:
+				nameLabel.getStyleClass().add("priest");
+				break;
+			case HUNTER:
+				nameLabel.getStyleClass().add("hunter");
+				break;
+			case ROGUE:
+				nameLabel.getStyleClass().add("rogue");
+				break;
+			case WARLOCK:
+				nameLabel.getStyleClass().add("warlock");
+				break;
+			case WARRIOR:
+				nameLabel.getStyleClass().add("warrior");
+				break;
+			case SHAMAN:
+				nameLabel.getStyleClass().add("shaman");
+				break;
+			case DEATH_KNIGHT:
+				nameLabel.getStyleClass().add("deathKnight");
+				break;
+			default:
+				break;
+
+		}
+
+	}
+
 	public void setNonCard(String name, String description) {
 		nameLabel.setText(name);
 		descriptionLabel.setText(description);
@@ -133,7 +181,7 @@ public class CardToken extends BorderPane {
 	private void setRarity(Rarity rarity) {
 		rarityGem.setFill(IconFactory.getRarityColor(rarity));
 		rarityGem.setVisible(rarity != Rarity.FREE);
-		rarityGem.setRadius(rarity == Rarity.LEGENDARY ? baseRarityGemSize * 1.5 : baseRarityGemSize);
+		rarityGem.setRadius(rarity == Rarity.LEGENDARY ? baseRarityGemSize * 1.25 : baseRarityGemSize);
 	}
 
 	protected void setScoreValue(Group group, int value) {

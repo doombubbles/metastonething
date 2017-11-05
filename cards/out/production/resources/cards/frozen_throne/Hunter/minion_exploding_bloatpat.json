@@ -1,0 +1,22 @@
+{
+    "name": "Exploding Bloatpat",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 1,
+    "heroClass": "HUNTER",
+    "rarity": "RARE",
+    "race": "BEAST",
+    "description": "Deathrattle: Deal 2 damage to all enemy minions.",
+    "deathrattle": {
+        "class": "DamageSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 2
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

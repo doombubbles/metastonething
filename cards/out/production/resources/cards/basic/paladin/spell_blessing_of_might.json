@@ -1,0 +1,17 @@
+{
+	"name": "Blessing of Might",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "FREE",
+	"description": "Give a minion +3 Attack.",
+	"targetSelection": "MINIONS",
+	"race": "RETRIBUTION",
+	"spell": {
+		"class": "BuffSpell",
+		"attackBonus": 3
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,8 @@
+Cruel Dinomancer
+Mana Cost: 6
+Attack: 5
+Health: 5
+Type: Minion
+Rarity: Rare
+Class: Warlock
+Text: Deathrattle: Summon a random minion you discarded this game.

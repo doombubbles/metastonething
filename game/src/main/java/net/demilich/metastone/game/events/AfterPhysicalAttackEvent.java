@@ -11,7 +11,7 @@ public class AfterPhysicalAttackEvent extends GameEvent {
 	private final int damageDealt;
 
 	public AfterPhysicalAttackEvent(GameContext context, Actor attacker, Actor defender, int damageDealt) {
-		super(context, defender.getOwner(), attacker.getOwner());
+		super(context, defender.getOwner(), attacker.getOwner(), damageDealt);
 		this.attacker = attacker;
 		this.defender = defender;
 		this.damageDealt = damageDealt;

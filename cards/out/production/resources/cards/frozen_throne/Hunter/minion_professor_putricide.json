@@ -1,0 +1,31 @@
+{
+    "name": "Professor Putricide",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 4,
+    "heroClass": "HUNTER",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "After you play a Secret, put a random Hunter Secret into the battlefield.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"sourcePlayer": "SELF",
+			"requiredAttribute": "SECRET"
+		},
+		"spell": {
+			"class": "CastRandomSpellSpell",
+			"exclusive": true,
+			"cardFilter": {
+				"class": "CardFilter",
+				"attribute": "SECRET",
+				"operation": "HAS",
+				"heroClass": "HUNTER"
+			}
+		}
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

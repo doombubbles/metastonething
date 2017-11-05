@@ -42,6 +42,9 @@ public class EntityReference {
 	public static final EntityReference FRIENDLY_DECK = new EntityReference(-78);
 	public static final EntityReference ENEMY_DECK = new EntityReference(-79);
 
+	public static final EntityReference RIGHTMOST_FRIENDLY_MINION = new EntityReference(-80);
+	public static final EntityReference RIGHTMOST_ENEMY_MINION = new EntityReference(-81);
+
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {
 			return null;

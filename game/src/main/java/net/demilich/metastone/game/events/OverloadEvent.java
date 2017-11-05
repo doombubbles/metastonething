@@ -8,8 +8,8 @@ public class OverloadEvent extends GameEvent {
 
 	private Card card;
 
-	public OverloadEvent(GameContext context, int playerId, Card card) {
-		super(context, playerId, -1);
+	public OverloadEvent(GameContext context, int playerId, Card card, int value) {
+		super(context, playerId, -1, value);
 		this.card = card;
 	}
 	

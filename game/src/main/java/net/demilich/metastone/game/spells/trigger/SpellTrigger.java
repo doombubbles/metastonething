@@ -113,6 +113,11 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (oneTurn && (event.getEventType() == GameEventType.TURN_END || event.getEventType() == GameEventType.TURN_START)) {
 			expire();
 		}
+
+		if (event.getEventType() == GameEventType.TURN_END && primaryTrigger.isInOneTurn()) {
+			primaryTrigger.resetCount();
+		}
+
 		try {
 			if (event.getEventTarget() != null) {
 				event.getGameContext().getEventTargetStack().push(event.getEventTarget().getReference());
@@ -191,6 +196,12 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	
 	public boolean isDelayed() {
 		return turnDelay > 0 ? true : false;
+	}
+
+	public void countDown(GameEvent event) {
+		if (primaryTrigger.total) {
+			countDown(event.getValue());
+		} else countDown();
 	}
 	
 	public void countDown() {

@@ -1,0 +1,18 @@
+{
+	"name": "Shuffle 3 Relics",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Shuffle 3 Jade Relics into your deck.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ShuffleToDeckSpell",
+		"howMany": 3,
+		"target": "NONE",
+		"card": "spell_jade_relic"
+	},
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

@@ -291,6 +291,20 @@ public class TargetLogic {
 			List<Entity> targets = getEntities(context, player, TargetSelection.ENEMY_MINIONS);
 			targets.remove(source);
 			return targets;
+		} else if (targetKey == EntityReference.RIGHTMOST_ENEMY_MINION) {
+			Player opponent = context.getOpponent(player);
+			List<Minion> minions =  opponent.getMinions();
+			return singleTargetAsList(minions.get(minions.size() - 1));
+		} else if (targetKey == EntityReference.RIGHTMOST_FRIENDLY_MINION) {
+			List<Minion> minions =  player.getMinions();
+			return singleTargetAsList(minions.get(minions.size() - 1));
+		} else if (targetKey == EntityReference.LEFTMOST_ENEMY_MINION) {
+			Player opponent = context.getOpponent(player);
+			List<Minion> minions =  opponent.getMinions();
+			return singleTargetAsList(minions.get(0));
+		} else if (targetKey == EntityReference.LEFTMOST_FRIENDLY_MINION) {
+			List<Minion> minions =  player.getMinions();
+			return singleTargetAsList(minions.get(0));
 		}
 
 		return singleTargetAsList(findEntity(context, targetKey));

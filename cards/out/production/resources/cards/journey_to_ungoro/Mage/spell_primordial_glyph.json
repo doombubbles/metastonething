@@ -1,0 +1,34 @@
+{
+    "name": "Primordial Glyph",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "EPIC",
+    "description": "Discover a spell. Reduce its Cost by (2).",
+    "targetSelection": "NONE",
+	"race": "ARCANE",
+    "spell": {
+        "class": "DiscoverRandomCardSpell",
+		"spell": {
+			"class": "ReceiveCardAndDoSomethingSpell",
+			"targetPlayer": "SELF",
+			"spell": {
+				"class": "CardCostModifierSpell",
+				"target": "FRIENDLY_PLAYER",
+				"cardCostModifier": {
+					"class": "CardCostModifier",
+					"target": "EVENT_CARD",
+					"operation": "SUBTRACT",
+					"value": 2
+				}
+			}
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "SPELL"
+		}
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

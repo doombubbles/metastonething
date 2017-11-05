@@ -1,0 +1,89 @@
+{
+    "name": "Adaptation",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "COMMON",
+    "description": "Adapt a friendly minion.",
+    "targetSelection": "MINIONS",
+    "spell": {
+		"class": "DiscoverOptionSpell",
+		"reveal": true,
+		"spells": [
+			{
+				"name": "Crackling Shield",
+				"description": "Divine Shield",
+				"class": "AddAttributeSpell",
+				"attribute": "DIVINE_SHIELD"
+			},
+			{
+				"name": "Lightning Speed",
+				"description": "Winfury",
+				"class": "AddAttributeSpell",
+				"attribute": "WINDFURY"
+			},
+			{
+				"name": "Massive",
+				"description": "Taunt",
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			},
+			{
+				"name": "Poison Spit",
+				"description": "Poisonous",
+				"class": "AddAttributeSpell",
+				"attribute": "POISONOUS"
+			},
+			{
+				"name": "Liquid Membrane",
+				"description": "Can't be targeted by spells our Hero Powers.",
+				"class": "AddAttributeSpell",
+				"attribute": "UNTARGETABLE_BY_SPELLS"
+			},
+			{
+				"name": "Flaming Claws",
+				"description": "+3 Attack",
+				"class": "BuffSpell",
+				"attackBonus": 3
+			},
+			{
+				"name": "Rocky Carapace",
+				"description": "+3 Health",
+				"class": "BuffSpell",
+				"hpBonus": 3
+			},
+			{
+				"name": "Volcanic Might",
+				"description": "+1/+1",
+				"class": "BuffSpell",
+				"attackBonus": 1,
+				"hpBonus": 1
+			},
+			{
+				"name": "Shrouding Mist",
+				"description": "Stealth until your next turn.",
+				"class": "AddAttributeSpell",
+				"attribute": "STEALTH",
+				"revertTrigger": {
+					"class": "TurnStartTrigger",
+					"targetPlayer": "SELF"
+				}
+			},
+			{
+				"name": "Living Spores",
+				"description": "Deathrattle: Summon two 1/1 Plants.",
+				"class": "AddDeathrattleSpell",
+				"spell": {
+					"class": "SummonSpell",
+					"cards": [
+						"token_plant",
+						"token_plant"
+					]
+				}
+			}
+		]
+	},
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

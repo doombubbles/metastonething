@@ -1,0 +1,24 @@
+{
+	"name": "Poisoned Dagger",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "Equip a 2/2 Dagger.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ConditionalSpell",
+		"spell": {
+			"class": "EquipWeaponSpell",
+			"card": "weapon_poisoned_dagger"
+		},
+		"condition": {
+			"class": "HasWeaponCondition",
+			"cardId": "weapon_poisoned_blade",
+			"invert": "true"
+		}
+	},
+	"collectible": false,
+	"set": "THE_GRAND_TOURNAMENT",
+	"fileFormatVersion": 1
+}

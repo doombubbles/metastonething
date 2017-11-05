@@ -1,0 +1,43 @@
+{
+    "name": "Phantom Freebooter",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "race": "PIRATE",
+    "description": "Battlecry: Gain stats equal to your weapon's",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"attackBonus": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_WEAPON",
+						"attribute": "ATTACK"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"hpBonus": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_WEAPON",
+						"attribute": "HP"
+					}
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

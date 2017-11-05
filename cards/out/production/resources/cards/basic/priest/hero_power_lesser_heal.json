@@ -1,0 +1,16 @@
+{
+	"name": "Lesser Heal",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "PRIEST",
+	"rarity": "FREE",
+	"description": "Restore 2 Health.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "HealSpell",
+		"value": 2
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

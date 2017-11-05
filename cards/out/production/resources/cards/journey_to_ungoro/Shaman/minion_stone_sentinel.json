@@ -1,0 +1,49 @@
+{
+	"name": "Stone Sentinel",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"race": "ELEMENTAL",
+	"description": "Battlecry: If you played an Elemental last turn, summon two 2/3 Elementals with Taunt.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_rock_elemental",
+					"boardPositionRelative": "RIGHT"
+				},
+				{
+					"class": "SummonSpell",
+					"card": "token_rock_elemental",
+					"boardPositionRelative": "LEFT"
+				}
+			]
+		},
+		"condition": {
+			"class": "PlayedLastTurnCondition",
+			"filter": {
+				"class": "CardFilter",
+				"race": "ELEMENTAL"
+			}
+		}
+	},
+	"glow": {
+		"class": "PlayedLastTurnCondition",
+		"filter": {
+			"class": "CardFilter",
+			"race": "ELEMENTAL"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

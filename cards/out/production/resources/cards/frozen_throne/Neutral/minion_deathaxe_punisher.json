@@ -1,0 +1,32 @@
+{
+    "name": "Deathaxe Punisher",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Give a random Lifesteal minion in your hand +2/+2.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"filter": {
+				"class": "CardFilter",
+				"attribute": "LIFESTEAL",
+				"operation": "HAS"
+			},
+			"randomTarget": true
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

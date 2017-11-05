@@ -1,0 +1,9 @@
+Grave Shambler
+Mana Cost: 4
+Attack: 4
+Health: 4
+Tribe: Elemental
+Type: Minion
+Rarity: Common
+Class: Neutral
+Text: Whenever your weapon is destroyed, gain +1/+1.

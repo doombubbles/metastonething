@@ -1,0 +1,38 @@
+{
+	"name": "Mark of Y'Shaarj",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Give a minion +2/+2. If it's a Beast, draw a card.",
+	"targetSelection": "MINIONS",
+	"race": "GUARDIAN",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "BuffSpell",
+			"target": "TARGET",
+			"attackBonus": 2,
+			"hpBonus": 2
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"target": "SELF",
+			"value": 1
+		},
+		"condition": {
+			"class": "RaceCondition",
+			"race": "BEAST"
+		}
+	},
+	"glow": {
+		"class": "MinionOnBoardCondition",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "BEAST"
+		}
+	},
+	"collectible": true,
+	"set": "THE_OLD_GODS",
+	"fileFormatVersion": 1
+}

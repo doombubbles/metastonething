@@ -1,0 +1,17 @@
+{
+	"name": "Plague Lord",
+	"baseManaCost": 2,
+	"type": "HERO_POWER",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Choose One - +3 Attack this turn; or Gain 3 Armor.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_spider_fangs",
+		"spell_scarab_shell"
+	],
+	"bothOptions": "spell_fang_shell",
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.entities.minions.Race;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,7 @@ public class CreateSummonSpell extends Spell {
 		minionCardDesc.set = CardSet.BASIC;
 		minionCardDesc.collectible = false;
 		minionCardDesc.baseManaCost = desc.getValue(SpellArg.MANA, context, player, target, source, 0);
+		minionCardDesc.race = (Race) desc.get(SpellArg.RACE);
 		MinionCard newCard = (MinionCard) minionCardDesc.createInstance();
 		context.addTempCard(newCard);
 		

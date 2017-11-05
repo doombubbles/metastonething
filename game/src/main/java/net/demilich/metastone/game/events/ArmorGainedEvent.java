@@ -8,8 +8,8 @@ public class ArmorGainedEvent extends GameEvent {
 
 	private final Hero hero;
 
-	public ArmorGainedEvent(GameContext context, Hero hero) {
-		super(context, hero.getOwner(), -1);
+	public ArmorGainedEvent(GameContext context, Hero hero, int value) {
+		super(context, hero.getOwner(), -1, value);
 		this.hero = hero;
 	}
 	

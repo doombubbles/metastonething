@@ -51,7 +51,6 @@ public class CardCatalogue {
 				return card.clone();
 			}
 		}
-
 		return null;
 	}
 

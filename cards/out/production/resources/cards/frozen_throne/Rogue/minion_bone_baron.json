@@ -1,0 +1,30 @@
+{
+    "name": "Bone Baron",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "ROGUE",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Deathrattle: Add two 1/1 Skeletons to your hand.",
+	"deathrattle": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "ReceiveCardSpell",
+				"card": "token_skeleton"
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "token_skeleton"
+			}
+		]
+	},
+	"attribute": {
+		"DEATHRATTLES": true
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

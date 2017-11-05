@@ -1,0 +1,20 @@
+{
+	"name": "Al'Akir the Windlord",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"race": "ELEMENTAL",
+	"description": "Windfury, Charge, Divine Shield, Taunt",
+	"attributes": {
+		"CHARGE": true,
+		"DIVINE_SHIELD": true,
+		"TAUNT": true,
+		"WINDFURY": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

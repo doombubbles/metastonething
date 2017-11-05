@@ -1,0 +1,122 @@
+{
+    "name": "Ravenous Pterrordax",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 4,
+    "heroClass": "WARLOCK",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Battlecry: Destroy a friendly minion to Adapt twice.",
+    "battlecry": {
+        "targetSelection": "FRIENDLY_MINIONS",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DestroySpell"
+				},
+				{
+					"class": "DiscoverOptionSpell",
+					"reveal": true,
+					"value": 2,
+					"spells": [
+						{
+							"name": "Crackling Shield",
+							"description": "Divine Shield",
+							"class": "AddAttributeSpell",
+							"attribute": "DIVINE_SHIELD",
+							"target": "SELF"
+						},
+						{
+							"name": "Lightning Speed",
+							"description": "Winfury",
+							"class": "AddAttributeSpell",
+							"attribute": "WINDFURY",
+							"target": "SELF"
+						},
+						{
+							"name": "Massive",
+							"description": "Taunt",
+							"class": "AddAttributeSpell",
+							"attribute": "TAUNT",
+							"target": "SELF"
+						},
+						{
+							"name": "Poison Spit",
+							"description": "Poisonous",
+							"target": "SELF",
+							"class": "AddAttributeSpell",
+							"attribute": "POISONOUS"
+						},
+						{
+							"name": "Liquid Membrane",
+							"description": "Can't be targeted by spells our Hero Powers.",
+							"class": "AddAttributeSpell",
+							"attribute": "UNTARGETABLE_BY_SPELLS",
+							"target": "SELF"
+						},
+						{
+							"name": "Flaming Claws",
+							"description": "+3 Attack",
+							"target": "SELF",
+							"class": "BuffSpell",
+							"attackBonus": 3
+						},
+						{
+							"name": "Rocky Carapace",
+							"description": "+3 Health",
+							"target": "SELF",
+							"class": "BuffSpell",
+							"hpBonus": 3
+						},
+						{
+							"name": "Volcanic Might",
+							"description": "+1/+1",
+							"target": "SELF",
+							"class": "BuffSpell",
+							"attackBonus": 1,
+							"hpBonus": 1
+						},
+						{
+							"name": "Shrouding Mist",
+							"description": "Stealth until your next turn.",
+							"class": "AddAttributeSpell",
+							"attribute": "STEALTH",
+							"revertTrigger": {
+								"class": "TurnStartTrigger",
+								"targetPlayer": "SELF"
+							},
+							"target": "SELF"
+						},
+						{
+							"name": "Living Spores",
+							"description": "Deathrattle: Summon two 1/1 Plants.",
+							"class": "AddDeathrattleSpell",
+							"spell": {
+								"class": "SummonSpell",
+								"cards": [
+									"token_plant",
+									"token_plant"
+								]
+							},
+							"target": "SELF"
+						}
+					]
+				}
+			],
+			"condition": {
+				"class": "MinionOnBoardCondition"
+			}
+		}
+    },
+	"glow": {
+		"class": "MinionOnBoardCondition"
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

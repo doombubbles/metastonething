@@ -1,0 +1,32 @@
+{
+	"name": "Gnomish Experimenter",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "RARE",
+	"description": "Battlecry: Draw a card, if it is a minion turn it into a chicken.",
+	"battlecry": {
+		"spell": {
+			"class": "DrawCardAndDoSomethingSpell",
+			"spell": {
+				"class": "ConditionalSpell",
+				"spell": {
+					"class": "TransformCardSpell",
+					"card": "token_chicken_gvg"
+				},
+				"condition": {
+					"class": "CardPropertyCondition",
+					"cardType": "MINION"
+				}
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

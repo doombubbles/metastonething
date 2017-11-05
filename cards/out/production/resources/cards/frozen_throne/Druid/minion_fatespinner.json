@@ -1,0 +1,68 @@
+{
+    "name": "Fatespinner",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 3,
+    "heroClass": "DRUID",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Choose a Deathrattle (Secretly) - Deal 3 damage to all minons; or Give them +2/+2.",
+    "options": [
+		{
+			"description": "3 damage to all",
+			"spell": {
+				"class": "AddDeathrattleSpell",
+				"target": "SELF",
+				"spell": {
+					"class": "DamageSpell",
+					"target": "ALL_MINIONS",
+					"value": 3
+				}
+			}
+		},
+		{
+			"description": "+2/2 to all",
+			"spell": {
+				"class": "AddDeathrattleSpell",
+				"target": "SELF",
+				"spell": {
+					"class": "BuffSpell",
+					"target": "ALL_MINIONS",
+					"attackBonus": 2,
+					"hpBonus": 2
+				}
+			}
+		}
+	],
+	"bothOptions": {
+		"description": "3 damage and +2/+2 to all",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "AddDeathrattleSpell",
+					"target": "SELF",
+					"spell": {
+						"class": "DamageSpell",
+						"target": "ALL_MINIONS",
+						"value": 3
+					}
+				},
+				{
+					"class": "AddDeathrattleSpell",
+					"target": "SELF",
+					"spell": {
+						"class": "BuffSpell",
+						"target": "ALL_MINIONS",
+						"attackBonus": 2,
+						"hpBonus": 2
+					}
+				}
+			]
+		}
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Spider Fangs",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "+3 Attack.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
+		"attackBonus": 3
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

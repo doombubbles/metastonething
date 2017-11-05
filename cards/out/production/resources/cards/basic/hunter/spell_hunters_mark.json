@@ -1,0 +1,17 @@
+{
+	"name": "Hunter's Mark",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "FREE",
+	"description": "Change a minion's Health to 1.",
+	"targetSelection": "MINIONS",
+	"race": "MARKSMAN",
+	"spell": {
+		"class": "SetHpSpell",
+		"value": 1
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

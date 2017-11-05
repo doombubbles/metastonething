@@ -1,0 +1,30 @@
+{
+	"name": "Shadowflame",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Destroy a friendly minion and deal its Attack damage to all enemy minions.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"race": "DEMONOLOGY",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "DamageSpell",
+				"target": "ENEMY_MINIONS",
+				"value": {
+					"class": "AttributeValueProvider",
+					"target": "TARGET",
+					"attribute": "ATTACK"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

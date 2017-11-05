@@ -1,0 +1,17 @@
+{
+	"name": "Shadow Bolt",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "Deal 4 damage to a minion.",
+	"targetSelection": "MINIONS",
+	"race": "DESTRUCTION",
+	"spell": {
+		"class": "DamageSpell",
+		"value": 4
+	},
+	"collectible": true,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

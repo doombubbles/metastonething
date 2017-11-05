@@ -12,11 +12,20 @@ public abstract class GameEvent {
 	private final GameContext context;
 	private final int targetPlayerId;
 	private final int sourcePlayerId;
+	private final int value;
+
+	public GameEvent(GameContext context, int targetPlayerId, int sourcePlayerId, int value) {
+		this.context = context;
+		this.targetPlayerId = targetPlayerId;
+		this.sourcePlayerId = sourcePlayerId;
+		this.value = value;
+	}
 
 	public GameEvent(GameContext context, int targetPlayerId, int sourcePlayerId) {
 		this.context = context;
 		this.targetPlayerId = targetPlayerId;
 		this.sourcePlayerId = sourcePlayerId;
+		this.value = 0;
 	}
 
 	/**
@@ -44,6 +53,10 @@ public abstract class GameEvent {
 	
 	public int getSourcePlayerId() {
 		return sourcePlayerId;
+	}
+
+	public int getValue() {
+		return value;
 	}
 
 	@Override

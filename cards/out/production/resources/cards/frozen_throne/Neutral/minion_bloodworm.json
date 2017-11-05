@@ -1,0 +1,17 @@
+{
+    "name": "Bloodworm",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Lifesteal",
+	"attributes": {
+		"LIFESTEAL": true
+	},
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

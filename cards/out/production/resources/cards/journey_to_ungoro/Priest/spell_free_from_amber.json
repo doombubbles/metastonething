@@ -1,0 +1,26 @@
+{
+    "name": "Free From Amber",
+    "baseManaCost": 8,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "description": "Discover a minion that costs (8) or more. Summon it.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "DiscoverRandomCardSpell",
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "SELF"
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"attribute": "BASE_MANA_COST",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 8
+		}
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

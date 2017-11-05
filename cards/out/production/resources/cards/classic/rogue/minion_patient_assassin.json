@@ -1,0 +1,17 @@
+{
+	"name": "Patient Assassin",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "ROGUE",
+	"rarity": "EPIC",
+	"description": "Stealth. Poisonous.",
+	"attributes": {
+		"POISONOUS": true,
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,18 @@
+{
+	"name": "Power of the Wild",
+	"baseManaCost": 2,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Choose One - Give your minions +1/+1; or Summon a 3/2 Panther.",
+	"targetSelection": "NONE",
+	"race": "FERAL",
+	"options": [
+		"spell_power_of_the_wild_1",
+		"spell_power_of_the_wild_2"
+	],
+	"bothOptions": "spell_power_of_the_wild_3",
+	"collectible": true,
+	"set": "CLASSIC",
+	"fileFormatVersion": 1
+}
