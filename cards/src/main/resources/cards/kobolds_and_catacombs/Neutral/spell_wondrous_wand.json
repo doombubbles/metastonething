@@ -1,0 +1,26 @@
+{
+	"name": "Wondrous Wand",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "NEUTRAL",
+	"rarity": "FREE",
+	"description": "Draw 3 cards. Reduce their Costs to (0).",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardAndDoSomethingSpell",
+		"value": 3,
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "EVENT_CARD",
+				"operation": "SET",
+				"value": 0
+			}
+		}
+	},
+	"collectible": false,
+	"set": "MEAN_STREETS_OF_GADGETZAN",
+	"fileFormatVersion": 1
+}

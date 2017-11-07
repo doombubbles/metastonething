@@ -1,0 +1,29 @@
+{
+    "name": "The Second Seal",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "FREE",
+    "description": "Summon a 3/3 Demon. Add 'The Third Seal' to your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CreateSummonSpell",
+				"race": "DEMON",
+				"name": "Demon",
+				"attackBonus": 3,
+				"hpBonus": 3,
+				"mana": 3
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "spell_the_third_seal"
+			}
+		]
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

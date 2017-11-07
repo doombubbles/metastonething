@@ -1,0 +1,25 @@
+{
+    "name": "Zarog's Crown",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "ANY",
+    "rarity": "FREE",
+    "description": "Discover a Legendary minion. Summon two copies of it.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "DiscoverRandomCardSpell",
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "SELF",
+			"value": 2
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"rarity": "LEGENDARY"
+		}
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

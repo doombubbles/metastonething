@@ -1,0 +1,25 @@
+{
+    "name": "Crushing Walls",
+    "baseManaCost": 7,
+    "type": "SPELL",
+    "heroClass": "HUNTER",
+    "rarity": "EPIC",
+    "description": "Destroy your opponent's left and right-most minions.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DestroySpell",
+				"target": "RIGHTMOST_ENEMY_MINION"
+			},
+			{
+				"class": "DestroySpell",
+				"target": "LEFTMOST_ENEMY_MINION"
+			}
+		]
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

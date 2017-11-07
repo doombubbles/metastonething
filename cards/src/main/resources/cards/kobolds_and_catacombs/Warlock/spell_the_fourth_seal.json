@@ -1,0 +1,29 @@
+{
+    "name": "The Fourth Seal",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "FREE",
+    "description": "Summon a 4/4 Demon. Add 'The Final Seal' to your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CreateSummonSpell",
+				"race": "DEMON",
+				"name": "Demon",
+				"attackBonus": 5,
+				"hpBonus": 5,
+				"mana": 5
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "spell_the_finalseal"
+			}
+		]
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

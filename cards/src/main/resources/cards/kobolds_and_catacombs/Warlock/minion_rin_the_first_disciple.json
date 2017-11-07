@@ -1,0 +1,21 @@
+{
+    "name": "Rin, the First Disciple",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 6,
+    "heroClass": "WARLOCK",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Taunt. Deathrattle: Add 'The First Seal' to your hand.",
+    "deathrattle": {
+        "class": "ReceiveCardSpell",
+		"card": "spell_the_first_seal"
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

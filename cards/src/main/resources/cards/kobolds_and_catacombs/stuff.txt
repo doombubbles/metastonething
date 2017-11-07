@@ -1,0 +1,8 @@
+Drygulch Jailor
+Mana Cost: 2
+Attack: 1
+Health: 1
+Type: Minion
+Rarity: Common
+Class: Paladin
+Text: Deathrattle: Add 3 Silver Hand Recruits to your hand.

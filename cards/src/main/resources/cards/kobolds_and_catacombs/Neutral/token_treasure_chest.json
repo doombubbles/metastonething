@@ -1,0 +1,27 @@
+{
+    "name": "Treasure Chest",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 0,
+    "baseHp": 8,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Deathrattle: Give your opponent awesome loot!",
+    "deathrattle": {
+        "class": "ReceiveRandomCardSpell",
+		"targetPlayer": "OPPONENT",
+		"cards": [
+			"token_golden_kobold",
+			"spell_tolins_goblet",
+			"spell_wondrous_wand",
+			"spell_zarogs_crown"
+		]
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}
