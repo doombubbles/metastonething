@@ -1,0 +1,20 @@
+{
+    "name": "Greater Mithril Spellstone",
+    "baseManaCost": 7,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "RARE",
+    "description": "Summon 3 5/5 Mithril Golems.",
+    "targetSelection": "FRIENDLY_MINIONS",
+    "spell": {
+        "class": "CreateSummonSpell",
+		"name": "Mithril Golem",
+		"attackBonus": 5,
+		"hpBonus": 5,
+		"mana": 5,
+		"value": 3
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

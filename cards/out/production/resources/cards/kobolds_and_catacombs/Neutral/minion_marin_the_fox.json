@@ -1,0 +1,25 @@
+{
+    "name": "Marin the Fox",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry: Summon a 0/8 Treasure chest for your opponent. (Break it for awesome loot!)",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "OPPONENT",
+			"card": "token_treasure_chest"
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

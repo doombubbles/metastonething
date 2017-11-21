@@ -1,0 +1,35 @@
+{
+    "name": "Wandering Monster",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "HUNTER",
+    "rarity": "RARE",
+    "description": "Secret: When an enemy attacks your hero, summon a 3-Cost minion as the new target.",
+    "trigger": {
+		"class": "TargetAcquisitionTrigger",
+		"actionType": "PHYSICAL_ATTACK",
+		"sourcePlayer": "OPPONENT",
+		"targetPlayer": "BOTH",
+		"queueCondition": {
+			"class": "MinionCountCondition",
+			"operation": "LESS",
+			"value": 7
+		},
+		"fireCondition": {
+			"class": "MinionCountCondition",
+			"operation": "LESS",
+			"value": 7
+		}
+	},
+	"spell": {
+		"class": "SummonNewAttackTargetSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"manaCost": 3
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

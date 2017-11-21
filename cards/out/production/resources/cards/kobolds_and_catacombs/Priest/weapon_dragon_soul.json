@@ -1,0 +1,25 @@
+{
+    "name": "Dragon Soul",
+    "baseManaCost": 3,
+    "type": "WEAPON",
+    "damage": 0,
+    "durability": 3,
+    "heroClass": "PRIEST",
+    "rarity": "LEGENDARY",
+    "description": "After you cast 3 spells in a turn, summon a 5/5 Dragon.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterSpellCastedTrigger",
+			"value": 3,
+			"inOneTurn": true,
+			"reset": true
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "minion_dragon_consort"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -30,10 +30,7 @@
 						},
 						{
 							"class": "CastRandomSpellSpell",
-							"cardFilter": {
-								"class": "CardFilter",
-								"cardId": "spell_defile"
-							}
+							"card": "spell_defile"
 						}
 					]
 				},

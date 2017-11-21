@@ -1,0 +1,29 @@
+{
+    "name": "The First Seal",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "FREE",
+    "description": "Summon a 2/2 Demon. Add 'The Second Seal' to your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CreateSummonSpell",
+				"race": "DEMON",
+				"name": "Demon",
+				"attackBonus": 2,
+				"hpBonus": 2,
+				"mana": 2
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "spell_the_second_seal"
+			}
+		]
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

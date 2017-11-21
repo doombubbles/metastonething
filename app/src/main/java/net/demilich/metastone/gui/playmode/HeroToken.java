@@ -254,6 +254,8 @@ public class HeroToken extends GameToken {
 					secretIcon = new ImageView(IconFactory.getImageUrl("common/secretpink.png"));
 				} else if (card.getHeroClass() == HeroClass.HUNTER) {
 					secretIcon = new ImageView(IconFactory.getImageUrl("common/secretgreen.png"));
+				} else if (card.getHeroClass() == HeroClass.ROGUE) {
+					secretIcon = new ImageView(IconFactory.getImageUrl("common/secretgrey.png"));
 				} else secretIcon = new ImageView(IconFactory.getImageUrl("common/secret.png"));
 			}
 			secretsAnchor.getChildren().add(secretIcon);

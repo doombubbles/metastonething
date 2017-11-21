@@ -1,8 +1,8 @@
-Drygulch Jailor
-Mana Cost: 2
+Feral Gibberer
+Mana Cost: 1
 Attack: 1
 Health: 1
 Type: Minion
-Rarity: Common
-Class: Paladin
-Text: Deathrattle: Add 3 Silver Hand Recruits to your hand.
+Rarity: Rare
+Class: Neutral
+Text: After this minion attacks a hero, add a copy of it to your hand.

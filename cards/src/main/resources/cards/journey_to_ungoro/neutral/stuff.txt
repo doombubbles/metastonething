@@ -1,8 +1,8 @@
-Cruel Dinomancer
-Mana Cost: 6
+Tortollan Primalist
+Mana Cost: 8
 Attack: 5
-Health: 5
+Health: 4
 Type: Minion
-Rarity: Rare
-Class: Warlock
-Text: Deathrattle: Summon a random minion you discarded this game.
+Rarity: Epic
+Class: Neutral
+Text: Battlecry: Discover a spell and cast it with random targets.

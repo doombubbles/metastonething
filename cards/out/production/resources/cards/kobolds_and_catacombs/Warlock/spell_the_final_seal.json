@@ -1,0 +1,29 @@
+{
+    "name": "The Final Seal",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "FREE",
+    "description": "Summon a 5/5 Demon. Add 'Azari, the Devourer' to your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CreateSummonSpell",
+				"race": "DEMON",
+				"name": "Demon",
+				"attackBonus": 6,
+				"hpBonus": 6,
+				"mana": 6
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "token_azari_the_devourer"
+			}
+		]
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

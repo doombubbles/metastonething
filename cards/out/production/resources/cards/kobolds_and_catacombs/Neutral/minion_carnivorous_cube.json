@@ -1,0 +1,28 @@
+{
+    "name": "Carnivorous Cube",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Destroy a friendly minion. Deathrattle: Summon 2 Copies of it.",
+    "battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "custom.MoatLurkerSpell",
+			"howMany": 2
+		}
+	},
+	"deathrattle": {
+		"class": "NullSpell"
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DEATHRATTLES": true
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

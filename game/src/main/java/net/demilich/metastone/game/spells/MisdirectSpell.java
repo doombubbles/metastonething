@@ -5,6 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -16,7 +17,8 @@ public class MisdirectSpell extends Spell {
 		if (attacker.isDestroyed()) {
 			return;
 		}
-		Actor randomTarget = context.getLogic().getAnotherRandomTarget(player, attacker, (Actor) target, EntityReference.ALL_CHARACTERS);
+		EntityReference targetReference = desc.contains(SpellArg.TARGET_SELECTION) ? (EntityReference) desc.get(SpellArg.TARGET_SELECTION) : EntityReference.ALL_CHARACTERS;
+		Actor randomTarget = context.getLogic().getAnotherRandomTarget(player, attacker, (Actor) target, targetReference);
 		context.getEnvironment().put(Environment.TARGET_OVERRIDE, randomTarget.getReference());
 	}
 }

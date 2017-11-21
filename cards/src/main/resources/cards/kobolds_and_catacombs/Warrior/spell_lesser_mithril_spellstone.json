@@ -1,0 +1,29 @@
+{
+    "name": "Lesser Mithril Spellstone",
+    "baseManaCost": 7,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "RARE",
+    "description": "Summon 1 5/5 Mithril Golem. (Equip a weapon to upgrade.)",
+    "targetSelection": "FRIENDLY_MINIONS",
+    "spell": {
+        "class": "CreateSummonSpell",
+		"name": "Mithril Golem",
+		"attackBonus": 5,
+		"hpBonus": 5,
+		"mana": 5
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "WeaponEquippedTrigger"
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"card": "spell_mithril_spellstone"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

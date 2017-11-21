@@ -72,7 +72,7 @@ public class CastRandomSpellSpell extends Spell {
 			if (!player.getSummons().contains(source) && !source.getEntityType().equals(EntityType.CARD)) {
 				break;
 			}
-			Card randomCard = filteredSpells.getRandom();
+			Card randomCard = desc.contains(SpellArg.CARD) ? context.getCardById(desc.getString(SpellArg.CARD))  : filteredSpells.getRandom();
 			if (tryAgain) {
 				while (!((SpellCard) randomCard).canBeCast(context, player)) {
 					randomCard = filteredSpells.getRandom();

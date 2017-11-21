@@ -1,0 +1,37 @@
+{
+    "name": "Branching Paths",
+    "baseManaCost": 4,
+    "type": "SPELL",
+    "heroClass": "DRUID",
+    "rarity": "EPIC",
+    "description": "Choose Twice - Draw a card; Give your minions +1 Attack; Gain 6 Armor.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "DiscoverOptionSpell",
+		"value": 2,
+		"spells": [
+			{
+				"name": "Draw a card",
+				"description": "Draw a card",
+				"class": "DrawCardSpell"
+			},
+			{
+				"name": "Give your minions +1 Attack",
+				"description": "Give your minions +1 Attack",
+				"class": "TemporaryAttackSpell",
+				"target": "FRIENDLY_MINIONS",
+				"value": 1
+			},
+			{
+				"name": "Gain 6 Armor",
+				"description": "Gain 6 Armor",
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armorBonus": 6
+			}
+		]
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

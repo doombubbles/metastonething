@@ -46,20 +46,10 @@
 			"attribute": "TAUNT"
 		},
 		{
-			"class": "AddSpellTriggerSpell",
+			"class": "AddAttributeSpell",
 			"name": "Poison Spit",
 			"description": "Poisonous",
-			"trigger": {
-				"eventTrigger": {
-					"class": "DamageCausedTrigger",
-					"targetEntityType": "MINION",
-					"hostTargetType": "IGNORE_OTHER_SOURCES"
-				},
-				"spell": {
-					"class": "DestroySpell",
-					"target": "EVENT_TARGET"
-				}
-			}
+			"attribute": "POISONOUS"
 		},
 		{
 			"name": "Rocky Carapace",
@@ -82,6 +72,12 @@
 			"description": "+1/+1",
 			"class": "BuffSpell",
 			"value": 1
+		},
+		{
+			"name": "Sanguine Fangs",
+			"description": "Lifesteal",
+			"class": "AddAttributeSpell",
+			"attribute": "LIFESTEAL"
 		}
 	],
 	"collectible": false,

@@ -1,0 +1,39 @@
+{
+    "name": "Kathrena Winterwisp",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 6,
+    "heroClass": "HUNTER",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry and Deathrattle: Recruit a Beast.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "PutRandomMinionOnBoardSpell",
+			"cardLocation": "DECK",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "BEAST"
+			}
+		}
+    },
+	"deathrattle": {
+		"class": "PutRandomMinionOnBoardSpell",
+		"cardLocation": "DECK",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"race": "BEAST"
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true,
+		"DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,30 @@
+{
+    "name": "Cheat Death",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "COMMON",
+    "description": "Secret: When a friendly minion dies, return it to your hand. It costs (2) less.",
+    "targetSelection": "NONE",
+    "trigger": {
+		"class": "MinionDeathTrigger",
+		"targetPlayer": "SELF"
+	},
+	"spell": {
+		"class": "ReturnMinionToHandSpell",
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "EVENT_CARD",
+				"operation": "SUBTRACT",
+				"value": 2
+			}
+		},
+		"target": "EVENT_TARGET"
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}
