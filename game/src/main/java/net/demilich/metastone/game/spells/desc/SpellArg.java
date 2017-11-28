@@ -59,6 +59,7 @@ public enum SpellArg {
 	TRIGGER,
 	VALUE,
 	RACE,
+	EXCESS,
 	
 	REVEAL,
 }

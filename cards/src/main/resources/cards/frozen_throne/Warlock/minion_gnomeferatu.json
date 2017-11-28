@@ -11,7 +11,7 @@
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
-			"class": "custom.VampireSpell",
+			"class": "DiscardCardsFromDeckSpell",
 			"targetPlayer": "OPPONENT"
 		}
     },

@@ -5,7 +5,7 @@
     "heroClass": "WARRIOR",
     "rarity": "RARE",
     "description": "Summon 2 5/5 Mithril Golems. (Equip a weapon to upgrade.)",
-    "targetSelection": "FRIENDLY_MINIONS",
+    "targetSelection": "NONE",
     "spell": {
         "class": "CreateSummonSpell",
 		"name": "Mithril Golem",

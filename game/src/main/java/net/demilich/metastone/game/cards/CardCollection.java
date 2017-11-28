@@ -131,8 +131,9 @@ public class CardCollection implements Iterable<Card>, Cloneable {
 		return false;
 	}
 
-	public void shuffle() {
+	public List<Card> shuffle() {
 		Collections.shuffle(cards);
+		return cards;
 	}
 
 	public void sortByManaCost() {

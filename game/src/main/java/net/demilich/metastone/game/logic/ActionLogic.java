@@ -9,6 +9,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.TurnState;
 import net.demilich.metastone.game.actions.EndTurnAction;
+import net.demilich.metastone.game.actions.ExtraTurnAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.cards.Card;
@@ -133,7 +134,9 @@ public class ActionLogic {
 		validActions.addAll(getPhysicalAttackActions(context, player));
 		validActions.addAll(getPlayCardActions(context, player));
 		if (context.getTurnState() != TurnState.TURN_ENDED) {
-			validActions.add(new EndTurnAction());
+			if (player.getAttributeValue(Attribute.EXTRA_TURNS) > 0) {
+				validActions.add(new ExtraTurnAction());
+			} else validActions.add(new EndTurnAction());
 		}
 
 		return validActions;

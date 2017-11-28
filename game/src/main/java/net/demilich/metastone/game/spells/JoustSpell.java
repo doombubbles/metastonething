@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.JoustEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -11,7 +12,8 @@ public class JoustSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		JoustEvent joustEvent = context.getLogic().joust(player);
+		CardType cardType = desc.contains(SpellArg.CARD_TYPE) ? (CardType) desc.get(SpellArg.CARD_TYPE) : CardType.MINION;
+		JoustEvent joustEvent = context.getLogic().joust(player, cardType);
 		if (!joustEvent.isWon()) {
 			SpellDesc spell1 = (SpellDesc) desc.get(SpellArg.SPELL_1);
 			if (spell1 != null) {

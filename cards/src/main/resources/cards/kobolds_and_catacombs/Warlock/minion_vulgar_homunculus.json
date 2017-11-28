@@ -1,0 +1,26 @@
+{
+    "name": "Vulgar Homunculus",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 4,
+    "heroClass": "WARLOCK",
+    "rarity": "COMMON",
+    "race": "DEMON",
+    "description": "Taunt. Battlecry: Deal 2 damage to your hero.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "DamageSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 2
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true,
+		"TAUNT": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

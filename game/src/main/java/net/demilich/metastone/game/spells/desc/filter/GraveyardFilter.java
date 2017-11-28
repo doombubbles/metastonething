@@ -12,6 +12,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 
 public class GraveyardFilter extends EntityFilter {
@@ -25,11 +26,15 @@ public class GraveyardFilter extends EntityFilter {
 		Card card = null;
 		
 		List<Minion> deadMinions = new ArrayList<>();
+		List<Weapon> deadWeapons = new ArrayList<>();
 		List<Entity> graveyard = new ArrayList<Entity>();
 		graveyard.addAll(player.getGraveyard());
 		for (Entity deadEntity : graveyard) {
 			if (deadEntity.getEntityType() == EntityType.MINION) {
 				deadMinions.add((Minion) deadEntity);
+			}
+			if (deadEntity.getEntityType() == EntityType.WEAPON) {
+				deadWeapons.add((Weapon) deadEntity);
 			}
 		}
 		
@@ -41,6 +46,12 @@ public class GraveyardFilter extends EntityFilter {
 				return true;
 			}
 			
+		}
+		for (Weapon weapon : deadWeapons) {
+			if (weapon.getSourceCard().getCardId().equals(card.getCardId())) {
+				return true;
+			}
+
 		}
 		return false;
 	}

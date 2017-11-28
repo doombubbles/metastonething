@@ -11,4 +11,5 @@ public enum ActionType {
 	EQUIP_WEAPON,
 	DISCOVER,
 	REPLACE_HERO,
+	EXTRA_TURN,
 }

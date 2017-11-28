@@ -9,7 +9,8 @@
     "description": "At the end of your turn, draw 3 cards.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "TurnEndTrigger"
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "DrawCardSpell",

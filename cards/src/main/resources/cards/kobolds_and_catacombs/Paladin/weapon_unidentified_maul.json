@@ -1,0 +1,29 @@
+{
+    "name": "Unidentified Maul",
+    "baseManaCost": 3,
+    "type": "WEAPON",
+    "damage": 2,
+    "durability": 2,
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "Gains a bonus effect in your hand.",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardDrawnTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"cards": [
+				"weapon_champions_maul",
+				"weapon_sacred_maul",
+				"weapon_blessed_maul",
+				"weapon_purifiers_maul"
+			]
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

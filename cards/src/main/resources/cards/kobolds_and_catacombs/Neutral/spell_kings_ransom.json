@@ -1,0 +1,15 @@
+{
+    "name": "King's Ransom",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "ANY",
+    "rarity": "FREE",
+    "description": "Swap decks with your opponent.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "custom.SwapDeckSpell"
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

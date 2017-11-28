@@ -1,0 +1,39 @@
+{
+    "name": "Spiteful Summoner",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Reveal a spell from your deck. Summon a random minion with the same Cost.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "RevealAndDoSomethingSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL"
+			},
+			"spell": {
+				"class": "SummonRandomMinionFilteredSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": {
+						"class": "AttributeValueProvider",
+						"target": "EVENT_CARD",
+						"attribute": "BASE_MANA_COST"
+					}
+				}
+				
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

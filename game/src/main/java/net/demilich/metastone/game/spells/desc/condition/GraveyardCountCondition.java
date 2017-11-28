@@ -6,7 +6,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.SpellUtils;
-import net.demilich.metastone.game.spells.desc.filter.Operation;
+import net.demilich.metastone.game.spells.desc.filter.ComparisonOperation;
 
 public class GraveyardCountCondition extends Condition {
 
@@ -25,7 +25,7 @@ public class GraveyardCountCondition extends Condition {
 			}
 		}
 		int targetValue = desc.getInt(ConditionArg.VALUE);
-		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
+		ComparisonOperation operation = (ComparisonOperation) desc.get(ConditionArg.OPERATION);
 		return SpellUtils.evaluateOperation(operation, count, targetValue);
 	}
 

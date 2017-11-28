@@ -211,4 +211,6 @@ public class Player extends Entity {
 	
 	public Map<String, Integer> roguequest = new HashMap<String, Integer>();
 
+	public List<Card> spellsCastOnFriendlies = new ArrayList<>();
+
 }

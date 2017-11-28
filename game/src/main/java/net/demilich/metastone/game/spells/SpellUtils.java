@@ -24,7 +24,7 @@ import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
-import net.demilich.metastone.game.spells.desc.filter.Operation;
+import net.demilich.metastone.game.spells.desc.filter.ComparisonOperation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellUtils {
@@ -38,7 +38,7 @@ public class SpellUtils {
 		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference, true);
 	}
 
-	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
+	public static boolean evaluateOperation(ComparisonOperation operation, int actualValue, int targetValue) {
 		switch (operation) {
 		case EQUAL:
 			return actualValue == targetValue;

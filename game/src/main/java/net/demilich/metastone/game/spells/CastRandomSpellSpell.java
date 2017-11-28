@@ -38,6 +38,12 @@ public class CastRandomSpellSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
+	public static SpellDesc create(String card) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(CastRandomSpellSpell.class);
+		arguments.put(SpellArg.CARD, card);
+		return new SpellDesc(arguments);
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// This spell is crazy.

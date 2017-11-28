@@ -5,7 +5,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.spells.desc.filter.Operation;
+import net.demilich.metastone.game.spells.desc.filter.ComparisonOperation;
 
 public class MinionCountCondition extends Condition {
 
@@ -35,7 +35,7 @@ public class MinionCountCondition extends Condition {
 		}
 		
 		int targetValue = (int) desc.get(ConditionArg.VALUE);
-		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
+		ComparisonOperation operation = (ComparisonOperation) desc.get(ConditionArg.OPERATION);
 		return SpellUtils.evaluateOperation(operation, minionCount, targetValue);
 	}
 

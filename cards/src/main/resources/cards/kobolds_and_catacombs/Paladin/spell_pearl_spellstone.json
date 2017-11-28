@@ -1,0 +1,33 @@
+{
+    "name": "Pearl Spellstone",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "Summon a 4/4 Spirit with Taunt. (Restore 3 Health to upgrade.)",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "CreateSummonSpell",
+		"name": "Spirit",
+		"attackBonus": 4,
+		"hpBonus": 4,
+		"mana": 4,
+		"attribute": "TAUNT"
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "HealingTrigger",
+			"sourcePlayer": "SELF",
+			"value": 3,
+			"total": true
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"card": "spell_greater_pearl_spellstone"
+		}
+	},
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

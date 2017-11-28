@@ -96,6 +96,7 @@ public enum Attribute {
 	DOUBLE_END_TURN,
 	RECEIVED,
 	INSTANT_TRAPS,
+	EXTRA_TURNS,
 	
 	CUSTOM_1,
 	CUSTOM_2,

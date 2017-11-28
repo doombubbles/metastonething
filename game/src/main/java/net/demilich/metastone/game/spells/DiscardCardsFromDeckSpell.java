@@ -6,6 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -32,6 +33,8 @@ public class DiscardCardsFromDeckSpell extends Spell {
 				return;
 			}
 			Card card = player.getDeck().getRandom();
+			context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 1.2 + 1.2 * i));
+			context.fireGameEvent(new CardRevealedEvent(context, context.getOpponent(player).getId(), card, 1.2 + 1.2 * i));
 			context.getLogic().removeCardFromDeck(player.getId(), card);
 		}
 	}

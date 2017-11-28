@@ -16,8 +16,7 @@
 				"class": "AttributeValueProvider",
 				"target": "SPELL_TARGET",
 				"attribute": "BASE_MANA_COST",
-				"offset": 1,
-				"multiplier": 1
+				"offset": 1
 			}
 		}
 	},

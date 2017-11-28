@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells.trigger;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -19,7 +20,14 @@ public class SpellCastedTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
-		
+
+		String customId = desc.getString(EventTriggerArg.CUSTOM);
+		if (customId == "MAGE_QUEST") {
+			if (!spellCastedEvent.getSourceCard().hasAttribute(Attribute.RECEIVED) && !spellCastedEvent.getSourceCard().isCollectible()) {
+				return false;
+			}
+		}
+
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && spellCastedEvent.getSourceCard().getRace() != race) {
 			return false;

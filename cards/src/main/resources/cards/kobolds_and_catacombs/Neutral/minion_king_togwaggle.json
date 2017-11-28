@@ -1,0 +1,33 @@
+{
+    "name": "King Togwaggle",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry: Swap decks with your opponent. Give them a Ransom spell to swap back.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "custom.SwapDeckSpell"
+				},
+				{
+					"class": "ReceiveCardSpell",
+					"targetPlayer": "OPPONENT",
+					"card": "spell_kings_ransom"
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

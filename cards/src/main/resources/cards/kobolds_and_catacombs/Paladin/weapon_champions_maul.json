@@ -1,0 +1,23 @@
+{
+    "name": "Champion's Maul",
+    "baseManaCost": 3,
+    "type": "WEAPON",
+    "damage": 2,
+    "durability": 2,
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "Battlecry: Symmon two 1/1 Silver Hand Recruits.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"cards": [
+				"token_silver_hand_recruit",
+				"token_silver_hand_recruit"
+			]
+		}
+	},
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

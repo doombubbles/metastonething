@@ -1,0 +1,46 @@
+{
+	"name": "Spider Ambush!",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "Summon a 4/4 Spider. Draw a card. Cast this when drawn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SummonSpell",
+				"card": "token_leyline_spider"
+			},
+			{
+				"class": "DrawCardSpell"
+			}
+		]
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardDrawnTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_leyline_spider"
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "EVENT_TARGET"
+				},
+				{
+					"class": "DrawCardSpell"
+				}
+			]
+		}
+	},
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

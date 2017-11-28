@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
@@ -59,7 +60,7 @@ public class DamageSpell extends Spell {
 		}
 		
 		boolean ignoreSpellDamage = desc.getBool(SpellArg.IGNORE_SPELL_DAMAGE);
-		context.getLogic().damage(player, (Actor) target, damage, source, ignoreSpellDamage);
+		context.getLogic().damage(player, (Actor) target, damage, source, ignoreSpellDamage, desc.contains(SpellArg.EXCESS) ? (EntityReference) desc.get(SpellArg.EXCESS) : null);
 	}
 
 }

@@ -94,6 +94,9 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.utils.MathUtils;
+import org.w3c.dom.Attr;
+
+import javax.smartcardio.ATR;
 
 public class GameLogic implements Cloneable {
 
@@ -455,6 +458,9 @@ public class GameLogic implements Cloneable {
 				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
 			} else {
 				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
+				if (targets.get(0).getEntityType() == EntityType.MINION && targets.get(0).getOwner() == playerId) {
+					player.spellsCastOnFriendlies.add(sourceCard);
+				}
 			}
 		}
 	}
@@ -532,6 +538,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellDamage) {
+		return damage(player, target, baseDamage, source, ignoreSpellDamage, null);
+	}
+
+	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellDamage, EntityReference excess) {
 		// sanity check to prevent StackOverFlowError with Mistress of Pain +
 		// Auchenai Soulpriest
 		if (target.getHp() < -100) {
@@ -556,6 +566,18 @@ public class GameLogic implements Cloneable {
 		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
 			damage *= 2;
 		}
+
+		if (excess != null) {
+			int excessDamage = Math.max(0, damage - target.getAttributeValue(Attribute.HP));
+			damage -= excessDamage;
+			EntityReference targetKey = excess;
+			for (Entity entity : context.resolveTarget(player, target, targetKey)) {
+				if (entity != target) {
+					damage(player, (Actor) entity, excessDamage, source, true, null);
+				}
+			}
+		}
+
 		context.getDamageStack().push(damage);
 		context.fireGameEvent(new PreDamageEvent(context, target, source));
 		damage = context.getDamageStack().pop();
@@ -734,6 +756,7 @@ public class GameLogic implements Cloneable {
 			owner.getHero().setWeapon(null);
 		}
 		weapon.onUnequip(context, owner);
+		owner.getGraveyard().add(weapon);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -1279,8 +1302,8 @@ public class GameLogic implements Cloneable {
 		return loggingEnabled;
 	}
 
-	public JoustEvent joust(Player player) {
-		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
+	public JoustEvent joust(Player player, CardType cardType) {
+		Card ownCard = player.getDeck().getRandomOfType(cardType);
 		Card opponentCard = null;
 		boolean won = false;
 		// no minions left in deck - automatically loose joust
@@ -1289,7 +1312,7 @@ public class GameLogic implements Cloneable {
 			log("Jousting LOST - no minion card left");
 		} else {
 			Player opponent = context.getOpponent(player);
-			opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
+			opponentCard = opponent.getDeck().getRandomOfType(cardType);
 			// opponent has no minions left in deck - automatically win joust
 			if (opponentCard == null) {
 				won = true;
@@ -2085,14 +2108,6 @@ public class GameLogic implements Cloneable {
 		return true;
 	}
 
-	/**
-	 * Transforms a Minion into a new Minion.
-	 * 
-	 * @param minion
-	 *            The original minion in play
-	 * @param newMinion
-	 *            The new minion to transform into
-	 */
 	public void transformMinion(Summon summon, Summon newSummon) {
 		// Remove any spell triggers associated with the old minion.
 		removeSpellTriggers(summon);

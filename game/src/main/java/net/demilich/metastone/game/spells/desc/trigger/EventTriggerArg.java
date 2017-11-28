@@ -19,5 +19,6 @@ public enum EventTriggerArg {
 	VALUE,
 	IN_ONE_TURN,
 	RESET,
-	TOTAL
+	TOTAL,
+	CUSTOM
 }

@@ -12,6 +12,7 @@
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "OverloadTrigger",
+			"sourcePlayer": "SELF",
 			"value": 3,
 			"total": true
 		},

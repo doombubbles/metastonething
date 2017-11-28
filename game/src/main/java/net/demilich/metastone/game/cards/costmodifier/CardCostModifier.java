@@ -182,6 +182,10 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return modifiedManaCost;
 	}
 
+	public AlgebraicOperation getOperation() {
+		return (AlgebraicOperation) desc.get(CardCostModifierArg.OPERATION);
+	}
+
 	@Override
 	public void setHost(Entity host) {
 		hostReference = host.getReference();

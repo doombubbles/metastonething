@@ -7,7 +7,10 @@
 	"description": "Take an extra turn.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "custom.TimeWarpSpell"
+		"class": "ModifyAttributeSpell",
+		"target": "FRIENDLY_PLAYER",
+		"attribute": "EXTRA_TURNS",
+		"value": 1
 	},
 	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",

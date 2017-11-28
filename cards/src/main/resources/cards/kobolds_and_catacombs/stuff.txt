@@ -1,8 +1,8 @@
-Feral Gibberer
+Kobold Librarian
 Mana Cost: 1
-Attack: 1
+Attack: 2
 Health: 1
 Type: Minion
-Rarity: Rare
-Class: Neutral
-Text: After this minion attacks a hero, add a copy of it to your hand.
+Rarity: Common
+Class: Warlock
+Text: Battlecry: Draw a card. Deal 2 damage to your hero.

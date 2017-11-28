@@ -1,0 +1,36 @@
+{
+    "name": "Rummaging Kobold",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 1,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Return one of your destroyed weapons to your hand.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "AndFilter",
+				"filters": [
+					{
+						"class": "GraveyardFilter",
+						"targetPlayer": "SELF"
+					},
+					{
+						"class": "CardFilter",
+						"cardType": "WEAPON"
+					}
+				]
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

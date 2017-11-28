@@ -1,0 +1,30 @@
+{
+    "name": "Grizzled Guardian",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 5,
+    "heroClass": "DRUID",
+    "rarity": "RARE",
+    "race": "BEAST",
+    "description": "Taunt. Deathrattle: Recruit 2 minions that cost (4) or less.",
+    "deathrattle": {
+        "class": "PutRandomMinionOnBoardSpell",
+		"cardLocation": "DECK",
+		"value": 2,
+		"cardFilter": {
+			"class": "CardFilter",
+			"attribute": "BASE_MANA_COST",
+			"operation": "LESS_OR_EQUAL",
+			"cardType": "MINION",
+			"value": 4
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true,
+		"TAUNT": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

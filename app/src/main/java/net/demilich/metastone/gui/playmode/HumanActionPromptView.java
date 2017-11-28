@@ -71,6 +71,9 @@ public class HumanActionPromptView extends VBox {
 		case END_TURN:
 			actionString = "END TURN";
 			break;
+		case EXTRA_TURN:_TURN:
+			actionString = "EXTRA TURN";
+			break;
 		case DISCOVER:
 			DiscoverAction discover = (DiscoverAction) action;
 			actionString = "DISCOVER " + discover.getSpell().getSpellClass().getSimpleName();
@@ -78,7 +81,7 @@ public class HumanActionPromptView extends VBox {
 		case REPLACE_HERO:
 			PlayReplaceHeroCardAction raction = (PlayReplaceHeroCardAction) action;
 			card = context.resolveCardReference(raction.getCardReference());
-			actionString = "Replace Hero: " + card.getName();
+			actionString = "REPLACE HERO: " + card.getName();
 			break;
 		default:
 			return "<unknown action " + action.getActionType() + ">";
