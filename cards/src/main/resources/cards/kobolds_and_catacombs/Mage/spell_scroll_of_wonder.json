@@ -1,0 +1,42 @@
+{
+	"name": "Scroll of Wonder",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Cast a random spell. Draw a card. Cast this when drawn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CastRandomSpellSpell"
+			},
+			{
+				"class": "DrawCardSpell"
+			}
+		]
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardDrawnTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "CastRandomSpellSpell",
+					"cardId": "spell_scroll_of_wonder" 
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "EVENT_TARGET"
+				}
+			]
+		}
+	},
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,37 @@
+{
+    "name": "Lesser Ruby Spellstone",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "RARE",
+    "description": "Add 1 random Mage spell to your hand. (Play 2 Elementals to upgrade.)",
+    "targetSelection": "NONE",
+    "spell": {
+       "class": "ReceiveCardSpell",
+		"value": 1,
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "SPELL",
+			"heroClass": "MAGE"
+		}
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "AfterMinionPlayedTrigger",
+			"targetPlayer": "SELF",
+			"queueCondition": {
+				"class": "RaceCondition",
+				"race": "ELEMENTAL"
+			},
+			"value": 2
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"card": "spell_ruby_spellstone"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -43,8 +43,10 @@ public class BuffWeaponSpell extends Spell {
 		logger.debug("{} gains ({})", weapon, damageBonus + "/" + durabilityBonus);
 		if (damageBonus != 0) {
 			weapon.modifyAttribute(Attribute.ATTACK, damageBonus);
+			weapon.modifyAttribute(Attribute.ENCHANTMENT_ATTACK, damageBonus);
 		}
 		if (durabilityBonus != 0) {
+			weapon.modifyAttribute(Attribute.ENCHANTMENT_HP, durabilityBonus);
 			context.getLogic().modifyDurability(weapon, durabilityBonus);
 		}
 	}

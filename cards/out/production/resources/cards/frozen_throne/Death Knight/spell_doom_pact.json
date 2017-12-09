@@ -14,7 +14,7 @@
 				"target": "ALL_MINIONS"
 			},
 			{
-				"class": "custom.VampireSpell",
+				"class": "DiscardCardsFromDeckSpell",
 				"targetPlayer": "SELF",
 				"howMany": {
 					"class": "EntityCounter",

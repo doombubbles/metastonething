@@ -1,0 +1,17 @@
+{
+    "name": "Greater Emerald Spellstone",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "HUNTER",
+    "rarity": "RARE",
+    "description": "Summon four 3/3 Wolves.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "SummonSpell",
+		"name": "Wolf",
+		"value": 4
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

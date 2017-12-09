@@ -114,10 +114,12 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			expire();
 		}
 
+		/*
 		if (event.getEventType() == GameEventType.TURN_END && primaryTrigger.isInOneTurn()) {
+			event.getGameContext().getLogic().info("Reset!");
 			primaryTrigger.resetCount();
 		}
-
+		*/
 		try {
 			if (event.getEventTarget() != null) {
 				event.getGameContext().getEventTargetStack().push(event.getEventTarget().getReference());
@@ -130,6 +132,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			event.getGameContext().printCurrentTriggers();
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);
 			throw e;
+		}
+
+		if (primaryTrigger.getTriggerCount() == 0 && primaryTrigger.doesReset()) {
+			primaryTrigger.resetCount();
 		}
 	}
 
@@ -243,6 +249,15 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	public int getPrimaryCount() {
 		return primaryTrigger.getTriggerCount();
 	}
+
+	public boolean doesReset() {
+		return primaryTrigger.doesReset() || primaryTrigger.isInOneTurn();
+	}
+
+	public void resetCount() {
+		primaryTrigger.resetCount();
+	}
+
 	
 	public int getSecondaryCount() {
 		return secondaryTrigger.getTriggerCount();

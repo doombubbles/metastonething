@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
-
+import net.demilich.metastone.game.events.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,41 +39,6 @@ import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.entities.weapons.Weapon;
-import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
-import net.demilich.metastone.game.events.AfterSpellCastedEvent;
-import net.demilich.metastone.game.events.AfterSummonEvent;
-import net.demilich.metastone.game.events.ArmorGainedEvent;
-import net.demilich.metastone.game.events.AttributeGainedEvent;
-import net.demilich.metastone.game.events.AttributeLostEvent;
-import net.demilich.metastone.game.events.BeforeSummonEvent;
-import net.demilich.metastone.game.events.BoardChangedEvent;
-import net.demilich.metastone.game.events.CardPlayedEvent;
-import net.demilich.metastone.game.events.CardRevealedEvent;
-import net.demilich.metastone.game.events.DamageEvent;
-import net.demilich.metastone.game.events.DiscardEvent;
-import net.demilich.metastone.game.events.DrawCardEvent;
-import net.demilich.metastone.game.events.EnrageChangedEvent;
-import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.events.GameStartEvent;
-import net.demilich.metastone.game.events.HealEvent;
-import net.demilich.metastone.game.events.HeroPowerUsedEvent;
-import net.demilich.metastone.game.events.JoustEvent;
-import net.demilich.metastone.game.events.KillEvent;
-import net.demilich.metastone.game.events.OverloadEvent;
-import net.demilich.metastone.game.events.PhysicalAttackEvent;
-import net.demilich.metastone.game.events.PreDamageEvent;
-import net.demilich.metastone.game.events.QuestPlayedEvent;
-import net.demilich.metastone.game.events.QuestSuccessfulEvent;
-import net.demilich.metastone.game.events.SecretPlayedEvent;
-import net.demilich.metastone.game.events.SecretRevealedEvent;
-import net.demilich.metastone.game.events.SilenceEvent;
-import net.demilich.metastone.game.events.SpellCastedEvent;
-import net.demilich.metastone.game.events.SummonEvent;
-import net.demilich.metastone.game.events.TargetAcquisitionEvent;
-import net.demilich.metastone.game.events.TurnEndEvent;
-import net.demilich.metastone.game.events.TurnStartEvent;
-import net.demilich.metastone.game.events.WeaponDestroyedEvent;
-import net.demilich.metastone.game.events.WeaponEquippedEvent;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -965,8 +930,8 @@ public class GameLogic implements Cloneable {
 	public void gainArmor(Player player, int armor) {
 		logger.debug("{} gains {} armor", player.getHero(), armor);
 		player.getHero().modifyArmor(armor);
-		player.getStatistics().armorGained(armor);
 		if (armor > 0) {
+			player.getStatistics().armorGained(armor);
 			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero(), armor));
 		}
 	}
@@ -2064,6 +2029,7 @@ public class GameLogic implements Cloneable {
 				Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
 				SummonEvent summonEvent = new SummonEvent(context, actor, source);
+
 				context.fireGameEvent(summonEvent);
 			} else {
 				SummonEvent summonEvent = new SummonEvent(context, minion, source);
@@ -2101,14 +2067,20 @@ public class GameLogic implements Cloneable {
 
 			context.getSummonReferenceStack().pop();
 			if (player.getSummons().contains(minion)) {
+				context.fireGameEvent(new MinionExistEvent(context, minion, source));
 				context.fireGameEvent(new AfterSummonEvent(context, minion, source));
 			}
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));
+
 		return true;
 	}
 
-	public void transformMinion(Summon summon, Summon newSummon) {
+	public void transformMinion (Summon summon, Summon newSummon) {
+		transformMinion(summon, newSummon, false);
+	}
+
+	public void transformMinion(Summon summon, Summon newSummon, boolean quiet) {
 		// Remove any spell triggers associated with the old minion.
 		removeSpellTriggers(summon);
 
@@ -2147,7 +2119,10 @@ public class GameLogic implements Cloneable {
 				} else {
 					owner.getSummons().add(index, newSummon);
 				}
-	
+
+
+
+
 				applyAttribute(newSummon, Attribute.SUMMONING_SICKNESS);
 				refreshAttacksPerRound(newSummon);
 	
@@ -2156,7 +2131,9 @@ public class GameLogic implements Cloneable {
 						addGameEventListener(owner, spellTrigger, newSummon);
 					}
 				}
-	
+				if (!quiet) {
+					context.fireGameEvent(new MinionExistEvent(context, newSummon, newSummon.getSourceCard()));
+				}
 				if (newSummon.getCardCostModifier() != null) {
 					addManaModifier(owner, newSummon.getCardCostModifier(), newSummon);
 				}

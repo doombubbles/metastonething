@@ -10,13 +10,14 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterSpellCastedTrigger",
+			"targetPlayer": "SELF",
 			"value": 3,
 			"inOneTurn": true,
 			"reset": true
 		},
 		"spell": {
 			"class": "SummonSpell",
-			"card": "minion_dragon_consort"
+			"card": "token_dragon"
 		}
 	},
     "collectible": true,

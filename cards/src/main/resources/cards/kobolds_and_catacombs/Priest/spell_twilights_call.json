@@ -1,0 +1,23 @@
+{
+    "name": "Twilight's Call",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "description": "Summon 1/1 copies of 2 friendly Deathrattle minions that died this game.",
+    "targetSelection": "",
+    "spell": {
+        "class": "ResurrectSpell",
+		"value": 2,
+		"cardFilter": {
+			"class": "CardFilter",
+			"attribute": "DEATHRATTLES",
+			"operation": "HAS"
+		},
+		"attackBonus": 1,
+		"healthBonus": 1
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

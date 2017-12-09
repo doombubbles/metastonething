@@ -1,0 +1,35 @@
+{
+    "name": "Leyline Manipulator",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 5,
+    "heroClass": "MAGE",
+    "rarity": "RARE",
+    "race": "ELEMENTAL",
+    "description": "Battlecry: If you're holding any cards that didn't start in your deck, reduce their Cost by (2).",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardFilter": {
+				"class": "CardFilter",
+				"attribute": "RECEIVED",
+				"operation": "HAS"
+			},
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "FRIENDLY_HAND",
+				"operation": "SUBTRACT",
+				"value": 2
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

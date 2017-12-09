@@ -1,0 +1,27 @@
+{
+    "name": "Raven Familiar",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "MAGE",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Battlecry: Reveal a spell in each deck. If yours costs more, draw it.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "JoustSpell",
+			"cardType": "SPELL",
+			"spell": {
+				"class": "FromDeckToHandSpell"
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

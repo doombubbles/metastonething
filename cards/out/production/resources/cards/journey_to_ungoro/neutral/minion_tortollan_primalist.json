@@ -1,0 +1,30 @@
+{
+    "name": "Tortollan Primalist",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: Discover a spell and cast it with random targets.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell": {
+				"class": "CastRandomSpellSpell"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL"
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "JOURNEY_TO_UNGORO",
+    "fileFormatVersion": 1
+}

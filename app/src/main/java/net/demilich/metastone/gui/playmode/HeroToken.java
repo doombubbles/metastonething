@@ -82,6 +82,9 @@ public class HeroToken extends GameToken {
 	private ImageView heroPowerIcon;
 	@FXML
 	private Shape glow;
+
+	//@FXML
+	//private Shape elusive;
 	
 	@FXML
 	private ImageView glow2;
@@ -276,6 +279,7 @@ public class HeroToken extends GameToken {
 		stealth.setVisible(hero.hasAttribute(Attribute.STEALTH));
 		immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
 		divineShield.setVisible(hero.hasAttribute(Attribute.DIVINE_SHIELD));
+		//elusive.setVisible(context.getLogic().hasAttribute(context.getPlayer(hero.getOwner()), Attribute.ELUSIVE_HERO));
 	}
 	
 	public boolean hasAttribute(Player player, Attribute attr, GameContext context) {

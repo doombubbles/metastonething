@@ -37,7 +37,8 @@ public class BuffSpell extends Spell {
 		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		int hpBonus = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
-		
+		Attribute attribute = (Attribute) desc.get(SpellArg.ATTRIBUTE);
+
 		if (value != 0) {
 			attackBonus = hpBonus = value;
 		}
@@ -48,6 +49,9 @@ public class BuffSpell extends Spell {
 		}
 		if (hpBonus != 0) {
 			target.modifyHpBonus(hpBonus);
+		}
+		if (attribute != null) {
+			target.setAttribute(attribute);
 		}
 	}
 

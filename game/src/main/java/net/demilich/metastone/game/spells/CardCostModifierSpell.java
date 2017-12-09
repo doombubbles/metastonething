@@ -53,6 +53,7 @@ public class CardCostModifierSpell extends Spell {
 			// targeting FRIENDLY_HAND would pull cards in the hand NOW, as opposed to cards
 			// that will be added next turn.
 			List<Entity> cards = context.resolveTarget(player, source, (EntityReference) manaModifierDesc.get(CardCostModifierArg.TARGET));
+			Boolean randomTarget = manaModifierDesc.contains(CardCostModifierArg.RANDOM_TARGET);
 			List<Integer> cardIds = new ArrayList<Integer>();
 			for (Entity card : cards) {
 				if (cardFilter == null || cardFilter.matches(context, player, card)) {
@@ -62,6 +63,10 @@ public class CardCostModifierSpell extends Spell {
 			
 			if (cardIds.isEmpty()) {
 				return;
+			}
+
+			while (randomTarget && cardIds.size() > 1) {
+				cardIds.remove(context.getLogic().random(cardIds.size()));
 			}
 			manaModifierDesc = manaModifierDesc.removeArg(CardCostModifierArg.TARGET);
 			manaModifierDesc = manaModifierDesc.addArg(CardCostModifierArg.CARD_IDS, cardIds);

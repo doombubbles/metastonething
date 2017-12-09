@@ -38,4 +38,5 @@ public enum GameEventType {
 	
 	ATTRIBUTE_GAINED,
 	ATTRIBUTE_LOST,
+	MINION_EXISTS,
 }

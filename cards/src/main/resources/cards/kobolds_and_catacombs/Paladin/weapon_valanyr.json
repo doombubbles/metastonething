@@ -1,0 +1,36 @@
+{
+    "name": "Val'anyr",
+    "baseManaCost": 6,
+    "type": "WEAPON",
+    "damage": 4,
+    "durability": 2,
+    "heroClass": "PALADIN",
+    "rarity": "LEGENDARY",
+    "description": "Deathrattle: Give a minion in your hand +4/+2. When it dies, reequip this.",
+	"deathrattle": {
+		"class": "MetaSpell",
+		"target": "FRIENDLY_HAND",
+		"randomTarget": true,
+		"filter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		},
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 4,
+				"hpBonus": 2
+			},
+			{
+				"class": "AddDeathrattleSpell",
+				"spell": {
+					"class": "EquipWeaponSpell",
+					"card": "weapon_valanyr"
+				}
+			}
+		]
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -22,6 +22,15 @@ import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class CardCostModifier extends CustomCloneable implements IGameEventListener {
+	@Override
+	public boolean doesReset() {
+		return false;
+	}
+
+	@Override
+	public void resetCount() {
+
+	}
 
 	private boolean expired;
 	private int owner;
@@ -241,5 +250,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	public void countDown(GameEvent event) {
 		
 	}
+
+
 
 }

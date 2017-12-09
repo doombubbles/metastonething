@@ -11,7 +11,13 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class MetaSpell extends Spell {
-	
+
+	public static SpellDesc create(SpellDesc... spells) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
+		arguments.put(SpellArg.SPELLS, spells);
+		return new SpellDesc(arguments);
+	}
+
 	public static SpellDesc create(EntityReference target, boolean randomTarget, SpellDesc... spells) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(MetaSpell.class);
 		arguments.put(SpellArg.TARGET, target);

@@ -26,8 +26,4 @@ public class Server {
 
     }
 
-    public void startGame() {
-
-    }
-
 }

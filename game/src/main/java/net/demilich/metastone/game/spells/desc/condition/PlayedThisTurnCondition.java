@@ -18,11 +18,6 @@ public class PlayedThisTurnCondition extends Condition {
 		Map<String, Map<Integer, Integer>> cardIds = player.getStatistics().getCardsPlayed();
 		int count = 0;
 		int turn = context.getTurn();
-		if (player.getId() == context.getActivePlayerId()) {
-			turn -= 0;
-		} else {
-			turn -= 1;
-		}
 		EntityFilter filter = (EntityFilter) desc.get(ConditionArg.FILTER);
 		for (String cardId : cardIds.keySet()) {
 			Entity entity = context.getCardById(cardId);
@@ -32,7 +27,7 @@ public class PlayedThisTurnCondition extends Condition {
 				}
 			}
 		}
-		return count >= desc.getInt(ConditionArg.VALUE);
+		return player == context.getActivePlayer() && count >= desc.getInt(ConditionArg.VALUE) + 1;
 	}
 
 }

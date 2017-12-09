@@ -1,0 +1,35 @@
+{
+    "name": "Shifting Scroll",
+    "baseManaCost": 0,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "COMMON",
+    "description": "Each turn this is in your hand, transform it into a random Mage spell.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "NullSpell"
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "custom.ShifterZerusSpell",
+			"target": "SELF",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "WEAPON"
+			}
+		}
+	},
+	"condition": {
+		"class": "ComparisonCondition",
+		"operation": "GREATER",
+		"value1": 0,
+		"value2": 1
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

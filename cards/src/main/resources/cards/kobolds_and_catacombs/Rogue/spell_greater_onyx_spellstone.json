@@ -1,0 +1,20 @@
+{
+    "name": "Greater Onyx Spellstone",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "RARE",
+    "description": "Destroy up to 3 enemy minions.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MultiTargetSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 3,
+		"spell": {
+			"class": "DestroySpell"
+		}
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

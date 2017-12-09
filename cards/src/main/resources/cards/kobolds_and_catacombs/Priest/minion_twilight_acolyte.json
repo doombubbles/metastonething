@@ -1,0 +1,37 @@
+{
+    "name": "Twilight Acolyte",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 4,
+    "heroClass": "PRIEST",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Battlecry: If you're holding a Dragon, swap this minion's Attack with another minion's.",
+    "battlecry": {
+        "targetSelection": "MINIONS",
+		"spell": {
+			"class": "SwapAttackSpell"
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+    },
+	"glow": {
+		"class": "HoldsCardCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "DRAGON"
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -59,7 +59,7 @@ public class TransformMinionSpell extends Spell {
 			Summon newSummon = transformTarget != null ? transformTarget : templateCard.summon();
 			
 			logger.debug("{} is transformed into a {}", summon, newSummon);
-			context.getLogic().transformMinion(summon, newSummon);
+			context.getLogic().transformMinion(summon, newSummon, desc.contains(SpellArg.EXCLUSIVE));
 		}
 	}
 

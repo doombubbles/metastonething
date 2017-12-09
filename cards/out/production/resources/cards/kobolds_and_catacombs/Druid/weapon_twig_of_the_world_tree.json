@@ -1,0 +1,18 @@
+{
+    "name": "Twig of the World Tree",
+    "baseManaCost": 4,
+    "type": "WEAPON",
+    "damage": 1,
+    "durability": 5,
+    "heroClass": "DRUID",
+    "rarity": "LEGENDARY",
+    "description": "Deathrattle: Gain 10 Mana Crystals.",
+	"deathrattle": {
+		"class": "ModifyMaxManaSpell",
+		"fullManaCrystals": true,
+		"value": 10
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

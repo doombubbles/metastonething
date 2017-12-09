@@ -1,0 +1,31 @@
+{
+    "name": "Ebon Dragonsmith",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "race": "DRAGON",
+    "description": "Battlecry: Reduce the Cost of a random weapon in your hand by (2).",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "FRIENDLY_HAND",
+				"operation": "SUBTRACT",
+				"value": 2,
+				"randomTarget": true
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,39 @@
+{
+    "name": "Duskbreaker",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "race": "DRAGON",
+    "description": "Battlecry: If you're holding a Dragon, deal 3 damage to all other minions.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "DamageSpell",
+			"target": "ALL_OTHER_MINIONS",
+			"value": 3
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+	},
+	"glow": {
+		"class": "HoldsCardCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "DRAGON"
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

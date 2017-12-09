@@ -1,0 +1,32 @@
+{
+    "name": "Murmuring Elemental",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 1,
+    "baseHp": 1,
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "race": "ELEMENTAL",
+    "description": "Battlecry: Your next Battlecry this turn triggers twice.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "AddAttributeSpell",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "DOUBLE_BATTLECRIES",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			},
+			"secondRevertTrigger": {
+				"class": "CardPlayedTrigger",
+				"requiredAttribute": "BATTLECRY"
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

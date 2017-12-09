@@ -14,27 +14,8 @@
 			"targetPlayer": "OPPONENT"
 		},
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "DamageSpell",
-					"target": "EVENT_TARGET",
-					"value": {
-						"class": "AttributeValueProvider",
-						"target": "SELF",
-						"attribute": "ATTACK"
-					}
-				},
-				{
-					"class": "DamageSpell",
-					"target": "SELF",
-					"value": {
-						"class": "AttributeValueProvider",
-						"target": "EVENT_TARGET",
-						"attribute": "ATTACK"
-					}
-				}
-			]
+			"class": "AttackWithSelfSpell",
+			"target": "EVENT_TARGET"
 		}
 	},
 	"collectible": true,

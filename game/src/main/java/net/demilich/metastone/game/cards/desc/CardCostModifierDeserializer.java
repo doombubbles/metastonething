@@ -42,6 +42,7 @@ public class CardCostModifierDeserializer implements JsonDeserializer<CardCostMo
 		parseArgument(CardCostModifierArg.TOGGLE_OFF_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
 		parseArgument(CardCostModifierArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(CardCostModifierArg.OPERATION, jsonData, arguments, ParseValueType.ALGEBRAIC_OPERATION);
+		parseArgument(CardCostModifierArg.RANDOM_TARGET, jsonData, arguments, ParseValueType.BOOLEAN);
 
 		return new CardCostModifierDesc(arguments);
 	}

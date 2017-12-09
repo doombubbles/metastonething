@@ -14,10 +14,8 @@
 		},
 		"spell2": {
 			"class": "CastRandomSpellSpell",
-			"cardFilter": {
-				"class": "CardFilter",
-				"cardId": "spell_spreading_plague"
-			}
+			"card": "spell_spreading_plague"
+			
 		},
 		"condition": {
 			"class": "ComparisonCondition",

@@ -17,6 +17,7 @@ public class ReceiveCardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+		Attribute attribute = (Attribute) desc.get(SpellArg.ATTRIBUTE);
 		if (cardFilter != null) {
 			CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 			CardCollection result = new CardCollection();
@@ -36,6 +37,9 @@ public class ReceiveCardSpell extends Spell {
 				if (card != null) {
 					Card clone = card.clone();
 					clone.setAttribute(Attribute.RECEIVED);
+					if (attribute != null) {
+						clone.setAttribute(attribute);
+					}
 					context.getLogic().receiveCard(player.getId(), clone);
 				}
 			}
@@ -43,6 +47,9 @@ public class ReceiveCardSpell extends Spell {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
 					card.setAttribute(Attribute.RECEIVED);
+					if (attribute != null) {
+						card.setAttribute(attribute);
+					}
 					context.getLogic().receiveCard(player.getId(), card);
 				}
 			}

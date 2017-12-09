@@ -1,0 +1,20 @@
+{
+    "name": "Greater Pearl Spellstone",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "Summon a 6/6 Spirit with Taunt.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "CreateSummonSpell",
+		"name": "Spirit",
+		"attackBonus": 6,
+		"hpBonus": 6,
+		"mana": 6,
+		"attribute": "TAUNT"
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Skeleton",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "ANY",
+    "rarity": "FREE",
+    "race": "NONE",
+    "description": "",
+    "collectible": true,
+    "set": "FROZEN_THRONE",
+    "fileFormatVersion": 1
+}

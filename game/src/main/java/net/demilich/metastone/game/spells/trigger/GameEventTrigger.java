@@ -24,7 +24,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	public GameEventTrigger(EventTriggerDesc desc) {
 		this.desc = desc;
 		this.triggerCount = desc.getTriggerCount();
-		this.startingTriggerCount = triggerCount - 1;
+		this.startingTriggerCount = triggerCount;
 		this.doesReset = desc.doesReset();
 		this.inOneTurn = desc.inOneTurn();
 		this.total = desc.isTotal();
@@ -98,20 +98,28 @@ public abstract class GameEventTrigger extends CustomCloneable {
 
 	public void countDown() {
 		triggerCount--;
+		/*
 		if (triggerCount < 0) {
 			triggerCount = doesReset ? startingTriggerCount: 0;
 		}
+		*/
 	}
 
 	public void countDown(int num) {
 		triggerCount -= num;
+		/*
 		if (triggerCount < 0) {
 			triggerCount = doesReset ? startingTriggerCount: 0;
 		}
+		*/
 	}
 
 	public void resetCount() {
-		triggerCount = startingTriggerCount + 1;
+		triggerCount = startingTriggerCount;
+	}
+
+	public boolean doesReset() {
+		return doesReset;
 	}
 
 	public boolean isInOneTurn() {

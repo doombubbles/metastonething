@@ -13,6 +13,7 @@
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "ArmorGainedTrigger",
+			"targetPlayer": "SELF",
 			"value": 3,
 			"total": true
 		},

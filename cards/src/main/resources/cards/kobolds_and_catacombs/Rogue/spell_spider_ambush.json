@@ -20,22 +20,19 @@
 	},
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "CardDrawnTrigger",
+			"class": "CardReceivedTrigger",
 			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {
 			"class": "MetaSpell",
 			"spells": [
 				{
-					"class": "SummonSpell",
-					"card": "token_leyline_spider"
+					"class": "CastRandomSpellSpell",
+					"card": "spell_spider_ambush"
 				},
 				{
 					"class": "RemoveCardSpell",
 					"target": "EVENT_TARGET"
-				},
-				{
-					"class": "DrawCardSpell"
 				}
 			]
 		}

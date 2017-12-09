@@ -12,10 +12,8 @@
 			"class": "ConditionalSpell",
 			"spell": {
 				"class": "CastRandomSpellSpell",
-				"cardFilter": {
-					"class": "CardFilter",
-					"cardId": "spell_roll_the_bones"
-				}
+				"card": "spell_roll_the_bones"
+				
 			},
 			"condition": {
 				"class": "AttributeCondition",

@@ -1,0 +1,28 @@
+{
+    "name": "Hungry Ettin",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 10,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Taunt. Battlecry: Summon a random 2-Cost minion for your opponent.",
+    "battlecry": {
+        "spell": {
+			"class": "SummonRandomMinionFilteredSpell",
+			"targetPlayer": "OPPONENT",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"manaCost": 2
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

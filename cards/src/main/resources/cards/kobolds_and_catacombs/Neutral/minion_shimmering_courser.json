@@ -1,0 +1,35 @@
+{
+    "name": "Shimmering Courser",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "BEAST",
+    "description": "Only you can target this with spells and Hero Powers.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "EitherOrSpell",
+			"spell1": {
+				"class": "RemoveAttributeSpell",
+				"attribute": "UNTARGETABLE_BY_SPELLS"
+			},
+			"spell1": {
+				"class": "AddAttributeSpell",
+				"attribute": "UNTARGETABLE_BY_SPELLS"
+			},
+			"condition": {
+				"class": "OwnedByPlayerCondition",
+				"targetPlayer": "ACTIVE"
+			}
+			
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

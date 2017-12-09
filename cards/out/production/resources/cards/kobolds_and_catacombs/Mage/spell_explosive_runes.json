@@ -1,0 +1,22 @@
+{
+    "name": "Explosive Runes",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "RARE",
+    "description": "Secret: After your opponent plays a minion, deal 6 damage to it and any excess to their hero.",
+    "targetSelection": "NONE",
+    "trigger": {
+		"class": "MinionPlayedTrigger",
+		"targetPlayer": "OPPONENT"
+	},
+	"spell": {
+		"class": "DamageSpell",
+		"target": "EVENT_TARGET",
+		"value": 6,
+		"excess": "ENEMY_HERO"
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

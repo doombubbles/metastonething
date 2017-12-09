@@ -1,0 +1,25 @@
+{
+    "name": "Green Jelly",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "At the end of your turn, summon a 1/2 Ooze with Taunt.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"boardPositionRelative": "RIGHT",
+			"cardId": "token_slime"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

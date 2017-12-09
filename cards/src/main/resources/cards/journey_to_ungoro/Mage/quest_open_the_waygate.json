@@ -7,7 +7,7 @@
 	"description": "Quest: Cast 6 spells that didn't start in your deck. Reward: Time Warp.",
 	"targetSelection": "NONE",
 	"quest": {
-		"class": "AfterSpellCastedTrigger",
+		"class": "SpellCastedTrigger",
 		"sourcePlayer": "SELF",
 		"custom": "MAGE_QUEST",
 		"value": 6

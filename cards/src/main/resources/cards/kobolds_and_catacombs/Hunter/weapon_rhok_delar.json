@@ -1,0 +1,33 @@
+{
+    "name": "Rhok delar",
+    "baseManaCost": 7,
+    "type": "WEAPON",
+    "damage": 4,
+    "durability": 2,
+    "heroClass": "HUNTER",
+    "rarity": "LEGENDARY",
+    "description": "Battlecry: If your deck has no minions, fill your hand with Hunter spells.",
+	"battlecry": {
+		"class": "ReceiveCardSpell",
+		"value": 10,
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "SPELL",
+			"heroClass": "HUNTER"
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			},
+			"invert": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

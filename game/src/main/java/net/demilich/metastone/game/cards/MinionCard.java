@@ -11,7 +11,9 @@ import net.demilich.metastone.game.actions.PlayMinionCardAction;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
 public class MinionCard extends SummonCard {
@@ -115,6 +117,15 @@ public class MinionCard extends SummonCard {
 
 	public Minion summon() {
 		return createMinion();
+	}
+
+	public void addDeathrattle(SpellDesc deathrattleSpell) {
+		SpellDesc combinedDeathrattle;
+		if (desc.deathrattle != null) {
+			combinedDeathrattle = MetaSpell.create(deathrattleSpell, desc.deathrattle);
+		} else combinedDeathrattle = deathrattleSpell;
+
+		desc.deathrattle = combinedDeathrattle;
 	}
 	
 	public MinionCardDesc getDesc() {

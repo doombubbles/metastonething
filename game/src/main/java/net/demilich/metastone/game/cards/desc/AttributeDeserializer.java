@@ -68,6 +68,12 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.INSTANT_TRAPS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.QUEST, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.EXTRA_TURNS, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.ENCHANTMENT_ATTACK, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.ENCHANTMENT_HP, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.ELUSIVE_HERO, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.COUNTDOWN, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.NO_FILTER, jsonData, map, ParseValueType.BOOLEAN);
+
 		return map;
 	}
 

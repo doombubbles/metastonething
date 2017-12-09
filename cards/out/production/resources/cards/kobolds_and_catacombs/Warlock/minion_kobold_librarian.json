@@ -1,0 +1,33 @@
+{
+    "name": "Kobold Librarian",
+    "baseManaCost": 1,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 1,
+    "heroClass": "WARLOCK",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Battlecry: Draw a card. Deal 2 damage to your hero.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 2
+				},
+				{
+					"class": "DrawCardSpell"
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

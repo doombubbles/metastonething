@@ -1,0 +1,53 @@
+{
+    "name": "Kobold Hermit",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 1,
+    "baseHp": 1,
+    "heroClass": "SHAMAN",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Battlecry: Choose a basic Totem. Summon it.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "DiscoverOptionSpell",
+			"spells": [
+				{
+					"name": "Wrath of Air Totem",
+					"description": "Summon a Wrath of Air Totem.",
+					"class": "SummonSpell",
+					"card": "token_wrath_of_air_totem"
+					
+				},
+				{
+					"name": "Stoneclaw Totem",
+					"description": "Summon a Stoneclaw Totem.",
+					"class": "SummonSpell",
+					"card": "token_stoneclaw_totem"
+					
+				},
+				{
+					"name": "Searing Totem",
+					"description": "Summon a Searing Totem.",
+					"class": "SummonSpell",
+					"card": "token_searing_totem"
+					
+				},
+				{
+					"name": "Healing Totem",
+					"description": "Summon a Healing Totem.",
+					"class": "SummonSpell",
+					"card": "token_healing_totem"
+					
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

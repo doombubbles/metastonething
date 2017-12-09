@@ -48,4 +48,8 @@ public interface IGameEventListener {
 	
 	public abstract boolean canFireCondition(GameEvent event);
 
+	public abstract boolean doesReset();
+
+	public abstract void resetCount();
+
 }

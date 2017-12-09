@@ -4,8 +4,11 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -25,9 +28,15 @@ public class AddDeathrattleSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Actor minion = (Actor) target;
+
 		SpellDesc deathrattle = (SpellDesc) desc.get(SpellArg.SPELL);
-		minion.addDeathrattle(deathrattle);
+		if (target.getEntityType() == EntityType.CARD) {
+			MinionCard minionCard = (MinionCard) target;
+			minionCard.addDeathrattle(deathrattle);
+		} else {
+			Actor minion = (Actor) target;
+			minion.addDeathrattle(deathrattle);
+		}
 	}
 
 }

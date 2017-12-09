@@ -1,0 +1,48 @@
+{
+    "name": "Temporus",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 6,
+    "heroClass": "PRIEST",
+    "rarity": "LEGENDARY",
+    "race": "DRAGON",
+    "description": "Battlecry: Your opponent takes two turns. Then you take two turns.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ModifyAttributeSpell",
+					"target": "ENEMY_PLAYER",
+					"attribute": "EXTRA_TURNS",
+					"value": 1
+				},
+				{
+					"class": "AddSpellTriggerSpell",
+					"target": "FRIENDLY_PLAYER",
+					"trigger": {
+						"eventTrigger": {
+							"class": "TurnStartTrigger",
+							"targetPlayer": "SELF"
+						},
+						"spell": {
+							"class": "ModifyAttributeSpell",
+							"target": "FRIENDLY_PLAYER",
+							"attribute": "EXTRA_TURNS",
+							"value": 1
+						},
+						"oneTime": true
+					}
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

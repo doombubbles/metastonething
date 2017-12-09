@@ -1,0 +1,25 @@
+{
+    "name": "Potion of Heroism",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "COMMON",
+    "description": "Give a minion Divine Shield. Draw a card.",
+    "targetSelection": "MINIONS",
+	"race": "POTION",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DrawCardSpell"
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "DIVINE_SHIELD"
+			}
+		]
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

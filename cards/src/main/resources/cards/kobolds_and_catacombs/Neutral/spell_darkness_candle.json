@@ -1,0 +1,34 @@
+{
+	"name": "Darkness Candle",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Snuff out a candle. Draw a card. Cast this when drawn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell"
+	},
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "CastRandomSpellSpell",
+					"card": "spell_darkness_candle"
+				},
+				{
+					"class": "RemoveCardSpell",
+					"target": "EVENT_TARGET"
+				}
+			]
+		}
+	},
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

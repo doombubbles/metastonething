@@ -14,7 +14,7 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "custom.VampireSpell",
+			"class": "DiscardCardsFromDeckSpell",
 			"value": 3
 		}
 	},

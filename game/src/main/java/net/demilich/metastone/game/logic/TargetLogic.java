@@ -3,6 +3,7 @@ package net.demilich.metastone.game.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.entities.EntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +52,9 @@ public class TargetLogic {
 				continue;
 			}
 			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
-					&& (entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) || (entity.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS)))) {
+					&& (entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)
+					|| (entity.getEntityType().equals(EntityType.HERO) && context.getLogic().hasAttribute(context.getPlayer(entity.getOwner()), Attribute.ELUSIVE_HERO))
+					|| (entity.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS)))) {
 				continue;
 			}
 

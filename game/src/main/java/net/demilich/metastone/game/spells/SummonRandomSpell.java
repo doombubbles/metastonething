@@ -4,8 +4,11 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
@@ -20,9 +23,21 @@ public class SummonRandomSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		String[] minionCardsId = (String[]) desc.get(SpellArg.CARDS);
-		String randomMinionId = minionCardsId[context.getLogic().random(minionCardsId.length)];
-		MinionCard randomMinionCard = (MinionCard) context.getCardById(randomMinionId);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		CardCollection cards = new CardCollection();
+		for (String s : minionCardsId) {
+			cards.add(context.getCardById(s));
+		}
+		for (int i = 1; i <= desc.getValue(SpellArg.VALUE, context, player, target, source, 1); i++ ) {
+			if (cards.isEmpty()) {
+				return;
+			}
+			Card randomMinionCard = cards.getRandom();
+			context.getLogic().summon(player.getId(), ((MinionCard)randomMinionCard).summon());
+			if (desc.contains(SpellArg.EXCLUSIVE)) {
+				cards.remove(randomMinionCard);
+			}
+		}
+
 	}
 
 }

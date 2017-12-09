@@ -12,7 +12,7 @@
     },
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "CardReceivedTrigger",
+			"class": "CardDrawnTrigger",
 			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {

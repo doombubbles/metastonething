@@ -33,6 +33,14 @@ public class TransformToRandomMinionSpell extends TransformMinionSpell {
 				filteredMinions.add(minionCard);
 			}
 		}
+
+		if (filteredMinions.getCount() > 1) {
+			//Don't even ask me why I have to do this
+			filteredMinions.removeAll(card -> card.getName() == "Snowfury Giant");
+
+			filteredMinions.removeAll(card -> card.getName() == "The Darkness");
+		}
+
 		MinionCard randomCard = (MinionCard) filteredMinions.getRandom();
 
 		if (randomCard != null) {

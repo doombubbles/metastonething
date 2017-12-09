@@ -1,0 +1,17 @@
+{
+    "name": "Kobold Monk",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Your hero can't be targeted by spells or Hero Powers.",
+	"attributes": {
+		"ELUSIVE_HERO": true
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

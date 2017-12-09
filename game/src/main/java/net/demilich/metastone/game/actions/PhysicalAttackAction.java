@@ -6,6 +6,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -32,6 +33,13 @@ public class PhysicalAttackAction extends GameAction {
 				(attacker.hasAttribute(Attribute.CANNOT_ATTACK_HERO_ON_SUMMON)
 						&& attacker.hasAttribute(Attribute.SUMMONING_SICKNESS))) {
 			return false;
+		}
+		if (attacker.getEntityType() == EntityType.HERO) {
+			if (((Hero) attacker).getWeapon() != null) {
+				if (((Hero) attacker).getWeapon().hasAttribute(Attribute.CANNOT_ATTACK_HEROES)) {
+					return false;
+				}
+			}
 		}
 		return true;
 	}

@@ -56,6 +56,9 @@ public class TriggerManager implements Cloneable, IDisposable {
 						!trigger.interestedIn(GameEventType.TURN_END)) {
 					trigger.expire();
 				}
+				if (trigger.doesReset()) {
+					trigger.resetCount();
+				}
 				trigger.delayTimeDown();
 			}
 			if (trigger.isExpired()) {

@@ -35,7 +35,16 @@ public class ResurrectSpell extends Spell {
 			}
 			Minion resurrectedMinion = deadMinions.get(context.getLogic().random(deadMinions.size()));
 			MinionCard minionCard = (MinionCard) resurrectedMinion.getSourceCard();
-			context.getLogic().summon(player.getId(), minionCard.summon());
+			Minion minion = minionCard.summon();
+			if (context.getLogic().summon(player.getId(), minion)) {
+				if (desc.contains(SpellArg.ATTACK_BONUS)) {
+					minion.setAttack(desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, null, 1));
+				}
+				if (desc.contains(SpellArg.HP_BONUS)) {
+					minion.setHp(desc.getValue(SpellArg.HP_BONUS, context, player, target, null, 1));
+					minion.setMaxHp(desc.getValue(SpellArg.HP_BONUS, context, player, target, null, 1));
+				}
+			}
 			deadMinions.remove(resurrectedMinion);
 		}
 	}

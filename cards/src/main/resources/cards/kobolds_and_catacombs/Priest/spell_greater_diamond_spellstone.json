@@ -1,0 +1,16 @@
+{
+    "name": "Greater Diamond Spellstone",
+    "baseManaCost": 7,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "description": "Resurrect 4 different friendly minions.",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "ResurrectSpell",
+		"value": 4
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

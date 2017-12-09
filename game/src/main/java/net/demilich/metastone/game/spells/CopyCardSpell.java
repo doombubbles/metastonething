@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,12 +51,19 @@ public class CopyCardSpell extends Spell {
 			logger.error("Trying to copy cards from invalid cardLocation {}", cardLocation);
 			break;
 		}
+		CardCollection sourceCollection2 = null;
+		EntityFilter filter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
+		for (Card card : sourceCollection) {
+			if (filter == null || filter.matches(context, player, card)) {
+				sourceCollection2.add(card);
+			}
+		}
 
 		for (int i = 0; i < numberOfCardsToCopy; i++) {
 			if (sourceCollection.isEmpty()) {
 				return;
 			}
-			Card clone = sourceCollection.getRandom().getCopy();
+			Card clone = sourceCollection2.getRandom().getCopy();
 			context.getLogic().receiveCard(player.getId(), clone);
 		}
 	}

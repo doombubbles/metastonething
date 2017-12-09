@@ -30,7 +30,7 @@ public class RevealAndDoSomethingSpell extends Spell {
         }
         int howMany = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
         for (int i = 1; i <= howMany; i++) {
-            context.fireGameEvent(new CardRevealedEvent(context, player.getId(), chosenCard, 0));
+            context.fireGameEvent(new CardRevealedEvent(context, player.getId(), chosenCard, 1.2 * i));
             SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
             context.setEventCard(chosenCard);
             SpellUtils.castChildSpell(context, player, spell, source, target);
