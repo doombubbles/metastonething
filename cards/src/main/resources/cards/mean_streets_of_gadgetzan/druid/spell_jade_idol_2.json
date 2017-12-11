@@ -4,13 +4,13 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Shuffle 3 Jade Relics into your deck.",
+	"description": "Shuffle 3 Jade Idol into your deck.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "ShuffleToDeckSpell",
 		"howMany": 3,
 		"target": "NONE",
-		"card": "spell_jade_relic"
+		"card": "spell_jade_idol"
 	},
 	"collectible": false,
 	"set": "MEAN_STREETS_OF_GADGETZAN",

@@ -8,7 +8,7 @@
     "targetSelection": "NONE",
     "spell": {
         "class": "SummonSpell",
-		"name": "Wolf",
+		"card": "token_wolf",
 		"value": 3
     },
 	"passiveTrigger": {

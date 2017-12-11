@@ -1,6 +1,6 @@
 {
     "name": "Flanking Strike",
-    "baseManaCost": 3,
+    "baseManaCost": 4,
     "type": "SPELL",
     "heroClass": "HUNTER",
     "rarity": "COMMON",
@@ -15,7 +15,7 @@
 			},
 			{
 				"class": "SummonSpell",
-				"cardId": "token_wolf"
+				"card": "token_wolf"
 			}
 		]
     },

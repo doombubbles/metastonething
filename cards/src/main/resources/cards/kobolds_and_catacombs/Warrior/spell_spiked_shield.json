@@ -20,7 +20,7 @@
 			}
 		]
     },
-    "collectible": true,
+    "collectible": false,
     "set": "KOBOLDS_AND_CATACOMBS",
     "fileFormatVersion": 1
 }

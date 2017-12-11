@@ -27,7 +27,8 @@ public class SummonRandomSpell extends Spell {
 		for (String s : minionCardsId) {
 			cards.add(context.getCardById(s));
 		}
-		for (int i = 1; i <= desc.getValue(SpellArg.VALUE, context, player, target, source, 1); i++ ) {
+		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+		for (int i = 1; i <= value; i++ ) {
 			if (cards.isEmpty()) {
 				return;
 			}

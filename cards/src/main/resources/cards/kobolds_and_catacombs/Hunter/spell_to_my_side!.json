@@ -8,7 +8,7 @@
     "targetSelection": "NONE",
     "spell": {
         "class": "EitherOrSpell",
-		"spell1": {
+		"spell2": {
 			"class": "SummonRandomSpell",
 			"cards": [
 				"token_huffer",
@@ -16,7 +16,7 @@
 				"token_leokk"
 			]
 		},
-		"spell2": {
+		"spell1": {
 			"class": "SummonRandomSpell",
 			"cards": [
 				"token_huffer",
@@ -35,6 +35,14 @@
 			"invert": true
 		}
     },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		},
+		"invert": true
+	},
     "collectible": true,
     "set": "KOBOLDS_AND_CATACOMBS",
     "fileFormatVersion": 1
