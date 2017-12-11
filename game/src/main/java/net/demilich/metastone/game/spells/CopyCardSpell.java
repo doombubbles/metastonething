@@ -51,7 +51,7 @@ public class CopyCardSpell extends Spell {
 			logger.error("Trying to copy cards from invalid cardLocation {}", cardLocation);
 			break;
 		}
-		CardCollection sourceCollection2 = null;
+		CardCollection sourceCollection2 = new CardCollection();
 		EntityFilter filter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		for (Card card : sourceCollection) {
 			if (filter == null || filter.matches(context, player, card)) {
