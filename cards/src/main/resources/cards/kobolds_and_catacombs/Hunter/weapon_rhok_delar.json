@@ -8,20 +8,23 @@
     "rarity": "LEGENDARY",
     "description": "Battlecry: If your deck has no minions, fill your hand with Hunter spells.",
 	"battlecry": {
-		"class": "ReceiveCardSpell",
-		"value": 10,
-		"cardFilter": {
-			"class": "CardFilter",
-			"cardType": "SPELL",
-			"heroClass": "HUNTER"
-		},
-		"condition": {
-			"class": "DeckContainsCondition",
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"value": 10,
 			"cardFilter": {
 				"class": "CardFilter",
-				"cardType": "MINION"
+				"cardType": "SPELL",
+				"heroClass": "HUNTER"
 			},
-			"invert": true
+			"condition": {
+				"class": "DeckContainsCondition",
+				"cardFilter": {
+					"class": "CardFilter",
+					"cardType": "MINION"
+				},
+				"invert": true
+			}
 		}
 	},
 	"attributes": {
