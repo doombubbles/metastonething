@@ -46,8 +46,8 @@ public class ReceiveCardSpell extends Spell {
 		} else {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
-					card.setAttribute(Attribute.RECEIVED);
 					if (attribute != null) {
+						card.setAttribute(Attribute.RECEIVED);
 						card.setAttribute(attribute);
 					}
 					context.getLogic().receiveCard(player.getId(), card);

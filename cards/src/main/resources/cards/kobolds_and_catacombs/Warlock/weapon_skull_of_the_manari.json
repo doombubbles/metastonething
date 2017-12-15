@@ -8,17 +8,15 @@
     "rarity": "LEGENDARY",
     "description": "At the start of your turn, summon a Demon from your hand.",
 	"trigger": {
-		"eventTrigerr": {
+		"eventTrigger": {
 			"class": "TurnStartTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "PutRandomMinionOnBoardSpell",
-			"targetPlayer": "SELF",
 			"cardLocation": "HAND",
 			"cardFilter": {
-				"class": "CardFilter",
-				"cardType": "MINION",
+				"class": "RaceFilter",
 				"race": "DEMON"
 			}
 		}
