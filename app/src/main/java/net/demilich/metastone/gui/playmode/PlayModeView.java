@@ -32,7 +32,7 @@ public class PlayModeView extends BorderPane {
 
 	private boolean firstUpdate = true;
 
-	public PlayModeView() {
+	public PlayModeView(boolean multiplayer) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PlayModeView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -48,7 +48,7 @@ public class PlayModeView extends BorderPane {
 		loadingView = new LoadingBoardView();
 		setCenter(loadingView);
 
-		actionPromptView = new HumanActionPromptView();
+		actionPromptView = new HumanActionPromptView(multiplayer);
 		//sidePane.getChildren().add(actionPromptView);
 
 		backButton.setOnAction(actionEvent -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));

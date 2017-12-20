@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Battlecry: Summon a Jade Golem. Give it Taunt.",
+	"description": "Battlecry: Summon a {$1/$2} Jade Golem. Give it Taunt.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -50,6 +50,20 @@
 	"attributes": {
 		"BATTLECRY": true
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

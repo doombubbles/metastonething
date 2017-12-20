@@ -1,0 +1,21 @@
+{
+    "name": "Astral Tiger",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 5,
+    "heroClass": "DRUID",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Deathrattle: Shuffle a copy of this minion into your deck.",
+    "deathrattle": {
+		"class": "ShuffleMinionToDeckSpell",
+		"target": "SELF"
+	},
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

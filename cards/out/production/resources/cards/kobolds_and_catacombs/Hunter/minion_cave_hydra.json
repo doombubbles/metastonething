@@ -1,0 +1,34 @@
+{
+    "name": "Cave Hydra",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 4,
+    "heroClass": "HUNTER",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Also damages the minions next to whomever this attacks.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetEntityType": "MINION",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "AdjacentEffectSpell",
+			"target": "EVENT_TARGET",
+			"spell2": {
+				"class": "DamageSpell",
+				"value": {
+					"class": "AttributeValueProvider",
+					"target": "SELF",
+					"attribute": "ATTACK"
+				}
+			}
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

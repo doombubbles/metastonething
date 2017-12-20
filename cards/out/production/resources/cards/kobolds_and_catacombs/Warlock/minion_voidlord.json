@@ -14,7 +14,8 @@
 		"value": 3
     },
     "attributes": {
-        "DEATHRATTLES": true
+        "DEATHRATTLES": true,
+		"TAUNT": true
     },
     "collectible": true,
     "set": "KOBOLDS_AND_CATACOMBS",

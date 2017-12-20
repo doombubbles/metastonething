@@ -11,6 +11,7 @@ import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -46,6 +47,9 @@ public class Player extends Entity {
 	private boolean hideCards;
 
 	private IBehaviour behaviour;
+
+
+
 
 	private Player(Player otherPlayer) {
 		this.setName(otherPlayer.getName());
@@ -212,5 +216,7 @@ public class Player extends Entity {
 	public Map<String, Integer> roguequest = new HashMap<String, Integer>();
 
 	public List<Card> spellsCastOnFriendlies = new ArrayList<>();
+
+	public Card lastCardPlayed;
 
 }

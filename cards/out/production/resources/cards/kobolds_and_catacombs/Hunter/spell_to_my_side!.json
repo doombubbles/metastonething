@@ -1,0 +1,49 @@
+{
+    "name": "To My Side!",
+    "baseManaCost": 6,
+    "type": "SPELL",
+    "heroClass": "HUNTER",
+    "rarity": "EPIC",
+    "description": "Summon an Animal Companion, or 2 if your deck has no minions.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "EitherOrSpell",
+		"spell2": {
+			"class": "SummonRandomSpell",
+			"cards": [
+				"token_huffer",
+				"token_misha",
+				"token_leokk"
+			]
+		},
+		"spell1": {
+			"class": "SummonRandomSpell",
+			"cards": [
+				"token_huffer",
+				"token_misha",
+				"token_leokk"
+			],
+			"value": 2,
+			"exclusive": true
+		},	
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			},
+			"invert": true
+		}
+    },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION"
+		},
+		"invert": true
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

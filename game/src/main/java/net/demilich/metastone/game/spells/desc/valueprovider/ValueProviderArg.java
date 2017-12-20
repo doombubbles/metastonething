@@ -21,5 +21,6 @@ public enum ValueProviderArg {
 	VALUE,
 	VALUE_1,
 	VALUE_2,
+	CUSTOM,
 
 }

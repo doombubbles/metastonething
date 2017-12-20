@@ -1,0 +1,6 @@
+Skeleton
+Mana Cost: 5
+Attack: 5
+Health: 5
+Class: ANY
+Tribe: None

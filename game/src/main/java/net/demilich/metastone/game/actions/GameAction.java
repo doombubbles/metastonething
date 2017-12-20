@@ -6,7 +6,9 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public abstract class GameAction implements Cloneable {
+import java.io.Serializable;
+
+public abstract class GameAction implements Cloneable, Serializable {
 
 	private TargetSelection targetRequirement = TargetSelection.NONE;
 	private ActionType actionType = ActionType.SYSTEM;

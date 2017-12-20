@@ -1,0 +1,25 @@
+{
+    "name": "Healing Rain",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "SHAMAN",
+    "rarity": "COMMON",
+    "description": "Restore 12 Health randomly split among all friendly characters.",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "CastRepeatedlySpell",
+		"target": "FRIENDLY_CHARACTERS",
+		"howMany": 12,
+		"spell": {
+			"class": "HealSpell",
+			"value": 1
+		},
+		"randomTarget": true,
+		"filter": {
+			"class": "DamagedFilter"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

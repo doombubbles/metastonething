@@ -1,0 +1,31 @@
+{
+    "name": "Reckless Flurry",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "EPIC",
+    "description": "Spend all your Armor. Deal that much damage to all minions.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_HERO",
+					"attribute": "ARMOR"
+				},
+				"target": "ALL_MINIONS"
+			},
+			{
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armorBonus": -999999
+			}
+		]
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

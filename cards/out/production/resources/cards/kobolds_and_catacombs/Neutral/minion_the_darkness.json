@@ -1,0 +1,38 @@
+{
+    "name": "The Darkness",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 20,
+    "baseHp": 20,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Starts dormant. Battlecry: Shuffle 3 Candles into the enemy deck. When drawn, this awakens.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "ShuffleToDeckSpell",
+			"card": "spell_darkness_candle",
+			"howMany": 3,
+			"targetPlayer": "OPPONENT"
+		}
+    },
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionExistsTrigger",
+			"target": "SELF"
+		},
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "permanent_the_darkness"
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true,
+		"NO_FILTER": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

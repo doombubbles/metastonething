@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.decks;
 
+import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.cards.Card;
@@ -10,7 +11,7 @@ import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.game.decks.validation.IDeckValidator;
 
-public class RandomDeck extends Deck {
+public class RandomDeck extends Deck implements Serializable {
 	
 	private DeckFormat deckFormat;
 

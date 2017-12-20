@@ -2,7 +2,9 @@ package net.demilich.metastone.game.targeting;
 
 import net.demilich.metastone.game.entities.Entity;
 
-public class EntityReference {
+import java.io.Serializable;
+
+public class EntityReference implements Serializable {
 	public static final EntityReference NONE = new EntityReference(-1);
 	public static final EntityReference ENEMY_CHARACTERS = new EntityReference(-2);
 	public static final EntityReference ENEMY_MINIONS = new EntityReference(-3);

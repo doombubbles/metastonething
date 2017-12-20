@@ -63,6 +63,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.NO_DURABILITY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.ONE_TURN, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CUSTOM_7, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.CUSTOM_8, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DOUBLE_END_TURN, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.RECEIVED, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.INSTANT_TRAPS, jsonData, map, ParseValueType.BOOLEAN);

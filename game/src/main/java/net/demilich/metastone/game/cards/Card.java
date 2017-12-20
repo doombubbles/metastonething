@@ -1,6 +1,8 @@
 package net.demilich.metastone.game.cards;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
@@ -15,6 +17,7 @@ import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -33,6 +36,7 @@ public abstract class Card extends Entity {
 	private ValueProvider manaCostModifier;
 	private final String cardId;
 	private final ConditionDesc glow;
+	private List<ValueProvider> descValues;
 
 	public Card(CardDesc desc) {
 		cardId = desc.id;
@@ -43,6 +47,7 @@ public abstract class Card extends Entity {
 		cardSet = desc.set;
 		rarity = desc.rarity;
 		heroClass = desc.heroClass;
+		descValues = new ArrayList<>();
 		glow = desc.glow;
 		if (desc.heroClasses != null) {
 			heroClasses = desc.heroClasses;
@@ -63,6 +68,13 @@ public abstract class Card extends Entity {
 
 		if (desc.deckTrigger != null) {
 			attributes.put(Attribute.DECK_TRIGGER, desc.deckTrigger);
+		}
+
+		if (desc.descValues != null) {
+			for (ValueProviderDesc descValue : desc.descValues) {
+				this.descValues.add(descValue.create());
+			}
+
 		}
 	}
 
@@ -278,6 +290,10 @@ public abstract class Card extends Entity {
 	@Override
 	public String toString() {
 		return String.format("[%s '%s' %s Manacost:%d]", getCardType(), getName(), getReference(), getBaseManaCost());
+	}
+
+	public List<ValueProvider> getDescValues() {
+		return this.descValues;
 	}
 
 }

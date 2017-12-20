@@ -1,0 +1,29 @@
+{
+    "name": "Corridor Creeper",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "race": "BEAST",
+    "description": "Cost (1) less whenever a minion dies while this is in your hand.",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "MinionDeathTrigger"
+		},
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "SELF",
+				"operation": "SUBTRACT",
+				"value": 1
+			}
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

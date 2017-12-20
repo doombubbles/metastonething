@@ -11,7 +11,7 @@
 		"SHAMAN"
 	],
 	"rarity": "LEGENDARY",
-	"description": "Battlecry and Deathrattle: Summon a Jade Golem.",
+	"description": "Battlecry and Deathrattle: Summon a {$1/$2} Jade Golem.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -85,6 +85,20 @@
 		"BATTLECRY": true,
 		"DEATHRATTLES": true
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

@@ -64,4 +64,6 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 		return (Class<? extends GameEventTrigger>) get(EventTriggerArg.CLASS);
 	}
 
+
+
 }

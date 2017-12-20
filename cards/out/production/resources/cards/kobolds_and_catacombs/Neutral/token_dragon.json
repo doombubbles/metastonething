@@ -1,0 +1,14 @@
+{
+	"name": "Dragon",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"race": "DRAGON",
+	"description": "",
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

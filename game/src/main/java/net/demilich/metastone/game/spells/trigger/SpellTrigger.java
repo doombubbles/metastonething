@@ -263,4 +263,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		return secondaryTrigger.getTriggerCount();
 	}
 
+	public GameEventTrigger getPrimaryTrigger() {
+		return primaryTrigger;
+	}
 }

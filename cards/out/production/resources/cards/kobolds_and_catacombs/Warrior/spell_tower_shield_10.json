@@ -1,0 +1,27 @@
+{
+    "name": "Tower Shield +10",
+    "baseManaCost": 6,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "COMMON",
+    "description": "Gain 5 Armor. Gain 10 more armor.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armoBonus": 5
+			},
+			{
+				"class": "BuffHeroSpell",
+				"target": "FRIENDLY_HERO",
+				"armoBonus": 10
+			}
+		]
+    },
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

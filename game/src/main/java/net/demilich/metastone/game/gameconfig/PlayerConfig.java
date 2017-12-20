@@ -6,7 +6,9 @@ import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
 
-public class PlayerConfig {
+import java.io.Serializable;
+
+public class PlayerConfig implements Serializable {
 
 	private String name;
 	private HeroCard heroCard;

@@ -63,6 +63,19 @@
 							"operation": "HAS",
 							"heroClass": "PALADIN"
 						}
+					},
+					{
+						"name": "Rogue",
+						"description": "Receive a random Rogue secret.",
+						"class": "ReceiveCardSpell",
+						"value": 1,
+						"card": "spell_the_coin",
+						"cardFilter": {
+							"class": "CardFilter",
+							"attribute": "SECRET",
+							"operation": "HAS",
+							"heroClass": "ROGUE"
+						}
 					}
 				]
 			}
@@ -72,6 +85,6 @@
 		"COMBO": true
 	},
 	"collectible": true,
-	"set": "CLASSIC",
+	"set": "CUSTOM",
 	"fileFormatVersion": 1
 }

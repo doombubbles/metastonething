@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
+
+import net.demilich.metastone.game.entities.minions.*;
 import net.demilich.metastone.game.events.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +37,6 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Permanent;
-import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
@@ -63,7 +62,7 @@ import org.w3c.dom.Attr;
 
 import javax.smartcardio.ATR;
 
-public class GameLogic implements Cloneable {
+public class GameLogic implements Cloneable, Serializable {
 
 	public static Logger logger = LoggerFactory.getLogger(GameLogic.class);
 
@@ -182,8 +181,7 @@ public class GameLogic implements Cloneable {
 	 * 			Increased spell damage
 	 */
 	public int applySpellpower(Player player, Entity source, int baseValue) {
-		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
-				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
+		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE) + getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
 		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
 			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
 		}
@@ -516,7 +514,7 @@ public class GameLogic implements Cloneable {
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellDamage && sourceCard != null) {
 			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
-				damage = applySpellpower(player, source, baseDamage);
+				damage = applySpellpower(player, source, baseDamage) + sourceCard.getAttributeValue(Attribute.SPELL_DAMAGE);
 			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyHeroPowerDamage(player, damage);
 				if (hasAttribute(player, Attribute.FREEZE_POWER)) {
@@ -689,6 +687,8 @@ public class GameLogic implements Cloneable {
 				destroyWeapon((Weapon) target);
 				break;
 			case ANY:
+			case PERMANENT:
+				break;
 			default:
 				logger.error("Trying to destroy unknown entity type {}", target.getEntityType());
 				break;
@@ -792,6 +792,14 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
 		if (hasAttribute(player, Attribute.DOUBLE_END_TURN)) {
 			context.fireGameEvent(new TurnEndEvent(context, playerId));
+		}
+		for (Summon summon: player.getSummons()) {
+			if (summon instanceof Rift) {
+				Rift rift = (Rift) summon;
+				if (rift.countDown() == 0) {
+					context.getLogic().markAsDestroyed(rift);
+				}
+			}
 		}
 		CardCollection dumb = new CardCollection();
 		for (Card card : player.getHand()) {
@@ -1517,6 +1525,7 @@ public class GameLogic implements Cloneable {
 		log("{} plays {}", player.getName(), card);
 
 		player.getStatistics().cardPlayed(card, context.getTurn());
+		player.lastCardPlayed = card;
 		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card);
 		context.fireGameEvent(cardPlayedEvent);
 
@@ -1993,6 +2002,7 @@ public class GameLogic implements Cloneable {
 		summon.setOwner(player.getId());
 
 		context.getSummonReferenceStack().push(summon.getReference());
+
 
 		log("{} summons {}", player.getName(), summon);
 

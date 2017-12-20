@@ -166,13 +166,13 @@
 							</image>
 						</ImageView>
 						
-						<ImageView fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
+						<ImageView fx:id="attack_icon" fitHeight="100.0" fitWidth="32.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="3.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
 							<image>
 								<Image url="/img/common/attack_value_icon.png" />
 							</image>
 						</ImageView>
 						<Group fx:id="attackAnchor" translateX="8.0" translateY="-3.0" StackPane.alignment="BOTTOM_LEFT" />
-						<ImageView fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
+						<ImageView fx:id="health_icon" fitHeight="100.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="2.0" translateY="2.0" StackPane.alignment="BOTTOM_RIGHT">
 							<image>
 								<Image url="/img/common/health_value_icon.png" />
 							</image>

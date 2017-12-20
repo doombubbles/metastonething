@@ -10,6 +10,7 @@ public enum CardType {
 	SPELL,
 	WEAPON,
 	REPLACE_HERO,
+	RIFT,
 	;
 	
 	public boolean isCardType(CardType cardType) {

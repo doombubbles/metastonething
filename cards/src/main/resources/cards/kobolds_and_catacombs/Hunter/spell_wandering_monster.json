@@ -29,6 +29,20 @@
 			"manaCost": 3
 		}
 	},
+	"instant":{
+		"targetSelection": "ENEMY_CHARACTERS",
+		"spell": {
+			"class": "SummonAndDoSomethingSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"manaCost": 3
+			},
+			"spell": {
+				"class": "AttackSpell"
+			}
+		}
+	},
     "collectible": true,
     "set": "KOBOLDS_AND_CATACOMBS",
     "fileFormatVersion": 1

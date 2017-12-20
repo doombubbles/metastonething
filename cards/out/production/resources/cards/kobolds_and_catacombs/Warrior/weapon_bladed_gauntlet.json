@@ -1,0 +1,30 @@
+{
+    "name": "Bladed Gauntlet",
+    "baseManaCost": 2,
+    "type": "WEAPON",
+    "damage": 0,
+    "durability": 2,
+    "heroClass": "WARRIOR",
+    "rarity": "EPIC",
+    "description": "Has Attack equal to your Armor. Can't attack heroes.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "SetAttackSpell",
+			"target": "FRIENDLY_WEAPON",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "ARMOR"
+			}
+		}
+	},
+	"attributes": {
+		"CANNOT_ATTACK_HEROES": true
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

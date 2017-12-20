@@ -11,19 +11,13 @@
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
-			"class": "CreateSummonSpell",
-			"name": "Skeleton",
-			"attackBonus": 5,
-			"hpBonus": 5,
-			"targetPlayer": "SELF",
-			"mana": 5
+			"class": "SummonSpell",
+			"card": "token_55skeleton"
 		}
     },
 	"deathrattle": {
-		"class": "CreateSummonSpell",
-		"name": "Skeleton",
-		"attackBonus": 5,
-		"hpBonus": 5,
+		"class": "SummonSpell",
+		"card": "token_55skeleton",
 		"targetPlayer": "OPPONENT"
 	},
     "attributes": {

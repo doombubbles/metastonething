@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
-public class TargetLogic {
+public class TargetLogic implements Serializable {
 
 	private static Logger logger = LoggerFactory.getLogger(TargetLogic.class);
 

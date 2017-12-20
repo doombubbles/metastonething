@@ -5,7 +5,9 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.TargetPlayer;
 
-public abstract class ValueProvider {
+import java.io.Serializable;
+
+public abstract class ValueProvider implements Serializable {
 
 	protected final ValueProviderDesc desc;
 

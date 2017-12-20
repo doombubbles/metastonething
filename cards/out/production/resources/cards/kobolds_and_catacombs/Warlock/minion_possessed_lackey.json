@@ -1,0 +1,26 @@
+{
+    "name": "Possessed Lackey",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "WARLOCK",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Deathrattle: Recruit a Demon",
+    "deathrattle": {
+        "class": "PutRandomMinionOnBoardSpell",
+		"cardLocation": "DECK",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"race": "DEMON"
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

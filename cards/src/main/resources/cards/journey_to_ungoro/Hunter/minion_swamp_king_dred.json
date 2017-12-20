@@ -14,7 +14,7 @@
 			"targetPlayer": "OPPONENT"
 		},
 		"spell": {
-			"class": "AttackWithSelfSpell",
+			"class": "AttackSpell",
 			"target": "EVENT_TARGET"
 		}
 	},

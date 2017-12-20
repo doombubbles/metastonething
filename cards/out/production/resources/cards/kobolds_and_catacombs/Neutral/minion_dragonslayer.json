@@ -1,0 +1,35 @@
+{
+    "name": "Dragonslayer",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Battlecry: Deal 6 damage to a Dragon",
+    "battlecry": {
+        "targetSelection": "MINIONS",
+        "spell": {
+			"class": "DamageSpell",
+			"value": 6,
+			"filter": {
+				"class": "RaceFilter",
+				"race": "DRAGON"
+			}
+		}
+    },
+	"glow": {
+		"class": "MinionOnBoardCondition",
+		"cardFilter": {
+			"class": "RaceFilter",
+			"race": "DRAGON"
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

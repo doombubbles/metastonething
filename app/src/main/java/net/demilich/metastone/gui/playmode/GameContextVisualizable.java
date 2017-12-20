@@ -12,6 +12,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
+import net.demilich.metastone.gui.multiplayermode.Server;
 
 public class GameContextVisualizable extends GameContext {
 
@@ -19,8 +20,11 @@ public class GameContextVisualizable extends GameContext {
 
 	private boolean blockedByAnimation;
 
-	public GameContextVisualizable(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
+	private boolean multiplayer;
+
+	public GameContextVisualizable(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, boolean multiplayer) {
 		super(player1, player2, logic, deckFormat);
+		this.multiplayer = multiplayer;
 	}
 
 	protected boolean acceptAction(GameAction nextAction) {
@@ -60,7 +64,10 @@ public class GameContextVisualizable extends GameContext {
 		}
 
 		setBlockedByAnimation(true);
-		NotificationProxy.sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+		if (multiplayer) {
+			NotificationProxy.sendNotification(GameNotification.SERVER_GAME_STATE_UPDATE, this);
+		} else NotificationProxy.sendNotification(GameNotification.GAME_STATE_UPDATE, this);
+
 
 		while (blockedByAnimation) {
 			try {
@@ -68,7 +75,9 @@ public class GameContextVisualizable extends GameContext {
 			} catch (InterruptedException e) {
 			}
 		}
-		NotificationProxy.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
+		if (multiplayer) {
+			NotificationProxy.sendNotification(GameNotification.SERVER_GAME_STATE_LATE_UPDATE, this);
+		} else NotificationProxy.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
 	}
 
 	public void setBlockedByAnimation(boolean blockedByAnimation) {

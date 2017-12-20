@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="panel" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,6 +19,7 @@
             <Button fx:id="trainingModeButton" layoutX="422.0" layoutY="391.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Training Mode" textAlignment="CENTER" />
             <Button fx:id="sandboxModeButton" layoutX="422.0" layoutY="417.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Sandbox Mode" textAlignment="CENTER" />
             <Button fx:id="battleOfDecksButton" layoutX="422.0" layoutY="388.0" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Battle of Decks" textAlignment="CENTER" />
+            <Button fx:id="multiplayerButton" mnemonicParsing="false" prefWidth="200.0" styleClass="main-button" text="Multiplayer" textAlignment="CENTER" />
          </children></VBox>
    </center>
    <top>

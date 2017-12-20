@@ -1,9 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +18,7 @@ import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
+import net.demilich.metastone.gui.multiplayermode.Client;
 
 public class HumanMulliganView extends BorderPane implements EventHandler<MouseEvent> {
 
@@ -42,7 +41,9 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 
 	private final HashMap<Card, MulliganEntry> mulliganState = new HashMap<Card, MulliganEntry>();
 
-	public HumanMulliganView(HumanMulliganOptions options) {
+	private boolean multiplayer;
+
+	public HumanMulliganView(HumanMulliganOptions options, boolean multiplayer) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/HumanMulliganView.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
@@ -54,7 +55,7 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 		}
 
 		displayCards(options);
-
+		this.multiplayer = multiplayer;
 		NotificationProxy.sendNotification(GameNotification.SHOW_MODAL_DIALOG, this);
 	}
 
@@ -86,7 +87,14 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 					discardedCards.add(card);
 				}
 			}
-			options.getBehaviour().setMulliganCards(discardedCards);
+
+			if (multiplayer) {
+				NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_MULLIGAN, new ArrayList<>(Arrays.asList(options, discardedCards)));
+				System.out.println("hohoho");
+			} else {
+				options.getBehaviour().setMulliganCards(discardedCards);
+
+			}
 			this.getScene().getWindow().hide();
 		});
 	}

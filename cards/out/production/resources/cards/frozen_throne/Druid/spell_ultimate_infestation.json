@@ -23,11 +23,8 @@
 				"armorBonus": 5
 			},
 			{
-				"class": "CreateSummonSpell",
-				"name": "Ghoul",
-				"attackBonus": 5,
-				"hpBonus": 5,
-				"mana": 5
+				"class": "SummonSpell",
+				"name": "token_55ghoul"
 			}
 		]
     },

@@ -50,6 +50,7 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ValueProviderArg.VALUE_1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ValueProviderArg.VALUE_2, jsonData, arguments, ParseValueType.VALUE);
+		parseArgument(ValueProviderArg.CUSTOM, jsonData, arguments, ParseValueType.STRING);
 
 		return new ValueProviderDesc(arguments);
 	}

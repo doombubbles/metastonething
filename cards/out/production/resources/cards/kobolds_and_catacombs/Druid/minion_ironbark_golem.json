@@ -1,0 +1,41 @@
+{
+    "name": "Ironbark Golem",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 6,
+    "heroClass": "DRUID",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Taunt. Can only attack if you have 3 or more Armor.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "EitherOrSpell",
+			"target": "SELF",
+			"spell1": {
+				"class": "RemoveAttributeSpell",
+				"attribute": "CANNOT_ATTACK"
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"attribute": "CANNOT_ATTACK"
+			},
+			"condition": {
+				"class": "AttributeCondition",
+				"target": "FRIENDLY_HERO",
+				"attribute": "ARMOR",
+				"operation": "GREATER_OR_EQUAL",
+				"value": 3
+			}
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

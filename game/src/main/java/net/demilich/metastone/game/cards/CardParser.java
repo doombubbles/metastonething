@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.desc.*;
 import net.demilich.metastone.utils.ResourceInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,26 +16,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
 import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
-import net.demilich.metastone.game.cards.desc.AuraDeserializer;
-import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
-import net.demilich.metastone.game.cards.desc.CardDesc;
-import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
-import net.demilich.metastone.game.cards.desc.ChooseHeroCardDesc;
-import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
-import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
-import net.demilich.metastone.game.cards.desc.GroupCardDesc;
-import net.demilich.metastone.game.cards.desc.HeroCardDesc;
-import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
-import net.demilich.metastone.game.cards.desc.MinionCardDesc;
-import net.demilich.metastone.game.cards.desc.PermanentCardDesc;
-import net.demilich.metastone.game.cards.desc.QuestCardDesc;
-import net.demilich.metastone.game.cards.desc.ReplaceHeroCardDesc;
-import net.demilich.metastone.game.cards.desc.SecretCardDesc;
-import net.demilich.metastone.game.cards.desc.SpellCardDesc;
-import net.demilich.metastone.game.cards.desc.SpellDeserializer;
-import net.demilich.metastone.game.cards.desc.ValueProviderDeserializer;
-import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
@@ -221,6 +202,14 @@ public class CardParser {
 			} else {
 				return gson.fromJson(jsonData, ReplaceHeroCardDesc.class);
 			}
+		case RIFT:
+			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
+			}
+			if (!jsonData.getAsJsonObject().has("description")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
+			}
+			return gson.fromJson(jsonData, RiftCardDesc.class);
 		case GROUP:
 			if (!jsonData.getAsJsonObject().has("group")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'group' attribute!");

@@ -25,7 +25,7 @@ public class StartGameCommand extends SimpleCommand<GameNotification> {
 		
 		DeckFormat deckFormat = gameConfig.getDeckFormat();
 
-		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
+		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat, false);
 		Thread t = new Thread(new Runnable() {
 
 			@Override

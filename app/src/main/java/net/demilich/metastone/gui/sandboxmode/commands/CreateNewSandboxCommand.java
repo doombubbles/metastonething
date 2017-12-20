@@ -36,7 +36,7 @@ public class CreateNewSandboxCommand extends SimpleCommand<GameNotification> {
 				
 				DeckFormat deckFormat = gameConfig.getDeckFormat();
 
-				GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat);
+				GameContext sandbox = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat, false);
 				sandboxProxy.setSandbox(sandbox);
 				sendNotification(GameNotification.UPDATE_SANDBOX_STATE, sandbox);
 

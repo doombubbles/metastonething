@@ -1,5 +1,6 @@
 package net.demilich.metastone.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
 
-public class GameContext implements Cloneable, IDisposable {
+public class GameContext implements Cloneable, IDisposable, Serializable {
 	public static final int PLAYER_1 = 0;
 	public static final int PLAYER_2 = 1;
 
@@ -111,6 +112,45 @@ public class GameContext implements Cloneable, IDisposable {
 		eventTargetReferenceStack.addAll(getEventTargetStack());
 		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
 		
+		for (Environment key : getEnvironment().keySet()) {
+			if (!key.customClone()) {
+				clone.getEnvironment().put(key, getEnvironment().get(key));
+			}
+		}
+		clone.getLogic().setLoggingEnabled(false);
+		return clone;
+	}
+
+	public GameContext cloneAndSwitch() {
+		GameLogic logicClone = getLogic().clone();
+		Player player1Clone = getPlayer2().clone();
+		// player1Clone.getDeck().shuffle();
+		Player player2Clone = getPlayer1().clone();
+		// player2Clone.getDeck().shuffle();
+		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, deckFormat);
+		clone.tempCards = tempCards.clone();
+		clone.triggerManager = triggerManager.clone();
+		clone.activePlayer = activePlayer;
+		clone.turn = turn;
+		clone.actionsThisTurn = actionsThisTurn;
+		clone.result = result;
+		clone.turnState = turnState;
+		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
+		clone.cardCostModifiers.clear();
+		for (CardCostModifier cardCostModifier : cardCostModifiers) {
+			clone.cardCostModifiers.add(cardCostModifier.clone());
+		}
+
+		Stack<Integer> damageStack = new Stack<Integer>();
+		damageStack.addAll(getDamageStack());
+		clone.getEnvironment().put(Environment.DAMAGE_STACK, damageStack);
+		Stack<EntityReference> summonReferenceStack = new Stack<EntityReference>();
+		summonReferenceStack.addAll(getSummonReferenceStack());
+		clone.getEnvironment().put(Environment.SUMMON_REFERENCE_STACK, summonReferenceStack);
+		Stack<EntityReference> eventTargetReferenceStack = new Stack<EntityReference>();
+		eventTargetReferenceStack.addAll(getEventTargetStack());
+		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
+
 		for (Environment key : getEnvironment().keySet()) {
 			if (!key.customClone()) {
 				clone.getEnvironment().put(key, getEnvironment().get(key));
@@ -401,6 +441,10 @@ public class GameContext implements Cloneable, IDisposable {
 		return triggerManager.getTriggersAssociatedWith(entityReference);
 	}
 
+	public List<IGameEventListener> getTriggers() {
+		return triggerManager.getTriggers();
+	}
+
 	public int getTurn() {
 		return turn;
 	}
@@ -436,6 +480,7 @@ public class GameContext implements Cloneable, IDisposable {
 		activePlayer = getPlayer(startingPlayerId).getId();
 		logger.debug(getActivePlayer().getName() + " begins");
 		logic.init(activePlayer, true);
+		System.out.println("weewoo");
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
 	}
 

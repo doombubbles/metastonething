@@ -7,6 +7,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 
 public class CardTooltip extends CardToken {
 
@@ -20,7 +21,31 @@ public class CardTooltip extends CardToken {
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
-		descriptionLabel.setText(card.getDescription());
+		String descriptionText = card.getDescription();
+		if (card.getDescValues().size() > 0 && context != null) {
+
+			if (descriptionText.contains("[")) {
+				descriptionText = descriptionText.replace(descriptionText.substring(descriptionText.indexOf("["), descriptionText.lastIndexOf("]") + 1), "");
+			}
+			if (descriptionText.contains("{")) {
+				String partInCurlies = descriptionText.substring(descriptionText.indexOf("{"), descriptionText.lastIndexOf("}") + 1);
+				String newPartInCurlies = partInCurlies;
+				for (int i = 1; i <= card.getDescValues().size(); i++) {
+					ValueProvider valueProvider = card.getDescValues().get(i-1);
+					newPartInCurlies = newPartInCurlies.replace("$" + i, valueProvider.getValue(context, player, null, card) + "");
+				}
+				descriptionText = descriptionText.replace(partInCurlies, newPartInCurlies).replace("{", "").replace("}", "");
+			}
+		} else {
+			if (descriptionText.contains("{")) {
+				descriptionText = descriptionText.replace(descriptionText.substring(descriptionText.indexOf("{"), descriptionText.lastIndexOf("}") + 1), "");
+			}
+			if (descriptionText.contains("[")) {
+				descriptionText = descriptionText.replace("[", "").replace("]", "");
+			}
+		}
+
+		descriptionLabel.setText(descriptionText);
 		if (!card.hasAttribute(Attribute.RACE) || card.getAttribute(Attribute.RACE) == Race.NONE) {
 			raceLabel.setVisible(false);
 		} else {

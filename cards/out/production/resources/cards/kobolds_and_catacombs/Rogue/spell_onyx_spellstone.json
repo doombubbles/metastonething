@@ -1,0 +1,33 @@
+{
+    "name": "Onyx Spellstone",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "RARE",
+    "description": "Destroy up to 2 random enemy minions. (Play 3 Deathrattle cards to upgrade.)",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MultiTargetSpell",
+		"target": "ENEMY_MINIONS",
+		"value": 2,
+		"spell": {
+			"class": "DestroySpell"
+		}
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"requiredAttribute": "DEATHRATTLES",
+			"value": 3
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"card": "spell_greater_onyx_spellstone"
+		}
+	},
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

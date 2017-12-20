@@ -1,0 +1,32 @@
+{
+    "name": "The Darkness",
+    "baseManaCost": 4,
+    "type": "PERMANENT",
+    "baseAttack": 20,
+    "baseHp": 20,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "When your opponent draws 3 Candles, this awakens!",
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardReceivedTrigger",
+			"targetPlayer": "OPPONENT",
+			"queueCondition": {
+				"class": "CardPropertyCondition",
+				"target": "EVENT_TARGET",
+				"cardId": "spell_darkness_candle"
+			}
+		},
+		"value": 3,
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "minion_the_darkness",
+			"exclusive": true
+		}
+	},
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

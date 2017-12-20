@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Summon a Jade Golem. Shuffle 3 Jade Relics into your deck.",
+	"description": "Summon a Jade Golem. Shuffle 3 Jade Idols into your deck.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -13,7 +13,7 @@
 				"class": "ShuffleToDeckSpell",
 				"howMany": 3,
 				"target": "NONE",
-				"card": "spell_jade_relic"
+				"card": "spell_jade_idol"
 			},
 			{
 				"class": "CreateSummonSpell",

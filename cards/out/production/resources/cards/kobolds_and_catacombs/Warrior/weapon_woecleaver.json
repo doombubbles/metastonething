@@ -1,0 +1,26 @@
+{
+    "name": "Woecleaver",
+    "baseManaCost": 8,
+    "type": "WEAPON",
+    "damage": 3,
+    "durability": 3,
+    "heroClass": "WARRIOR",
+    "rarity": "LEGENDARY",
+    "description": "After your hero attacks, Recruit a minion.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO"
+		},
+		"spell": {
+			"class": "PutRandomMinionOnBoardSpell",
+			"targetPlayer": "SELF",
+			"cardLocation": "DECK"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

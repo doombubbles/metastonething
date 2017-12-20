@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.statistics;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +12,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 
-public class GameStatistics implements Cloneable {
+public class GameStatistics implements Cloneable, Serializable {
 
 	private final Map<Statistic, Object> stats = new EnumMap<Statistic, Object>(Statistic.class);
 	private final Map<String, Map<Integer, Integer>> cardsPlayed = new HashMap<String, Map<Integer, Integer>>();

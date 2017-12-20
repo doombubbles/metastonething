@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "Summon a Jade Golem. Gain an empty Mana Crystal.",
+	"description": "Summon a {$1/$2} Jade Golem. Gain an empty Mana Crystal.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -48,6 +48,20 @@
 			}
 		]
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

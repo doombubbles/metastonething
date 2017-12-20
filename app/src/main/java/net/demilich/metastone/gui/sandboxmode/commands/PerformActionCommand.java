@@ -35,7 +35,7 @@ public class PerformActionCommand extends SimpleCommand<GameNotification> {
 			for (GameAction rolledAction : rolledOutActions) {
 				actionGroup.add(rolledAction);
 			}
-			HumanTargetOptions targetOptions = new HumanTargetOptions(this::performAction, context, selectedPlayer.getId(), actionGroup);
+			HumanTargetOptions targetOptions = new HumanTargetOptions(this::performAction, context, selectedPlayer.getId(), actionGroup, false);
 			sendNotification(GameNotification.SELECT_TARGET, targetOptions);
 		} else {
 			performAction(gameAction);

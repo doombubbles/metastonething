@@ -59,7 +59,7 @@ public class SandboxModeView extends BorderPane {
 		setCenter(loadingBoardView);
 
 		toolboxView = new ToolboxView();
-		actionPromptView = new HumanActionPromptView();
+		actionPromptView = new HumanActionPromptView(false);
 
 		backButton.setOnAction(actionEvent -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
 		playButton.setOnAction(this::startPlayMode);

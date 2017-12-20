@@ -39,7 +39,7 @@ public class SpawnMinionCommand extends SimpleCommand<GameNotification> {
 			actionGroup.add(gameAction);
 		}
 
-		HumanTargetOptions targetOptions = new HumanTargetOptions(this::spawnMinion, context, selectedPlayer.getId(), actionGroup);
+		HumanTargetOptions targetOptions = new HumanTargetOptions(this::spawnMinion, context, selectedPlayer.getId(), actionGroup, false);
 		sendNotification(GameNotification.SELECT_TARGET, targetOptions);
 	}
 

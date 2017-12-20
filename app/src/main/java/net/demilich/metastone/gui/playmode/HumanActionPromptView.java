@@ -1,6 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,6 +34,8 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.cards.CardTooltip;
 
 public class HumanActionPromptView extends VBox {
+
+	private boolean multiplayer;
 
 	private static String getActionString(GameContext context, GameAction action) {
 		PlayCardAction playCardAction = null;
@@ -96,7 +99,7 @@ public class HumanActionPromptView extends VBox {
 
 	private final List<Node> existingButtons = new ArrayList<Node>();
 
-	public HumanActionPromptView() {
+	public HumanActionPromptView(boolean multiplayer) {
 		Label headerLabel = new Label("Choose action:");
 		headerLabel.setStyle("-fx-font-family: Arial;-fx-font-weight: bold; -fx-font-size: 16pt;");
 
@@ -105,6 +108,7 @@ public class HumanActionPromptView extends VBox {
 		setPadding(new Insets(8));
 		setAlignment(Pos.CENTER);
 		getChildren().add(headerLabel);
+		this.multiplayer = multiplayer;
 	}
 
 	private Node createActionButton(final ActionGroup actionGroup, HumanActionOptions options) {
@@ -156,13 +160,15 @@ public class HumanActionPromptView extends VBox {
 		if (actionGroup.getActionsInGroup().size() == 1 && (actionGroup.getPrototype().getTargetRequirement() == TargetSelection.NONE
 				|| actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
 			button.setOnAction(event -> {
-				options.getBehaviour().onActionSelected(actionGroup.getPrototype());
+				if (multiplayer) {
+					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  actionGroup.getPrototype())));
+				} else options.getBehaviour().onActionSelected(actionGroup.getPrototype());
 				setVisible(false);
 
 			});
 			return button;
 		}
-		HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), actionGroup);
+		HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), actionGroup, multiplayer);
 		
 		button.setOnAction(event -> {
 			NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
@@ -209,7 +215,7 @@ public class HumanActionPromptView extends VBox {
 		Collection<ActionGroup> actionGroups = groupActions(options);
 		for (ActionGroup actionGroup : actionGroups) {
 			if (actionGroup.getPrototype().getActionType().equals(ActionType.BATTLECRY)) {
-				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), options.getContext(), options.getPlayer().getId(), actionGroup);
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), options.getContext(), options.getPlayer().getId(), actionGroup, multiplayer);
 				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
 				return;
 			}

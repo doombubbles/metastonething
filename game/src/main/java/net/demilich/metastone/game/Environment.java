@@ -1,6 +1,6 @@
 package net.demilich.metastone.game;
 
-public enum Environment {
+public enum Environment{
 	SUMMON_REFERENCE_STACK,
 	KILLED_MINION,
 	TARGET_OVERRIDE,

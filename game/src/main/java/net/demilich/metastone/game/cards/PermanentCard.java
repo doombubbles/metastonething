@@ -17,7 +17,7 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
 public class PermanentCard extends SummonCard {
 
-	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
+	public static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
 			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
 					Attribute.BASE_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
 

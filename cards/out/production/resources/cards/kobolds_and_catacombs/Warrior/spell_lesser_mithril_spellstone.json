@@ -15,7 +15,8 @@
     },
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "WeaponEquippedTrigger"
+			"class": "WeaponEquippedTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
 			"class": "TransformCardSpell",

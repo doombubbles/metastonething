@@ -4,7 +4,7 @@
     "type": "SPELL",
     "heroClass": "PRIEST",
     "rarity": "RARE",
-    "description": "Resurrect 2 different friendly minions. (Cast 4 spells to upgrade.)",
+    "description": "Resurrect 2 different friendly minions. (Cast {$1 more}[4] spells to upgrade.)",
     "targetSelection": "NONE",
     "spell": {
 		"class": "ResurrectSpell",
@@ -22,6 +22,13 @@
 			"card": "spell_diamond_spellstone"
 		}
 	},
+	"descValues": [
+		{
+			"class": "TriggerValueProvider",
+			"target": "SELF",
+			"custom": "SPELL_CASTED"
+		}
+	],
     "collectible": true,
     "set": "KOBOLDS_AND_CATACOMBS",
     "fileFormatVersion": 1

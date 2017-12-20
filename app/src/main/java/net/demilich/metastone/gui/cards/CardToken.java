@@ -18,13 +18,7 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.ReplaceHeroCard;
-import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.WeaponCard;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.spells.Spell;
@@ -100,7 +94,7 @@ public class CardToken extends BorderPane {
 
 		boolean isMinionOrWeaponCard = card.getCardType().isCardType(CardType.MINION) || card.getCardType().isCardType(CardType.WEAPON);
 		attackAnchor.setVisible(isMinionOrWeaponCard);
-		hpAnchor.setVisible(isMinionOrWeaponCard || card.getCardType().isCardType(CardType.REPLACE_HERO));
+		hpAnchor.setVisible(isMinionOrWeaponCard || card.getCardType().isCardType(CardType.REPLACE_HERO) || card.getCardType().isCardType(CardType.RIFT));
 		attackIcon.setVisible(isMinionOrWeaponCard);
 		hpIcon.setVisible(isMinionOrWeaponCard || card.getCardType().isCardType(CardType.REPLACE_HERO));
 		if (card.getCardType().isCardType(CardType.MINION)) {
@@ -114,6 +108,9 @@ public class CardToken extends BorderPane {
 		} else if (card.getCardType().isCardType(CardType.REPLACE_HERO)) {
 			ReplaceHeroCard replaceHeroCard = (ReplaceHeroCard) card;
 			setScoreValue(hpAnchor, replaceHeroCard.armor);
+		} else if (card.getCardType().isCardType((CardType.RIFT))) {
+			RiftCard riftCard = (RiftCard) card;
+			setScoreValue(hpAnchor, riftCard.getDuration());
 		}
 	}
 
@@ -169,6 +166,12 @@ public class CardToken extends BorderPane {
 
 	public void setNonCard(String name, String description) {
 		nameLabel.setText(name);
+		if (description.contains("{")) {
+			description = description.replace(description.substring(description.indexOf("{"), description.lastIndexOf("}") + 1), "");
+		}
+		if (description.contains("[")) {
+			description = description.replace("[", "").replace("]", "");
+		}
 		descriptionLabel.setText(description);
 		setRarity(Rarity.FREE);
 		manaCostAnchor.setVisible(false);

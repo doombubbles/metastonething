@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.gui.multiplayermode.MultiplayerConfigMediator;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
@@ -45,6 +46,8 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		case BATTLE_OF_DECKS_SELECTED:
 			getFacade().registerMediator(new BattleOfDecksMediator());
 			break;
+		case MUlTIPLAYER_MODE_SELECTED:
+			getFacade().registerMediator(new MultiplayerConfigMediator());
 		default:
 			break;
 		}
@@ -60,6 +63,7 @@ public class MainMenuMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.SANDBOX_MODE_SELECTED);
 		notificationInterests.add(GameNotification.TRAINING_MODE_SELECTED);
 		notificationInterests.add(GameNotification.BATTLE_OF_DECKS_SELECTED);
+		notificationInterests.add(GameNotification.MUlTIPLAYER_MODE_SELECTED);
 		return notificationInterests;
 	}
 

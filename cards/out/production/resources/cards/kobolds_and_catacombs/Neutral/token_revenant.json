@@ -1,0 +1,14 @@
+{
+    "name": "Revenant",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "NONE",
+    "description": "Gets Leo an Oscar",
+    "collectible": false,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -4,7 +4,7 @@
     "type": "SPELL",
     "heroClass": "ROGUE",
     "rarity": "RARE",
-    "description": "Destroy up to 2 random enemy minions. (Play 3 Deathrattle cards to upgrade.)",
+    "description": "Destroy up to 2 random enemy minions. (Play {$1 more}[3] Deathrattle cards to upgrade.)",
     "targetSelection": "NONE",
     "spell": {
         "class": "MultiTargetSpell",
@@ -27,6 +27,13 @@
 			"card": "spell_greater_onyx_spellstone"
 		}
 	},
+	"descValues": [
+		{
+			"class": "TriggerValueProvider",
+			"target": "SELF",
+			"custom": "PLAY_CARD"
+		}
+	],
     "collectible": false,
     "set": "KOBOLDS_AND_CATACOMBS",
     "fileFormatVersion": 1

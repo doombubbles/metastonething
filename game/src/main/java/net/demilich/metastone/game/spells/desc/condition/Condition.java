@@ -4,7 +4,9 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 
-public abstract class Condition {
+import java.io.Serializable;
+
+public abstract class Condition implements Serializable {
 
 	private final ConditionDesc desc;
 

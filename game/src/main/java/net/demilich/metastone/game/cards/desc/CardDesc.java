@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards.desc;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
@@ -13,7 +14,7 @@ import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
-public abstract class CardDesc {
+public abstract class CardDesc implements Serializable {
 
 	public String id;
 	public String name;
@@ -31,6 +32,7 @@ public abstract class CardDesc {
 	public TriggerDesc passiveTrigger;
 	public TriggerDesc deckTrigger;
 	public ConditionDesc glow;
+	public ValueProviderDesc[] descValues;
 
 	public abstract Card createInstance();
 

@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.playmode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.gui.multiplayermode.Client;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import javafx.application.Platform;
@@ -15,17 +16,19 @@ import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanMulliganOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 
-public class PlayModeMediator extends Mediator<GameNotification>implements EventHandler<KeyEvent> {
+public class PlayModeMediator extends Mediator<GameNotification> implements EventHandler<KeyEvent> {
 
 	public static final String NAME = "PlayModeMediator";
 
 	private final PlayModeView view;
 	private final HumanActionPromptView actionPromptView;
+	private final Client client;
 
-	public PlayModeMediator() {
+	public PlayModeMediator(Client client) {
 		super(NAME);
-		view = new PlayModeView();
+		view = new PlayModeView(client != null);
 		actionPromptView = view.getActionPromptView();
+		this.client = client;
 	}
 
 	@Override
@@ -35,11 +38,6 @@ public class PlayModeMediator extends Mediator<GameNotification>implements Event
 		}
 
 		view.disableTargetSelection();
-	}
-	
-	public void thing(HumanActionOptions actionOptions) {
-		actionPromptView.setActions(actionOptions, true);
-		view.doCardActionStuff(actionOptions);
 	}
 
 	@Override
@@ -55,7 +53,10 @@ public class PlayModeMediator extends Mediator<GameNotification>implements Event
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
 			HumanActionOptions actionOptions = (HumanActionOptions) notification.getBody();
-			Platform.runLater(() -> thing(actionOptions));
+			Platform.runLater(() -> {
+				actionPromptView.setActions(actionOptions, true);
+				view.doCardActionStuff(actionOptions);
+			});
 			break;
 		case HUMAN_PROMPT_FOR_TARGET:
 			HumanTargetOptions options = (HumanTargetOptions) notification.getBody();
@@ -63,12 +64,41 @@ public class PlayModeMediator extends Mediator<GameNotification>implements Event
 			break;
 		case HUMAN_PROMPT_FOR_MULLIGAN:
 			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
-			Platform.runLater(() -> new HumanMulliganView(mulliganOptions));
+			Platform.runLater(() -> new HumanMulliganView(mulliganOptions, client != null));
 			break;
 		case HIDE_ACTIONS:
 			HumanActionOptions actionOptions2 = (HumanActionOptions) notification.getBody();
 			Platform.runLater(() -> actionPromptView.setActions(actionOptions2, false));
 			break;
+
+
+
+		case REPLY_FROM_SERVER_PROMPT_FOR_MULLIGAN:
+			client.sendNotifiation(notification.getId(), notification.getBody());
+			break;
+
+		case REPLY_FROM_SERVER_PROMPT_FOR_ACTION:
+			client.sendNotifiation(notification.getId(), notification.getBody());
+			break;
+
+		/*
+		case CLIENT_PROMPT_FOR_MULLIGAN:
+			HumanMulliganOptions mulliganOptions2 = (HumanMulliganOptions) notification.getBody();
+			Platform.runLater(() -> new HumanMulliganView(mulliganOptions2, true));
+			break;
+		case CLIENT_PROMPT_FOR_ACTION:
+			HumanActionOptions actionOptions3 = (HumanActionOptions) notification.getBody();
+			Platform.runLater(() -> thing(actionOptions3));
+			break;
+		case CLIENT_GAME_STATE_UPDATE:
+			GameContext context3 = (GameContext) notification.getBody();
+			Platform.runLater(() -> view.showAnimations(context3));
+			break;
+		case CLIENT_GAME_STATE_LATE_UPDATE:
+			GameContext context4 = (GameContext) notification.getBody();
+			Platform.runLater(() -> view.updateGameState(context4));
+			break;
+		*/
 		default:
 			break;
 		}
@@ -85,6 +115,8 @@ public class PlayModeMediator extends Mediator<GameNotification>implements Event
 		notificationInterests.add(GameNotification.REPLY_DECKS);
 		notificationInterests.add(GameNotification.REPLY_DECK_FORMATS);
 		notificationInterests.add(GameNotification.HIDE_ACTIONS);
+		notificationInterests.add(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION);
+		notificationInterests.add(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_MULLIGAN);
 		return notificationInterests;
 	}
 

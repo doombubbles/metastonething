@@ -35,6 +35,10 @@ public class MainMenuView extends BorderPane {
 	private Button battleOfDecksButton;
 
 	@FXML
+	private Button multiplayerButton;
+
+
+	@FXML
 	private Label versionLabel;
 
 	@FXML
@@ -65,6 +69,8 @@ public class MainMenuView extends BorderPane {
 
 		battleOfDecksButton
 				.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.BATTLE_OF_DECKS_SELECTED));
+
+		multiplayerButton.setOnAction(event -> NotificationProxy.sendNotification(GameNotification.MUlTIPLAYER_MODE_SELECTED));
 
 		if (!BuildConfig.DEV_BUILD) {
 			trainingModeButton.setVisible(false);

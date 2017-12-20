@@ -1,0 +1,52 @@
+{
+    "name": "Master Oakheart",
+    "baseManaCost": 9,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry: Recruit a 1, 2, and 3-Attack minion.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "PutRandomMinionOnBoardSpell",
+					"targetPlayer": "SELF",
+					"cardLocation": "DECK",
+					"cardFilter": {
+						"class": "CardFilter",
+						"manaCost": 1
+					}
+				},
+				{
+					"class": "PutRandomMinionOnBoardSpell",
+					"targetPlayer": "SELF",
+					"cardLocation": "DECK",
+					"cardFilter": {
+						"class": "CardFilter",
+						"manaCost": 2
+					}
+				},
+				{
+					"class": "PutRandomMinionOnBoardSpell",
+					"targetPlayer": "SELF",
+					"cardLocation": "DECK",
+					"cardFilter": {
+						"class": "CardFilter",
+						"manaCost": 3
+					}
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

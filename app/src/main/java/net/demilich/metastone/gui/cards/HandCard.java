@@ -1,10 +1,7 @@
 package net.demilich.metastone.gui.cards;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javafx.event.Event;
 import javafx.event.EventType;
@@ -67,6 +64,7 @@ public class HandCard extends CardToken {
 	private Tooltip tooltip;
 
 	private HumanActionOptions options;
+	private boolean multiplayer;
 	
 	public HandCard() {
 		super("HandCard.fxml");
@@ -128,6 +126,7 @@ public class HandCard extends CardToken {
 	
 	public void setOptions(HumanActionOptions actionOptions) {
 		options = actionOptions;
+		multiplayer = options.getBehaviour().getName().equals("<Multiplayer controlled>");
 	}
 	
 	public void play(MouseEvent mouseEvent) {
@@ -174,10 +173,16 @@ public class HandCard extends CardToken {
 			yeah = yeahs.get(0);
 			
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
-				options.getBehaviour().onActionSelected(yeah.getPrototype());
+
+
+				if (multiplayer) {
+					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+				} else options.getBehaviour().onActionSelected(yeah.getPrototype());
+
+
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 			} else {
-				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah);
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah, multiplayer);
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
 			}

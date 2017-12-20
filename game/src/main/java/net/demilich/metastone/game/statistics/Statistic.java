@@ -22,5 +22,4 @@ public enum Statistic {
 	WEAPONS_EQUIPPED,
 	WEAPONS_PLAYED,
 	OVERLOADED_MANA,
-
 }

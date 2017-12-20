@@ -5,7 +5,9 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.TargetPlayer;
 
-public abstract class EntityFilter {
+import java.io.Serializable;
+
+public abstract class EntityFilter implements Serializable {
 
 	protected final FilterDesc desc;
 

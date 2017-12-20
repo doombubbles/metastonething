@@ -11,11 +11,8 @@
     "deathrattle": {
         "class": "ConditionalSpell",
 		"spell": {
-			"class": "CreateSummonSpell",
-			"attackBonus": 8,
-			"hpBonus": 8,
-			"name": "Skeleton",
-			"mana": 8
+			"class": "SummonSpell",
+			"card": "token_88skeleton"
 		},
 		"condition": {
 			"class": "OwnedByPlayerCondition",

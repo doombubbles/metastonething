@@ -1,0 +1,30 @@
+{
+    "name": "Lesser Onyx Spellstone",
+    "baseManaCost": 5,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "RARE",
+    "description": "Destroy 1 random enemy minion. (Play 3 Deathrattle cards to upgrade.)",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "DestroySpell",
+		"target": "ENEMY_MINIONS",
+		"randomTarget": true
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"requiredAttribute": "DEATHRATTLES",
+			"value": 3
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"card": "spell_onyx_spellstone"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

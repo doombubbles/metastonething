@@ -1,0 +1,33 @@
+{
+    "name": "Unidentified Shield",
+    "baseManaCost": 6,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "COMMON",
+    "description": "Gain 5 Armor. Gains a bonus effect in your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "BuffHeroSpell",
+		"target": "FRIENDLY_HERO",
+		"armoBonus": 5
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "CardDrawnTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"cards": [
+				"spell_tower_shield_10",
+				"spell_serrated_shield",
+				"spell_runed_shield",
+				"spell_spiked_shield"
+			]
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,14 @@
+{
+	"name": "Giant Rat",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"race": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

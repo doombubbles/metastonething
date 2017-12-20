@@ -4,54 +4,19 @@
 	"heroClass": "ROGUE",
 	"rarity": "FREE",
 	"description": "When you play 4 cards in a turn, revive this minion.",
-	"triggers": [
-		{
-			"eventTrigger": {
-				"class": "CardPlayedTrigger",
-				"targetPlayer": "SELF"
-			},
-			"spell": {
-				"class": "ModifyAttributeSpell",
-				"target": "SELF",
-				"attribute": "CUSTOM_1",
-				"value": 1
-			}
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"value": 4,
+			"inOneTurn": true
 		},
-		{
-			"eventTrigger": {
-				"class": "CardPlayedTrigger",
-				"targetPlayer": "SELF"
-			},
-			"spell": {
-				"class": "ConditionalSpell",
-				"spell": {
-					"class": "TransformMinionSpell",
-					"target": "SELF",
-					"card": "minion_sherazin_corpse_flower"
-				},
-				"condition": {
-					"class": "AttributeCondition",
-					"target": "SELF",
-					"value": 4,
-					"operation": "GREATER_OR_EQUAL",
-					"attribute": "CUSTOM_1"
-				}
-			}
-		},
-		{
-			"eventTrigger": {
-				"class": "TurnEndTrigger",
-				"targetPlayer": "SELF"
-			},
-			"spell": {
-				"class": "SetAttributeSpell",
-				"target": "SELF",
-				"attribute": "CUSTOM_1",
-				"value": 0
-			}
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "minion_sherazin_corpse_flower"
 		}
-		
-	],
+	},
 	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1

@@ -1,0 +1,24 @@
+{
+    "name": "Evasion",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "EPIC",
+    "description": "Secret: After your hero takes damage, become Immune this turn.",
+    "trigger": {
+		"class": "DamageReceivedTrigger",
+		"targetEntityType": "HERO",
+		"targetPlayer": "SELF"
+	},
+	"spell": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "IMMUNE",
+		"revertTrigger": {
+			"class": "TurnEndTrigger"
+		}
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}

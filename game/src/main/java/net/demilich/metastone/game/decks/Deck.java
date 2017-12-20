@@ -5,7 +5,9 @@ import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 
-public class Deck {
+import java.io.Serializable;
+
+public class Deck implements Serializable {
 
 	private String name = "";
 	private final HeroClass heroClass;

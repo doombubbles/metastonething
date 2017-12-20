@@ -21,4 +21,5 @@ public enum EventTriggerArg {
 	RESET,
 	TOTAL,
 	CUSTOM
+
 }

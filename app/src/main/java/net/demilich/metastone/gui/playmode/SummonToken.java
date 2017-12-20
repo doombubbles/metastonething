@@ -1,9 +1,12 @@
 package net.demilich.metastone.gui.playmode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javafx.scene.image.ImageView;
+import net.demilich.metastone.game.entities.minions.Rift;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +59,12 @@ public class SummonToken extends GameToken {
 	private Group hpAnchor;
 
 	@FXML
+	private ImageView attack_icon;
+
+	@FXML
+	private ImageView health_icon;
+
+	@FXML
 	private Node defaultToken;
 	@FXML
 	private Node divineShield;
@@ -99,6 +108,7 @@ public class SummonToken extends GameToken {
 	private CardTooltip cardTooltip;
 	
 	private HumanActionOptions options;
+	private boolean multiplayer;
 	
 	private Summon summon;
 	
@@ -119,12 +129,19 @@ public class SummonToken extends GameToken {
 		name.setText(summon.getName());
 		if (summon instanceof Minion) {
 			attackAnchor.setVisible(true);
+			attack_icon.setVisible(true);
 			hpAnchor.setVisible(true);
+			health_icon.setVisible(true);
 			setScoreValue(attackAnchor, summon.getAttack(), summon.getAttributeValue(Attribute.BASE_ATTACK));
 			setScoreValue(hpAnchor, summon.getHp(), summon.getBaseHp(), summon.getMaxHp());
 		} else if (summon instanceof Permanent) {
+			if (summon instanceof Rift) {
+				hpAnchor.setVisible(true);
+				setScoreValue(hpAnchor, ((Rift) summon).getTime(), ((Rift) summon).getTotalDuration());
+			} else hpAnchor.setVisible(false);
 			attackAnchor.setVisible(false);
-			hpAnchor.setVisible(false);
+			attack_icon.setVisible(false);
+			health_icon.setVisible(false);
 		}
 		this.summon = summon;
 		visualizeStatus(summon);
@@ -186,6 +203,7 @@ public class SummonToken extends GameToken {
 	
 	public void setOptions(HumanActionOptions actionOptions) {
 		options = actionOptions;
+		multiplayer = options.getBehaviour().getName().equals("<Multiplayer controlled>");
 	}
 	
 	public void attack(MouseEvent mouseEvent) {
@@ -214,10 +232,12 @@ public class SummonToken extends GameToken {
 				return;
 			}
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
-				options.getBehaviour().onActionSelected(yeah.getPrototype());
+				if (multiplayer) {
+					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+				} else options.getBehaviour().onActionSelected(yeah.getPrototype());
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 			} else {
-				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah);
+				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah, multiplayer);
 				NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_TARGET, humanTargetOptions);
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 			}

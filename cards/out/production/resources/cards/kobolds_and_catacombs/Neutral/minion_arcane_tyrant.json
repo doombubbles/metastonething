@@ -14,7 +14,7 @@
 		"ifFalse": 0,
 		"condition": {
 			"class": "PlayedThisTurnCondition",
-			"cardFilter": {
+			"filter": {
 				"class": "CardFilter",
 				"cardType": "SPELL",
 				"attribute": "BASE_MANA_COST",

@@ -1,0 +1,25 @@
+{
+    "name": "Dark Pact",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "COMMON",
+    "description": "Destroy a friendly minion. Restore 8 Health to your hero.",
+    "targetSelection": "FRIENDLY_MINIONS",
+    "spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DestroySpell"
+			},
+			{
+				"class": "HealSpell",
+				"target": "FRIENDLY_HERO",
+				"value": 8
+			}
+		]
+	},
+    "collectible": true,
+    "set": "KOBOLDS_AND_CATACOMBS",
+    "fileFormatVersion": 1
+}
