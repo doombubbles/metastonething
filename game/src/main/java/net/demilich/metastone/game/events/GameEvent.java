@@ -7,7 +7,9 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.trigger.GameEventTrigger;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
-public abstract class GameEvent {
+import java.io.Serializable;
+
+public abstract class GameEvent implements Serializable {
 
 	private final GameContext context;
 	private final int targetPlayerId;

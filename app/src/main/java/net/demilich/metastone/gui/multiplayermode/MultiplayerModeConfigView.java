@@ -92,6 +92,7 @@ public class MultiplayerModeConfigView extends BorderPane implements EventHandle
 			multiPlayerConfig.setNumberOfGames(1);
 			PlayerConfig playerConfig = player1Config.getPlayerConfig();
 			playerConfig.setBehaviour(new MultiplayerBehaviour());
+			playerConfig.setHideCards(false);
 			multiPlayerConfig.setPlayerConfig1(playerConfig);
 			multiPlayerConfig.setDeckFormat(formatBox.getValue());
 			multiPlayerConfig.setIpAddress(player1Config.getIpAddress());

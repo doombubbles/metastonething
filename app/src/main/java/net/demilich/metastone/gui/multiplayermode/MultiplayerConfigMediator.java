@@ -2,10 +2,9 @@ package net.demilich.metastone.gui.multiplayermode;
 
 import net.demilich.metastone.BuildConfig;
 import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.Server;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.gameconfig.GameConfig;
 import net.demilich.metastone.game.gameconfig.MultiplayerConfig;
 import net.demilich.metastone.gui.playmode.PlayModeMediator;
 import net.demilich.nittygrittymvc.Mediator;
@@ -43,25 +42,21 @@ public class MultiplayerConfigMediator extends Mediator<GameNotification> {
 			MultiplayerConfig multiplayerConfig = (MultiplayerConfig) notification.getBody();
 
 			if (multiplayerConfig.getIpAddress().equals("") || multiplayerConfig.getIpAddress().equals(null)) {
-				Server server = new Server(multiplayerConfig, BuildConfig.VERSION);
-				MultiplayerMediator multiplayerMediator = new MultiplayerMediator(server);
-				getFacade().registerMediator(multiplayerMediator);
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						server.initialize();
+						Server.initialize(multiplayerConfig, BuildConfig.VERSION);
 					}
 				}).start();
 				multiplayerConfig.setIpAddress("localhost");
 			}
 
-			Client client = new Client(multiplayerConfig, BuildConfig.VERSION);
-			PlayModeMediator mediator = new PlayModeMediator(client);
+			PlayModeMediator mediator = new PlayModeMediator(true);
 			getFacade().registerMediator(mediator);
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					client.initialize();
+					Client.initialize(multiplayerConfig, BuildConfig.VERSION);
 				}
 			}).start();
 

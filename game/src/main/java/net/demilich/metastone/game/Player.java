@@ -184,6 +184,10 @@ public class Player extends Entity {
 		return hideCards && !(behaviour instanceof HumanBehaviour);
 	}
 
+	public boolean isHideCards() {
+		return  hideCards;
+	}
+
 	public void setBehaviour(IBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}

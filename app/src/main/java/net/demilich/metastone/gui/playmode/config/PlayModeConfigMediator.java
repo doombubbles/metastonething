@@ -3,11 +3,6 @@ package net.demilich.metastone.gui.playmode.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.gui.multiplayermode.Server;
-import net.demilich.metastone.gui.multiplayermode.Client;
-import net.demilich.metastone.game.gameconfig.MultiplayerConfig;
-import net.demilich.metastone.gui.multiplayermode.MultiplayerMediator;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
@@ -41,7 +36,7 @@ public class PlayModeConfigMediator extends Mediator<GameNotification> {
 			view.injectDeckFormats(deckFormats);
 			break;
 		case COMMIT_PLAYMODE_CONFIG:
-			getFacade().registerMediator(new PlayModeMediator(null));
+			getFacade().registerMediator(new PlayModeMediator(false));
 			new Thread(new Runnable() {
 
 				@Override

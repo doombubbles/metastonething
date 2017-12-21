@@ -114,7 +114,6 @@ public class TargetLogic implements Serializable {
 		if (cardResult != null) {
 			return cardResult;
 		}
-
 		logger.error("Id " + targetId + " not found!");
 		logger.error(context.toString());
 		logger.error(context.getEnvironment().toString());
@@ -214,103 +213,103 @@ public class TargetLogic implements Serializable {
 		if (targetKey == null || targetKey == EntityReference.NONE) {
 			return null;
 		}
-		if (targetKey == EntityReference.ALL_CHARACTERS) {
+
+		if (targetKey.getId() == EntityReference.ALL_CHARACTERS.getId()) {
 			return getEntities(context, player, TargetSelection.ANY);
-		} else if (targetKey == EntityReference.ALL_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.ALL_MINIONS.getId()) {
 			return getEntities(context, player, TargetSelection.MINIONS);
-		} else if (targetKey == EntityReference.ENEMY_CHARACTERS) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_CHARACTERS.getId()) {
 			return getEntities(context, player, TargetSelection.ENEMY_CHARACTERS);
-		} else if (targetKey == EntityReference.ENEMY_HERO) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_HERO.getId()) {
 			return getEntities(context, player, TargetSelection.ENEMY_HERO);
-		} else if (targetKey == EntityReference.ENEMY_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_MINIONS.getId()) {
 			return getEntities(context, player, TargetSelection.ENEMY_MINIONS);
-		} else if (targetKey == EntityReference.FRIENDLY_CHARACTERS) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_CHARACTERS.getId()) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_CHARACTERS);
-		} else if (targetKey == EntityReference.FRIENDLY_HERO) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_HERO.getId()) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_HERO);
-		} else if (targetKey == EntityReference.FRIENDLY_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_MINIONS.getId()) {
 			return getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
-		} else if (targetKey == EntityReference.OTHER_FRIENDLY_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.OTHER_FRIENDLY_MINIONS.getId()) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.FRIENDLY_MINIONS);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.ALL_OTHER_CHARACTERS) {
+		} else if (targetKey.getId() == EntityReference.ALL_OTHER_CHARACTERS.getId()) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.ANY);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.ALL_OTHER_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.ALL_OTHER_MINIONS.getId()) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.MINIONS);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.ADJACENT_MINIONS.getId()) {
 			return new ArrayList<>(context.getAdjacentSummons(player, source.getReference()));
-		} else if (targetKey == EntityReference.OPPOSITE_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.OPPOSITE_MINIONS.getId()) {
 			return new ArrayList<>(context.getOppositeSummons(player, source.getReference()));
-		} else if (targetKey == EntityReference.MINIONS_TO_LEFT) {
+		} else if (targetKey.getId() == EntityReference.MINIONS_TO_LEFT.getId()) {
 			return new ArrayList<>(context.getLeftSummons(player, source.getReference()));
-		} else if (targetKey == EntityReference.MINIONS_TO_RIGHT) {
+		} else if (targetKey.getId() == EntityReference.MINIONS_TO_RIGHT.getId()) {
 			return new ArrayList<>(context.getRightSummons(player, source.getReference()));
-		} else if (targetKey == EntityReference.SELF) {
+		} else if (targetKey.getId() == EntityReference.SELF.getId()) {
 			return singleTargetAsList(source);
-		} else if (targetKey == EntityReference.EVENT_TARGET) {
+		} else if (targetKey.getId() == EntityReference.EVENT_TARGET.getId()) {
 			return singleTargetAsList(context.resolveSingleTarget(context.getEventTargetStack().peek()));
-		} else if (targetKey == EntityReference.TARGET) {
+		} else if (targetKey.getId() == EntityReference.TARGET.getId()) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET)));
-		} else if (targetKey == EntityReference.SPELL_TARGET) {
+		} else if (targetKey.getId() == EntityReference.SPELL_TARGET.getId()) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.SPELL_TARGET)));
-		} else if (targetKey == EntityReference.KILLED_MINION) {
+		} else if (targetKey.getId() == EntityReference.KILLED_MINION.getId()) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.KILLED_MINION)));
-		} else if (targetKey == EntityReference.ATTACKER_REFERENCE) {
+		} else if (targetKey.getId() == EntityReference.ATTACKER_REFERENCE.getId()) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.ATTACKER_REFERENCE)));
-		} else if (targetKey == EntityReference.PENDING_CARD) {
+		} else if (targetKey.getId() == EntityReference.PENDING_CARD.getId()) {
 			return singleTargetAsList((Entity) context.getPendingCard());
-		} else if (targetKey == EntityReference.EVENT_CARD) {
+		} else if (targetKey.getId() == EntityReference.EVENT_CARD.getId()) {
 			return singleTargetAsList((Entity) context.getEventCard());
-		} else if (targetKey == EntityReference.FRIENDLY_WEAPON) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_WEAPON.getId()) {
 			if (player.getHero().getWeapon() != null) {
 				return singleTargetAsList(player.getHero().getWeapon());
 			} else {
 				return new ArrayList<>();
 			}
-		} else if (targetKey == EntityReference.ENEMY_WEAPON) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_WEAPON.getId()) {
 			Player opponent = context.getOpponent(player);
 			if (opponent.getHero().getWeapon() != null) {
 				return singleTargetAsList(opponent.getHero().getWeapon());
 			} else {
 				return new ArrayList<>();
 			}
-		} else if (targetKey == EntityReference.FRIENDLY_HAND) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_HAND.getId()) {
 			return new ArrayList<>(player.getHand().toList());
-		} else if (targetKey == EntityReference.FRIENDLY_DECK) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_DECK.getId()) {
 			return new ArrayList<>(player.getDeck().toList());
-		} else if (targetKey == EntityReference.ENEMY_HAND) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_HAND.getId()) {
 			return new ArrayList<>(context.getOpponent(player).getHand().toList());
-		} else if (targetKey == EntityReference.ENEMY_DECK) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_DECK.getId()) {
 			return new ArrayList<>(context.getOpponent(player).getDeck().toList());
-		} else if (targetKey == EntityReference.FRIENDLY_PLAYER) {
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_PLAYER.getId()) {
 			return singleTargetAsList(player);
-		} else if (targetKey == EntityReference.ENEMY_PLAYER) {
+		} else if (targetKey.getId() == EntityReference.ENEMY_PLAYER.getId()) {
 			return singleTargetAsList(context.getOpponent(player));
-		} else if (targetKey == EntityReference.OTHER_ENEMY_MINIONS) {
+		} else if (targetKey.getId() == EntityReference.OTHER_ENEMY_MINIONS.getId()) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.ENEMY_MINIONS);
 			targets.remove(source);
 			return targets;
-		} else if (targetKey == EntityReference.RIGHTMOST_ENEMY_MINION) {
+		} else if (targetKey.getId() == EntityReference.RIGHTMOST_ENEMY_MINION.getId()) {
 			Player opponent = context.getOpponent(player);
 			List<Minion> minions =  opponent.getMinions();
 			return singleTargetAsList(minions.get(minions.size() - 1));
-		} else if (targetKey == EntityReference.RIGHTMOST_FRIENDLY_MINION) {
+		} else if (targetKey.getId() == EntityReference.RIGHTMOST_FRIENDLY_MINION.getId()) {
 			List<Minion> minions =  player.getMinions();
 			return singleTargetAsList(minions.get(minions.size() - 1));
-		} else if (targetKey == EntityReference.LEFTMOST_ENEMY_MINION) {
+		} else if (targetKey.getId() == EntityReference.LEFTMOST_ENEMY_MINION.getId()) {
 			Player opponent = context.getOpponent(player);
 			List<Minion> minions =  opponent.getMinions();
 			return singleTargetAsList(minions.get(0));
-		} else if (targetKey == EntityReference.LEFTMOST_FRIENDLY_MINION) {
+		} else if (targetKey.getId() == EntityReference.LEFTMOST_FRIENDLY_MINION.getId()) {
 			List<Minion> minions =  player.getMinions();
 			return singleTargetAsList(minions.get(0));
 		}
-
 		return singleTargetAsList(findEntity(context, targetKey));
 	}
 

@@ -34,7 +34,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	private static final Logger logger = LoggerFactory.getLogger(GameContext.class);
 
-	private final Player[] players = new Player[2];
+	private Player[] players = new Player[2];
 	private final GameLogic logic;
 	private final DeckFormat deckFormat;
 	private final TargetLogic targetLogic = new TargetLogic();
@@ -51,6 +51,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	private int actionsThisTurn;
 
 	private boolean ignoreEvents;
+
+	public boolean switched = false;
 
 	private CardCollection tempCards = new CardCollection();
 
@@ -79,6 +81,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public void addTrigger(IGameEventListener trigger) {
 		triggerManager.addTrigger(trigger);
+	}
+
+	public void switchy() {
+		switched = true;
 	}
 
 	@Override
@@ -112,45 +118,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		eventTargetReferenceStack.addAll(getEventTargetStack());
 		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
 		
-		for (Environment key : getEnvironment().keySet()) {
-			if (!key.customClone()) {
-				clone.getEnvironment().put(key, getEnvironment().get(key));
-			}
-		}
-		clone.getLogic().setLoggingEnabled(false);
-		return clone;
-	}
-
-	public GameContext cloneAndSwitch() {
-		GameLogic logicClone = getLogic().clone();
-		Player player1Clone = getPlayer2().clone();
-		// player1Clone.getDeck().shuffle();
-		Player player2Clone = getPlayer1().clone();
-		// player2Clone.getDeck().shuffle();
-		GameContext clone = new GameContext(player1Clone, player2Clone, logicClone, deckFormat);
-		clone.tempCards = tempCards.clone();
-		clone.triggerManager = triggerManager.clone();
-		clone.activePlayer = activePlayer;
-		clone.turn = turn;
-		clone.actionsThisTurn = actionsThisTurn;
-		clone.result = result;
-		clone.turnState = turnState;
-		clone.winner = logicClone.getWinner(player1Clone, player2Clone);
-		clone.cardCostModifiers.clear();
-		for (CardCostModifier cardCostModifier : cardCostModifiers) {
-			clone.cardCostModifiers.add(cardCostModifier.clone());
-		}
-
-		Stack<Integer> damageStack = new Stack<Integer>();
-		damageStack.addAll(getDamageStack());
-		clone.getEnvironment().put(Environment.DAMAGE_STACK, damageStack);
-		Stack<EntityReference> summonReferenceStack = new Stack<EntityReference>();
-		summonReferenceStack.addAll(getSummonReferenceStack());
-		clone.getEnvironment().put(Environment.SUMMON_REFERENCE_STACK, summonReferenceStack);
-		Stack<EntityReference> eventTargetReferenceStack = new Stack<EntityReference>();
-		eventTargetReferenceStack.addAll(getEventTargetStack());
-		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
-
 		for (Environment key : getEnvironment().keySet()) {
 			if (!key.customClone()) {
 				clone.getEnvironment().put(key, getEnvironment().get(key));
@@ -480,7 +447,6 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		activePlayer = getPlayer(startingPlayerId).getId();
 		logger.debug(getActivePlayer().getName() + " begins");
 		logic.init(activePlayer, true);
-		System.out.println("weewoo");
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
 	}
 
@@ -529,8 +495,8 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			nextAction = getActivePlayer().getBehaviour().requestAction(this, getActivePlayer(), getValidActions());
 		}
 		if (nextAction == null) {
-			throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
-					+ getValidActions().size() + " actions were available");
+			//throw new RuntimeException("Behaviour " + getActivePlayer().getBehaviour().getName() + " selected NULL action while "
+					//+ getValidActions().size() + " actions were available");
 		}
 		performAction(activePlayer, nextAction);
 

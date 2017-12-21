@@ -2,7 +2,9 @@ package net.demilich.metastone.game.behaviour;
 
 import net.demilich.metastone.game.GameContext;
 
-public abstract class Behaviour implements IBehaviour {
+import java.io.Serializable;
+
+public abstract class Behaviour implements IBehaviour, Serializable {
 
 	public IBehaviour clone() {
 		try {

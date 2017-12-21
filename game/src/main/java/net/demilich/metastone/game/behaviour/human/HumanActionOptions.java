@@ -13,14 +13,15 @@ public class HumanActionOptions implements Serializable {
 	private final HumanBehaviour behaviour;
 	private final GameContext context;
 	private Player player;
-	private Player opponent;
 	private final List<GameAction> validActions;
+	private final boolean multiplayer;
 
-	public HumanActionOptions(HumanBehaviour behaviour, GameContext context, Player player, List<GameAction> validActions, Player opponent) {
+	public HumanActionOptions(HumanBehaviour behaviour, GameContext context, Player player, List<GameAction> validActions, boolean multiplayer) {
 		this.behaviour = behaviour;
 		this.context = context;
 		this.player = player;
 		this.validActions = validActions;
+		this.multiplayer = multiplayer;
 	}
 
 	public HumanBehaviour getBehaviour() {
@@ -33,13 +34,6 @@ public class HumanActionOptions implements Serializable {
 
 	public Player getPlayer() {
 		return player;
-	}
-
-	public HumanActionOptions switchPlayers() {
-		Player temp = player;
-		player = opponent;
-		opponent = temp;
-		return this;
 	}
 
 	public List<GameAction> getValidActions() {
@@ -56,4 +50,11 @@ public class HumanActionOptions implements Serializable {
 		return false;
 	}
 
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public boolean isMultiplayer() {
+		return multiplayer;
+	}
 }

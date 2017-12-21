@@ -28,6 +28,7 @@ import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.HandCard;
+import net.demilich.metastone.gui.multiplayermode.Client;
 import net.demilich.metastone.gui.playmode.animation.EventVisualizerDispatcher;
 
 public class GameBoardView extends BorderPane {
@@ -56,6 +57,7 @@ public class GameBoardView extends BorderPane {
 	private HandCard[] p2Cards = new HandCard[GameLogic.MAX_HAND_CARDS];
 	private SummonToken[] p1Minions = new SummonToken[GameLogic.MAX_MINIONS];
 	private SummonToken[] p2Minions = new SummonToken[GameLogic.MAX_MINIONS];
+	private boolean switched;
 
 	private final HashMap<GameToken, Button> summonHelperMap1 = new HashMap<GameToken, Button>();
 	private final HashMap<GameToken, Button> summonHelperMap2 = new HashMap<GameToken, Button>();
@@ -163,13 +165,18 @@ public class GameBoardView extends BorderPane {
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
-
 			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {
 
 				@Override
 				public void handle(MouseEvent event) {
 					disableTargetSelection();
-					targetOptions.getActionSelectionListener().onActionSelected(action);
+					if (targetOptions.isMultiplayer()) {
+						try {
+							Client.getOutToServerStream().writeObject(action);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else targetOptions.getActionSelectionListener().onActionSelected(action);
 				}
 			};
 
@@ -181,18 +188,23 @@ public class GameBoardView extends BorderPane {
 		int playerId = targetOptions.getPlayerId();
 		GameContext context = targetOptions.getContext();
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
-			updateHandCards(context, context.getPlayer1(), p1Cards);
+			updateHandCards(context, (context.switched ? context.getPlayer2() : context.getPlayer1()), p1Cards);
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
-			Button summonHelper = playerId == 0 ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
+			Button summonHelper = (playerId == 0  && !context.switched) || (playerId == 1 && context.switched) ? summonHelperMap1.get(token) : summonHelperMap2.get(token);
 			summonHelper.setVisible(true);
 			summonHelper.setManaged(true);
 			EventHandler<ActionEvent> clickedHander = new EventHandler<ActionEvent>() {
-
 				@Override
 				public void handle(ActionEvent event) {
 					disableTargetSelection();
-					targetOptions.getActionSelectionListener().onActionSelected(action);
+					if (targetOptions.isMultiplayer()) {
+						try {
+							Client.getOutToServerStream().writeObject(action);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else targetOptions.getActionSelectionListener().onActionSelected(action);
 				}
 			};
 			summonHelper.setOnAction(clickedHander);
@@ -210,6 +222,16 @@ public class GameBoardView extends BorderPane {
 	}
 
 	public GameToken getToken(Entity entity) {
+		if (entityTokenMap.get(entity) == null && entity != null) {
+			for (Actor actor : entityTokenMap.keySet()) {
+				if (actor != null) {
+					if (actor.getId() == entity.getId()) {
+						return entityTokenMap.get(actor);
+					}
+				}
+
+			}
+		}
 		return entityTokenMap.get(entity);
 	}
 
@@ -227,21 +249,43 @@ public class GameBoardView extends BorderPane {
 	}
 
 	public void updateGameState(GameContext context) {
+
 		entityTokenMap.clear();
-		p1Hero.setHero(context.getPlayer1(), context);
-		p1Hero.updateHeroPowerCost(context, context.getPlayer1());
-		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
-		entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
-		p2Hero.setHero(context.getPlayer2(), context);
-		p2Hero.updateHeroPowerCost(context, context.getPlayer2());
-		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
-		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
+		if (!context.switched) {
+			p1Hero.setHero(context.getPlayer1(), context);
+			p1Hero.updateHeroPowerCost(context, context.getPlayer1());
+			p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
+			entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
 
-		updateHandCards(context, context.getPlayer1(), p1Cards);
-		updateHandCards(context, context.getPlayer2(), p2Cards);
+			p2Hero.setHero(context.getPlayer2(), context);
+			p2Hero.updateHeroPowerCost(context, context.getPlayer2());
+			p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
+			entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
 
-		updateSummonTokens(context.getPlayer1(), p1Minions);
-		updateSummonTokens(context.getPlayer2(), p2Minions);
+			updateHandCards(context, context.getPlayer1(), p1Cards);
+			updateHandCards(context, context.getPlayer2(), p2Cards);
+
+			updateSummonTokens(context.getPlayer1(), p1Minions);
+			updateSummonTokens(context.getPlayer2(), p2Minions);
+		} else {
+			p1Hero.setHero(context.getPlayer2(), context);
+			p1Hero.updateHeroPowerCost(context, context.getPlayer2());
+			p1Hero.highlight(context.getActivePlayer() == context.getPlayer2());
+			entityTokenMap.put(context.getPlayer2().getHero(), p1Hero);
+
+			p2Hero.setHero(context.getPlayer1(), context);
+			p2Hero.updateHeroPowerCost(context, context.getPlayer1());
+			p2Hero.highlight(context.getActivePlayer() == context.getPlayer1());
+			entityTokenMap.put(context.getPlayer1().getHero(), p2Hero);
+
+			updateHandCards(context, context.getPlayer2(), p1Cards);
+			updateHandCards(context, context.getPlayer1(), p2Cards);
+
+			updateSummonTokens(context.getPlayer2(), p1Minions);
+			updateSummonTokens(context.getPlayer1(), p2Minions);
+		}
+
+
 
 		checkForWinner(context);
 	}
@@ -292,8 +336,8 @@ public class GameBoardView extends BorderPane {
 		for (int i = 0; i < summonTokens.length; i++) {
 			if (i < summons.size()) {
 				Summon summon = summons.get(i);
-				summonTokens[i].setOptions(options);
-			} 
+				summonTokens[i].setOptions(options, switched);
+			}
 		}
 		p1Hero.setOptions(options);
 		p2Hero.setOptions(options);

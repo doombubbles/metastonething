@@ -1,6 +1,7 @@
 package net.demilich.metastone.gui.cards;
 
 
+import java.io.IOException;
 import java.util.*;
 
 import javafx.event.Event;
@@ -50,6 +51,8 @@ import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.IconFactory;
+import net.demilich.metastone.gui.multiplayermode.Client;
+import net.demilich.metastone.gui.playmode.GameBoardView;
 
 public class HandCard extends CardToken {
 
@@ -114,10 +117,9 @@ public class HandCard extends CardToken {
 				gloww();
 			}
 		});
-		
-		hideCard(player.hideCards());
+		hideCard(player.isHideCards());
 
-		if (player.hideCards()) {
+		if (player.isHideCards()) {
 			Tooltip.uninstall(this, tooltip);
 			tooltipContent = null;
 			tooltip = null;
@@ -126,19 +128,18 @@ public class HandCard extends CardToken {
 	
 	public void setOptions(HumanActionOptions actionOptions) {
 		options = actionOptions;
-		multiplayer = options.getBehaviour().getName().equals("<Multiplayer controlled>");
+		multiplayer = actionOptions.isMultiplayer();
 	}
 	
 	public void play(MouseEvent mouseEvent) {
 		if (options != null) {
 			GameContext context = options.getContext();
-			
 			HandCard handCard = (HandCard) mouseEvent.getSource();
 			Card card = handCard.getCard();
 			if (card.getOwner() != context.getActivePlayerId()) {
 				return;
 			}
-			if (options.getValidActions().size() < 2 || !options.getBehaviour().isWaiting()) {
+			if (options.getValidActions().size() < 2 || multiplayer ? Client.blockedByAnimation : !options.getBehaviour().isWaiting()) {
 				return;
 			}
 			Collection<ActionGroup> actionGroups = new ArrayList<>();
@@ -149,10 +150,13 @@ public class HandCard extends CardToken {
 				}
 			}
 			List<ActionGroup> yeahs = new ArrayList<ActionGroup>();
-			ActionGroup yeah = null;
+			ActionGroup yeah;
 			for (ActionGroup actionGroup : actionGroups) {
 				GameAction action = actionGroup.getPrototype();
-				if (context.resolveSingleTarget(action.getSource()) == card) {
+				if (context.resolveSingleTarget(action.getSource()) == null) {
+					break;
+				}
+				if (context.resolveSingleTarget(action.getSource()).getId() == card.getId()) {
 					yeahs.add(actionGroup);
 				}
 			}
@@ -171,15 +175,14 @@ public class HandCard extends CardToken {
 				return;
 			}
 			yeah = yeahs.get(0);
-			
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
-
-
 				if (multiplayer) {
-					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+					try {
+						Client.getOutToServerStream().writeObject(yeah.getPrototype());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				} else options.getBehaviour().onActionSelected(yeah.getPrototype());
-
-
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 			} else {
 				HumanTargetOptions humanTargetOptions = new HumanTargetOptions(options.getBehaviour(), context, options.getPlayer().getId(), yeah, multiplayer);

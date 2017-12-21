@@ -1,5 +1,6 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,12 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.Server;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.logic.GameLogic;
-import net.demilich.metastone.gui.multiplayermode.Server;
+import net.demilich.metastone.gui.multiplayermode.Client;
 
 public class GameContextVisualizable extends GameContext {
 
@@ -27,10 +29,15 @@ public class GameContextVisualizable extends GameContext {
 		this.multiplayer = multiplayer;
 	}
 
+	public boolean isMultiplayer() {
+		return multiplayer;
+	}
+
 	protected boolean acceptAction(GameAction nextAction) {
 		if (!ignoreEvents()) {
 			return true;
 		}
+		System.out.println("Is this even an issue?");
 		while (ignoreEvents()) {
 			try {
 				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
@@ -62,21 +69,40 @@ public class GameContextVisualizable extends GameContext {
 		if (ignoreEvents()) {
 			return;
 		}
-
 		setBlockedByAnimation(true);
 		if (multiplayer) {
-			NotificationProxy.sendNotification(GameNotification.SERVER_GAME_STATE_UPDATE, this);
+			Server.sendNotification(GameNotification.GAME_STATE_UPDATE, this, 0);
+			this.switched = true;
+			Server.sendNotification(GameNotification.GAME_STATE_UPDATE, this, 1);
+			this.switched = false;
 		} else NotificationProxy.sendNotification(GameNotification.GAME_STATE_UPDATE, this);
 
 
-		while (blockedByAnimation) {
+		if (multiplayer) {
 			try {
-				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
-			} catch (InterruptedException e) {
+				boolean connectingClient = (boolean) Server.getInFromConnectingClientStream().readObject();
+				boolean hostClient = (boolean) Server.getInFromHostClientStream().readObject();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} else {
+			while (blockedByAnimation) {
+				try {
+					Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
+				} catch (InterruptedException e) {
+				}
 			}
 		}
+		setBlockedByAnimation(false);
+		getGameEvents().clear();
 		if (multiplayer) {
-			NotificationProxy.sendNotification(GameNotification.SERVER_GAME_STATE_LATE_UPDATE, this);
+			Server.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this, 0);
+			this.getPlayer1().setHideCards(true);
+			this.switched = true;
+			Server.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this, 1);
+			this.switched = false;
 		} else NotificationProxy.sendNotification(GameNotification.GAME_STATE_LATE_UPDATE, this);
 	}
 

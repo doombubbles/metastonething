@@ -1,8 +1,11 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.human.MultiplayerBehaviour;
 import net.demilich.metastone.gui.multiplayermode.Client;
 import net.demilich.nittygrittymvc.Mediator;
 import net.demilich.nittygrittymvc.interfaces.INotification;
@@ -22,13 +25,13 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 
 	private final PlayModeView view;
 	private final HumanActionPromptView actionPromptView;
-	private final Client client;
+	private final boolean multiplayer;
 
-	public PlayModeMediator(Client client) {
+	public PlayModeMediator(boolean multiplayer) {
 		super(NAME);
-		view = new PlayModeView(client != null);
+		view = new PlayModeView(multiplayer);
 		actionPromptView = view.getActionPromptView();
-		this.client = client;
+		this.multiplayer = multiplayer;
 	}
 
 	@Override
@@ -45,10 +48,12 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 		switch (notification.getId()) {
 		case GAME_STATE_UPDATE:
 			GameContext context = (GameContext) notification.getBody();
+			Client.blockedByAnimation = true;
 			Platform.runLater(() -> view.showAnimations(context));
 			break;
 		case GAME_STATE_LATE_UPDATE:
 			GameContext context2 = (GameContext) notification.getBody();
+			Client.blockedByAnimation = false;
 			Platform.runLater(() -> view.updateGameState(context2));
 			break;
 		case HUMAN_PROMPT_FOR_ACTION:
@@ -64,41 +69,20 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 			break;
 		case HUMAN_PROMPT_FOR_MULLIGAN:
 			HumanMulliganOptions mulliganOptions = (HumanMulliganOptions) notification.getBody();
-			Platform.runLater(() -> new HumanMulliganView(mulliganOptions, client != null));
+			Platform.runLater(() -> new HumanMulliganView(mulliganOptions, multiplayer));
 			break;
 		case HIDE_ACTIONS:
 			HumanActionOptions actionOptions2 = (HumanActionOptions) notification.getBody();
 			Platform.runLater(() -> actionPromptView.setActions(actionOptions2, false));
 			break;
-
-
-
-		case REPLY_FROM_SERVER_PROMPT_FOR_MULLIGAN:
-			client.sendNotifiation(notification.getId(), notification.getBody());
+		case GAME_OVER:
+			try {
+				Client.rip();
+				getFacade().sendNotification(GameNotification.MAIN_MENU);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
-
-		case REPLY_FROM_SERVER_PROMPT_FOR_ACTION:
-			client.sendNotifiation(notification.getId(), notification.getBody());
-			break;
-
-		/*
-		case CLIENT_PROMPT_FOR_MULLIGAN:
-			HumanMulliganOptions mulliganOptions2 = (HumanMulliganOptions) notification.getBody();
-			Platform.runLater(() -> new HumanMulliganView(mulliganOptions2, true));
-			break;
-		case CLIENT_PROMPT_FOR_ACTION:
-			HumanActionOptions actionOptions3 = (HumanActionOptions) notification.getBody();
-			Platform.runLater(() -> thing(actionOptions3));
-			break;
-		case CLIENT_GAME_STATE_UPDATE:
-			GameContext context3 = (GameContext) notification.getBody();
-			Platform.runLater(() -> view.showAnimations(context3));
-			break;
-		case CLIENT_GAME_STATE_LATE_UPDATE:
-			GameContext context4 = (GameContext) notification.getBody();
-			Platform.runLater(() -> view.updateGameState(context4));
-			break;
-		*/
 		default:
 			break;
 		}
@@ -115,8 +99,7 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 		notificationInterests.add(GameNotification.REPLY_DECKS);
 		notificationInterests.add(GameNotification.REPLY_DECK_FORMATS);
 		notificationInterests.add(GameNotification.HIDE_ACTIONS);
-		notificationInterests.add(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION);
-		notificationInterests.add(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_MULLIGAN);
+		notificationInterests.add(GameNotification.GAME_OVER);
 		return notificationInterests;
 	}
 

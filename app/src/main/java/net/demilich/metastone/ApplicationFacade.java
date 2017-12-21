@@ -1,5 +1,6 @@
 package net.demilich.metastone;
 
+import net.demilich.metastone.gui.multiplayermode.StartMultiplayerCommand;
 import net.demilich.nittygrittymvc.Facade;
 import net.demilich.nittygrittymvc.interfaces.IFacade;
 import net.demilich.metastone.gui.autoupdate.CheckForUpdateCommand;
@@ -91,6 +92,9 @@ public class ApplicationFacade extends Facade<GameNotification> {
 
 		registerCommand(GameNotification.SAVE_TRAINING_DATA, new SaveTrainingDataCommand());
 		registerCommand(GameNotification.REQUEST_TRAINING_DATA, new RequestTrainingDataCommand());
+
+
+		registerCommand(GameNotification.START_MULTIPLAYER, new StartMultiplayerCommand());
 	}
 
 	public void startUp() {

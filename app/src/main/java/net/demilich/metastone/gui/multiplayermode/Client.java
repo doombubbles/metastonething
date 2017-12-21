@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.multiplayermode;
 import net.demilich.metastone.GameData;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.gameconfig.MultiplayerConfig;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.gui.playmode.GameContextVisualizable;
@@ -12,24 +13,31 @@ import java.net.*;
 
 public class Client {
 
-    private final String IP_ADDRESS;
-    private final int PORT;
-    private final String VERSION;
+    private static String IP_ADDRESS;
+    private static int PORT;
+    private static String VERSION;
 
-    private final MultiplayerConfig multiplayerConfig;
+    private static MultiplayerConfig multiplayerConfig;
 
     private static ObjectOutputStream outToServerStream;
     private static ObjectInputStream inFromServerStream;
 
-    public boolean inGame = false;
+    private static Thread t;
 
+    public static Socket clientSocket;
+
+    public static boolean inGame = false;
+
+    public static boolean blockedByAnimation = false;
+
+    /*
     public Client (MultiplayerConfig config, String version) {
         this.IP_ADDRESS = config.getIpAddress();
         this.PORT = config.getPort();
         this.VERSION = version;
         this.multiplayerConfig = config;
     }
-
+    */
     public static void main(String[] args) {
         MultiplayerConfig multiplayerConfig = new MultiplayerConfig();
         multiplayerConfig.setIpAddress(args[0]);
@@ -37,14 +45,16 @@ public class Client {
         PlayerConfig playerConfig = new PlayerConfig();
         playerConfig.setName("hey my dudes");
         multiplayerConfig.setPlayerConfig1(playerConfig);
-        Client client = new Client(multiplayerConfig, args[2]);
-        client.initialize();
+        initialize(multiplayerConfig, args[2]);
     }
 
-    public void initialize() {
+    public static void initialize(MultiplayerConfig config, String version) {
+        IP_ADDRESS = config.getIpAddress();
+        PORT = config.getPort();
+        VERSION = version;
+        multiplayerConfig = config;
         try {
-            Socket clientSocket = new Socket(IP_ADDRESS, PORT);
-
+            clientSocket = new Socket(IP_ADDRESS, PORT);
 
             /*
             PrintStream printStream = new PrintStream(clientSocket.getOutputStream());
@@ -62,7 +72,7 @@ public class Client {
 
             //GameContextVisualizable gameContextVisualizable = (GameContextVisualizable) inFromServerStream.readObject();
 
-            Thread t = new Thread(new Runnable() {
+            t = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     inGame = true;
@@ -71,9 +81,7 @@ public class Client {
                             receiveNotification((GameData) inFromServerStream.readObject());
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
                     } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
                 }
             });
@@ -86,27 +94,41 @@ public class Client {
 
     }
 
-    public void sendNotifiation(GameNotification notification, Object data) {
+    public static void sendNotification(GameNotification notification, Object data) {
         GameData gameData = new GameData(notification, data);
         try {
-            System.out.println("over here?");
             outToServerStream.writeObject(gameData);
-            System.out.println("sendy");
+            outToServerStream.reset();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void receiveNotification(GameData gameData) {
+    public static void receiveNotification(GameData gameData) {
         GameNotification notification = gameData.getGameNotification();
         Object object = gameData.getData();
         NotificationProxy.sendNotification(notification, object);
     }
 
-    public void endGame() {
+    public static void endGame() {
         inGame = false;
     }
 
+    public static ObjectOutputStream getOutToServerStream() {
+        return outToServerStream;
+    }
 
-
+    public static void rip() throws IOException {
+        endGame();
+        t.interrupt();
+        if (clientSocket != null) {
+            clientSocket.close();
+        }
+        if (outToServerStream != null) {
+            outToServerStream.close();
+        }
+        if (inFromServerStream != null) {
+            outToServerStream.close();
+        }
+    }
 }

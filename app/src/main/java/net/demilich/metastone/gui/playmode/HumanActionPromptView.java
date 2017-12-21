@@ -1,5 +1,7 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,8 +34,9 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.cards.CardTooltip;
+import net.demilich.metastone.gui.multiplayermode.Client;
 
-public class HumanActionPromptView extends VBox {
+public class HumanActionPromptView extends VBox implements Serializable {
 
 	private boolean multiplayer;
 
@@ -58,7 +61,7 @@ public class HumanActionPromptView extends VBox {
 			break;
 		case SPELL:
 			playCardAction = (PlayCardAction) action;
-			card = context.resolveCardReference(playCardAction.getCardReference());
+			card =context.resolveCardReference(playCardAction.getCardReference());
 			actionString = "CAST SPELL: " + card.getName();
 			break;
 		case SUMMON:
@@ -74,7 +77,7 @@ public class HumanActionPromptView extends VBox {
 		case END_TURN:
 			actionString = "END TURN";
 			break;
-		case EXTRA_TURN:_TURN:
+		case EXTRA_TURN:
 			actionString = "EXTRA TURN";
 			break;
 		case DISCOVER:
@@ -161,7 +164,11 @@ public class HumanActionPromptView extends VBox {
 				|| actionGroup.getPrototype().getActionType() == ActionType.SUMMON)) {
 			button.setOnAction(event -> {
 				if (multiplayer) {
-					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  actionGroup.getPrototype())));
+					try {
+						Client.getOutToServerStream().writeObject(actionGroup.getPrototype());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				} else options.getBehaviour().onActionSelected(actionGroup.getPrototype());
 				setVisible(false);
 
@@ -211,7 +218,7 @@ public class HumanActionPromptView extends VBox {
 	public void setActions(HumanActionOptions options, boolean visible) {
 		getChildren().removeAll(existingButtons);
 		existingButtons.clear();
-		
+
 		Collection<ActionGroup> actionGroups = groupActions(options);
 		for (ActionGroup actionGroup : actionGroups) {
 			if (actionGroup.getPrototype().getActionType().equals(ActionType.BATTLECRY)) {

@@ -1,5 +1,6 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import javafx.scene.image.ImageView;
 import net.demilich.metastone.game.entities.minions.Rift;
+import net.demilich.metastone.gui.multiplayermode.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,6 +111,7 @@ public class SummonToken extends GameToken {
 	
 	private HumanActionOptions options;
 	private boolean multiplayer;
+	private boolean switched;
 	
 	private Summon summon;
 	
@@ -187,7 +190,8 @@ public class SummonToken extends GameToken {
 		canAttack.setVisible(false);
 		canAttackTaunt.setVisible(false);
 		if (options != null) {
-			if (options.getContext().getPlayer1().getSummons().contains(summon) && options.getContext().getPlayer1() == options.getContext().getActivePlayer()) {
+			if (((multiplayer && switched) ? options.getContext().getPlayer2() : options.getContext().getPlayer1()).getSummons().contains(summon)
+					&& ((multiplayer && switched) ? options.getContext().getPlayer2() : options.getContext().getPlayer1()) == options.getContext().getActivePlayer()) {
 				canAttack.setVisible(summon.canAttackThisTurn() && !summon.hasAttribute(Attribute.TAUNT));
 				canAttackTaunt.setVisible(summon.canAttackThisTurn() && summon.hasAttribute(Attribute.TAUNT));
 			}
@@ -201,16 +205,17 @@ public class SummonToken extends GameToken {
 		token.setOpacity(summon.hasAttribute(Attribute.STEALTH) ? 0.5 : 1);
 	}
 	
-	public void setOptions(HumanActionOptions actionOptions) {
+	public void setOptions(HumanActionOptions actionOptions, boolean switched) {
 		options = actionOptions;
-		multiplayer = options.getBehaviour().getName().equals("<Multiplayer controlled>");
+		multiplayer = options.isMultiplayer();
+		this.switched  = switched;
 	}
 	
 	public void attack(MouseEvent mouseEvent) {
 		if (options != null) {
 			GameContext context = options.getContext();
 			SummonToken summonToken = (SummonToken) mouseEvent.getSource();
-			if (this.summon.getOwner() != context.getActivePlayerId() || !options.getBehaviour().isWaiting()) {
+			if (this.summon.getOwner() != context.getActivePlayerId() || multiplayer ? Client.blockedByAnimation : !options.getBehaviour().isWaiting()) {
 				return;
 			}
 			
@@ -224,7 +229,10 @@ public class SummonToken extends GameToken {
 			ActionGroup yeah = null;
 			for (ActionGroup actionGroup : actionGroups) {
 				GameAction action = actionGroup.getPrototype();
-				if (context.resolveSingleTarget(action.getSource()) == this.summon) {
+				if (context.resolveSingleTarget(action.getSource()) == null) {
+					break;
+				}
+				if (context.resolveSingleTarget(action.getSource()).getId() == this.summon.getId()) {
 					yeah = actionGroup;
 				}
 			}
@@ -233,7 +241,11 @@ public class SummonToken extends GameToken {
 			}
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
 				if (multiplayer) {
-					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+					try {
+						Client.getOutToServerStream().writeObject(yeah.getPrototype());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				} else options.getBehaviour().onActionSelected(yeah.getPrototype());
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 			} else {

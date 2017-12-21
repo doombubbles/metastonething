@@ -5,6 +5,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.Server;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.IActionSelectionListener;
 import net.demilich.metastone.game.cards.Card;
@@ -24,26 +25,21 @@ public class MultiplayerBehaviour extends HumanBehaviour implements IActionSelec
 		return "<Multiplayer controlled>";
 	}
 
-	@Override
+	@Override @SuppressWarnings("unchecked")
 	public List<Card> mulligan(GameContext context, Player player, List<Card> cards) {
 		if (context.ignoreEvents()) {
 			return new ArrayList<Card>();
 		}
-		waitingForInput = true;
-		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards, context.getOpponent(player));
+		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
 
-
-		NotificationProxy.sendNotification(GameNotification.SERVER_PROMPT_FOR_MULLIGAN, options);
-
-		while (waitingForInput) {
-			try {
-				System.out.println("waiting for mulligan info to come back... " + waitingForInput);
-				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
-			} catch (InterruptedException e) {
-			}
+		if (player.equals(context.getPlayer2())) {
+			Server.sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options, 1);
+			mulliganCards = (List<Card>) Server.readObject(1);
+		} else {
+			Server.sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options, 0);
+			mulliganCards = (List<Card>) Server.readObject(0);
 		}
 
-		System.out.println("receivey2");
 		return mulliganCards;
 	}
 
@@ -55,29 +51,26 @@ public class MultiplayerBehaviour extends HumanBehaviour implements IActionSelec
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
-		waitingForInput = true;
-		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions, context.getOpponent(player));
-
-		NotificationProxy.sendNotification(GameNotification.SERVER_PROMPT_FOR_ACTION, options);
-
-		while (waitingForInput) {
-			try {
-				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
-				if (context.ignoreEvents()) {
-					return null;
-				}
-			} catch (InterruptedException e) {
-			}
+		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions, true);
+		if (player.equals(context.getPlayer2())) {
+			HumanActionOptions options1 = options;
+			options1.getContext().switchy();
+			//System.out.println(options1.getPlayer().getHand().toList().toString());
+			Server.sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options1, 1);
+			selectedAction = (GameAction) Server.readObject(1);
+		} else {
+			//System.out.println(options.getPlayer().getHand().toList().toString());
+			Server.sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options, 0);
+			selectedAction = (GameAction) Server.readObject(0);
 		}
+
 		return selectedAction;
 	}
 
 	@Override
 	public void setMulliganCards(List<Card> mulliganCards) {
-		System.out.println("waitingForInput is currently: " + waitingForInput);
 		this.mulliganCards = mulliganCards;
 		this.waitingForInput = false;
-		System.out.println("waitingForInput is currently: " + waitingForInput);
 	}
 
 }

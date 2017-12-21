@@ -30,7 +30,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 			return new ArrayList<Card>();
 		}
 		waitingForInput = true;
-		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards, context.getOpponent(player));
+		HumanMulliganOptions options = new HumanMulliganOptions(player, this, cards);
 		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_MULLIGAN, options);
 		while (waitingForInput) {
 			try {
@@ -50,7 +50,7 @@ public class HumanBehaviour extends Behaviour implements IActionSelectionListene
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
 		waitingForInput = true;
-		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions, context.getOpponent(player));
+		HumanActionOptions options = new HumanActionOptions(this, context, player, validActions, false);
 		NotificationProxy.sendNotification(GameNotification.HUMAN_PROMPT_FOR_ACTION, options);
 		while (waitingForInput) {
 			try {

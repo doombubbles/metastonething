@@ -1240,7 +1240,7 @@ public class GameLogic implements Cloneable, Serializable {
 	public void init(int playerId, boolean begins) {
 		Player player = context.getPlayer(playerId);
 		player.getHero().setId(idFactory.generateId());
-		player.getHero().setOwner(player.getId());
+		player.getHero().setOwner(playerId);
 		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
 		player.getHero().setHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
 

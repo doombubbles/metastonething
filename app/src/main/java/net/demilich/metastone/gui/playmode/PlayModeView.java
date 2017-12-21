@@ -11,8 +11,11 @@ import javafx.scene.layout.VBox;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Server;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
+import net.demilich.metastone.game.behaviour.human.MultiplayerBehaviour;
+import net.demilich.metastone.gui.multiplayermode.Client;
 
 public class PlayModeView extends BorderPane {
 
@@ -51,7 +54,16 @@ public class PlayModeView extends BorderPane {
 		actionPromptView = new HumanActionPromptView(multiplayer);
 		//sidePane.getChildren().add(actionPromptView);
 
-		backButton.setOnAction(actionEvent -> NotificationProxy.sendNotification(GameNotification.MAIN_MENU));
+		backButton.setOnAction(actionEvent -> {
+			try {
+				Server.rip();
+				Client.rip();
+			} catch (IOException e) {
+				NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
+				e.printStackTrace();
+			}
+
+		});
 
 		sidePane.getChildren().setAll(actionPromptView, navigationPane);
 	}
@@ -77,6 +89,14 @@ public class PlayModeView extends BorderPane {
 		if (firstUpdate) {
 			setCenter(boardView);
 			firstUpdate = false;
+		}
+		if (context.getPlayer1().getBehaviour() instanceof MultiplayerBehaviour && context.switched) {
+			context.getPlayer2().setHideCards(false);
+			context.getPlayer1().setHideCards(true);
+		}
+		if (context.getPlayer2().getBehaviour() instanceof MultiplayerBehaviour && !context.switched) {
+			context.getPlayer1().setHideCards(false);
+			context.getPlayer2().setHideCards(true);
 		}
 		boardView.updateGameState(context);
 		if (context.gameDecided()) {

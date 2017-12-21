@@ -1,5 +1,6 @@
 package net.demilich.metastone.gui.playmode;
 
+import java.io.IOException;
 import java.util.*;
 
 import javafx.event.Event;
@@ -27,6 +28,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.ActionGroup;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
+import net.demilich.metastone.game.behaviour.human.MultiplayerBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.QuestCard;
@@ -38,6 +40,7 @@ import net.demilich.metastone.gui.cards.CardTooltip;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.gui.multiplayermode.Client;
 
 public class HeroToken extends GameToken {
 	
@@ -152,41 +155,12 @@ public class HeroToken extends GameToken {
 		
 		if (!player.getQuests().isEmpty()) {
 			int n = context.getCardById((String) player.getQuests().toArray()[player.getQuests().size() - 1]).getAttributeValue(Attribute.QUEST);
-			/*
-			switch ((String) player.getQuests().toArray()[player.getQuests().size() - 1]) {
-				case "quest_awaken_the_makers":
-				case "quest_fire_plumes_heart":
-				case "quest_the_marsh_queen":
-					n = 7;
-					break;
-				case "quest_the_omega_rune":
-					n = 8;
-					break;
-				case "quest_unite_the_murlocs":
-					n = 10;
-					break;
-				case "quest_jungle_giants":
-				case "quest_the_caverns_below":
-					n = 5;
-					break;
-				case "quest_open_the_waygate":
-				case "quest_lakkari_sacrifice":
-				case "quest_the_last_kaleidosaur":
-					n = 6;
-					break;
-			}
-			*/
 			questLabel.setText("Quest: " + (n - player.getAttributeValue(Attribute.QUEST)) + "/" + n);
-			
-			
 		} else if (player.hasAttribute(Attribute.CTHUN_ATTACK_BUFF)) {
 			questLabel.setText("C'Thun: " + (player.getAttributeValue(Attribute.CTHUN_ATTACK_BUFF) + 6));
 		}
-		else questLabel.setText("            "); 
-		
-		glow2.setVisible(hero == context.getPlayer1().getHero() && hero.canAttackThisTurn());
-		
-		
+		else questLabel.setText("            ");
+		glow2.setVisible(hero.getId() == ((multiplayer && context.switched) ? context.getPlayer2().getHero() : context.getPlayer1().getHero()).getId() && hero.canAttackThisTurn());
 		if (player.getAttributeValue(Attribute.OVERLOAD) > 0) {
 			manaLabel.setText(player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getAttributeValue(Attribute.OVERLOAD));
 		} else {
@@ -194,7 +168,9 @@ public class HeroToken extends GameToken {
 		}
 		updateArmor(hero.getArmor());
 		updateHeroPower(hero);
-		glow.setVisible(hero == context.getPlayer1().getHero() && hero == context.getActivePlayer().getHero() && context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower().getCardReference()));
+		glow.setVisible(hero.getId() == ((multiplayer && context.switched) ? context.getPlayer2().getHero() : context.getPlayer1().getHero()).getId()
+						&& hero.getId() == context.getActivePlayer().getHero().getId()
+						&& context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower().getCardReference()));
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
 		updateStatus(hero, context);
@@ -261,7 +237,7 @@ public class HeroToken extends GameToken {
 			}
 			secretsAnchor.getChildren().add(secretIcon);
 
-			if (!player.hideCards() || card instanceof QuestCard) {
+			if (!player.isHideCards() || card instanceof QuestCard) {
 				Tooltip tooltip = new Tooltip();
 				CardTooltip tooltipContent = new CardTooltip();
 				tooltipContent.setCard(card);
@@ -275,7 +251,9 @@ public class HeroToken extends GameToken {
 		frozen.setVisible(hero.hasAttribute(Attribute.FROZEN));
 		shadowform.setVisible(hero.hasAttribute(Attribute.SHADOWFORM));
 		stealth.setVisible(hero.hasAttribute(Attribute.STEALTH));
-		immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
+		if (hero.getOwner() != -1) {
+			immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
+		} else immune.setVisible(false);
 		divineShield.setVisible(hero.hasAttribute(Attribute.DIVINE_SHIELD));
 		//elusive.setVisible(context.getLogic().hasAttribute(context.getPlayer(hero.getOwner()), Attribute.ELUSIVE_HERO));
 	}
@@ -304,14 +282,14 @@ public class HeroToken extends GameToken {
 	}
 	
 	public void setOptions(HumanActionOptions targetOptions) {
-		options = targetOptions;
-		multiplayer = options.getBehaviour().getName().equals("<Multiplayer controlled>");
+		this.options = targetOptions;
+		this.multiplayer = options.isMultiplayer();
 	}
 	
 	private void heroPower(MouseEvent event) {
 		if (options != null) {
 			GameContext context = options.getContext();
-			if (hero != context.getActivePlayer().getHero() || !options.getBehaviour().isWaiting()) {
+			if (hero != context.getActivePlayer().getHero() || multiplayer ? Client.blockedByAnimation : !options.getBehaviour().isWaiting()) {
 				return;
 			}
 			Collection<ActionGroup> actionGroups = new ArrayList<>();
@@ -325,7 +303,10 @@ public class HeroToken extends GameToken {
 			ActionGroup yeah = null;
 			for (ActionGroup actionGroup : actionGroups) {
 				GameAction action = actionGroup.getPrototype();
-				if (context.resolveSingleTarget(action.getSource()) == hero.getHeroPower()) {
+				if (context.resolveSingleTarget(action.getSource()) == null) {
+					break;
+				}
+				if (context.resolveSingleTarget(action.getSource()).getId() == hero.getHeroPower().getId()) {
 					yeahs.add(actionGroup);
 				}
 			}
@@ -351,7 +332,11 @@ public class HeroToken extends GameToken {
 			
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
 				if (multiplayer) {
-					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION, new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+					try {
+						Client.getOutToServerStream().writeObject(yeah.getPrototype());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				} else options.getBehaviour().onActionSelected(yeah.getPrototype());
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
 			} else {
@@ -365,7 +350,7 @@ public class HeroToken extends GameToken {
 	private void attack(Event mouseEvent) {
 		if (options != null) {
 			GameContext context = options.getContext();
-			if (hero != context.getActivePlayer().getHero() || !options.getBehaviour().isWaiting()) {
+			if (hero != context.getActivePlayer().getHero() || multiplayer ? Client.blockedByAnimation : !options.getBehaviour().isWaiting()) {
 				return;
 			}
 			
@@ -379,7 +364,10 @@ public class HeroToken extends GameToken {
 			ActionGroup yeah = null;
 			for (ActionGroup actionGroup : actionGroups) {
 				GameAction action = actionGroup.getPrototype();
-				if (context.resolveSingleTarget(action.getSource()) == hero) {
+				if (context.resolveSingleTarget(action.getSource()) == null) {
+					break;
+				}
+				if (context.resolveSingleTarget(action.getSource()).getId() == hero.getId()) {
 					yeah = actionGroup;
 				}
 			}
@@ -388,7 +376,11 @@ public class HeroToken extends GameToken {
 			}
 			if (yeah.getActionsInGroup().size() == 1 && (yeah.getPrototype().getTargetRequirement() == TargetSelection.NONE || yeah.getPrototype().getActionType() == ActionType.SUMMON)) {
 				if (multiplayer) {
-					NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION,new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+					try {
+						Client.getOutToServerStream().writeObject(yeah.getPrototype());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				} else options.getBehaviour().onActionSelected(yeah.getPrototype());
 
 				NotificationProxy.sendNotification(GameNotification.HIDE_ACTIONS, options);
@@ -422,7 +414,11 @@ public class HeroToken extends GameToken {
 				}
 			}
 			if (multiplayer) {
-				NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_ACTION,new ArrayList<>(Arrays.asList(options,  yeah.getPrototype())));
+				try {
+					Client.getOutToServerStream().writeObject(yeah.getPrototype());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			} else options.getBehaviour().onActionSelected(yeah.getPrototype());
 		}
 		
