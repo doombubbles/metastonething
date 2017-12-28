@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Deal 4 damage. Summon a Jade Golem.",
+	"description": "Deal *4* damage. Summon a {$1/$2} Jade Golem.",
 	"targetSelection": "ANY",
 	"spell": {
 		"class": "MetaSpell",
@@ -48,6 +48,20 @@
 			}
 		]
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

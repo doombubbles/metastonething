@@ -5,14 +5,14 @@
     "heroClass": "WARRIOR",
     "rarity": "COMMON",
     "description": "Gain 5 Armor. Equip a 5/2 weapon",
-    "targetSelection": "ANY",
+    "targetSelection": "NONE",
     "spell": {
         "class": "MetaSpell",
 		"spells": [
 			{
 				"class": "BuffHeroSpell",
 				"target": "FRIENDLY_HERO",
-				"armoBonus": 5
+				"armorBonus": 5
 			},
 			{
 				"class": "EquipWeaponSpell",

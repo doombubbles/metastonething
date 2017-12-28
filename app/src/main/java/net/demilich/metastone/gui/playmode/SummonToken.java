@@ -194,8 +194,8 @@ public class SummonToken extends GameToken {
 		if (options != null) {
 			if (((multiplayer && switched) ? options.getContext().getPlayer2() : options.getContext().getPlayer1()).getSummons().contains(summon)
 					&& ((multiplayer && switched) ? options.getContext().getPlayer2() : options.getContext().getPlayer1()) == options.getContext().getActivePlayer()) {
-				canAttack.setVisible(summon.canAttackThisTurn() && !summon.hasAttribute(Attribute.TAUNT));
-				canAttackTaunt.setVisible(summon.canAttackThisTurn() && summon.hasAttribute(Attribute.TAUNT));
+				canAttack.setVisible(summon.getEntityType().equals(EntityType.MINION) && summon.canAttackThisTurn() && !summon.hasAttribute(Attribute.TAUNT));
+				canAttackTaunt.setVisible(summon.getEntityType().equals(EntityType.MINION) && summon.canAttackThisTurn() && summon.hasAttribute(Attribute.TAUNT));
 			}
 			
 		}

@@ -6,7 +6,7 @@
 	"durability": 2,
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
-	"description": "Battlecry: Summon a Jade Golem. Overload: (1)",
+	"description": "Battlecry: Summon a {$1/$2} Jade Golem. Overload: (1)",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -47,6 +47,20 @@
 		"BATTLECRY": true,
 		"OVERLOAD": 1
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

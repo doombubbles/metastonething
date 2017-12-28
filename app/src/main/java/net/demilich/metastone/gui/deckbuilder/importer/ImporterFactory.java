@@ -7,12 +7,13 @@ public class ImporterFactory {
         if(url == null)
             return null;
 
-        if(url.contains("hearthpwn.com"))
+        if(url.contains("hearthpwn.com")) {
             return new HearthPwnImporter();
-
-        if(url.contains("tempostorm.com"))
-           return new TempostormImporter();
-
+        } else if(url.contains("tempostorm.com")) {
+            return new TempostormImporter();
+        } else if (!url.equals("")){
+            return new DeckCodeImporter();
+        }
         return null;
     }
 }

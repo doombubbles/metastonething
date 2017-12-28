@@ -9,11 +9,11 @@
     "spell": {
         "class": "BuffHeroSpell",
 		"target": "FRIENDLY_HERO",
-		"armoBonus": 5
+		"armorBonus": 5
     },
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "CardDrawnTrigger",
+			"class": "CardReceivedTrigger",
 			"hostTargetType": "IGNORE_OTHER_TARGETS"
 		},
 		"spell": {

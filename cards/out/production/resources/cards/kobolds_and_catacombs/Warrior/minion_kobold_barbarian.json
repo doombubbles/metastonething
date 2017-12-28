@@ -14,7 +14,7 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "AttackWithSelfSpell",
+			"class": "AttackSpell",
 			"target": "ENEMY_CHARACTERS",
 			"randomTarget": true
 		}

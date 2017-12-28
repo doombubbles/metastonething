@@ -16,6 +16,7 @@
 		},
 		"spell": {
 			"class": "DiscoverRandomCardSpell",
+			"targetPlayer": "SELF",
 			"spell": {
 				"class": "CastRandomSpellSpell"
 			},

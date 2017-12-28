@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
-	"description": "Deal 4 damage to a random enemy minion.",
+	"description": "Deal *4* damage to a random enemy minion.",
 	"targetSelection": "NONE",
 	"race": "FIRE",
 	"spell": {

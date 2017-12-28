@@ -4,7 +4,7 @@
     "type": "SPELL",
     "heroClass": "SHAMAN",
     "rarity": "COMMON",
-    "description": "Deal 4 Damage to a minion. Restore 4 Health to your hero.",
+    "description": "Deal *4* Damage to a minion. Restore 4 Health to your hero.",
     "targetSelection": "MINIONS",
 	"race": "RESTORATION",
     "spell": {

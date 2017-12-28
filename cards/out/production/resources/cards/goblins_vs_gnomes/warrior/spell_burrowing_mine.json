@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "WARRIOR",
 	"rarity": "FREE",
-	"description": "When you draw this, it explodes. You take 10 damage and draw a card.",
+	"description": "When you draw this, it explodes. You take *10* damage and draw a card.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "NullSpell"

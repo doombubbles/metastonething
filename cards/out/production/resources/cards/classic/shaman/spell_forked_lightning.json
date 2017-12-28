@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Deal 2 damage to 2 random enemy minions. Overload: (2)",
+	"description": "Deal *2* damage to 2 random enemy minions. Overload: (2)",
 	"targetSelection": "NONE",
 	"race": "ELEMENTAL",
 	"spell": {

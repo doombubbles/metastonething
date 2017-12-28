@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "Taunt. Battlecry: Summon a Jade Golem.",
+	"description": "Taunt. Battlecry: Summon a {$1/$2} Jade Golem.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
@@ -47,6 +47,20 @@
 		"BATTLECRY": true,
 		"TAUNT": true
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

@@ -54,11 +54,12 @@ public class ReceiveCardSpell extends Spell {
 		} else {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
+					Card local = card.clone();
 					if (attribute != null) {
-						card.setAttribute(attribute);
+						local.setAttribute(attribute);
 					}
-					card.setAttribute(Attribute.RECEIVED);
-					context.getLogic().receiveCard(player.getId(), card);
+					local.setAttribute(Attribute.RECEIVED);
+					context.getLogic().receiveCard(player.getId(), local);
 				}
 			}
 		}

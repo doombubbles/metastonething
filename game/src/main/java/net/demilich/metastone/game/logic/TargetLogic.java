@@ -257,6 +257,9 @@ public class TargetLogic implements Serializable {
 		} else if (targetKey.getId() == EntityReference.SELF.getId()) {
 			return singleTargetAsList(source);
 		} else if (targetKey.getId() == EntityReference.EVENT_TARGET.getId()) {
+			if (context.getEventTargetStack().empty()) {
+				return null;
+			}
 			return singleTargetAsList(context.resolveSingleTarget(context.getEventTargetStack().peek()));
 		} else if (targetKey.getId() == EntityReference.TARGET.getId()) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET)));

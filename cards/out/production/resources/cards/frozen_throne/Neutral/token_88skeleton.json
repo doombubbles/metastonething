@@ -8,7 +8,7 @@
     "rarity": "FREE",
     "race": "NONE",
     "description": "",
-    "collectible": true,
+    "collectible": false,
     "set": "FROZEN_THRONE",
     "fileFormatVersion": 1
 }

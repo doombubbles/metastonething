@@ -12,12 +12,12 @@
 			{
 				"class": "BuffHeroSpell",
 				"target": "FRIENDLY_HERO",
-				"armoBonus": 5
+				"armorBonus": 5
 			},
 			{
 				"class": "BuffHeroSpell",
 				"target": "FRIENDLY_HERO",
-				"armoBonus": 10
+				"armorBonus": 10
 			}
 		]
     },

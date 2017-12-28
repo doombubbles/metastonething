@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "FREE",
-	"description": "Deal 6 damage.",
+	"description": "Deal *6* damage.",
 	"targetSelection": "ANY",
 	"race": "FIRE",
 	"spell": {

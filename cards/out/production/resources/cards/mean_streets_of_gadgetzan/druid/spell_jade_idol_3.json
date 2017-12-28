@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Summon a Jade Golem. Shuffle 3 Jade Idols into your deck.",
+	"description": "Summon a {$1/$2} Jade Golem. Shuffle 3 Jade Idols into your deck.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "MetaSpell",
@@ -50,6 +50,20 @@
 			}
 		]
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": false,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

@@ -21,7 +21,7 @@
       <ComboBox fx:id="deckBox" prefWidth="150.0" visibleRowCount="15" />
       <Separator prefWidth="200.0" />
       <Label styleClass="name-small" text="IP Address:" />
-      <TextField fx:id="ipAddress" alignment="CENTER" maxWidth="200.0" minWidth="200.0" promptText="(Leave blank to host and play)" />
+      <TextField fx:id="ipAddress" alignment="CENTER" maxWidth="150.0" minWidth="150.0" promptText="(Leave blank to host)" />
       <Separator prefWidth="200.0" />
       <Label styleClass="name-small" text="Port:" />
       <TextField fx:id="port" alignment="CENTER" maxWidth="100.0" minWidth="100.0" />

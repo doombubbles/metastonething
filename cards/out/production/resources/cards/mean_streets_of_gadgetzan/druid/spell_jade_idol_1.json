@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"description": "Summon a Jade Golem.",
+	"description": "Summon a {$1/$2} Jade Golem.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "CreateSummonSpell",
@@ -39,6 +39,20 @@
 			"value": 1
 		}
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": false,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

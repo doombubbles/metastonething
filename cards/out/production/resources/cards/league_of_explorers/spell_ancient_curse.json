@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"description": "When you draw this, take 7 damage and draw a card.",
+	"description": "When you draw this, take *7* damage and draw a card.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "NullSpell"

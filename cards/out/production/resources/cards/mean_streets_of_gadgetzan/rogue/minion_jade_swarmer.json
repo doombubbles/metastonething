@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
-	"description": "Stealth. Deathrattle: Summon a Jade Golem.",
+	"description": "Stealth. Deathrattle: {$1/$2} Summon a Jade Golem.",
 	"deathrattle": {
 		"class": "CreateSummonSpell",
 		"name": "Jade Golem",
@@ -44,6 +44,20 @@
 		"DEATHRATTLES": true,
 		"STEALTH": true
 	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		},
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "JADE_BUFF",
+			"offset": 1
+		}
+	],
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",
 	"fileFormatVersion": 1

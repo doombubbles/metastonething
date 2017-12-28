@@ -29,7 +29,7 @@ public class ImportDeckCommand extends SimpleCommand<GameNotification> {
 			return;
 		}
 		getFacade().sendNotification(GameNotification.SET_ACTIVE_DECK, importedDeck);
-		getFacade().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
+		//getFacade().sendNotification(GameNotification.SAVE_ACTIVE_DECK);
 	}
 
 }

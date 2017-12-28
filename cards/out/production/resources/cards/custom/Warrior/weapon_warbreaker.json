@@ -10,7 +10,7 @@
 	"trigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
-			"targetPlayer": "SELF",
+			"sourcePlayer": "SELF",
 			"race": "ARMS"
 		},
 		"spell": {
