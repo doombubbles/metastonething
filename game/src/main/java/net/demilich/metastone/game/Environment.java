@@ -16,11 +16,13 @@ public enum Environment{
 	EVENT_CARD,
 	CHOOSE_ONE_CARD,
 	LAST_MANA_COST,
+	EVENT_SOURCE_REFERENCE_STACK,
 	;
 	
 	public boolean customClone() {
 		return (this == SUMMON_REFERENCE_STACK ||
 				this == EVENT_TARGET_REFERENCE_STACK ||
-				this == DAMAGE_STACK);
+				this == DAMAGE_STACK ||
+				this == EVENT_SOURCE_REFERENCE_STACK);
 	}
 }

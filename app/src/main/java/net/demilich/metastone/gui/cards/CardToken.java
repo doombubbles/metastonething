@@ -3,6 +3,7 @@ package net.demilich.metastone.gui.cards;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -171,6 +172,9 @@ public class CardToken extends BorderPane {
 		}
 		if (description.contains("[")) {
 			description = description.replace("[", "").replace("]", "");
+		}
+		if (description.contains("*")) {
+			description = description.replaceAll(Pattern.quote("*"), "");
 		}
 		descriptionLabel.setText(description);
 		setRarity(Rarity.FREE);

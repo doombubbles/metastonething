@@ -7,6 +7,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -28,6 +29,10 @@ public class AddSpellTriggerSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		TriggerDesc triggerDesc = (TriggerDesc) desc.get(SpellArg.TRIGGER);
 		SpellTrigger spellTrigger = triggerDesc.create();
+		if (desc.contains(SpellArg.REVERT_TRIGGER)) {
+			EventTriggerDesc revertTriggerDesc = (EventTriggerDesc) desc.get(SpellArg.REVERT_TRIGGER);
+			spellTrigger.addRevertTrigger(revertTriggerDesc.create());
+		}
 		context.getLogic().addGameEventListener(player, spellTrigger, target);
 	}
 

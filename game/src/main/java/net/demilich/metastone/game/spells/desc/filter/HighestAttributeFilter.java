@@ -16,12 +16,17 @@ public class HighestAttributeFilter extends EntityFilter {
 	}
 
 	@Override
-	protected boolean test(GameContext context, Player player, Entity entity) {
+	protected boolean test(GameContext context, Player player, Entity entity, Entity source) {
 		Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 		EntityReference targetReference = (EntityReference) desc.get(FilterArg.TARGET);
 		List<Entity> entities = context.resolveTarget(player, entity, targetReference);
-		int highest = getHighestInList(entities, attribute);
-		return getAttributeValue(entity, attribute) >= highest;
+		if (desc.contains(FilterArg.INVERT)) {
+			int lowest = getLowestInList(entities, attribute);
+			return getAttributeValue(entity, attribute) <= lowest;
+		} else {
+			int highest = getHighestInList(entities, attribute);
+			return getAttributeValue(entity, attribute) >= highest;
+		}
 	}
 
 	private static int getAttributeValue(Entity entity, Attribute attribute) {
@@ -40,6 +45,17 @@ public class HighestAttributeFilter extends EntityFilter {
 			}
 		}
 		return highest;
+	}
+
+	private static int getLowestInList(List<Entity> entities, Attribute attribute) {
+		int lowest = Integer.MAX_VALUE;
+		for (Entity entity : entities) {
+			int attributeValue = getAttributeValue(entity, attribute);
+			if (attributeValue < lowest) {
+				lowest = attributeValue;
+			}
+		}
+		return lowest;
 	}
 
 }

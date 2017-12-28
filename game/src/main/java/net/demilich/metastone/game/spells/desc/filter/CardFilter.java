@@ -10,6 +10,7 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Rift;
 import net.demilich.metastone.game.spells.SpellUtils;
 
 public class CardFilter extends EntityFilter {
@@ -17,7 +18,7 @@ public class CardFilter extends EntityFilter {
 	public CardFilter(FilterDesc desc) {
 		super(desc);
 	}
-	
+
 	private boolean heroClassTest(GameContext context, Player player, Card card, HeroClass heroClass) {
 		if (heroClass == HeroClass.OPPONENT) {
 			heroClass = context.getOpponent(player).getHero().getHeroClass();
@@ -32,7 +33,7 @@ public class CardFilter extends EntityFilter {
 	}
 
 	@Override
-	protected boolean test(GameContext context, Player player, Entity entity) {
+	protected boolean test(GameContext context, Player player, Entity entity, Entity source) {
 		Card card = null;
 		if (entity instanceof Card) {
 			card = (Card) entity;
@@ -71,7 +72,7 @@ public class CardFilter extends EntityFilter {
 		}
 		
 		if (desc.contains(FilterArg.MANA_COST)) {
-			int manaCost = desc.getValue(FilterArg.MANA_COST, context, player, null, null, 0);
+			int manaCost = desc.getValue(FilterArg.MANA_COST, context, player, source, source, 0);
 			if (manaCost != card.getBaseManaCost()) {
 				return false;
 			}
@@ -92,7 +93,7 @@ public class CardFilter extends EntityFilter {
 				return card.hasAttribute(attribute);
 			}
 	
-			int targetValue = desc.getValue(FilterArg.VALUE, context, player, entity, entity, 0);
+			int targetValue = desc.getValue(FilterArg.VALUE, context, player, entity, source, 0);
 			int actualValue = card.getAttributeValue(attribute);
 	
 			return SpellUtils.evaluateOperation(operation, actualValue, targetValue);

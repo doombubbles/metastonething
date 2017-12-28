@@ -64,6 +64,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.ONE_TURN, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CUSTOM_7, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CUSTOM_8, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.CUSTOM_6, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.DOUBLE_END_TURN, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.RECEIVED, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.INSTANT_TRAPS, jsonData, map, ParseValueType.BOOLEAN);
@@ -74,6 +75,8 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.ELUSIVE_HERO, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.COUNTDOWN, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.NO_FILTER, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.ACTUAL_MANA_COST, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.CARD_TYPE_COSTS_HEALTH, jsonData, map, ParseValueType.CARD_TYPE);
 
 		return map;
 	}

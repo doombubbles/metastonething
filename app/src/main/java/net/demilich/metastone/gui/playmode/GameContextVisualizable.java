@@ -24,6 +24,8 @@ public class GameContextVisualizable extends GameContext {
 
 	private boolean multiplayer;
 
+	private boolean exceptions = false;
+
 	public GameContextVisualizable(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat, boolean multiplayer) {
 		super(player1, player2, logic, deckFormat);
 		this.multiplayer = multiplayer;
@@ -37,7 +39,6 @@ public class GameContextVisualizable extends GameContext {
 		if (!ignoreEvents()) {
 			return true;
 		}
-		System.out.println("Is this even an issue?");
 		while (ignoreEvents()) {
 			try {
 				Thread.sleep(BuildConfig.DEFAULT_SLEEP_DELAY);
@@ -83,9 +84,13 @@ public class GameContextVisualizable extends GameContext {
 				boolean connectingClient = (boolean) Server.getInFromConnectingClientStream().readObject();
 				boolean hostClient = (boolean) Server.getInFromHostClientStream().readObject();
 			} catch (IOException e) {
-				e.printStackTrace();
+				if (exceptions) {
+					e.printStackTrace();
+				}
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				if (exceptions) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			while (blockedByAnimation) {

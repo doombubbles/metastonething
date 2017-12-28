@@ -13,6 +13,7 @@ import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.filter.CardFilter;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
@@ -47,9 +48,15 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		}
 	}
 
-	public boolean appliesTo(Card card) {
+	public boolean appliesTo(Card card, GameContext context) {
 		if (expired) {
 			return false;
+		}
+
+		if (getCardFilter() != null) {
+			if (!getCardFilter().matches(context, context.getPlayer(card.getOwner()), card)) {
+				return false;
+			}
 		}
 		
 		if (!getRequiredCardIds().isEmpty() && !getRequiredCardIds().contains(card.getId())) {
@@ -88,6 +95,10 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		}
 		
 		return card.getCardType().isCardType(getCardType());
+	}
+
+	public CardFilter getCardFilter() {
+		return (CardFilter) desc.get(CardCostModifierArg.CARD_FILTER);
 	}
 	
 	@Override
@@ -157,6 +168,11 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			return false;
 		}
 		return eventType == expirationTrigger.interestedIn() || expirationTrigger.interestedIn() == GameEventType.ALL;
+	}
+
+	@Override
+	public boolean revertInterestedIn(GameEventType eventType) {
+		return false;
 	}
 
 	@Override

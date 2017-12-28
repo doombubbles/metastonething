@@ -58,8 +58,8 @@ public class PlayModeView extends BorderPane {
 			try {
 				Server.rip();
 				Client.rip();
-			} catch (IOException e) {
 				NotificationProxy.sendNotification(GameNotification.MAIN_MENU);
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 

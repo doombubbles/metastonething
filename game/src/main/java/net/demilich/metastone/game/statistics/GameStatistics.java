@@ -241,4 +241,8 @@ public class GameStatistics implements Cloneable, Serializable {
 		set(Statistic.WIN_RATE, winRate);
 	}
 
+	public void damageThisTurn(int damage) {
+		add(Statistic.DAMAGE_THIS_TURN, damage);
+	}
+
 }

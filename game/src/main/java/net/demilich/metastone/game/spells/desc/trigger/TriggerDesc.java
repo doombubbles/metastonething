@@ -13,9 +13,10 @@ public class TriggerDesc implements Serializable {
 	public boolean oneTime;
 	public boolean persistentOwner;
 	public int turnDelay;
+	public EventTriggerDesc revertTrigger;
 
 	public SpellTrigger create() {
-		SpellTrigger trigger = new SpellTrigger(eventTrigger.create(), null, spell, oneTurn, turnDelay, oneTime);
+		SpellTrigger trigger = new SpellTrigger(eventTrigger.create(), null, spell, oneTurn, turnDelay, oneTime, revertTrigger == null ? null : revertTrigger.create());
 		trigger.setPersistentOwner(persistentOwner);
 		return trigger;
 	}

@@ -11,7 +11,7 @@ public class OrFilter extends EntityFilter {
 	}
 
 	@Override
-	protected boolean test(GameContext context, Player player, Entity entity) {
+	protected boolean test(GameContext context, Player player, Entity entity, Entity source) {
 		EntityFilter[] filters = (EntityFilter[]) desc.get(FilterArg.FILTERS);
 		for (EntityFilter filter : filters) {
 			if (filter.matches(context, player, entity)) {

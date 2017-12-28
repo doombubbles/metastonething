@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "PALADIN",
 	"rarity": "FREE",
-	"description": "Deal {$1}[1] damage to all minions. Deals 1 more damage for each turn it spends in your hand.",
+	"description": "Deal *{$1}[1]* damage to all minions. Deals 1 more damage for each turn it spends in your hand.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",

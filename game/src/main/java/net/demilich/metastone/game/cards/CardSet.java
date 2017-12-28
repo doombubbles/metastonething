@@ -17,5 +17,6 @@ public enum CardSet {
 	FROZEN_THRONE,
 	KOBOLDS_AND_CATACOMBS,
 	
-	CUSTOM
+	CUSTOM,
+	SANDS_OF_TIME,
 }

@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "4 damage and draw a card",
+	"description": "*4* damage and draw a card",
 	"targetSelection": "MINIONS",
 	"race": "BALANCE",
 	"spell": {

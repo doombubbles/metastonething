@@ -16,8 +16,8 @@ public class AlgebraicValueProvider extends ValueProvider {
 
 	@Override
 	protected int provideValue(GameContext context, Player player, Entity target, Entity source) {
-		int value1 = desc.getValue(ValueProviderArg.VALUE_1, context, player, target, null, 1);
-		int value2 = desc.getValue(ValueProviderArg.VALUE_2, context, player, target, null, 1);
+		int value1 = desc.getValue(ValueProviderArg.VALUE_1, context, player, target, source, 1);
+		int value2 = desc.getValue(ValueProviderArg.VALUE_2, context, player, target, source, 1);
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(ValueProviderArg.OPERATION);
 		return evaluateOperation(value1, value2, operation);
 	}

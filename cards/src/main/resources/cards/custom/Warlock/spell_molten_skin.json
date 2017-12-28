@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
-	"description": "Deal 3 damage to yourself and gain 9 armor.",
+	"description": "Deal *3* damage to yourself and gain 9 armor.",
 	"targetSelection": "NONE",
 	"race": "DESTRUCTION",
 	"spell": {

@@ -60,6 +60,7 @@ public enum SpellArg {
 	VALUE,
 	RACE,
 	EXCESS,
+	OBJECT,
 	
 	REVEAL,
 }

@@ -39,4 +39,6 @@ public enum ParseValueType {
 	CARD_DESC_TYPE,
 	CARD_SOURCE,
 	GAME_VALUE,
+
+	OBJECT,
 }

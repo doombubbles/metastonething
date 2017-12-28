@@ -13,7 +13,7 @@ public class InDeckFilter extends EntityFilter {
 	}
 	
 	@Override
-	protected boolean test(GameContext context, Player player, Entity entity) {
+	protected boolean test(GameContext context, Player player, Entity entity, Entity source) {
 		Card card = null;
 		if (entity instanceof Card) {
 			card = (Card) entity;

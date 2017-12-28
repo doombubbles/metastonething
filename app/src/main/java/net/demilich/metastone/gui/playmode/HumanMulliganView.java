@@ -89,7 +89,6 @@ public class HumanMulliganView extends BorderPane implements EventHandler<MouseE
 			}
 
 			if (multiplayer) {
-				//NotificationProxy.sendNotification(GameNotification.REPLY_FROM_SERVER_PROMPT_FOR_MULLIGAN, new ArrayList<>(Arrays.asList(options, discardedCards)));
 				try {
 					Client.getOutToServerStream().writeObject(discardedCards);
 				} catch (IOException e) {

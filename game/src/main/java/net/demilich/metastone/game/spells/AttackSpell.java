@@ -7,6 +7,7 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.events.TargetAcquisitionEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -19,8 +20,10 @@ public class AttackSpell extends Spell {
     protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
         Entity attackSource = source;
         if (desc.contains(SpellArg.SPELL_SOURCE)) {
-            if ((EntityReference) desc.get(SpellArg.SPELL_SOURCE) == EntityReference.TARGET) {
+            if (desc.get(SpellArg.SPELL_SOURCE) == EntityReference.TARGET) {
                 attackSource = target;
+            } else if (desc.get(SpellArg.SPELL_SOURCE) == EntityReference.FRIENDLY_HERO) {
+                attackSource = player.getHero();
             } else attackSource = context.resolveSingleTarget((EntityReference) desc.get(SpellArg.SPELL_SOURCE));
         }
         Actor attackTarget = (Actor) target;
@@ -35,6 +38,12 @@ public class AttackSpell extends Spell {
         }
         if (!attackSource.hasAttribute(Attribute.FROZEN)) {
             context.getLogic().fight(player, (Actor) attackSource, attackTarget);
+            if (attackSource.getEntityType().equals(EntityType.HERO)) {
+                Hero hero = (Hero) attackSource;
+                if (hero.getWeapon() != null) {
+                    context.getLogic().modifyDurability(hero.getWeapon(), -1);
+                }
+            }
         }
     }
 }

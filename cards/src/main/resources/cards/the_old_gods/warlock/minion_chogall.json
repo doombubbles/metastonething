@@ -12,7 +12,8 @@
 		"spell": {
 			"class": "AddAttributeSpell",
 			"target": "FRIENDLY_PLAYER",
-			"attribute": "SPELLS_COST_HEALTH",
+			"attribute": "CARD_TYPE_COSTS_HEALTH",
+			"object": "CardType.SPELL",
 			"revertTrigger": {
 				"class": "TurnEndTrigger"
 			},

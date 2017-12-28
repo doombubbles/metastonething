@@ -90,12 +90,12 @@ public class PlayerConfigView extends VBox {
 		deckBox.valueProperty().addListener((ChangeListener<Deck>) (observableProperty, oldDeck, newDeck) -> {
 			getPlayerConfig().setDeck(newDeck);
 		});
+
 	}
 
 	private void filterDecks() {
 		HeroClass heroClass = getPlayerConfig().getHeroCard().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
-
 		if (heroClass == HeroClass.DECK_COLLECTION) {
 			for (Deck deck : decks) {
 				if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
@@ -129,11 +129,15 @@ public class PlayerConfigView extends VBox {
 						deckList.add(deck);
 					}
 				}
+				if (deck.getName().equals("The Supreme Archive") && !deck.isArbitrary()) {
+					playerConfig.setSupremeArchive(deck);
+				}
 			}
 		}
 
 		deckBox.setItems(deckList);
 		deckBox.getSelectionModel().selectFirst();
+
 	}
 
 	public PlayerConfig getPlayerConfig() {

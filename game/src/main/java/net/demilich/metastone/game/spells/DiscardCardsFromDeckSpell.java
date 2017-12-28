@@ -32,7 +32,7 @@ public class DiscardCardsFromDeckSpell extends Spell {
 			if (player.getDeck().isEmpty()) {
 				return;
 			}
-			Card card = player.getDeck().getRandom();
+			Card card = player.getDeck().get(0);
 			context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card, 1.2 + 1.2 * i));
 			context.fireGameEvent(new CardRevealedEvent(context, context.getOpponent(player).getId(), card, 1.2 + 1.2 * i));
 			context.getLogic().removeCardFromDeck(player.getId(), card);

@@ -14,7 +14,6 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
-import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
@@ -27,7 +26,7 @@ public abstract class Card extends Entity {
 	private String description = "";
 	private final CardType cardType;
 	private final CardSet cardSet;
-	private final Rarity rarity;
+	private Rarity rarity;
 	private HeroClass heroClass;
 	private HeroClass[] heroClasses;
 	private boolean collectible = true;
@@ -37,8 +36,10 @@ public abstract class Card extends Entity {
 	private final String cardId;
 	private final ConditionDesc glow;
 	private List<ValueProvider> descValues;
+	private CardDesc desc;
 
 	public Card(CardDesc desc) {
+		this.desc = desc;
 		cardId = desc.id;
 		setName(desc.name);
 		setDescription(desc.description);
@@ -131,8 +132,16 @@ public abstract class Card extends Entity {
 		return heroClass;
 	}
 
+	public void setHeroClass(HeroClass heroClass) {
+		this.heroClass = heroClass;
+	}
+
 	public HeroClass[] getHeroClasses() {
 		return heroClasses;
+	}
+
+	public void setRarity(Rarity rarity) {
+		this.rarity = rarity;
 	}
 
 	public Card getCopy() {
@@ -167,6 +176,7 @@ public abstract class Card extends Entity {
 		if (manaCostModifier != null) {
 			actualManaCost -= manaCostModifier.getValue(context, player, null, this);
 		}
+		setAttribute(Attribute.ACTUAL_MANA_COST, actualManaCost);
 		return actualManaCost;
 	}
 
@@ -285,6 +295,10 @@ public abstract class Card extends Entity {
 
 	public void setLocation(CardLocation location) {
 		this.location = location;
+	}
+
+	public CardDesc getDesc() {
+		return desc;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class AttributeFilter extends EntityFilter {
 	}
 
 	@Override
-	protected boolean test(GameContext context, Player player, Entity entity) {
+	protected boolean test(GameContext context, Player player, Entity entity, Entity source) {
 		Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 		ComparisonOperation operation = (ComparisonOperation) desc.get(FilterArg.OPERATION);
 		if (operation == ComparisonOperation.HAS) {

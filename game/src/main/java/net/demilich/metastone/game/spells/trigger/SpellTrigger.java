@@ -23,18 +23,20 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private boolean expired;
 	private boolean persistentOwner;
 	private int turnDelay;
+	private GameEventTrigger revertTrigger;
 
-	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay, boolean oneTime) {
+	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay, boolean oneTime, GameEventTrigger revertTrigger) {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
 		this.spell = spell;
 		this.oneTurn = oneTurn;
 		this.turnDelay = turnDelay;
 		this.oneTime = oneTime;
+		this.revertTrigger = revertTrigger;
 	}
 	
 	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, boolean oneTime) {
-		this(primaryTrigger, secondaryTrigger, spell, oneTurn, 0, oneTime);
+		this(primaryTrigger, secondaryTrigger, spell, oneTurn, 0, oneTime, null);
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell) {
@@ -42,7 +44,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	}
 
 	public SpellTrigger(GameEventTrigger trigger, SpellDesc spell, boolean oneTime, int turnDelay) {
-		this(trigger, null, spell, oneTime, turnDelay, oneTime);
+		this(trigger, null, spell, oneTime, turnDelay, oneTime, null);
 	}
 
 	@Override
@@ -52,8 +54,15 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		if (secondaryTrigger != null) {
 			clone.secondaryTrigger = (GameEventTrigger) secondaryTrigger.clone();
 		}
+		if (revertTrigger != null) {
+			clone.revertTrigger = revertTrigger.clone();
+		}
 		clone.spell = spell.clone();
 		return clone;
+	}
+
+	public void addRevertTrigger(GameEventTrigger revertTrigger) {
+		this.revertTrigger = revertTrigger;
 	}
 
 	public void expire() {
@@ -81,6 +90,14 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			result |= secondaryTrigger.interestedIn() == eventType || (secondaryTrigger.interestedIn() == GameEventType.ALL && !eventType.equals(GameEventType.ATTRIBUTE_GAINED) && !eventType.equals(GameEventType.ATTRIBUTE_LOST));
 		}
 		return result;
+	}
+
+	@Override
+	public boolean revertInterestedIn(GameEventType eventType) {
+		if (revertTrigger != null) {
+			return revertTrigger.interestedIn() == eventType || (revertTrigger.interestedIn() == GameEventType.ALL && !eventType.equals(GameEventType.ATTRIBUTE_GAINED) && !eventType.equals(GameEventType.ATTRIBUTE_LOST));
+		}
+		return false;
 	}
 
 	@Override
@@ -126,8 +143,14 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 			} else {
 				event.getGameContext().getEventTargetStack().push(null);
 			}
+			if (event.getEventSource() != null) {
+				event.getGameContext().getEventSourceStack().push(event.getEventSource().getReference());
+			} else {
+				event.getGameContext().getEventSourceStack().push(null);
+			}
 			onFire(ownerId, spell, event);
 			event.getGameContext().getEventTargetStack().pop();
+			event.getGameContext().getEventSourceStack().pop();
 		} catch (Exception e) {
 			event.getGameContext().printCurrentTriggers();
 			logger.error("SpellTrigger cannot be executed; GameEventTrigger: {} Spell: {}", primaryTrigger, spell);

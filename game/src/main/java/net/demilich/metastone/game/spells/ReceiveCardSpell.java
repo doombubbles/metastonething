@@ -11,7 +11,15 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
+import java.util.Map;
+
 public class ReceiveCardSpell extends Spell {
+
+	public static SpellDesc create(Player player) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(ReceiveCardSpell.class);
+		arguments.put(SpellArg.TARGET_PLAYER, player.getReference());
+		return new SpellDesc(arguments);
+	}
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
@@ -47,9 +55,9 @@ public class ReceiveCardSpell extends Spell {
 			for (Card card : SpellUtils.getCards(context, desc)) {
 				for (int i = 0; i < count; i++) {
 					if (attribute != null) {
-						card.setAttribute(Attribute.RECEIVED);
 						card.setAttribute(attribute);
 					}
+					card.setAttribute(Attribute.RECEIVED);
 					context.getLogic().receiveCard(player.getId(), card);
 				}
 			}

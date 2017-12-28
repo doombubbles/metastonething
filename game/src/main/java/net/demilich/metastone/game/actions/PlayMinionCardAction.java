@@ -43,6 +43,7 @@ public class PlayMinionCardAction extends PlayCardAction {
 		}
 		Player player = context.getPlayer(playerId);
 		int index = player.getSummons().indexOf(nextTo);
+		context.getPlayer(playerId).minionsPlayed.add(minionCard);
 		context.getLogic().summon(playerId, minion, minionCard, index, true);
 	}
 

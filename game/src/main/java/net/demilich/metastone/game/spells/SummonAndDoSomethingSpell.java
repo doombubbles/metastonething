@@ -12,6 +12,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
+import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 import java.util.Map;
@@ -21,22 +22,31 @@ public class SummonAndDoSomethingSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
-		MinionCard minionCard = null;
+		Minion minion = null;
 		if (desc.contains(SpellArg.CARD)) {
-			minionCard = (MinionCard) SpellUtils.getCard(context, desc);
-		} else {
+			minion = ((MinionCard) SpellUtils.getCard(context, desc)).summon();
+			context.getLogic().summon(player.getId(), minion);
+		} else if (desc.contains(SpellArg.CARD_FILTER)){
 			CardFilter cardFilter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 			CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 			cards.shuffle();
 			for (Card card : cards) {
 				if (cardFilter.matches(context, player, card)) {
-					minionCard = (MinionCard) context.getCardById(card.getCardId());
+					minion = ((MinionCard) context.getCardById(card.getCardId())).summon();
 				}
 			}
+			context.getLogic().summon(player.getId(), minion);
+		} else {
+			Minion clone = ((Minion) target).clone();
+			clone.clearSpellTriggers();
+			context.getLogic().summon(player.getId(), clone);
+			for (IGameEventListener trigger : context.getTriggersAssociatedWith(target.getReference())) {
+				IGameEventListener triggerClone = trigger.clone();
+				context.getLogic().addGameEventListener(player, triggerClone, clone);
+			}
+			minion = clone;
 		}
-		Minion targetMinion = minionCard.summon();
-		context.getLogic().summon(player.getId(), targetMinion);
-		SpellUtils.castChildSpell(context, player, spell, targetMinion, target);
+		SpellUtils.castChildSpell(context, player, spell, minion, target);
 
 
 	}

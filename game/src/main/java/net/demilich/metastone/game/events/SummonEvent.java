@@ -10,8 +10,8 @@ public class SummonEvent extends GameEvent {
 	private final Actor minion;
 	private final Card source;
 
-	public SummonEvent(GameContext context, Actor minion, Card source) {
-		super(context, minion.getOwner(), -1);
+	public SummonEvent(GameContext context, Actor minion, Card source, int stats) {
+		super(context, minion.getOwner(), -1, stats);
 		this.minion = minion;
 		this.source = source;
 	}

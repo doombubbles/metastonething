@@ -18,6 +18,8 @@ public interface IGameEventListener {
 
 	public abstract boolean interestedIn(GameEventType eventType);
 
+	public abstract boolean revertInterestedIn(GameEventType eventType);
+
 	public abstract boolean isExpired();
 
 	public abstract void onAdd(GameContext context);

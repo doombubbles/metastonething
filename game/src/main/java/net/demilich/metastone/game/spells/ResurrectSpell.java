@@ -45,7 +45,9 @@ public class ResurrectSpell extends Spell {
 					minion.setMaxHp(desc.getValue(SpellArg.HP_BONUS, context, player, target, null, 1));
 				}
 			}
-			deadMinions.remove(resurrectedMinion);
+			if (desc.contains(SpellArg.EXCLUSIVE)) {
+				deadMinions.removeIf(minion1 -> minion1.getSourceCard().equals(resurrectedMinion.getSourceCard()));
+			} else deadMinions.remove(resurrectedMinion);
 		}
 	}
 

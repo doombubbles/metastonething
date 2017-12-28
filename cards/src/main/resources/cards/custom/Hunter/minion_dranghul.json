@@ -16,6 +16,10 @@
 			"spell": {
 				"class": "SummonSpell",
 				"card": "minion_dranghul"
+			},
+			"filter": {
+				"class": "RaceFilter",
+				"race": "BEAST"
 			}
 		}
 	},

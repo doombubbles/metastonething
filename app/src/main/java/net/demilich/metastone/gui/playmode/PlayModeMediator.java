@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.MultiplayerBehaviour;
 import net.demilich.metastone.gui.multiplayermode.Client;
@@ -78,7 +79,6 @@ public class PlayModeMediator extends Mediator<GameNotification> implements Even
 		case GAME_OVER:
 			try {
 				Client.rip();
-				getFacade().sendNotification(GameNotification.MAIN_MENU);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

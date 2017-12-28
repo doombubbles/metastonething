@@ -1,29 +1,14 @@
 package net.demilich.metastone.gui.cards;
 
 
-import java.io.IOException;
-import java.util.*;
-
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
@@ -31,28 +16,24 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
-import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.ActionGroup;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.cards.SpellCard;
-import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.TargetPlayer;
-import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionArg;
-import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.multiplayermode.Client;
-import net.demilich.metastone.gui.playmode.GameBoardView;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class HandCard extends CardToken {
 
@@ -66,11 +47,20 @@ public class HandCard extends CardToken {
 	private CardTooltip tooltipContent;
 	private Tooltip tooltip;
 
+	@FXML
+	private ImageView manaGem;
+	@FXML
+	private ImageView rainbowGem;
+	@FXML
+	private ImageView bloodGem;
+
 	private HumanActionOptions options;
 	private boolean multiplayer;
 	
 	public HandCard() {
 		super("HandCard.fxml");
+		rainbowGem.setVisible(false);
+		bloodGem.setVisible(false);
 		hideCard(true);
 	}
 
@@ -94,6 +84,32 @@ public class HandCard extends CardToken {
 		super.nameLabel.getStyleClass().remove("thickBorder");
 		super.nameLabel.getStyleClass().add("thinBorder");
 		evaluateGlow(context, card, player);
+		manaGem.setVisible(true);
+		rainbowGem.setVisible(false);
+		bloodGem.setVisible(false);
+		if (context.getLogic().hasAttribute(player, Attribute.CARD_TYPE_COSTS_HEALTH)) {
+			List<CardType> cardTypes = new ArrayList<>();
+			List<Object> results = context.getLogic().getAttributes(player, Attribute.CARD_TYPE_COSTS_HEALTH);
+			for (Object object : results) {
+				CardType cardType = (CardType) object;
+				cardTypes.add(cardType);
+			}
+			if (cardTypes.contains(card.getCardType())) {
+				manaGem.setVisible(false);
+				bloodGem.setVisible(true);
+				rainbowGem.setVisible(false);
+			}
+		}
+		if (card.hasAttribute(Attribute.COSTS_HEALTH) || ((card.getRace().equals(Race.MURLOC) || card.getRace().equals(Race.ALL)) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))) {
+			manaGem.setVisible(false);
+			bloodGem.setVisible(true);
+			rainbowGem.setVisible(false);
+		}
+		if (card.getCardType().equals(CardType.SPELL) && player.getQuests().contains("quest_open_the_waygate") && (card.hasAttribute(Attribute.RECEIVED) || !card.isCollectible())) {
+			manaGem.setVisible(false);
+			bloodGem.setVisible(false);
+			rainbowGem.setVisible(true);
+		}
 		if (tooltipContent == null) {
 			tooltip = new Tooltip();
 			tooltipContent = new CardTooltip();

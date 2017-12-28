@@ -31,6 +31,15 @@ public class RiftCard extends PermanentCard {
                 rift.setAttribute(gameTag, getAttribute(gameTag));
             }
         }
+        BattlecryDesc battlecry = desc.battlecry;
+        if (battlecry != null) {
+            BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
+            if (battlecry.condition != null) {
+                battlecryAction.setCondition(battlecry.condition.create());
+            }
+            rift.setBattlecry(battlecryAction);
+
+        }
         if (desc.deathrattle != null) {
             rift.removeAttribute(Attribute.DEATHRATTLES);
             rift.addDeathrattle(desc.deathrattle);

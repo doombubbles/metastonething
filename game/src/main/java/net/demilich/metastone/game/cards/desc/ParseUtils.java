@@ -168,6 +168,16 @@ public class ParseUtils {
 			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);
 		case CARD_COST_MODIFIER:
 			return manaModifierParser.deserialize(entry, CardCostModifierDesc.class, null);
+		case OBJECT:
+			String string = entry.getAsString();
+			String classy = string.substring(0, string.indexOf("."));
+			String rest = string.substring(string.indexOf(".") + 1);
+			switch (classy) {
+				case "CardType":
+					return Enum.valueOf(CardType.class, rest);
+				default:
+					break;
+			}
 		default:
 			break;
 		}
@@ -247,6 +257,12 @@ public class ParseUtils {
 			return EntityReference.MINIONS_TO_LEFT;
 		case "minions_to_right":
 			return EntityReference.MINIONS_TO_RIGHT;
+		case "event_source":
+			return EntityReference.EVENT_SOURCE;
+		case "friendly_rifts":
+			return EntityReference.FRIENDLY_RIFTS;
+		case "enemy_rifts":
+			return EntityReference.ENEMY_RIFTS;
 		
 			
 		case "other_enemy_minions":

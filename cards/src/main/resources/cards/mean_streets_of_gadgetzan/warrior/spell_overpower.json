@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "WARRIOR",
 	"rarity": "EPIC",
-	"description": "Deal 3 damage to all damaged minions.",
+	"description": "Deal *3* damage to all damaged minions.",
 	"targetSelection": "NONE",
 	"race": "ARMS",
 	"spell": {

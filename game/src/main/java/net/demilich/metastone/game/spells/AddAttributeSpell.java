@@ -41,7 +41,12 @@ public class AddAttributeSpell extends RevertableSpell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Attribute tag = (Attribute) desc.get(SpellArg.ATTRIBUTE);
-		context.getLogic().applyAttribute(target, tag);
+		if (desc.contains(SpellArg.OBJECT)) {
+			Object object = desc.get(SpellArg.OBJECT);
+			System.out.println("woot toot");
+			target.setAttribute(tag, object);
+			System.out.println(target.getAttribute(tag).toString());
+		} else context.getLogic().applyAttribute(target, tag);
 		super.onCast(context, player, desc, source, target);
 	}
 }

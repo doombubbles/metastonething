@@ -14,8 +14,9 @@
 			"queueCondition": {
 				"class": "ComparisonCondition",
 				"value1": {
-					"class": "PlayerAttributeValueProvider",
-					"playerAttribute": "LAST_MANA_COST"
+					"class": "AttributeValueProvider",
+					"target": "EVENT_TARGET",
+					"attribute": "BASE_MANA_COST"
 				},
 				"value2": 1,
 				"operation": "EQUAL"
@@ -30,6 +31,6 @@
 		}
 	},
 	"collectible": true,
-	"set": "CUSTOM",
+	"set": "SANDS_OF_TIME",
 	"fileFormatVersion": 1
 }

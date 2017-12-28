@@ -1,8 +1,6 @@
 package net.demilich.metastone.game.cards;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
@@ -14,6 +12,8 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.MetaSpell;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
 public class MinionCard extends SummonCard {
@@ -55,10 +55,9 @@ public class MinionCard extends SummonCard {
 			if (battlecry.condition != null) {
 				battlecryAction.setCondition(battlecry.condition.create());
 			}
-
 			minion.setBattlecry(battlecryAction);
-		}
 
+		}
 		if (desc.deathrattle != null) {
 			minion.removeAttribute(Attribute.DEATHRATTLES);
 			minion.addDeathrattle(desc.deathrattle);
@@ -119,6 +118,56 @@ public class MinionCard extends SummonCard {
 		return createMinion();
 	}
 
+	public boolean hasDeathrattle() {
+		return desc.deathrattle != null;
+	}
+
+	public SpellDesc getDeathrattle() {
+		return  desc.deathrattle;
+	}
+
+	public TriggerDesc getTrigger() {
+		return desc.trigger;
+	}
+
+	public void setTrigger(TriggerDesc trigger) {
+		desc.trigger = trigger;
+	}
+
+	public TriggerDesc[] getTriggers() {
+		return desc.triggers;
+	}
+
+	public void setTriggers(TriggerDesc[] triggers) {
+		desc.triggers = triggers;
+	}
+
+	public CardCostModifierDesc getCostModifier() {
+		return desc.cardCostModifier;
+	}
+
+	public void setCostModifier(CardCostModifierDesc costModifier) {
+		desc.cardCostModifier = costModifier;
+	}
+
+	public AuraDesc getAura() {
+		return desc.aura;
+	}
+
+	public void setAura(AuraDesc aura) {
+		desc.aura = aura;
+	}
+
+	@Override
+	public void setBattlecry(BattlecryDesc battlecry) {
+		desc.battlecry = battlecry;
+	}
+
+	@Override
+	public BattlecryDesc getBattlecry() {
+		return desc.battlecry;
+	}
+
 	public void addDeathrattle(SpellDesc deathrattleSpell) {
 		SpellDesc combinedDeathrattle;
 		if (desc.deathrattle != null) {
@@ -127,7 +176,7 @@ public class MinionCard extends SummonCard {
 
 		desc.deathrattle = combinedDeathrattle;
 	}
-	
+
 	public MinionCardDesc getDesc() {
 		return desc;
 	}

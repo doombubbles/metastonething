@@ -9,6 +9,12 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 public class CardTooltip extends CardToken {
 
 	@FXML
@@ -21,6 +27,14 @@ public class CardTooltip extends CardToken {
 	@Override
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
+
+		if (!card.hasAttribute(Attribute.RACE) || card.getAttribute(Attribute.RACE) == Race.NONE) {
+			raceLabel.setVisible(false);
+		} else {
+			raceLabel.setText(card.getAttribute(Attribute.RACE).toString());
+			raceLabel.setVisible(true);
+		}
+
 		String descriptionText = card.getDescription();
 		if (card.getDescValues().size() > 0 && context != null) {
 
@@ -44,14 +58,31 @@ public class CardTooltip extends CardToken {
 				descriptionText = descriptionText.replace("[", "").replace("]", "");
 			}
 		}
+		if (descriptionText.contains("*") && context != null) {
+			String[] partTwixtStars = descriptionText.split(Pattern.quote("*"));
+			for (int i = 0; i < partTwixtStars.length; i++) {
+				String s = partTwixtStars[i];
+				if (i % 2 == 1) {
+					int oldValue = Integer.parseInt(s);
+					int newValue = context.getLogic().applyAmplify(player, context.getLogic().applySpellpower(player, card, oldValue)
+							+ card.getAttributeValue(Attribute.SPELL_DAMAGE)
+							+ player.getAttributeValue(Attribute.SPELL_DAMAGE), Attribute.SPELL_AMPLIFY_MULTIPLIER);
+
+					descriptionText = descriptionText.replace("*" + s + "*","*" + newValue + "*");
+					if (newValue <= oldValue) {
+						descriptionText = descriptionText.replaceAll(Pattern.quote("*"), "");
+					}
+				}
+			}
+		} else {
+			if (descriptionText.contains("*")) {
+				descriptionText = descriptionText.replaceAll(Pattern.quote("*"), "");
+			}
+		}
+
 
 		descriptionLabel.setText(descriptionText);
-		if (!card.hasAttribute(Attribute.RACE) || card.getAttribute(Attribute.RACE) == Race.NONE) {
-			raceLabel.setVisible(false);
-		} else {
-			raceLabel.setText(card.getAttribute(Attribute.RACE).toString());
-			raceLabel.setVisible(true);
-		}
+
 	}
 
 }

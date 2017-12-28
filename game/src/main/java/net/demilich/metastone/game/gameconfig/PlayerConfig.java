@@ -13,6 +13,7 @@ public class PlayerConfig implements Serializable {
 	private String name;
 	private HeroCard heroCard;
 	private Deck deck;
+	private Deck supremeArchive;
 	private IBehaviour behaviour;
 	private boolean hideCards;
 
@@ -20,6 +21,12 @@ public class PlayerConfig implements Serializable {
 	private HeroCard heroForPlay;
 
 	public PlayerConfig() {
+	}
+
+	public PlayerConfig(Deck deck, IBehaviour behaviour, Deck supremeArchive) {
+		this.deck = deck;
+		this.behaviour = behaviour;
+		this.supremeArchive = supremeArchive;
 	}
 
 	public PlayerConfig(Deck deck, IBehaviour behaviour) {
@@ -87,4 +94,11 @@ public class PlayerConfig implements Serializable {
 		this.name = name;
 	}
 
+	public Deck getSupremeArchive() {
+		return supremeArchive;
+	}
+
+	public void setSupremeArchive(Deck supremeArchive) {
+		this.supremeArchive = supremeArchive;
+	}
 }

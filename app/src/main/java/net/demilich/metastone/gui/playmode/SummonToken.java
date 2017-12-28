@@ -148,7 +148,9 @@ public class SummonToken extends GameToken {
 		}
 		this.summon = summon;
 		visualizeStatus(summon);
-		cardTooltip.setCard(summon.getSourceCard());
+		if (options != null) {
+			cardTooltip.setCard(options.getContext(), summon.getSourceCard(), options.getContext().getPlayer(summon.getOwner()));
+		} else cardTooltip.setCard(summon.getSourceCard());
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {

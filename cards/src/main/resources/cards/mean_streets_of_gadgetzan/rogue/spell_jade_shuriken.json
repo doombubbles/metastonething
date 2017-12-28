@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
-	"description": "Deal 2 damage. Combo: Summon a {$1/$2} Jade Golem.",
+	"description": "Deal *2* damage. Combo: Summon a {$1/$2} Jade Golem.",
 	"targetSelection": "ANY",
 	"race": "SUBTLETY",
 	"spell": {

@@ -4,7 +4,7 @@
     "type": "RIFT",
     "duration": 2,
     "heroClass": "PRIEST",
-    "rarity": "EPIC",
+    "rarity": "RARE",
     "description": "Whenever a friendly minion is healed, summon a Lightwarden",
 	"trigger": {
 		"eventTrigger": {
@@ -19,6 +19,6 @@
 		}
 	},
     "collectible": true,
-    "set": "CUSTOM",
+    "set": "SANDS_OF_TIME",
     "fileFormatVersion": 1
 }

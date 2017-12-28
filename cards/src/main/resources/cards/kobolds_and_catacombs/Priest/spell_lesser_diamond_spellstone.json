@@ -8,12 +8,13 @@
     "targetSelection": "NONE",
     "spell": {
 		"class": "ResurrectSpell",
-		"value": 2
+		"value": 2,
+		"exclusive": true
     },
 	"passiveTrigger": {
 		"eventTrigger": {
 			"class": "SpellCastedTrigger",
-			"targetPlayer": "SELF",
+			"sourcePlayer": "SELF",
 			"value": 4
 		},
 		"spell": {

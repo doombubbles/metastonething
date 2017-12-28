@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "RARE",
-	"description": "Deal 3 damage. If you're not holding any Fire or Frost spells, deal 5 instead.",
+	"description": "Deal *3* damage. If you're not holding any Fire or Frost spells, deal *5* instead.",
 	"targetSelection": "ANY",
 	"race": "ARCANE",
 	"spell": {

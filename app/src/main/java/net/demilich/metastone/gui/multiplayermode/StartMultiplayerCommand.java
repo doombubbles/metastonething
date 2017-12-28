@@ -27,15 +27,7 @@ public class StartMultiplayerCommand extends SimpleCommand<GameNotification> {
 
 		DeckFormat deckFormat = multiplayerConfig.getDeckFormat();
 		GameContext newGame = new GameContextVisualizable(player1, player2, new GameLogic(), deckFormat, true);
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				NotificationProxy.sendNotification(GameNotification.PLAY_GAME, newGame);
-			}
-		});
-		t.setDaemon(true);
-		t.start();
+		NotificationProxy.sendNotification(GameNotification.PLAY_GAME, newGame);
 	}
 
 }

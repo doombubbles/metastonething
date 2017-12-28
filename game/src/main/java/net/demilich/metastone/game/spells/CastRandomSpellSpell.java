@@ -69,16 +69,25 @@ public class CastRandomSpellSpell extends Spell {
 		opponent.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true);
 		player.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true); 
 		// HAHAHAHAHAHAHAHAHAHA!
-		
 		int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		for (int i = 0; i < numberOfSpellsToCast; i++) {
 			// In case Yogg changes sides, this should case who the spells are being cast for.
-			player = context.getPlayer(source.getOwner());
+			if (source.getEntityType().equals(EntityType.MINION)) {
+				player = context.getPlayer(source.getOwner());
+			}
 			// If Yogg is removed from the board, stop casting spells.
-			if (!player.getSummons().contains(source) && !source.getEntityType().equals(EntityType.CARD)) {
+			if (!player.getSummons().contains(source) && source.getEntityType().equals(EntityType.MINION)) {
+				System.out.println("He's dead jim " + source.getEntityType().name());
 				break;
 			}
-			Card randomCard = desc.contains(SpellArg.CARD) ? context.getCardById(desc.getString(SpellArg.CARD))  : filteredSpells.getRandom();
+			Card randomCard;
+			if (desc.contains(SpellArg.CARD)) {
+				randomCard = context.getCardById(desc.getString(SpellArg.CARD));
+			} else if (filter != null) {
+				randomCard = filteredSpells.getRandom();
+			} else {
+				randomCard = (Card) target;
+			}
 			if (tryAgain) {
 				while (!((SpellCard) randomCard).canBeCast(context, player)) {
 					randomCard = filteredSpells.getRandom();

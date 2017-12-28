@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Deal 3-6 damage. Overload: (1)",
+	"description": "Deal *3*-*6* damage. Overload: (1)",
 	"targetSelection": "ANY",
 	"race": "ELEMENTAL",
 	"spell": {

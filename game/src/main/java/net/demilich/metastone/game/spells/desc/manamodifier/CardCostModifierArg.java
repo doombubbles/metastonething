@@ -14,6 +14,7 @@ public enum CardCostModifierArg {
 	TARGET,
 	OPERATION,
 	RANDOM_TARGET,
+	CARD_FILTER,
 	
 	// Internal use only
 	CARD_IDS,

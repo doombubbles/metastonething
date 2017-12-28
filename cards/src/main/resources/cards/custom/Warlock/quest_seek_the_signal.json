@@ -8,7 +8,7 @@
 	"targetSelection": "NONE",
 	"quest": {
 		"class": "SpellCastedTrigger",
-		"targetPlayer": "SELF",
+		"sourcePlayer": "SELF",
 		"value": 3
 	},
 	"spell": {

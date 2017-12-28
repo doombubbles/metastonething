@@ -19,6 +19,9 @@ public class MultiplayerConfigMediator extends Mediator<GameNotification> {
 
 	private final MultiplayerModeConfigView view;
 
+	private Thread server;
+	private Thread client;
+
 	public MultiplayerConfigMediator() {
 		super(NAME);
 		view = new MultiplayerModeConfigView();
@@ -38,29 +41,36 @@ public class MultiplayerConfigMediator extends Mediator<GameNotification> {
 			view.injectDeckFormats(deckFormats);
 			break;
 		case COMMIT_MULTIPLAYER_CONFIG:
-
 			MultiplayerConfig multiplayerConfig = (MultiplayerConfig) notification.getBody();
-
 			if (multiplayerConfig.getIpAddress().equals("") || multiplayerConfig.getIpAddress().equals(null)) {
-				new Thread(new Runnable() {
+				server = new Thread(new Runnable() {
 					@Override
 					public void run() {
-						Server.initialize(multiplayerConfig, BuildConfig.VERSION);
+						Server.initialize(multiplayerConfig, BuildConfig.VERSION, false);
 					}
-				}).start();
+				});
+				server.setDaemon(true);
+				server.start();
 				multiplayerConfig.setIpAddress("localhost");
 			}
-
 			PlayModeMediator mediator = new PlayModeMediator(true);
 			getFacade().registerMediator(mediator);
-			new Thread(new Runnable() {
+			client = new Thread(new Runnable() {
 				@Override
 				public void run() {
 					Client.initialize(multiplayerConfig, BuildConfig.VERSION);
 				}
-			}).start();
-
-
+			});
+			client.setDaemon(true);
+			client.start();
+			break;
+		case MAIN_MENU:
+			if (server != null) {
+				server.interrupt();
+			}
+			if (client != null) {
+				client.interrupt();
+			}
 			break;
 		default:
 			break;
@@ -73,6 +83,7 @@ public class MultiplayerConfigMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.REPLY_DECKS);
 		notificationInterests.add(GameNotification.REPLY_DECK_FORMATS);
 		notificationInterests.add(GameNotification.COMMIT_MULTIPLAYER_CONFIG);
+		notificationInterests.add(GameNotification.MAIN_MENU);
 		return notificationInterests;
 	}
 

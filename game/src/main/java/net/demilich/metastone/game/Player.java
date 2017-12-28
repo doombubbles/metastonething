@@ -37,6 +37,7 @@ public class Player extends Entity {
 	private final HashSet<String> quests = new HashSet<>();
 	
 	private final CardCollection startingDeck;
+	private final CardCollection supremeArchive;
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -71,6 +72,7 @@ public class Player extends Entity {
 		this.behaviour = otherPlayer.behaviour;
 		this.getStatistics().merge(otherPlayer.getStatistics());
 		this.startingDeck = otherPlayer.getStartingDeck();
+		this.supremeArchive = otherPlayer.getSupremeArchive();
 	}
 
 	public Player(PlayerConfig config) {
@@ -83,6 +85,9 @@ public class Player extends Entity {
 		setBehaviour(config.getBehaviour().clone());
 		setHideCards(config.hideCards());
 		this.startingDeck = selectedDeck.getCardsCopy();
+		if (config.getSupremeArchive() != null) {
+			this.supremeArchive = config.getSupremeArchive().getCardsCopy();
+		} else this.supremeArchive = null;
 	}
 
 	@Override
@@ -164,6 +169,10 @@ public class Player extends Entity {
 		return startingDeck;
 	}
 
+	public CardCollection getSupremeArchive() {
+		return supremeArchive;
+	}
+
 	public List<Summon> getSummons() {
 		return summons;
 	}
@@ -222,5 +231,7 @@ public class Player extends Entity {
 	public List<Card> spellsCastOnFriendlies = new ArrayList<>();
 
 	public Card lastCardPlayed;
+
+	public List<MinionCard> minionsPlayed = new ArrayList<>();
 
 }

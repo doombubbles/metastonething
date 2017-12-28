@@ -23,13 +23,21 @@ public class Server {
     public static Socket connectingSocket;
     public static ServerSocket serverSocket;
 
+    public static boolean initialized;
+    private static boolean exceptions;
+
     public static void main(String[] args){
         MultiplayerConfig config = new MultiplayerConfig();
         config.setPort(Integer.parseInt(args[0]));
-        initialize(config, args[1]);
+        initialize(config, args[1], true);
     }
 
-    public static void initialize(MultiplayerConfig multiplayerConfig, String version){
+    public static void initialize(MultiplayerConfig multiplayerConfig, String version, boolean Exceptions){
+        if (initialized) {
+            return;
+        }
+        initialized = true;
+        exceptions = Exceptions;
         PORT = multiplayerConfig.getPort();
         try {
             serverSocket = new ServerSocket(PORT);
@@ -59,25 +67,29 @@ public class Server {
 
             NotificationProxy.sendNotification(GameNotification.START_MULTIPLAYER, multiplayerConfig);
         } catch (Exception e) {
-            e.printStackTrace();
+            if (exceptions) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static String handleVersion(Socket socket) {
-        try {
-            InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String version = bufferedReader.readLine();
-            System.out.println("We got to the version part of it! " + version);
-            return version;
+    /*
+public static String handleVersion(Socket socket) {
+    try {
+        InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String version = bufferedReader.readLine();
+        System.out.println("We got to the version part of it! " + version);
+        return version;
 
-        } catch (IOException e) {
-            e.printStackTrace();
+    } catch (IOException e) {
+        if (exceptions) {
             return null;
         }
 
     }
-
+}
+*/
     public static Object readObject(int playerId){
         if (playerId == 1) {
             try {
@@ -87,10 +99,17 @@ public class Server {
             }
         } else try {
             return inFromHostClientStream.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        }  catch (ClassNotFoundException e) {
+            if (exceptions) {
+                e.printStackTrace();
+
+            }
+        } catch (SocketException e) {
+        }catch (IOException e) {
+            if (exceptions) {
+                e.printStackTrace();
+
+            }
         }
         return null;
     }
@@ -102,7 +121,9 @@ public class Server {
             connection.writeObject(gameData);
             connection.reset();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (exceptions) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -114,24 +135,46 @@ public class Server {
         return inFromHostClientStream;
     }
 
-    public static void rip() throws IOException {
-        if (serverSocket != null) {
-            sendNotification(GameNotification.GAME_OVER, null, 0);
-            sendNotification(GameNotification.GAME_OVER, null, 1);
-            serverSocket.close();
-        }
-        if (inFromConnectingClientStream != null) {
-            inFromConnectingClientStream.close();
-        }
-        if (inFromHostClientStream != null) {
-            inFromHostClientStream.close();
-        }
+    public static void rip() {
+        initialized = false;
         if (outToConnectingClientStream != null) {
-            outToConnectingClientStream.close();
+            try {
+                sendNotification(GameNotification.GAME_OVER, null, 1);
+                outToConnectingClientStream.close();
+                System.out.println("Succesfully closed server stream # 1");
+            } catch (IOException e) {
+            }
         }
         if (outToHostClientStream != null) {
-            outToHostClientStream.close();
+            try {
+                sendNotification(GameNotification.GAME_OVER, null, 0);
+                outToHostClientStream.close();
+                System.out.println("Succesfully closed server stream # 2");
+            } catch (IOException e) {
+            }
         }
+        if (inFromConnectingClientStream != null) {
+            try {
+                inFromConnectingClientStream.close();
+                System.out.println("Succesfully closed server stream # 3");
+            } catch (IOException e) {
+            }
+        }
+        if (inFromHostClientStream != null) {
+            try {
+                inFromHostClientStream.close();
+            } catch (IOException e) {
+            }
+        }
+        if (serverSocket != null) {
+            System.out.println("This server is shuttin down");
+            System.out.println("Succesfully closed server stream # 4");
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+            }
+        }
+
     }
 
 

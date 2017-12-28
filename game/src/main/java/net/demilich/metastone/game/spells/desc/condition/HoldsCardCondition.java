@@ -15,12 +15,14 @@ public class HoldsCardCondition extends Condition {
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(ConditionArg.CARD_FILTER);
+		int value = desc.getValue(ConditionArg.VALUE, context, player, target, source, 1);
+		int count = 0;
 		for (Card card : player.getHand()) {
 			if (cardFilter == null || cardFilter.matches(context, player, card)) {
-				return true;
+				count++;
 			}
 		}
-		return false;
+		return count >= value;
 	}
 
 }

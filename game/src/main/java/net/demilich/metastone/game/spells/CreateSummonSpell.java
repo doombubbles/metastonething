@@ -33,7 +33,7 @@ public class CreateSummonSpell extends Spell {
 		minionCardDesc.heroClass = HeroClass.ANY;
 		minionCardDesc.type = CardType.MINION;
 		minionCardDesc.rarity = Rarity.FREE;
-		minionCardDesc.description = description;
+		minionCardDesc.description = desc.getString(SpellArg.DESCRIPTION);
 		Attribute attribute = (Attribute) desc.get(SpellArg.ATTRIBUTE);
 		if (attribute != null) {
 			minionCardDesc.attributes.put(attribute, true);

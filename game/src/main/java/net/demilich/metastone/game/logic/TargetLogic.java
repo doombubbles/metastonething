@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.minions.Rift;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -141,6 +142,9 @@ public class TargetLogic implements Serializable {
 	private Entity findInEnvironment(GameContext context, EntityReference targetKey) {
 		if (!context.getEventTargetStack().isEmpty() && targetKey == EntityReference.EVENT_TARGET) {
 			return context.resolveSingleTarget(context.getEventTargetStack().peek());
+		}
+		if (!context.getEventSourceStack().isEmpty() && targetKey == EntityReference.EVENT_SOURCE) {
+			return context.resolveSingleTarget(context.getEventSourceStack().peek());
 		}
 		return null;
 	}
@@ -309,6 +313,24 @@ public class TargetLogic implements Serializable {
 		} else if (targetKey.getId() == EntityReference.LEFTMOST_FRIENDLY_MINION.getId()) {
 			List<Minion> minions =  player.getMinions();
 			return singleTargetAsList(minions.get(0));
+		} else if (targetKey.getId() == EntityReference.EVENT_SOURCE.getId()) {
+			return singleTargetAsList(context.resolveSingleTarget(context.getEventSourceStack().peek()));
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_RIFTS.getId()) {
+			List<Entity> rifts = new ArrayList<>();
+			for (Summon summon : player.getSummons()) {
+				if (summon instanceof Rift) {
+					rifts.add(summon);
+				}
+			}
+			return rifts;
+		} else if (targetKey.getId() == EntityReference.ENEMY_RIFTS.getId()) {
+			List<Entity> rifts = new ArrayList<>();
+			for (Summon summon : context.getOpponent(player).getSummons()) {
+				if (summon instanceof Rift) {
+					rifts.add(summon);
+				}
+			}
+			return rifts;
 		}
 		return singleTargetAsList(findEntity(context, targetKey));
 	}

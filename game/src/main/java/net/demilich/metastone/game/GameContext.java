@@ -117,6 +117,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		Stack<EntityReference> eventTargetReferenceStack = new Stack<EntityReference>();
 		eventTargetReferenceStack.addAll(getEventTargetStack());
 		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
+
+		Stack<EntityReference> eventSourceReferenceStack = new Stack<EntityReference>();
+		eventTargetReferenceStack.addAll(getEventSourceStack());
+		clone.getEnvironment().put(Environment.EVENT_SOURCE_REFERENCE_STACK, eventSourceReferenceStack);
 		
 		for (Environment key : getEnvironment().keySet()) {
 			if (!key.customClone()) {
@@ -280,6 +284,14 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 			environment.put(Environment.EVENT_TARGET_REFERENCE_STACK, new Stack<EntityReference>());
 		}
 		return (Stack<EntityReference>) environment.get(Environment.EVENT_TARGET_REFERENCE_STACK);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Stack<EntityReference> getEventSourceStack() {
+		if (!environment.containsKey(Environment.EVENT_SOURCE_REFERENCE_STACK)) {
+			environment.put(Environment.EVENT_SOURCE_REFERENCE_STACK, new Stack<EntityReference>());
+		}
+		return (Stack<EntityReference>) environment.get(Environment.EVENT_SOURCE_REFERENCE_STACK);
 	}
 
 	public List<Summon> getLeftSummons(Player player, EntityReference minionReference) {

@@ -22,13 +22,13 @@ public class Client {
     private static ObjectOutputStream outToServerStream;
     private static ObjectInputStream inFromServerStream;
 
-    private static Thread t;
-
     public static Socket clientSocket;
 
     public static boolean inGame = false;
 
     public static boolean blockedByAnimation = false;
+
+    public static boolean initialized;
 
     /*
     public Client (MultiplayerConfig config, String version) {
@@ -49,13 +49,17 @@ public class Client {
     }
 
     public static void initialize(MultiplayerConfig config, String version) {
+        if (initialized) {
+            return;
+        }
+        initialized = true;
         IP_ADDRESS = config.getIpAddress();
         PORT = config.getPort();
         VERSION = version;
         multiplayerConfig = config;
         try {
             clientSocket = new Socket(IP_ADDRESS, PORT);
-
+            System.out.println("Just started up a client");
             /*
             PrintStream printStream = new PrintStream(clientSocket.getOutputStream());
             printStream.println(VERSION);
@@ -72,21 +76,14 @@ public class Client {
 
             //GameContextVisualizable gameContextVisualizable = (GameContextVisualizable) inFromServerStream.readObject();
 
-            t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    inGame = true;
-                    try {
-                        while(inGame) {
-                            receiveNotification((GameData) inFromServerStream.readObject());
-                        }
-                    } catch (IOException e) {
-                    } catch (ClassNotFoundException e) {
-                    }
+            inGame = true;
+            try {
+                while(inGame) {
+                    receiveNotification((GameData) inFromServerStream.readObject());
                 }
-            });
-            t.setDaemon(true);
-            t.start();
+            } catch (IOException e) {
+            } catch (ClassNotFoundException e) {
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,16 +116,23 @@ public class Client {
     }
 
     public static void rip() throws IOException {
+        initialized = false;
         endGame();
-        t.interrupt();
-        if (clientSocket != null) {
-            clientSocket.close();
-        }
         if (outToServerStream != null) {
             outToServerStream.close();
+            outToServerStream = null;
+            System.out.println("Succesfully closed client stream # 1");
         }
         if (inFromServerStream != null) {
-            outToServerStream.close();
+            inFromServerStream.close();
+            inFromServerStream = null;
+            System.out.println("Succesfully closed client stream # 2");
         }
+        if (clientSocket != null) {
+            clientSocket.close();
+            clientSocket = null;
+            System.out.println("This client is shuttin down");
+        }
+
     }
 }

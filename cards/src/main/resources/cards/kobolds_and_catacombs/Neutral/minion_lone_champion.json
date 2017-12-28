@@ -29,7 +29,7 @@
 			"class": "MinionCountCondition",
 			"targetPlayer": "SELF",
 			"operation": "EQUAL",
-			"value": 0
+			"value": 1
 		}
     },
 	"glow": {

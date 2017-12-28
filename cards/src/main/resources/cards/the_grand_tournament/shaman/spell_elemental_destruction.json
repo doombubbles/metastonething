@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "EPIC",
-	"description": "Deal 4-5 damage to all minions. Overload: (5)",
+	"description": "Deal *4*-*5* damage to all minions. Overload: (5)",
 	"targetSelection": "NONE",
 	"race": "ELEMENTAL",
 	"spell": {

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.entities.minions.*;
 import net.demilich.metastone.game.events.*;
 import org.slf4j.Logger;
@@ -224,26 +225,29 @@ public class GameLogic implements Cloneable, Serializable {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
-		if (card.getCardType().isCardType(CardType.SPELL)
-				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)
-				&& player.getHero().getEffectiveHp() < manaCost) {
-			return false;
-		} else if (card.getCardType().isCardType(CardType.SPELL)
-				&& card.hasAttribute(Attribute.COSTS_HEALTH)
-				&& player.getHero().getEffectiveHp() < manaCost) {
+		List<CardType> cardTypes = new ArrayList<>();
+		if (hasAttribute(player, Attribute.CARD_TYPE_COSTS_HEALTH)) {
+			List<Object> results = getAttributes(player, Attribute.CARD_TYPE_COSTS_HEALTH);
+			for (Object object : results) {
+				CardType cardType = (CardType) object;
+				cardTypes.add(cardType);
+			}
+			if (cardTypes.contains(card.getCardType()) && player.getHero().getEffectiveHp() < manaCost && !hasAttribute(player, Attribute.IMMUNE_HERO) && !player.hasAttribute(Attribute.IMMUNE)) {
+				return false;
+			}
+		}
+		if (card.hasAttribute(Attribute.COSTS_HEALTH) && player.getHero().getEffectiveHp() < manaCost) {
 			return false; 
 		}
 		else if (card.getCardType().isCardType(CardType.MINION)
-				&& ((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL)
+				&& (card.getAttribute(Attribute.RACE) == Race.MURLOC || card.getAttribute(Attribute.RACE) == Race.ALL)
 				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (player.getMana() < manaCost && manaCost != 0
-				&& !((card.getCardType().isCardType(CardType.SPELL)
-				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH))
-				|| (((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL)
-				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))
-				|| card.hasAttribute(Attribute.COSTS_HEALTH))) {
+				&& !(cardTypes.contains(card.getCardType()))
+				&& !(((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))
+				&& !card.hasAttribute(Attribute.COSTS_HEALTH)) {
 			return false;
 		}
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
@@ -357,8 +361,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
-	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference,
-			boolean childSpell) {
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, boolean childSpell) {
 		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell);
 	}
 
@@ -514,7 +517,7 @@ public class GameLogic implements Cloneable, Serializable {
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellDamage && sourceCard != null) {
 			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
-				damage = applySpellpower(player, source, baseDamage) + sourceCard.getAttributeValue(Attribute.SPELL_DAMAGE);
+				damage = applySpellpower(player, source, baseDamage) + sourceCard.getAttributeValue(Attribute.SPELL_DAMAGE) + player.getAttributeValue(Attribute.SPELL_DAMAGE);
 			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyHeroPowerDamage(player, damage);
 				if (hasAttribute(player, Attribute.FREEZE_POWER)) {
@@ -628,6 +631,10 @@ public class GameLogic implements Cloneable, Serializable {
 		
 		
 		log(hero.getName() + " receives " + damage + " damage, hp now: " + hero.getHp() + "(" + hero.getArmor() + ")");
+		if (context.getActivePlayerId() == hero.getOwner()) {
+			context.getPlayer(hero.getOwner()).getStatistics().damageThisTurn(damage);
+		}
+
 		return damage;
 	}
 
@@ -787,6 +794,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 		player.removeAttribute(Attribute.COMBO);
 		player.getHero().removeAttribute(Attribute.CUSTOM_7);
+		player.getStatistics().set(Statistic.DAMAGE_THIS_TURN, 0L);
 		hero.activateWeapon(false);
 		log("{} ends his turn.", player.getName());
 		context.fireGameEvent(new TurnEndEvent(context, playerId));
@@ -868,8 +876,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 		context.getEnvironment().put(Environment.ATTACKER_REFERENCE, attacker.getReference());
 
-		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, player.getId(), ActionType.PHYSICAL_ATTACK,
-				attacker, defender);
+		TargetAcquisitionEvent targetAcquisitionEvent = new TargetAcquisitionEvent(context, player.getId(), ActionType.PHYSICAL_ATTACK, attacker, defender);
 		context.fireGameEvent(targetAcquisitionEvent);
 		Actor target = defender;
 		if (context.getEnvironment().containsKey(Environment.TARGET_OVERRIDE)) {
@@ -890,11 +897,22 @@ public class GameLogic implements Cloneable, Serializable {
 		if (attacker.hasAttribute(Attribute.IMMUNE_WHILE_ATTACKING)) {
 			applyAttribute(attacker, Attribute.IMMUNE);
 		}
-
+		int attackerDamage;
+		attackerDamage = attacker.getAttack();
 		removeAttribute(attacker, Attribute.STEALTH);
+		if (attacker.getEntityType().equals(EntityType.HERO)) {
+			Hero hero = (Hero) attacker;
+			if (hero.getWeapon() != null) {
+				if (!hero.getWeapon().isActive()) {
+					hero.activateWeapon(true);
+					attackerDamage = attacker.getAttack();
+					hero.activateWeapon(false);
+				}
 
-		int attackerDamage = attacker.getAttack();
+			}
+		}
 		int defenderDamage = target.getAttack();
+
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage));
 		// secret may have killed attacker ADDENDUM: or defender
 		if (attacker.isDestroyed() || target.isDestroyed()) {
@@ -933,6 +951,7 @@ public class GameLogic implements Cloneable, Serializable {
 		context.fireGameEvent(new AfterPhysicalAttackEvent(context, attacker, target, damaged ? attackerDamage : 0));
 
 		context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
+		checkForDeadEntities();
 	}
 
 	public void gainArmor(Player player, int armor) {
@@ -1031,7 +1050,7 @@ public class GameLogic implements Cloneable, Serializable {
 		int manaCost = card.getManaCost(context, player);
 		int minValue = 0;
 		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
-			if (!costModifier.appliesTo(card)) {
+			if (!costModifier.appliesTo(card, context)) {
 				continue;
 			}
 			manaCost = costModifier.process(card, manaCost);
@@ -1158,6 +1177,9 @@ public class GameLogic implements Cloneable, Serializable {
 		if (player.getHero().hasAttribute(attr)) {
 			return true;
 		}
+		if (player.hasAttribute(attr)) {
+			return true;
+		}
 		for (Summon summon : player.getSummons()) {
 			if (summon.hasAttribute(attr) && !summon.hasAttribute(Attribute.PENDING_DESTROY)) {
 				return true;
@@ -1165,6 +1187,23 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		return false;
+	}
+
+	public List<Object> getAttributes(Player player, Attribute attr) {
+		List<Object> results = new ArrayList<>();
+		if (player.getHero().hasAttribute(attr)) {
+			results.add(player.getHero().getAttribute(attr));
+		}
+
+		if (player.hasAttribute(attr)) {
+			results.add(player.getAttribute(attr));
+		}
+		for (Summon summon : player.getSummons()) {
+			if (summon.hasAttribute(attr) && !summon.hasAttribute(Attribute.PENDING_DESTROY)) {
+				results.add(summon.getAttribute(attr));
+			}
+		}
+		return results;
 	}
 
 	public boolean hasAutoHeroPower(int player) {
@@ -1479,36 +1518,47 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void performGameAction(int playerId, GameAction action) {
-		debugHistory.add(action.toString());
-		if (playerId != context.getActivePlayerId()) {
-			logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
-		}
-		if (action.getTargetRequirement() != TargetSelection.NONE) {
-			Entity target = context.resolveSingleTarget(action.getTargetKey());
-			if (target != null) {
-				context.getEnvironment().put(Environment.TARGET, target.getReference());
-			} else {
-				context.getEnvironment().put(Environment.TARGET, null);
-			}
-		}
+		try {
+			debugHistory.add(action.toString());
+			if (playerId != context.getActivePlayerId()) {
+                logger.warn("Player {} tries to perform an action, but it is not his turn!", context.getPlayer(playerId).getName());
+            }
+			if (action.getTargetRequirement() != TargetSelection.NONE) {
+                Entity target = context.resolveSingleTarget(action.getTargetKey());
+                if (target != null) {
+                    context.getEnvironment().put(Environment.TARGET, target.getReference());
+                } else {
+                    context.getEnvironment().put(Environment.TARGET, null);
+                }
+            }
 
-		action.execute(context, playerId);
+			action.execute(context, playerId);
 
-		context.getEnvironment().remove(Environment.TARGET);
-		if (action.getActionType() != ActionType.BATTLECRY) {
-			checkForDeadEntities();
+			context.getEnvironment().remove(Environment.TARGET);
+			if (action.getActionType() != ActionType.BATTLECRY) {
+                checkForDeadEntities();
+            }
+		} catch (NullPointerException e){
 		}
 	}
 
 	public void playCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
-		card.setName(context.getCardById(card.getCardId()).getName());
+		card.setName(card.getDesc().name);
 		card.removeAttribute(Attribute.ONE_TURN);
 		int modifiedManaCost = getModifiedManaCost(player, card);
-		if (card.getCardType().isCardType(CardType.SPELL) && player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
-			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
-			damage(player, player.getHero(), modifiedManaCost, card, true);
+		if (hasAttribute(player, Attribute.CARD_TYPE_COSTS_HEALTH)) {
+			List<Object> results = getAttributes(player, Attribute.CARD_TYPE_COSTS_HEALTH);
+			List<CardType> cardTypes = new ArrayList<>();
+			for (Object object : results) {
+				CardType cardType = (CardType) object;
+				cardTypes.add(cardType);
+			}
+			if (cardTypes.contains(card.getCardType())) {
+				context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
+				damage(player, player.getHero(), modifiedManaCost, card, true);
+			}
 		} else if (((card.getRace() == Race.MURLOC || card.getRace() == Race.ALL)) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
@@ -2017,7 +2067,7 @@ public class GameLogic implements Cloneable, Serializable {
 			context.fireGameEvent(new BeforeSummonEvent(context, minion, source));
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));
-		
+
 		if (resolveBattlecry && summon.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), summon);
 			checkForDeadEntities();
@@ -2038,11 +2088,11 @@ public class GameLogic implements Cloneable, Serializable {
 			if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
 				Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
-				SummonEvent summonEvent = new SummonEvent(context, actor, source);
+				SummonEvent summonEvent = new SummonEvent(context, actor, source, minion.getAttack() + minion.getHp());
 
 				context.fireGameEvent(summonEvent);
 			} else {
-				SummonEvent summonEvent = new SummonEvent(context, minion, source);
+				SummonEvent summonEvent = new SummonEvent(context, minion, source, minion.getAttack() + minion.getHp());
 				context.fireGameEvent(summonEvent);
 			}
 

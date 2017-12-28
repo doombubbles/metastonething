@@ -11,6 +11,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
+import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SummonNewAttackTargetSpell extends Spell {
@@ -27,7 +28,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 		MinionCard minionCard = null;
 		if (desc.contains(SpellArg.CARD)) {
 			minionCard = (MinionCard) SpellUtils.getCard(context, desc);
-		} else {
+		} else if (desc.contains(SpellArg.CARD_FILTER)){
 			CardFilter cardFilter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 			CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 			cards.shuffle();
@@ -36,6 +37,19 @@ public class SummonNewAttackTargetSpell extends Spell {
 					minionCard = (MinionCard) context.getCardById(card.getCardId());
 				}
 			}
+		} else {
+			Minion template = (Minion) target;
+			Minion clone = template.clone();
+			clone.clearSpellTriggers();
+			context.getLogic().summon(player.getId(), clone);
+			for (IGameEventListener trigger : context.getTriggersAssociatedWith(template.getReference())) {
+				IGameEventListener triggerClone = trigger.clone();
+				context.getLogic().addGameEventListener(player, triggerClone, clone);
+			}
+			if (clone.getOwner() > -1) {
+				context.getEnvironment().put(Environment.TARGET_OVERRIDE, clone.getReference());
+			}
+			return;
 		}
 		Minion targetMinion = minionCard.summon();
 		context.getLogic().summon(player.getId(), targetMinion);

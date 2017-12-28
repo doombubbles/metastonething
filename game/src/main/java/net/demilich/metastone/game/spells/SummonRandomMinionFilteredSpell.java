@@ -15,7 +15,7 @@ import net.demilich.metastone.game.spells.desc.source.CardSource;
 
 public class SummonRandomMinionFilteredSpell extends Spell {
 
-	protected static MinionCard getRandomMatchingMinionCard(GameContext context, Player player, EntityFilter cardFilter, CardSource cardSource) {
+	protected static MinionCard getRandomMatchingMinionCard(GameContext context, Player player, EntityFilter cardFilter, CardSource cardSource, Entity source) {
 		CardCollection relevantMinions = null;
 		if (cardSource != null) {
 			CardCollection allCards = cardSource.getCards(context, player);
@@ -29,7 +29,7 @@ public class SummonRandomMinionFilteredSpell extends Spell {
 			CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
 			relevantMinions = new CardCollection();
 			for (Card card : allMinions) {
-				if (cardFilter == null || cardFilter.matches(context, player, card)) {
+				if (cardFilter == null || cardFilter.matches(context, player, card, source)) {
 					relevantMinions.add(card);
 				}
 			}
@@ -46,7 +46,7 @@ public class SummonRandomMinionFilteredSpell extends Spell {
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
 
 		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
-		MinionCard minionCard = getRandomMatchingMinionCard(context, player, cardFilter, cardSource);
+		MinionCard minionCard = getRandomMatchingMinionCard(context, player, cardFilter, cardSource, source);
 		if (minionCard == null && replacementCard != null) {
 			minionCard = (MinionCard) context.getCardById(replacementCard);
 		}
