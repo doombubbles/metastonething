@@ -74,7 +74,7 @@ public class HandCard extends CardToken {
 					BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 			Background background = new Background(image);
 			setBackground(background);
-		}
+		} else setBackground(super.getBackground());
 	}
 
 	@SuppressWarnings("unchecked")

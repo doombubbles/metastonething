@@ -10,7 +10,7 @@
 	"attributes": {
 		"CARD_TYPE_COSTS_HEALTH": "MINION"
 	},
-    "collectible": true,
+    "collectible": false,
     "set": "SANDS_OF_TIME",
     "fileFormatVersion": 1
 }

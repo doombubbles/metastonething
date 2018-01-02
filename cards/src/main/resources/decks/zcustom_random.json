@@ -1,0 +1,15 @@
+{
+  "name": "[ZCustom Random]",
+  "heroClass": "DECK_COLLECTION",
+  "arbitrary": false,
+  "decks": [
+    "ZCustom Tempo",
+    "ZCustom Zoo",
+    "ZCustom Spell",
+    "ZCustom Cube",
+    "ZCustom Big",
+    "ZCustom Aggro",
+    "ZCustom Satellite",
+    "ZCustom Face"
+  ]
+}

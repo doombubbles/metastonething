@@ -8,7 +8,6 @@
     "Control",
     "Highlander",
     "Pirate",
-    "Midrange Murloc",
     "Midrange",
     "Jade",
     "Tempo",
@@ -17,9 +16,13 @@
     "Zoo",
     "Control ",
     "Control Mage",
-    "Handbuff",
     "Demon Zoo",
     "Spell",
-    "Recruit"
+    "Recruit",
+    "Normie Dragon",
+    "Murloc",
+    "Secret",
+    "Aggro  ",
+    "Cubelock"
   ]
 }

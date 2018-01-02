@@ -17,7 +17,7 @@
 			"card": "minion_water_elemental"
 		}
 	},
-    "collectible": true,
+    "collectible": false,
     "set": "SANDS_OF_TIME",
     "fileFormatVersion": 1
 }
