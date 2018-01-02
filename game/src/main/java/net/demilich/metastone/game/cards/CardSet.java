@@ -19,4 +19,5 @@ public enum CardSet {
 	
 	CUSTOM,
 	SANDS_OF_TIME,
+	BATTLE_FOR_ASHENVALE,
 }
