@@ -31,13 +31,10 @@
 		"description": "+1 Attack this turn and 3 Armor",
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				"class": "BuffHeroSpell",
-				"target": "FRIENDLY_HERO",
-				"attackBonus": 1,
-				"hpBonus": 3
-			]
+			"class": "BuffHeroSpell",
+			"target": "FRIENDLY_HERO",
+			"attackBonus": 1,
+			"hpBonus": 3
 		}
 	},
 	"collectible": true,
