@@ -16,11 +16,13 @@ public class DeckCodeImporter implements IDeckImporter {
     public Deck importFrom(String deckCode){
         HeroClass heroClass = null;
         List<Card> cards = new ArrayList<>();
+        int line = 0;
         try {
             URL url = new URL("https://deck.codes/" + deckCode);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
+                line++;
                 if (inputLine.contains("<img src=\"/_/img/hero/")) {
                     String hero = inputLine.substring(inputLine.indexOf("<img src=\"/_/img/hero/") + 22, inputLine.indexOf(".")).toUpperCase();
                     heroClass = HeroClass.valueOf(hero);
@@ -30,7 +32,7 @@ public class DeckCodeImporter implements IDeckImporter {
                     if (nextLine.contains("???")) {
                         continue;
                     }
-                    String cardName = nextLine.substring(nextLine.indexOf("<span>") + 6, nextLine.indexOf("</span>"));
+                    String cardName = nextLine.substring(nextLine.indexOf("<span>") + 6, nextLine.indexOf("</span>")).replace("&#39;", "'");
 
                     in.readLine();
                     in.readLine();
@@ -38,13 +40,18 @@ public class DeckCodeImporter implements IDeckImporter {
                     String amountLine = in.readLine();
                     int qty = amountLine.contains("2") ? 2 : 1;
                     for (int i = 1; i <= qty; i++) {
-                        cards.add(CardCatalogue.getCardByName(cardName));
+                        if (CardCatalogue.getCardByName(cardName) != null) {
+                            cards.add(CardCatalogue.getCardByName(cardName));
+                        }
                     }
                 }
             }
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (heroClass == null) {
+            return null;
         }
         Deck deck = new Deck(heroClass, false);
         deck.setName("New Deck");

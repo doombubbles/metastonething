@@ -27,7 +27,7 @@ public class CastSpellFromSourceSpell extends Spell {
         }
         CardCollection filteredSpells = new CardCollection();
         for (Card spell : spells) {
-            if ((filter == null || filter.matches(context, player, spell)) && spell.getCardType().equals(CardType.SPELL)) {
+            if ((filter == null || filter.matches(context, player, spell)) && spell.getCardType().equals(CardType.SPELL) && context.getLogic().canPlayCard(player.getId(), spell.getCardReference())) {
                 filteredSpells.add(spell);
             }
         }

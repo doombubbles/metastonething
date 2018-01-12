@@ -1,18 +1,13 @@
 package net.demilich.metastone.game.logic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.entities.minions.*;
 import net.demilich.metastone.game.events.*;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1047,21 +1042,43 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public int getModifiedManaCost(Player player, Card card) {
-		int manaCost = card.getManaCost(context, player);
-		int minValue = 0;
-		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
+		int manaCost = card.getBaseManaCost();
+		List<CardCostModifier> costModifiers = context.getCardCostModifiers();
+		List<CardCostModifier> minCostModifiers = new ArrayList<>();
+		List<CardCostModifier> setCostModifiers = new ArrayList<>();
+		List<CardCostModifier> restCostModifiers = new ArrayList<>();
+		costModifiers.forEach(modifier -> {
+			if (modifier.getMinValue() != 0) {
+				minCostModifiers.add(modifier);
+			} else if (modifier.hasOperation()) {
+				if (modifier.getOperation().equals(AlgebraicOperation.SET)) {
+					setCostModifiers.add(modifier);
+				}
+			} else restCostModifiers.add(modifier);
+		});
+		costModifiers = new ArrayList<>();
+		costModifiers.addAll(minCostModifiers);
+		costModifiers.addAll(setCostModifiers);
+		costModifiers.addAll(restCostModifiers);
+		for (CardCostModifier costModifier : costModifiers) {
 			if (!costModifier.appliesTo(card, context)) {
 				continue;
 			}
+			int minValue = 0;
 			manaCost = costModifier.process(card, manaCost);
 			if (costModifier.getMinValue() > minValue) {
 				minValue = costModifier.getMinValue();
 			}
+			manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		}
-		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
+		if (card.getManaCostModifier() != null) {
+			manaCost -= card.getManaCostModifier().getValue(context, player, null, card);
+		}
 		if (card.hasAttribute(Attribute.MANA_COST_MODIFIER)) {
 			manaCost += card.getAttributeValue(Attribute.MANA_COST_MODIFIER);
 		}
+
+		manaCost = MathUtils.clamp(manaCost, 0, Integer.MAX_VALUE);
 		return manaCost;
 	}
 

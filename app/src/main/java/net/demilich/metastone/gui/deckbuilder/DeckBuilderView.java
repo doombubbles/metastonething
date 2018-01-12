@@ -1,5 +1,8 @@
 package net.demilich.metastone.gui.deckbuilder;
 
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -17,6 +21,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.decks.MetaDeck;
+import net.demilich.metastone.gui.common.DeckFormatStringConverter;
 import net.demilich.metastone.gui.deckbuilder.metadeck.MetaDeckListView;
 import net.demilich.metastone.gui.deckbuilder.metadeck.MetaDeckView;
 
@@ -44,6 +49,9 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	@FXML
 	private Button backButton;
 
+	@FXML
+	protected ComboBox<DeckFormat> formatBox;
+
 	private final CardView cardView;
 	private final CardListView cardListView;
 	private final DeckInfoView deckInfoView;
@@ -53,6 +61,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	private final MetaDeckListView metaDeckListView;
 
 	private List<DeckFormat> deckFormats = new ArrayList<DeckFormat>();
+	private DeckFormat currentFormat;
 
 	public DeckBuilderView() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/DeckBuilderView.fxml"));
@@ -67,7 +76,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 
 		importButton.setOnAction(this);
 		backButton.setOnAction(this);
-
+		formatBox.setConverter(new DeckFormatStringConverter());
 		cardView = new CardView();
 		cardListView = new CardListView();
 		deckInfoView = new DeckInfoView();
@@ -77,6 +86,9 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 		metaDeckView = new MetaDeckView();
 		metaDeckListView = new MetaDeckListView();
 		showSidebar(deckListView);
+		formatBox.valueProperty().addListener((ChangeListener<DeckFormat>) (observableProperty, oldDeckFormat, newDeckFormat) -> {
+			NotificationProxy.sendNotification(GameNotification.FILTER_DECKS, newDeckFormat);
+		});
 	}
 
 	public void activeDeckChanged(Deck activeDeck) {
@@ -133,6 +145,14 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 
 	public void injectDeckFormats(List<DeckFormat> deckFormats) {
 		this.deckFormats.addAll(deckFormats);
+		ObservableList<DeckFormat> deckFormatList = FXCollections.observableArrayList();
+
+		for (DeckFormat deckFormat : deckFormats) {
+			deckFormatList.add(deckFormat);
+		}
+
+		formatBox.setItems(deckFormatList);
+		formatBox.getSelectionModel().selectFirst();
 	}
 
 	private void showBottomBar(Node content) {

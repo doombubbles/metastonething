@@ -8,6 +8,7 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
+import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -310,4 +311,7 @@ public abstract class Card extends Entity {
 		return this.descValues;
 	}
 
+	public ValueProvider getManaCostModifier() {
+		return manaCostModifier;
+	}
 }

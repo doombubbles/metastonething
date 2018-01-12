@@ -9,7 +9,7 @@ subprojects {
 
     sourceCompatibility = 1.8
 
-    project.version = 'KnC_5_3'
+    project.version = 'KnC_6_0'
 
     compileJava {
         options.encoding = 'UTF-8'

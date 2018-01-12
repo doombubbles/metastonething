@@ -20,7 +20,6 @@ public class ImportDeckCommand extends SimpleCommand<GameNotification> {
 		Deck importedDeck = null;
 		if(importer != null)
 			importedDeck = importer.importFrom(url);
-
 		if (importedDeck == null) {
 			DialogNotification dialogNotification = new DialogNotification("Error",
 					"Import of deck failed. Please make sure to provide a valid URL. At the moment, only hearthpwn.com and tempostorm.com are supported for deck import.",

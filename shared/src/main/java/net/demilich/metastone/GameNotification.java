@@ -100,4 +100,6 @@ public enum GameNotification {
 	MUlTIPLAYER_MODE_SELECTED,
 
 	START_MULTIPLAYER,
+
+	FILTER_DECKS,
 }

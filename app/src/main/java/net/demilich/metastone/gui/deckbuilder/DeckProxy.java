@@ -52,6 +52,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 	private final List<Deck> decks = new ArrayList<Deck>();
 	private IDeckValidator activeDeckValidator = new DefaultDeckValidator();
 	private Deck activeDeck;
+	private DeckFormat currentFormat = null;
 
 	public DeckProxy() {
 		super(NAME);
@@ -111,6 +112,20 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return decks;
 	}
 
+	public void filterAndShowDecks(DeckFormat format) {
+		currentFormat = format;
+		if (currentFormat != null) {
+			List<Deck> newDecks = new ArrayList<>();
+			decks.forEach(deck -> {
+				if (currentFormat.isInFormat(deck)) {
+					newDecks.add(deck);
+				}
+			});
+			getFacade().sendNotification(GameNotification.DECKS_LOADED, newDecks);
+		} else getFacade().sendNotification(GameNotification.DECKS_LOADED, decks);
+
+	}
+
 	public void deleteDeck(Deck deck) {
 		decks.remove(deck);
 		logger.debug("Trying to delete deck '{}' contained in file '{}'...", deck.getName(), deck.getFilename());
@@ -127,7 +142,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		}
 
 		logger.info("Deck '{}' contained in file '{}' has been successfully deleted", deck.getName(), path.getFileName().toString());
-		getFacade().sendNotification(GameNotification.DECKS_LOADED, decks);
+		filterAndShowDecks(currentFormat);
 	}
 
 	public void loadDecks() throws IOException, URISyntaxException {

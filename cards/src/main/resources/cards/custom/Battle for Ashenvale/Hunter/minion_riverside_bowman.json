@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
-	"heroClass": "HUTNER",
+	"heroClass": "HUNTER",
 	"rarity": "COMMON",
 	"description": "Battlecry: Your Hero Power can target minions this turn.",
 	"battlecry": {

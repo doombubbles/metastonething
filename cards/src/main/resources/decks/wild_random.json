@@ -1,0 +1,28 @@
+{
+  "name": "[Wild Random]",
+  "heroClass": "DECK_COLLECTION",
+  "arbitrary": false,
+  "decks": [
+    "Wild Zoo",
+    "Wild Token",
+    "Wild Secret",
+    "Wild Rez",
+    "Wild Reno  ",
+    "Wild Mill",
+    "Wild Pirate",
+    "Wild Reno",
+    "Wild Reno ",
+    "Wild Malygos ",
+    "Wild Malygos",
+    "Wild Jade",
+    "Wild Giants",
+    "Wild Freeze",
+    "Wild Dragon",
+    "Wild Aggro  ",
+    "Wild Anyfin",
+    "Wild Aggro ",
+    "Wild Combo",
+    "Wild Cube",
+    "Wild Aggro"
+  ]
+}

@@ -33,6 +33,10 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 			deckProxy.setActiveDeckValidator(new DefaultDeckValidator());
 			view.createNewDeck();
 			break;
+		case FILTER_DECKS:
+			DeckProxy deckProxy2 = (DeckProxy) getFacade().retrieveProxy(DeckProxy.NAME);
+			deckProxy2.filterAndShowDecks((DeckFormat) notification.getBody());
+			break;
 		case EDIT_DECK:
 			view.editDeck((Deck) notification.getBody());
 			break;
@@ -74,6 +78,7 @@ public class DeckBuilderMediator extends Mediator<GameNotification> {
 		notificationInterests.add(GameNotification.DECK_FORMATS_LOADED);
 		notificationInterests.add(GameNotification.INVALID_DECK_NAME);
 		notificationInterests.add(GameNotification.DUPLICATE_DECK_NAME);
+		notificationInterests.add(GameNotification.FILTER_DECKS);
 		return notificationInterests;
 	}
 
