@@ -5,6 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
@@ -19,9 +20,16 @@ public class DoomerangSpell extends Spell {
 		if (damage > 0 && player.getHero().getWeapon().hasAttribute(Attribute.POISONOUS)) {
 			context.getLogic().destroy((Actor) target); 
 		}
-		context.getLogic().removeSpellTriggers(player.getHero().getWeapon(), false);
-		context.getLogic().receiveCard(player.getId(), context.getCardById(player.getHero().getWeapon().getSourceCard().getCardId()));
-		context.getLogic().destroy((Actor) player.getHero().getWeapon());
+		Weapon weapon = player.getHero().getWeapon();
+		if (weapon.getSourceCard().getCardId().equals("weapon_kingsbane")) {
+
+		} else {
+
+			context.getLogic().receiveCard(player.getId(), context.getCardById(weapon.getSourceCard().getCardId()));
+		}
+
+		context.getLogic().removeSpellTriggers(weapon, false);
+		context.getLogic().destroy((Actor) weapon);
 	}
 
 }
