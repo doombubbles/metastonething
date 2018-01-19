@@ -2,10 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -14,6 +11,8 @@ import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.spells.desc.source.DeckSource;
 import net.demilich.metastone.game.spells.desc.source.HandSource;
 import net.demilich.metastone.game.spells.desc.source.SourceArg;
+import net.demilich.metastone.game.targeting.CardLocation;
+import net.demilich.metastone.game.targeting.CardReference;
 
 public class CastSpellFromSourceSpell extends Spell {
     @Override
@@ -27,8 +26,11 @@ public class CastSpellFromSourceSpell extends Spell {
         }
         CardCollection filteredSpells = new CardCollection();
         for (Card spell : spells) {
-            if ((filter == null || filter.matches(context, player, spell)) && spell.getCardType().equals(CardType.SPELL) && context.getLogic().canPlayCard(player.getId(), spell.getCardReference())) {
-                filteredSpells.add(spell);
+            if ((filter == null || filter.matches(context, player, spell)) && spell.getCardType().equals(CardType.SPELL)) {
+                SpellCard spellCard = (SpellCard) spell;
+                if (spellCard.canBeCast(context, player)) {
+                    filteredSpells.add(spell);
+                }
             }
         }
 

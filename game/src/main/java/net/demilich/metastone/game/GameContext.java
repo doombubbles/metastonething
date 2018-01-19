@@ -247,8 +247,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 					return tempCard.clone();
 				}
 			}
-			if (cardId.equalsIgnoreCase("EVENT_CARD")) {
-				card = getEventCard();
+			if (cardId != null) {
+				if (cardId.equalsIgnoreCase("EVENT_CARD")) {
+					card = getEventCard();
+				}
 			}
 		}
 		return card;

@@ -17,7 +17,7 @@ public class PlayRiftCardAction extends PlayPermanentCardAction {
     }
 
     @Override
-    protected void play(GameContext context, int playerId) {
+    protected void play(GameContext context, int playerId, GameContext previousContext) {
         RiftCard riftCard = (RiftCard) context.getPendingCard();
         Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
         Rift rift = riftCard.summon();

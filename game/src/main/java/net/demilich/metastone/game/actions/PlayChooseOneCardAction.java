@@ -22,8 +22,8 @@ public class PlayChooseOneCardAction extends PlayCardAction {
 	}
 
 	@Override
-	public void play(GameContext context, int playerId) {
-		context.getLogic().castChooseOneSpell(playerId, spell, cardReference, getTargetKey(), chosenCard);
+	public void play(GameContext context, int playerId, GameContext previousContext) {
+		context.getLogic().castChooseOneSpell(playerId, spell, cardReference, getTargetKey(), chosenCard, previousContext);
 	}
 
 	public SpellDesc getSpell() {

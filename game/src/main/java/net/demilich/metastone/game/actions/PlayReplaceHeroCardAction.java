@@ -26,7 +26,7 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 	}
 
 	@Override
-	protected void play(GameContext context, int playerId) {
+	protected void play(GameContext context, int playerId, GameContext previousContext) {
 		Player player = context.getPlayer(playerId);
 		ReplaceHeroCard replaceHeroCard = (ReplaceHeroCard) context.getPendingCard();
 		HeroCard heroCard = (HeroCard) context.getCardById(replaceHeroCard.hero).clone();

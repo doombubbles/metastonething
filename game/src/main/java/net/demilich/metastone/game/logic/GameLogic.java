@@ -301,7 +301,7 @@ public class GameLogic implements Cloneable, Serializable {
 		return player.getSummons().size() < MAX_MINIONS;
 	}
 
-	public void castChooseOneSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, String cardId) {
+	public void castChooseOneSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, String cardId, GameContext previousContext) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -350,17 +350,17 @@ public class GameLogic implements Cloneable, Serializable {
 
 		checkForDeadEntities();
 		if (targets == null || targets.size() != 1) {
-			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null, previousContext));
 		} else {
-			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
+			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0), previousContext));
 		}
 	}
 
 	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, boolean childSpell) {
-		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell);
+		castSpell(playerId, spellDesc, sourceReference, targetReference, TargetSelection.NONE, childSpell, null);
 	}
 
-	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, TargetSelection targetSelection, boolean childSpell) {
+	public void castSpell(int playerId, SpellDesc spellDesc, EntityReference sourceReference, EntityReference targetReference, TargetSelection targetSelection, boolean childSpell, GameContext previousContext) {
 		Player player = context.getPlayer(playerId);
 		Entity source = null;
 		if (sourceReference != null) {
@@ -416,9 +416,9 @@ public class GameLogic implements Cloneable, Serializable {
 
 			checkForDeadEntities();
 			if (targets == null || targets.size() != 1) {
-				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null));
+				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, null, previousContext));
 			} else {
-				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0)));
+				context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, sourceCard, targets.get(0), previousContext));
 				if (targets.get(0).getEntityType() == EntityType.MINION && targets.get(0).getOwner() == playerId) {
 					player.spellsCastOnFriendlies.add(sourceCard);
 				}
@@ -1043,24 +1043,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getBaseManaCost();
-		List<CardCostModifier> costModifiers = context.getCardCostModifiers();
-		List<CardCostModifier> minCostModifiers = new ArrayList<>();
-		List<CardCostModifier> setCostModifiers = new ArrayList<>();
-		List<CardCostModifier> restCostModifiers = new ArrayList<>();
-		costModifiers.forEach(modifier -> {
-			if (modifier.getMinValue() != 0) {
-				minCostModifiers.add(modifier);
-			} else if (modifier.hasOperation()) {
-				if (modifier.getOperation().equals(AlgebraicOperation.SET)) {
-					setCostModifiers.add(modifier);
-				}
-			} else restCostModifiers.add(modifier);
-		});
-		costModifiers = new ArrayList<>();
-		costModifiers.addAll(minCostModifiers);
-		costModifiers.addAll(setCostModifiers);
-		costModifiers.addAll(restCostModifiers);
-		for (CardCostModifier costModifier : costModifiers) {
+		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
 			if (!costModifier.appliesTo(card, context)) {
 				continue;
 			}
@@ -1559,7 +1542,8 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
-	public void playCard(int playerId, CardReference cardReference) {
+	public GameContext playCard(int playerId, CardReference cardReference) {
+		GameContext previousContext = context.clone();
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		card.setName(card.getDesc().name);
@@ -1607,13 +1591,14 @@ public class GameLogic implements Cloneable, Serializable {
 			context.fireGameEvent(spellCastedEvent);
 			if (card.hasAttribute(Attribute.COUNTERED)) {
 				log("{} was countered!", card.getName());
-				return;
+				return previousContext;
 			}
 		}
 
 		if (card.hasAttribute(Attribute.OVERLOAD)) {
 			player.modifyAttribute(Attribute.OVERLOAD, card.getAttributeValue(Attribute.OVERLOAD));
 		}
+		return previousContext;
 	}
 
 	public void playQuest(Player player, Quest quest) {
@@ -2060,6 +2045,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public boolean summon(int playerId, Summon summon, Card source, int index, boolean resolveBattlecry) {
+		GameContext previousContext = context.clone();;
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
 			log("{} cannot summon any more summons, {} is destroyed", player.getName(), summon);
@@ -2101,7 +2087,6 @@ public class GameLogic implements Cloneable, Serializable {
 		if (summon instanceof Minion) {
 			Minion minion = (Minion) summon;
 			player.getStatistics().minionSummoned(minion, context.getTurn());
-
 			if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
 				Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
@@ -2109,6 +2094,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 				context.fireGameEvent(summonEvent);
 			} else {
+
 				SummonEvent summonEvent = new SummonEvent(context, minion, source, minion.getAttack() + minion.getHp());
 				context.fireGameEvent(summonEvent);
 			}
@@ -2145,7 +2131,7 @@ public class GameLogic implements Cloneable, Serializable {
 			context.getSummonReferenceStack().pop();
 			if (player.getSummons().contains(minion)) {
 				context.fireGameEvent(new MinionExistEvent(context, minion, source));
-				context.fireGameEvent(new AfterSummonEvent(context, minion, source));
+				context.fireGameEvent(new AfterSummonEvent(context, minion, source, previousContext));
 			}
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));

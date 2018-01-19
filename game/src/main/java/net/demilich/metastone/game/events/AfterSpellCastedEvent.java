@@ -9,10 +9,11 @@ public class AfterSpellCastedEvent extends GameEvent {
 	private final Card sourceCard;
 	private final Entity spellTarget;
 
-	public AfterSpellCastedEvent(GameContext context, int playerId, Card sourceCard, Entity target) {
-		super(context, target == null ? -1 : target.getOwner(), playerId);
+	public AfterSpellCastedEvent(GameContext context, int playerId, Card sourceCard, Entity target, GameContext previousContext) {
+		super(context, target == null ? -1 : target.getOwner(), playerId, previousContext);
 		this.sourceCard = sourceCard;
 		this.spellTarget = target;
+		this.after = true;
 	}
 	
 	@Override

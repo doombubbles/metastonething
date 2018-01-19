@@ -25,7 +25,7 @@ public class PlaySpellCardAction extends PlayCardAction {
 	}
 
 	@Override
-	public void play(GameContext context, int playerId) {
+	public void play(GameContext context, int playerId, GameContext previousContext) {
 		Card card = (Card) context.resolveSingleTarget(cardReference);
 		TargetSelection targetRequirement = getTargetRequirement();
 		if (card instanceof SecretCard && context.getLogic().hasAttribute(context.getPlayer(playerId), Attribute.INSTANT_TRAPS)) {
@@ -34,7 +34,7 @@ public class PlaySpellCardAction extends PlayCardAction {
 			context.fireGameEvent(new SecretRevealedEvent(context, ((SecretCard) card), playerId));
 			context.fireGameEvent(new SecretPlayedEvent(context, playerId, (SecretCard) card));
 		}
-		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), targetRequirement, false);
+		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), targetRequirement, false, previousContext);
 	}
 
 	public SpellDesc getSpell() {

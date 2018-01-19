@@ -46,7 +46,7 @@ public class ResurrectSpell extends Spell {
 				}
 			}
 			if (desc.contains(SpellArg.EXCLUSIVE)) {
-				deadMinions.removeIf(minion1 -> minion1.getSourceCard().equals(resurrectedMinion.getSourceCard()));
+				deadMinions.removeIf(minion1 -> minion1.getSourceCard().getCardId() == resurrectedMinion.getSourceCard().getCardId());
 			} else deadMinions.remove(resurrectedMinion);
 		}
 	}

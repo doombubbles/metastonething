@@ -15,12 +15,16 @@ public abstract class GameEvent implements Serializable {
 	private final int targetPlayerId;
 	private final int sourcePlayerId;
 	private final int value;
+	private final GameContext previousContext;
+
+	public boolean after = false;
 
 	public GameEvent(GameContext context, int targetPlayerId, int sourcePlayerId, int value) {
 		this.context = context;
 		this.targetPlayerId = targetPlayerId;
 		this.sourcePlayerId = sourcePlayerId;
 		this.value = value;
+		this.previousContext = null;
 	}
 
 	public GameEvent(GameContext context, int targetPlayerId, int sourcePlayerId) {
@@ -28,6 +32,15 @@ public abstract class GameEvent implements Serializable {
 		this.targetPlayerId = targetPlayerId;
 		this.sourcePlayerId = sourcePlayerId;
 		this.value = 0;
+		this.previousContext = null;
+	}
+
+	public GameEvent(GameContext context, int targetPlayerId, int sourcePlayerId, GameContext previousContext) {
+		this.context = context;
+		this.targetPlayerId = targetPlayerId;
+		this.sourcePlayerId = sourcePlayerId;
+		this.value = 0;
+		this.previousContext = previousContext;
 	}
 
 	/**
@@ -59,6 +72,10 @@ public abstract class GameEvent implements Serializable {
 
 	public int getValue() {
 		return value;
+	}
+
+	public GameContext getPreviousContext() {
+		return previousContext;
 	}
 
 	@Override

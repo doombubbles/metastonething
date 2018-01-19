@@ -12,7 +12,7 @@ public class PlayWeaponCardAction extends PlayCardAction {
 	}
 
 	@Override
-	public void play(GameContext context, int playerId) {
+	public void play(GameContext context, int playerId, GameContext previousContext) {
 		WeaponCard weaponCard = (WeaponCard) context.getPendingCard();
 		context.getLogic().equipWeapon(playerId, weaponCard.getWeapon(), true);
 	}

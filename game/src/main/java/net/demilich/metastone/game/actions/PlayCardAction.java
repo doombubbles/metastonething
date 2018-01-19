@@ -38,10 +38,10 @@ public abstract class PlayCardAction extends GameAction {
 		Card card = context.resolveCardReference(getCardReference());
 		context.setPendingCard(card);
 		try {
-			context.getLogic().playCard(playerId, getCardReference());
+			GameContext previousContext = context.getLogic().playCard(playerId, getCardReference());
 			// card was countered, do not actually resolve its effects
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
-				play(context, playerId);
+				play(context, playerId, previousContext);
 			}
 
 		} catch (Exception e) {
@@ -78,7 +78,7 @@ public abstract class PlayCardAction extends GameAction {
 		return playCardAction.getGroupIndex() == getGroupIndex() && this.cardReference.equals(playCardAction.cardReference);
 	}
 
-	protected abstract void play(GameContext context, int playerId);
+	protected abstract void play(GameContext context, int playerId, GameContext previousContext);
 
 	public void setGroupIndex(int groupIndex) {
 		this.groupIndex = groupIndex;

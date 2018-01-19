@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.GameContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +52,19 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 		for (IGameEventListener trigger : triggers) {
 			// In order to stop premature expiration, check
 			// for a oneTurnOnly tag and that it isn't delayed.
+
+			if (event.after) {
+				boolean hey = false;
+				for (IGameEventListener potentialTrigger : event.getPreviousContext().getTriggers()) {
+					if (potentialTrigger.getOwner() == trigger.getOwner() && potentialTrigger.getHostReference() == trigger.getHostReference() && potentialTrigger.getClass() == trigger.getClass()) {
+						hey = true;
+					}
+				}
+				if (!hey) {
+					continue;
+				}
+			}
+
 			if (event.getEventType() == GameEventType.TURN_END) {
 				if(trigger.oneTurnOnly() && !trigger.isDelayed() &&
 						!trigger.interestedIn(GameEventType.TURN_START) &&
@@ -78,6 +92,7 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 		}
 
 		for (IGameEventListener trigger : eventTriggers) {
+
 			if (trigger.canFireCondition(event) && triggers.contains(trigger)) {
 				trigger.countDown(event);
 				if (!trigger.hasCounter()) {

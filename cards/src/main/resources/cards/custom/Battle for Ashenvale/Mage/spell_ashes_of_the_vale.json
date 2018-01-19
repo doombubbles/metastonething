@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "RARE",
-	"description": "Deal *1* damage to all enemies. If you're not holding any minions, deal *4* instead.",
+	"description": "Deal *1* damage to all enemies. If you're holding no minions, deal *4* instead.",
 	"targetSelection": "NONE",
 	"race": "FIRE",
 	"spell": {

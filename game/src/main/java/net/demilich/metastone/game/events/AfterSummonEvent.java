@@ -10,10 +10,11 @@ public class AfterSummonEvent extends GameEvent {
 	private final Actor minion;
 	private final Card source;
 
-	public AfterSummonEvent(GameContext context, Actor minion, Card source) {
-		super(context, minion.getOwner(), -1);
+	public AfterSummonEvent(GameContext context, Actor minion, Card source, GameContext previousContext) {
+		super(context, minion.getOwner(), -1, previousContext);
 		this.minion = minion;
 		this.source = source;
+		this.after = true;
 	}
 	
 	@Override

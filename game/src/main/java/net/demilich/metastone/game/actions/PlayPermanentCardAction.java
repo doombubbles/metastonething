@@ -29,7 +29,7 @@ public class PlayPermanentCardAction extends PlayCardAction {
 	}
 
 	@Override
-	protected void play(GameContext context, int playerId) {
+	protected void play(GameContext context, int playerId, GameContext previousContext) {
 		PermanentCard permanentCard = (PermanentCard) context.getPendingCard();
 		Actor nextTo = (Actor) (getTargetKey() != null ? context.resolveSingleTarget(getTargetKey()) : null);
 		Permanent permanent = permanentCard.summon();

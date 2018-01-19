@@ -30,7 +30,7 @@ public class PlayMinionCardAction extends PlayCardAction {
 	}
 
 	@Override
-	protected void play(GameContext context, int playerId) {
+	protected void play(GameContext context, int playerId, GameContext previousContext) {
 		MinionCard minionCard = context.getPendingCard().getCardType() == CardType.MINION ? (MinionCard) context.getPendingCard() : null;
 		if (minionCard == null) {
 			context.getLogic().info("" + context.getPendingCard().getName());
