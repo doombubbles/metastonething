@@ -33,8 +33,9 @@ public class DoomerangSpell extends Spell {
 			weaponCard.setAttribute(Attribute.ATTACK_BONUS, weapon.getAttributeValue(Attribute.ENCHANTMENT_ATTACK));
 			weaponCard.setAttribute(Attribute.HP_BONUS, weapon.getAttributeValue(Attribute.ENCHANTMENT_HP));
 		}
+		context.getLogic().removeAttribute(player.getHero().getWeapon(), Attribute.DEATHRATTLES);
 		context.getLogic().receiveCard(player.getId(), weaponCard);
-		context.getLogic().removeSpellTriggers(weapon, false);
+		context.getLogic().removeSpellTriggers(player.getHero().getWeapon(), false);
 		context.getLogic().destroy((Actor) weapon);
 	}
 
