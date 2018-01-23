@@ -14,12 +14,12 @@
 			"class": "MetaSpell",
 			"spells": [
 				{
+					"class": "DrawCardSpell"
+				},
+				{
 					"class": "DamageSpell",
 					"target": "FRIENDLY_HERO",
 					"value": 2
-				},
-				{
-					"class": "DrawCardSpell"
 				}
 			]
 		}

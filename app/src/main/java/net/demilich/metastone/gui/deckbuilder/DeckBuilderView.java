@@ -109,6 +109,7 @@ public class DeckBuilderView extends BorderPane implements EventHandler<ActionEv
 	public void createNewDeck() {
 		showMainArea(new ChooseClassView());
 		showSidebar(null);
+		formatBox.setVisible(false);
 	}
 
 	public void displayDecks(List<Deck> decks) {
