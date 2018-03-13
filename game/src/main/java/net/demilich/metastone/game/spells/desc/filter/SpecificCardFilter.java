@@ -6,6 +6,9 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SpecificCardFilter extends EntityFilter {
 	
 	public SpecificCardFilter(FilterDesc desc) {
@@ -21,10 +24,11 @@ public class SpecificCardFilter extends EntityFilter {
 			cardId = ((Actor) entity).getSourceCard().getCardId();
 		}
 		String requiredCardId = desc.getString(FilterArg.CARD_ID);
+		List<String> cardIds = Arrays.asList((String[]) desc.get(FilterArg.CARDS));
 		if (requiredCardId.equalsIgnoreCase("EVENT_CARD")) {
 			requiredCardId = context.getEventCard().getCardId();
 		}
-		return cardId.equalsIgnoreCase(requiredCardId);
+		return cardId.equalsIgnoreCase(requiredCardId) || cardIds.contains(cardId);
 	}
 
 }

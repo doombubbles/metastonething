@@ -6,6 +6,7 @@
     "baseHp": 6,
     "heroClass": "SHAMAN",
     "rarity": "COMMON",
+	"race": "ELEMENTAL",
     "description": "Taunt. Battlecry: Freeze this minion.",
     "battlecry": {
         "targetSelection": "NONE",

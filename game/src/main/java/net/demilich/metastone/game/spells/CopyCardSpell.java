@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -39,7 +39,7 @@ public class CopyCardSpell extends Spell {
 		CardLocation cardLocation = (CardLocation) desc.get(SpellArg.CARD_LOCATION);
 
 		Player opponent = context.getOpponent(player);
-		CardCollection sourceCollection = null;
+		CardList sourceCollection = null;
 		switch (cardLocation) {
 		case DECK:
 			sourceCollection = opponent.getDeck();
@@ -51,7 +51,7 @@ public class CopyCardSpell extends Spell {
 			logger.error("Trying to copy cards from invalid cardLocation {}", cardLocation);
 			break;
 		}
-		CardCollection sourceCollection2 = new CardCollection();
+		CardList sourceCollection2 = new CardList();
 		EntityFilter filter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		for (Card card : sourceCollection) {
 			if (filter == null || filter.matches(context, player, card)) {

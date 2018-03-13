@@ -5,7 +5,7 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -25,7 +25,7 @@ public class EquipRandomWeaponSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		CardCollection allWeapons = CardCatalogue.query(context.getDeckFormat(), CardType.WEAPON);
+		CardList allWeapons = CardCatalogue.query(context.getDeckFormat(), CardType.WEAPON);
 		WeaponCard weaponCard = (WeaponCard) allWeapons.getRandom();
 		Weapon weapon = weaponCard.getWeapon();
 		weapon.setBattlecry(null);

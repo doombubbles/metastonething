@@ -5,7 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.Entity;
@@ -16,8 +16,8 @@ public class EliseSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		CardCollection ungoro = new CardCollection();
-		CardCollection guarantee = new CardCollection();
+		CardList ungoro = new CardList();
+		CardList guarantee = new CardList();
 		for (Card card : CardCatalogue.getAll()) {
 			if (card.getCardSet() == CardSet.JOURNEY_TO_UNGORO && !card.getCardId().contains("quest") && card.isCollectible()) {
 				ungoro.add(card);
@@ -26,7 +26,7 @@ public class EliseSpell extends Spell {
 				}
 			}
 		}
-		CardCollection cards = new CardCollection();
+		CardList cards = new CardList();
 		cards.add(guarantee.getRandom());
 		for (int i = 0; i < 4; i++) {
 			cards.add(ungoro.getRandom());

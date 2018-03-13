@@ -1,0 +1,25 @@
+{
+    "name": "Ebonchill",
+    "baseManaCost": 4,
+    "type": "WEAPON",
+    "damage": 0,
+    "durability": 3,
+    "heroClass": "MAGE",
+    "rarity": "LEGENDARY",
+    "description": "Whenever an enemy is Frozen, deal 2 damage to them.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AttributeGainedTrigger",
+			"targetPlayer": "OPPONENT",
+			"requiredAttribute": "FROZEN"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "EVENT_TARGET",
+			"value": 2
+		}
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

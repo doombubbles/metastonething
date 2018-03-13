@@ -217,7 +217,7 @@ public class TargetLogic implements Serializable {
 		if (targetKey == null || targetKey == EntityReference.NONE) {
 			return null;
 		}
-
+		Player opponent = context.getOpponent(player);
 		if (targetKey.getId() == EntityReference.ALL_CHARACTERS.getId()) {
 			return getEntities(context, player, TargetSelection.ANY);
 		} else if (targetKey.getId() == EntityReference.ALL_MINIONS.getId()) {
@@ -280,7 +280,6 @@ public class TargetLogic implements Serializable {
 				return new ArrayList<>();
 			}
 		} else if (targetKey.getId() == EntityReference.ENEMY_WEAPON.getId()) {
-			Player opponent = context.getOpponent(player);
 			if (opponent.getHero().getWeapon() != null) {
 				return singleTargetAsList(opponent.getHero().getWeapon());
 			} else {
@@ -301,23 +300,34 @@ public class TargetLogic implements Serializable {
 		} else if (targetKey.getId() == EntityReference.OTHER_ENEMY_MINIONS.getId()) {
 			List<Entity> targets = getEntities(context, player, TargetSelection.ENEMY_MINIONS);
 			targets.remove(source);
+			if (!context.getEventTargetStack().empty()) {
+				targets.remove(context.resolveSingleTarget(context.getEventTargetStack().peek()));
+			}
 			return targets;
 		} else if (targetKey.getId() == EntityReference.RIGHTMOST_ENEMY_MINION.getId()) {
-			Player opponent = context.getOpponent(player);
 			List<Minion> minions =  opponent.getMinions();
 			return singleTargetAsList(minions.get(minions.size() - 1));
 		} else if (targetKey.getId() == EntityReference.RIGHTMOST_FRIENDLY_MINION.getId()) {
 			List<Minion> minions =  player.getMinions();
 			return singleTargetAsList(minions.get(minions.size() - 1));
 		} else if (targetKey.getId() == EntityReference.LEFTMOST_ENEMY_MINION.getId()) {
-			Player opponent = context.getOpponent(player);
 			List<Minion> minions =  opponent.getMinions();
 			return singleTargetAsList(minions.get(0));
 		} else if (targetKey.getId() == EntityReference.LEFTMOST_FRIENDLY_MINION.getId()) {
 			List<Minion> minions =  player.getMinions();
 			return singleTargetAsList(minions.get(0));
 		} else if (targetKey.getId() == EntityReference.EVENT_SOURCE.getId()) {
-			return singleTargetAsList(context.resolveSingleTarget(context.getEventSourceStack().peek()));
+			if (context.getEventSourceStack().empty()) {
+				return null;
+			}
+			EntityReference target = context.getEventSourceStack().peek();
+			return singleTargetAsList(context.resolveSingleTarget(target));
+		} else if (targetKey.getId() == EntityReference.OUTPUT.getId()) {
+			if (context.getOutputStack().empty()) {
+				return null;
+			}
+			EntityReference output = context.getOutputStack().peek();
+			return singleTargetAsList(context.resolveSingleTarget(output));
 		} else if (targetKey.getId() == EntityReference.FRIENDLY_RIFTS.getId()) {
 			List<Entity> rifts = new ArrayList<>();
 			for (Summon summon : player.getSummons()) {
@@ -334,6 +344,16 @@ public class TargetLogic implements Serializable {
 				}
 			}
 			return rifts;
+		} else if (targetKey.getId() == EntityReference.FRIENDLY_TOP_CARD.getId()) {
+			if (player.getDeck().isEmpty()) {
+				return null;
+			}
+			return singleTargetAsList(player.getDeck().get(0));
+		} else if (targetKey.getId() == EntityReference.ENEMY_TOP_CARD.getId()) {
+			if (opponent.getDeck().isEmpty()) {
+				return null;
+			}
+			return singleTargetAsList(opponent.getDeck().get(0));
 		}
 		return singleTargetAsList(findEntity(context, targetKey));
 	}

@@ -77,6 +77,8 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.NO_FILTER, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.ACTUAL_MANA_COST, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.CARD_TYPE_COSTS_HEALTH, jsonData, map, ParseValueType.CARD_TYPE);
+		parseAttribute(Attribute.PHOENIX, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.RUSH, jsonData, map, ParseValueType.BOOLEAN);
 
 		return map;
 	}

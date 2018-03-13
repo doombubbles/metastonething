@@ -4,7 +4,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -20,8 +20,8 @@ public class ReplaceCardSpell extends Spell {
 		EntityFilter filter2 = filters[1];
 		Card cardTarget = (Card) target;
 		
-		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
-		CardCollection result = new CardCollection();
+		CardList cards = CardCatalogue.query(context.getDeckFormat());
+		CardList result = new CardList();
 		String replacementCard = (String) desc.get(SpellArg.CARD);
 		for (Card card : cards) {
 			if (filter2.matches(context, player, card)) {

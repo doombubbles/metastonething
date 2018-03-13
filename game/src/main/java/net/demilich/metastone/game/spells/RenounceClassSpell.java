@@ -6,7 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
@@ -31,8 +31,8 @@ public class RenounceClassSpell extends Spell {
 		
 		HeroClass renouncedClass = (HeroClass) cardFilter.getArg(FilterArg.HERO_CLASS);
 		HeroClass rebornClass = SpellUtils.getRandomHeroClassExcept(renouncedClass);
-		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
-		CardCollection result = new CardCollection();
+		CardList cards = CardCatalogue.query(context.getDeckFormat());
+		CardList result = new CardList();
 		for (Card card : cards) {
 			if (card.getHeroClass() == rebornClass) {
 				result.add(card);
@@ -41,7 +41,7 @@ public class RenounceClassSpell extends Spell {
 		
 		int manaCostModifier = desc.getValue(SpellArg.MANA_MODIFIER, context, player, target, source, 0);
 		
-		CardCollection heroPowers = CardCatalogue.getHeroPowers(context.getDeckFormat());
+		CardList heroPowers = CardCatalogue.getHeroPowers(context.getDeckFormat());
 		for (Card heroPowerCard : heroPowers) {
 			if (heroPowerCard.getHeroClass() == rebornClass) {
 				HeroPower heroPower = (HeroPower) heroPowerCard;
@@ -49,7 +49,7 @@ public class RenounceClassSpell extends Spell {
 			}
 		}
 
-		CardCollection replacedCards = new CardCollection();
+		CardList replacedCards = new CardList();
 		for (Card card : player.getDeck()) {
 			if (card.getHeroClass() == renouncedClass) {
 				replacedCards.add(card);
@@ -70,7 +70,7 @@ public class RenounceClassSpell extends Spell {
 		SpellDesc spellTriggerSpell = AddSpellTriggerSpell.create(triggerDesc);
 		SpellUtils.castChildSpell(context, player, spellTriggerSpell, source, player);
 		
-		replacedCards = new CardCollection();
+		replacedCards = new CardList();
 		for (Card card : player.getHand()) {
 			if (card.getHeroClass() == renouncedClass) {
 				replacedCards.add(card);

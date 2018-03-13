@@ -1,0 +1,9 @@
+Militia Commander
+
+Mana Cost: 4
+Attack: 2
+Health: 5
+Type: Minion
+Rarity: Rare
+Class: Warrior
+Text: Rush. Battlecry: Gain +3 Attack this turn.

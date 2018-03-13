@@ -1,0 +1,31 @@
+{
+	"name": "Warswords of the Valarjar",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 6,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Whenever this kills a minion, you may attack again.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO",
+			"targetEntityType": "MINION",
+			"fireCondition": {
+				"class": "IsDeadCondition"
+			}
+		},
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"target": "FRIENDLY_HERO",
+			"attribute": "EXTRA_ATTACKS",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

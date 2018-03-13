@@ -2,7 +2,7 @@
     "name": "Corridor Creeper",
     "baseManaCost": 7,
     "type": "MINION",
-    "baseAttack": 5,
+    "baseAttack": 2,
     "baseHp": 5,
     "heroClass": "ANY",
     "rarity": "EPIC",

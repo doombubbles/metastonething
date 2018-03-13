@@ -1,0 +1,41 @@
+{
+	"name": "Phoneix Flames",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "FREE",
+	"description": "Deal *{$1}[1]* damage to a minion. Your next Phoenix Flames deals 1 more damge.",
+	"targetSelection": "MINIONS",
+	"race": "FIRE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": {
+					"class": "AttributeValueProvider",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "PHOENIX",
+					"offset": 1
+				}
+			},
+			{
+				"class": "ModifyAttributeSpell",
+				"target": "FRIENDLY_PLAYER",
+				"attribute": "PHOENIX",
+				"value":1
+			}
+		]
+	},
+	"descValues": [
+		{
+			"class": "AttributeValueProvider",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "PHOENIX",
+			"offset": 1
+		}
+	],
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Phantom Militia",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Echo. Taunt.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "minion_phantom_militia",
+			"attribute": "ONE_TURN"
+		}
+	},
+	"attributes": {
+		"TAUNT": true
+	},
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.custom;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.Spell;
@@ -13,8 +13,8 @@ public class SimulacrumSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		CardCollection cards = new CardCollection();
-		CardCollection cards2 = new CardCollection();
+		CardList cards = new CardList();
+		CardList cards2 = new CardList();
 		for (Card card : player.getHand()) {
 			if (card.getCardType() == CardType.MINION) {
 				cards.add(card);

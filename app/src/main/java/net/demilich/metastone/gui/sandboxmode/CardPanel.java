@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.logic.GameLogic;
 
 public class CardPanel extends VBox {
@@ -39,24 +39,24 @@ public class CardPanel extends VBox {
 	}
 
 	private void handleEditDeckButton(ActionEvent actionEvent) {
-		CardCollection deck = selectedPlayer.getDeck();
+		CardList deck = selectedPlayer.getDeck();
 		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit deck", deck, this::onDeckFinishedEditing,
 				GameLogic.MAX_DECK_SIZE);
 		NotificationProxy.sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
 	}
 
 	private void handleEditHandButton(ActionEvent actionEvent) {
-		CardCollection hand = selectedPlayer.getHand();
+		CardList hand = selectedPlayer.getHand();
 		CardCollectionEditor cardCollectionEditor = new CardCollectionEditor("Edit hand", hand, this::onHandFinishedEditing,
 				GameLogic.MAX_HAND_CARDS);
 		NotificationProxy.sendNotification(GameNotification.SHOW_MODAL_DIALOG, cardCollectionEditor);
 	}
 
-	private void onDeckFinishedEditing(CardCollection cardCollection) {
+	private void onDeckFinishedEditing(CardList cardCollection) {
 		NotificationProxy.sendNotification(GameNotification.MODIFY_PLAYER_DECK, cardCollection);
 	}
 
-	private void onHandFinishedEditing(CardCollection cardCollection) {
+	private void onHandFinishedEditing(CardList cardCollection) {
 		NotificationProxy.sendNotification(GameNotification.MODIFY_PLAYER_HAND, cardCollection);
 	}
 

@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "BuffSpell",
 			"target": "ADJACENT_MINIONS",
-			"hpBonus": 2
+			"value": 2
 		}
     },
     "attributes": {

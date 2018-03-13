@@ -47,6 +47,17 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 	}
 
 	public void fireGameEvent(GameEvent event) {
+		if (event.getEventTarget() != null) {
+			event.getGameContext().getEventTargetStack().push(event.getEventTarget().getReference());
+		} else {
+			event.getGameContext().getEventTargetStack().push(null);
+		}
+		if (event.getEventSource() != null) {
+			event.getGameContext().getEventSourceStack().push(event.getEventSource().getReference());
+			//System.out.println("EVENT_SOURCE IS NOW " + event.getEventSource().getName());
+		} else {
+			event.getGameContext().getEventSourceStack().push(null);
+		}
 		List<IGameEventListener> eventTriggers = new ArrayList<IGameEventListener>();
 		List<IGameEventListener> removeTriggers = new ArrayList<IGameEventListener>();
 		for (IGameEventListener trigger : triggers) {
@@ -54,15 +65,21 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 			// for a oneTurnOnly tag and that it isn't delayed.
 
 			if (event.after) {
-				boolean hey = false;
-				for (IGameEventListener potentialTrigger : event.getPreviousContext().getTriggers()) {
-					if (potentialTrigger.getOwner() == trigger.getOwner() && potentialTrigger.getHostReference() == trigger.getHostReference() && potentialTrigger.getClass() == trigger.getClass()) {
-						hey = true;
+				try {
+					boolean hey = false;
+					for (IGameEventListener potentialTrigger : event.getPreviousContext().getTriggers()) {
+						if (potentialTrigger.getOwner() == trigger.getOwner() && potentialTrigger.getHostReference() == trigger.getHostReference() && potentialTrigger.getClass() == trigger.getClass()) {
+							hey = true;
+						}
 					}
-				}
-				if (!hey) {
+					if (!hey) {
+						continue;
+					}
+				} catch (Exception e) {
+					System.out.println("Well there's your problem");
 					continue;
 				}
+
 			}
 
 			if (event.getEventType() == GameEventType.TURN_END) {
@@ -117,6 +134,9 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 		for (IGameEventListener trigger : removeTriggers) {
 			triggers.remove(trigger);
 		}
+
+		event.getGameContext().getEventTargetStack().pop();
+		event.getGameContext().getEventSourceStack().pop();
 	}
 
 	private List<IGameEventListener> getListSnapshot(List<IGameEventListener> triggerList) {

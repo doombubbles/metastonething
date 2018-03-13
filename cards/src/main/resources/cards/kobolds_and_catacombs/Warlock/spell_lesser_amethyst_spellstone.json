@@ -16,7 +16,26 @@
 			"targetEntityType": "HERO",
 			"targetPlayer": "SELF",
 			"sourcePlayer": "SELF",
-			"custom": "AMETHYST"
+			"queueCondition": {
+				"class": "OrCondition",
+				"conditions": [
+					{
+						"class": "CardPropertyCondition",
+						"target": "EVENT_SOURCE",
+						"cardType": "MINION"
+					},
+					{
+						"class": "CardPropertyCondition",
+						"target": "EVENT_SOURCE",
+						"cardType": "SPELL"
+					},
+					{
+						"class": "CardPropertyCondition",
+						"target": "EVENT_SOURCE",
+						"cardType": "WEAPON"
+					}
+				]
+			}
 		},
 		"spell": {
 			"class": "TransformCardSpell",

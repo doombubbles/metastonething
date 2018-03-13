@@ -53,6 +53,8 @@ public class HandCard extends CardToken {
 	private ImageView rainbowGem;
 	@FXML
 	private ImageView bloodGem;
+	@FXML
+	private ImageView shadowGem;
 
 	private HumanActionOptions options;
 	private boolean multiplayer;
@@ -61,6 +63,7 @@ public class HandCard extends CardToken {
 		super("HandCard.fxml");
 		rainbowGem.setVisible(false);
 		bloodGem.setVisible(false);
+		shadowGem.setVisible(false);
 		hideCard(true);
 	}
 
@@ -87,6 +90,13 @@ public class HandCard extends CardToken {
 		manaGem.setVisible(true);
 		rainbowGem.setVisible(false);
 		bloodGem.setVisible(false);
+		shadowGem.setVisible(false);
+		if (card.hasAttribute(Attribute.ONE_TURN)) {
+			manaGem.setVisible(false);
+			bloodGem.setVisible(false);
+			rainbowGem.setVisible(false);
+			shadowGem.setVisible(true);
+		}
 		if (context.getLogic().hasAttribute(player, Attribute.CARD_TYPE_COSTS_HEALTH)) {
 			List<CardType> cardTypes = new ArrayList<>();
 			List<Object> results = context.getLogic().getAttributes(player, Attribute.CARD_TYPE_COSTS_HEALTH);
@@ -98,17 +108,20 @@ public class HandCard extends CardToken {
 				manaGem.setVisible(false);
 				bloodGem.setVisible(true);
 				rainbowGem.setVisible(false);
+				shadowGem.setVisible(false);
 			}
 		}
 		if (card.hasAttribute(Attribute.COSTS_HEALTH) || ((card.getRace().equals(Race.MURLOC) || card.getRace().equals(Race.ALL)) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))) {
 			manaGem.setVisible(false);
 			bloodGem.setVisible(true);
 			rainbowGem.setVisible(false);
+			shadowGem.setVisible(false);
 		}
 		if (card.getCardType().equals(CardType.SPELL) && player.getQuests().contains("quest_open_the_waygate") && (card.hasAttribute(Attribute.RECEIVED) || !card.isCollectible())) {
 			manaGem.setVisible(false);
 			bloodGem.setVisible(false);
 			rainbowGem.setVisible(true);
+			shadowGem.setVisible(false);
 		}
 		if (tooltipContent == null) {
 			tooltip = new Tooltip();

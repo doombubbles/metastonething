@@ -28,7 +28,7 @@
 							"expirationTrigger": {
 								"class": "CardPlayedTrigger",
 								"cardType": "SPELL",
-								"targetPlayer": "SELF"
+								"sourcePlayer": "SELF"
 							}
 						}
 					},
@@ -39,7 +39,7 @@
 							"eventTrigger": {
 								"class": "CardPlayedTrigger",
 								"cardType": "SPELL",
-								"targetPlayer": "SELF"
+								"sourcePlayer": "SELF"
 							},
 							"oneTime": true,
 							"spell": {
@@ -61,7 +61,7 @@
 											"expirationTrigger": {
 												"class": "CardPlayedTrigger",
 												"cardType": "SPELL",
-												"targetPlayer": "SELF"
+												"sourcePlayer": "SELF"
 											}
 										}
 									}

@@ -21,7 +21,7 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Summon;
@@ -291,7 +291,7 @@ public class GameBoardView extends BorderPane {
 	}
 
 	private void updateHandCards(GameContext context, Player player, HandCard[] handCards) {
-		CardCollection hand = player.getHand();
+		CardList hand = player.getHand();
 		for (int i = 0; i < handCards.length; i++) {
 			if (i < hand.getCount()) {
 				handCards[i].setManaged(true);

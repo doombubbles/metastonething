@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
-public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
+public class CardList implements Iterable<Card>, Cloneable, Serializable {
 
 	private List<Card> cards = new ArrayList<Card>();
 
-	public CardCollection() {
+	public CardList() {
 
 	}
 
@@ -25,7 +25,7 @@ public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
 		cards.add(place, card);
 	}
 
-	public void addAll(CardCollection cardCollection) {
+	public void addAll(CardList cardCollection) {
 		for (Card card : cardCollection) {
 			cards.add(card.clone());
 		}
@@ -36,8 +36,8 @@ public class CardCollection implements Iterable<Card>, Cloneable, Serializable {
 		cards.add(index, card);
 	}
 
-	public CardCollection clone() {
-		CardCollection clone = new CardCollection();
+	public CardList clone() {
+		CardList clone = new CardList();
 		for (Card card : cards) {
 			clone.add(card.clone());
 		}

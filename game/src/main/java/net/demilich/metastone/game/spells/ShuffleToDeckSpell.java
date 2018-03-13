@@ -7,7 +7,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -26,8 +26,8 @@ public class ShuffleToDeckSpell extends Spell {
 			card = ((Actor) target).getSourceCard().getCopy();
 		} else if (desc.contains(SpellArg.CARD_FILTER)){
 			EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
-			CardCollection cards = CardCatalogue.query(context.getDeckFormat());
-			CardCollection result = new CardCollection();
+			CardList cards = CardCatalogue.query(context.getDeckFormat());
+			CardList result = new CardList();
 			for (Card cardResult : cards) {
 				if (cardFilter.matches(context, player, cardResult)) {
 					result.add(cardResult);
@@ -37,7 +37,7 @@ public class ShuffleToDeckSpell extends Spell {
 		} else if (target != null && target.getEntityType() == EntityType.CARD) {
 			card = (Card) target;
 		} else if (desc.contains(SpellArg.CARD_SOURCE)) {
-			CardCollection cards = ((CardSource) desc.get(SpellArg.CARD_SOURCE)).getCards(context, player);
+			CardList cards = ((CardSource) desc.get(SpellArg.CARD_SOURCE)).getCards(context, player);
 			Map<Card, Integer> gonnaShuffle = new HashMap<Card, Integer>();
 			for (Card iCard : cards) {
 				if (!gonnaShuffle.containsKey(iCard)) {

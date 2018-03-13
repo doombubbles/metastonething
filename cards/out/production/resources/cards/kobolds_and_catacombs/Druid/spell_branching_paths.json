@@ -11,19 +11,19 @@
 		"value": 2,
 		"spells": [
 			{
-				"name": "Draw a card",
+				"name": "Eat the Mushroom",
 				"description": "Draw a card",
 				"class": "DrawCardSpell"
 			},
 			{
-				"name": "Give your minions +1 Attack",
+				"name": "Explore the Darkness",
 				"description": "Give your minions +1 Attack",
 				"class": "TemporaryAttackSpell",
 				"target": "FRIENDLY_MINIONS",
 				"value": 1
 			},
 			{
-				"name": "Gain 6 Armor",
+				"name": "Loot the Chest",
 				"description": "Gain 6 Armor",
 				"class": "BuffHeroSpell",
 				"target": "FRIENDLY_HERO",

@@ -45,21 +45,26 @@
   <top>
     <StackPane fx:id="topPane" prefHeight="-1.0" prefWidth="-1.0">
       <children>
-        <ImageView fx:id="manaGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="true">
-          <image>
-            <Image url="/img/common/mana_crystal.png" />
-          </image>
-        </ImageView>
-        <ImageView fx:id="rainbowGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="false">
-          <image>
-              <Image url="/img/common/rainbow_mana_crystal.png" />
-          </image>
-        </ImageView>
-        <ImageView fx:id="bloodGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="false">
-          <image>
-              <Image url="/img/common/red_mana_crystal.png" />
-          </image>
-        </ImageView>
+            <ImageView fx:id="manaGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="true">
+              <image>
+                <Image url="/img/common/mana_crystal.png" />
+              </image>
+            </ImageView>
+            <ImageView fx:id="rainbowGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="false">
+              <image>
+                  <Image url="/img/common/rainbow_mana_crystal.png" />
+              </image>
+            </ImageView>
+            <ImageView fx:id="bloodGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="false">
+              <image>
+                  <Image url="/img/common/red_mana_crystal.png" />
+              </image>
+            </ImageView>
+            <ImageView fx:id="shadowGem" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" translateX="-8.0" translateY="-4.0" StackPane.alignment="TOP_LEFT" visible="false">
+                <image>
+                    <Image url="/img/common/shadow_crystal.png" />
+                </image>
+            </ImageView>
             <Group fx:id="manaCostAnchor" translateX="-4.0" translateY="-5.0" StackPane.alignment="TOP_LEFT" />
       </children>
     </StackPane>

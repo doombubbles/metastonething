@@ -4,7 +4,7 @@ import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.PlayerAttribute;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.statistics.Statistic;
@@ -22,7 +22,7 @@ public class PlayerAttributeValueProvider extends ValueProvider {
 		case DECK_COUNT:
 			return player.getDeck().getCount();
 		case HAND_COUNT:
-			CardCollection cards = player.getHand();
+			CardList cards = player.getHand();
 			if (desc.contains(ValueProviderArg.FILTER)) {
 				EntityFilter filter = (EntityFilter) desc.get(ValueProviderArg.FILTER);
 				cards.removeAll(card -> !filter.matches(context, player, card));

@@ -263,10 +263,15 @@ public class ParseUtils {
 			return EntityReference.FRIENDLY_RIFTS;
 		case "enemy_rifts":
 			return EntityReference.ENEMY_RIFTS;
-		
-			
+		case "friendly_top_card":
+			return EntityReference.FRIENDLY_TOP_CARD;
+		case "enemy_top_card":
+			return EntityReference.ENEMY_TOP_CARD;
+		case "output":
+			return EntityReference.OUTPUT;
 		case "other_enemy_minions":
 			return EntityReference.OTHER_ENEMY_MINIONS;
+
 		default:
 			return null;
 		}

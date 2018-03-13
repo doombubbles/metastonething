@@ -1,0 +1,25 @@
+{
+	"name": "Strom'kar",
+	"baseManaCost": 6,
+	"type": "WEAPON",
+	"damage": 4,
+	"durability": 2,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Damage all minions so that they're at 1 Health remaining.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_MINIONS",
+			"value": {
+				"class": "AttributeValueProvider",
+				"attribute": "HP",
+				"offset": -1			
+			}
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

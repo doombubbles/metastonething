@@ -4,7 +4,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -16,18 +16,18 @@ import net.demilich.metastone.game.spells.desc.source.CardSource;
 public class SummonRandomMinionFilteredSpell extends Spell {
 
 	protected static MinionCard getRandomMatchingMinionCard(GameContext context, Player player, EntityFilter cardFilter, CardSource cardSource, Entity source) {
-		CardCollection relevantMinions = null;
+		CardList relevantMinions = null;
 		if (cardSource != null) {
-			CardCollection allCards = cardSource.getCards(context, player);
-			relevantMinions = new CardCollection();
+			CardList allCards = cardSource.getCards(context, player);
+			relevantMinions = new CardList();
 			for (Card card : allCards) {
 				if (card.getCardType().isCardType(CardType.MINION) && (cardFilter == null || cardFilter.matches(context, player, card))) {
 					relevantMinions.add(card);
 				}
 			}
 		} else {
-			CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
-			relevantMinions = new CardCollection();
+			CardList allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
+			relevantMinions = new CardList();
 			for (Card card : allMinions) {
 				if (cardFilter == null || cardFilter.matches(context, player, card, source)) {
 					relevantMinions.add(card);

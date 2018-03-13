@@ -1,12 +1,12 @@
 {
     "name": "Ice Breaker",
-    "baseManaCost": 2,
+    "baseManaCost": 3,
     "type": "WEAPON",
     "damage": 1,
     "durability": 3,
     "heroClass": "SHAMAN",
     "rarity": "RARE",
-    "description": "Destroy all Frozen minions that are damaged by this weapon.",
+    "description": "Destroy any Frozen minion damaged by this. Immune while attacking.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterPhysicalAttackTrigger",
@@ -35,6 +35,16 @@
 				]
 			}
 		}
+	},
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "IMMUNE_WHILE_ATTACKING"
+	},
+	"onUnequip": {
+		"class": "RemoveAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "IMMUNE_WHILE_ATTACKING"
 	},
     "collectible": true,
     "set": "FROZEN_THRONE",

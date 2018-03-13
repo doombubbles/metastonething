@@ -7,12 +7,12 @@
     "heroClass": "ANY",
     "rarity": "LEGENDARY",
     "race": "NONE",
-    "description": "Battlecry: If your deck has no 4-Cost cards, give your minions Lifesteal and Taunt.",
+    "description": "Battlecry: If your deck has no 4-Cost cards, gain Lifesteal and Taunt.",
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
 			"class": "MetaSpell",
-			"target": "FRIENDLY_MINIONS",
+			"target": "SELF",
 			"spells": [
 				{
 					"class": "AddAttributeSpell",

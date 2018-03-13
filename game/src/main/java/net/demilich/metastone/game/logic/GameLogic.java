@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.entities.minions.*;
 import net.demilich.metastone.game.events.*;
-import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +20,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PlaySpellCardAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.QuestCard;
 import net.demilich.metastone.game.cards.SecretCard;
@@ -38,7 +36,6 @@ import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.aura.Aura;
-import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.SpellFactory;
@@ -54,9 +51,8 @@ import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.utils.MathUtils;
-import org.w3c.dom.Attr;
 
-import javax.smartcardio.ATR;
+import static java.util.stream.Collectors.toList;
 
 public class GameLogic implements Cloneable, Serializable {
 
@@ -194,7 +190,7 @@ public class GameLogic implements Cloneable, Serializable {
 	 * @param cardCollection
 	 * 		The Deck to assign IDs to
 	 */
-	private void assignCardIds(CardCollection cardCollection) {
+	private void assignCardIds(CardList cardCollection) {
 		for (Card card : cardCollection) {
 			card.setId(idFactory.generateId());
 			card.setLocation(CardLocation.DECK);
@@ -743,7 +739,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public Card drawCard(int playerId, Entity source) {
 		Player player = context.getPlayer(playerId);
-		CardCollection deck = player.getDeck();
+		CardList deck = player.getDeck();
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
 			int fatigue = player.hasAttribute(Attribute.FATIGUE) ? player.getAttributeValue(Attribute.FATIGUE) : 0;
@@ -781,6 +777,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+		context.getOpponent(player).getHero().removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		hero.removeAttribute(Attribute.HERO_POWER_USAGES);
 		handleFrozen(hero);
 		for (Summon summon : player.getSummons()) {
@@ -804,7 +801,7 @@ public class GameLogic implements Cloneable, Serializable {
 				}
 			}
 		}
-		CardCollection dumb = new CardCollection();
+		CardList dumb = new CardList();
 		for (Card card : player.getHand()) {
 			card.setLocation(CardLocation.HAND);
 			if (card.hasAttribute(Attribute.ONE_TURN)) {
@@ -906,9 +903,9 @@ public class GameLogic implements Cloneable, Serializable {
 
 			}
 		}
-		int defenderDamage = target.getAttack();
 
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage));
+		int defenderDamage = target.getAttack();
 		// secret may have killed attacker ADDENDUM: or defender
 		if (attacker.isDestroyed() || target.isDestroyed()) {
 			context.getEnvironment().remove(Environment.ATTACKER_REFERENCE);
@@ -1168,7 +1165,7 @@ public class GameLogic implements Cloneable, Serializable {
 		if (!actor.hasAttribute(Attribute.FROZEN)) {
 			return;
 		}
-		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks()) {
+		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks() && !actor.hasAttribute(Attribute.SUMMONING_SICKNESS)) {
 			removeAttribute(actor, Attribute.FROZEN);
 		}
 	}
@@ -1675,7 +1672,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		card.setOwner(playerId);
-		CardCollection hand = player.getHand();
+		CardList hand = player.getHand();
 
 		if (hand.getCount() < MAX_HAND_CARDS) {
 			if (card.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
@@ -1741,6 +1738,16 @@ public class GameLogic implements Cloneable, Serializable {
 	public void removeAllCards(int playerId) {
 		for (Card card : context.getPlayer(playerId).getHand().toList()) {
 			removeCard(playerId, card);
+		}
+	}
+
+	public void remove(int playerID, Card card) {
+		Player player = context.getPlayer(playerID);
+		CardLocation location = card.getLocation();
+		if (location.equals(CardLocation.HAND)) {
+			removeCard(playerID, card);
+		} else if (location.equals(CardLocation.DECK)) {
+			removeCardFromDeck(playerID, card);
 		}
 	}
 
@@ -1826,7 +1833,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		newCard.setOwner(playerId);
-		CardCollection hand = player.getHand();
+		CardList hand = player.getHand();
 
 		if (newCard.getAttribute(Attribute.PASSIVE_TRIGGER) != null) {
 			TriggerDesc triggerDesc = (TriggerDesc) newCard.getAttribute(Attribute.PASSIVE_TRIGGER);
@@ -1851,7 +1858,7 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		newCard.setOwner(playerId);
-		CardCollection deck = player.getDeck();
+		CardList deck = player.getDeck();
 
 		if (newCard.getAttribute(Attribute.DECK_TRIGGER) != null) {
 			TriggerDesc triggerDesc = (TriggerDesc) newCard.getAttribute(Attribute.DECK_TRIGGER);
@@ -2040,6 +2047,49 @@ public class GameLogic implements Cloneable, Serializable {
 		checkForDeadEntities();
 	}
 
+	public void stealCard(Player newOwner, Entity source, Card card, CardLocation destination) throws IllegalArgumentException {
+
+		// If the card isn't already in the SET_ASIDE_ZONE, move it
+		if (card.getLocation() != CardLocation.SET_ASIDE_ZONE
+				&& card.getOwner() != newOwner.getId()) {
+			// Move to set aside zone first.
+
+			remove(card.getOwner(), card);
+			newOwner.getSetAsideZone().add(card);
+		}
+
+		// Only change the owner if necessary
+		if (card.getOwner() != newOwner.getId()) {
+			changeOwner(card, newOwner.getId());
+		}
+
+		// Move to the destination
+		if (destination == CardLocation.HAND) {
+			receiveCard(newOwner.getId(), card, source, false);
+		} else if (destination == CardLocation.DECK) {
+			// Remove again to make shuffling to deck valid.
+			remove(card.getOwner(), card);
+			shuffleToDeck(newOwner, card);
+		} else if (destination != CardLocation.SET_ASIDE_ZONE) {
+			throw new IllegalArgumentException(String.format("Invalid destination %s for card %s", destination.name(), card.getName()));
+		}
+	}
+
+	public void changeOwner(Entity target, int newOwnerId) throws ArrayStoreException {
+		if (target.getOwner() != newOwnerId) {
+			throw new ArrayStoreException("Cannot change the owner of an entity that is located in a zone not owned by the new owner.");
+		}
+		target.setOwner(newOwnerId);
+		List<IGameEventListener> triggers = context.getTriggersAssociatedWith(target.getReference()).stream().map(IGameEventListener::clone).collect(toList());
+		for (IGameEventListener trigger : triggers) {
+			if (!trigger.hasPersistentOwner()) {
+				trigger.setOwner(newOwnerId);
+			}
+			addGameEventListener(context.getPlayer(newOwnerId), trigger, target);
+		}
+		context.fireGameEvent(new BoardChangedEvent(context));
+	}
+
 	public boolean summon(int playerId, Summon summon) {
 		return summon(playerId, summon, null, -1, false);
 	}
@@ -2101,6 +2151,9 @@ public class GameLogic implements Cloneable, Serializable {
 
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
 			refreshAttacksPerRound(minion);
+			if (minion.hasAttribute(Attribute.RUSH)) {
+				applyAttribute(minion, Attribute.CANNOT_ATTACK_HEROES);
+			}
 		} else if (summon instanceof Permanent) {
 			Permanent permanent = (Permanent) summon;
 			player.getStatistics().permanentSummoned(permanent, context.getTurn());

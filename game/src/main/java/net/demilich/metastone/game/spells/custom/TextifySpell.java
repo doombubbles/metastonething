@@ -6,7 +6,6 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
@@ -20,11 +19,11 @@ public class TextifySpell extends Spell {
 
     @Override
     protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-        CardCollection baseMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
+        CardList baseMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
         baseMinions.removeAll(card1 -> card1.hasAttribute(Attribute.CHOOSE_ONE));
         baseMinions.removeAll(card -> card.getDescription().equals(""));
-        CardCollection deckCards = new CardCollection();
-        CardCollection handCards = new CardCollection();
+        CardList deckCards = new CardList();
+        CardList handCards = new CardList();
         for (Card card : player.getDeck()) {
             if (card.getCardType().equals(CardType.MINION)) {
                 MinionCard minionCard = (MinionCard) card;

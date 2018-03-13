@@ -30,7 +30,7 @@ public class SummonNewAttackTargetSpell extends Spell {
 			minionCard = (MinionCard) SpellUtils.getCard(context, desc);
 		} else if (desc.contains(SpellArg.CARD_FILTER)){
 			CardFilter cardFilter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
-			CardCollection cards = CardCatalogue.query(context.getDeckFormat());
+			CardList cards = CardCatalogue.query(context.getDeckFormat());
 			cards.shuffle();
 			for (Card card : cards) {
 				if (cardFilter.matches(context, player, card)) {

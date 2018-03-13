@@ -19,7 +19,8 @@
 			"target": "SELF",
 			"cardFilter": {
 				"class": "CardFilter",
-				"cardType": "WEAPON"
+				"cardType": "SPELL",
+				"heroClass": "MAGE"
 			}
 		}
 	},

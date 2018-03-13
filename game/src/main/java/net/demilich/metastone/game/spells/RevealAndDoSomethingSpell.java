@@ -3,8 +3,7 @@ package net.demilich.metastone.game.spells;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.CardRevealedEvent;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -16,7 +15,7 @@ public class RevealAndDoSomethingSpell extends Spell {
     @Override
     protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
         CardFilter cardFilter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
-        CardCollection deck = player.getDeck().clone();
+        CardList deck = player.getDeck().clone();
         deck.shuffle();
         Card chosenCard = null;
         for (Card card : deck) {

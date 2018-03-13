@@ -103,7 +103,9 @@ public enum Attribute {
 	COUNTDOWN,
 	NO_FILTER,
 	ACTUAL_MANA_COST,
-	
+	RUSH,
+
+	PHOENIX,
 	CUSTOM_1,
 	CUSTOM_2,
 	CUSTOM_3,

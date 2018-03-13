@@ -7,10 +7,9 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
-import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.ChooseOneCard;
 import net.demilich.metastone.game.cards.SpellCard;
@@ -22,7 +21,6 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.CardFilter;
 import net.demilich.metastone.game.spells.desc.source.CardSource;
-import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class CastSemiRandomSpellSpell extends Spell {
@@ -30,7 +28,7 @@ public class CastSemiRandomSpellSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
-		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
+		CardList spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
 		EntityType targetType = target.getEntityType();
 		List<TargetSelection> okTargets = new ArrayList<TargetSelection>();
@@ -51,7 +49,7 @@ public class CastSemiRandomSpellSpell extends Spell {
 		if (cardSource != null) {
 			spells = cardSource.getCards(context, player);
 		}
-		CardCollection filteredSpells = new CardCollection();
+		CardList filteredSpells = new CardList();
 		for (Card spell : spells) {
 			if (filter == null || filter.matches(context, player, spell)) {
 				if (((SpellCard) spell).getTargetRequirement() != TargetSelection.NONE && okTargets.contains(((SpellCard) spell).getTargetRequirement())) {

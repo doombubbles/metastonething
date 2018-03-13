@@ -1,0 +1,26 @@
+{
+    "name": "Reporting for Duty",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "PALADIN",
+    "rarity": "EPIC",
+    "description": "Summon a 1/1 Silver Hand Recruit. Repeatable this turn.",
+    "targetSelection": "FRIENDLY_MINIONS",
+    "spell": {
+        "class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SummonSpell",
+				"card": "token_silver_hand_recruit"
+			},
+			{
+				"class": "ReceiveCardSpell",
+				"card": "spell_reporting_for_duty",
+				"attribute": "ONE_TURN"
+			}
+		]
+    },
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

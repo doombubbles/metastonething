@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"description": "Choose One - Charge; or +2 Health and Taunt.",
+	"description": "Choose One - Transform to gain Charge; or +2 Health and Taunt.",
 	"options": [
 		{
 			"description": "Charge",

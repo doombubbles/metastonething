@@ -12,6 +12,7 @@
         "targetSelection": "NONE",
         "spell": {
 			"class": "FromDeckToHandSpell",
+			"value": 1,
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "WEAPON"

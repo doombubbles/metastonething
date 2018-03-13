@@ -1,6 +1,6 @@
 {
     "name": "Glacial Mysteries",
-    "baseManaCost": 8,
+    "baseManaCost": 6,
     "type": "SPELL",
     "heroClass": "MAGE",
     "rarity": "EPIC",

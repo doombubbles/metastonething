@@ -5,7 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -33,8 +33,8 @@ public class ReceiveCardAndDoSomethingSpell extends Spell {
 		SpellDesc cardEffectSpell = (SpellDesc) desc.get(SpellArg.SPELL);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		if (cardFilter != null) {
-			CardCollection cards = CardCatalogue.query(context.getDeckFormat());
-			CardCollection result = new CardCollection();
+			CardList cards = CardCatalogue.query(context.getDeckFormat());
+			CardList result = new CardList();
 			String replacementCard = (String) desc.get(SpellArg.CARD);
 			for (Card card : cards) {
 				if (cardFilter.matches(context, player, card)) {

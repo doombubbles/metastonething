@@ -31,14 +31,14 @@ public class CardCatalogue {
 
 	private static Logger logger = LoggerFactory.getLogger(CardCatalogue.class);
 
-	private final static CardCollection cards = new CardCollection();
+	private final static CardList cards = new CardList();
 
 	public static void add(Card card) {
 		cards.add(card);
 	}
 
-	public static CardCollection getAll() {
-		CardCollection result = new CardCollection();
+	public static CardList getAll() {
+		CardList result = new CardList();
 		for (Card card : cards) {
 			result.add(card);
 		}
@@ -64,32 +64,32 @@ public class CardCatalogue {
 		return null;
 	}
 
-	public static CardCollection getHeroes() {
+	public static CardList getHeroes() {
 		return query(null, card -> card.isCollectible() && card.getCardType() == CardType.HERO);
 	}
 
-	public static CardCollection getHeroPowers(DeckFormat deckFormat) {
+	public static CardList getHeroPowers(DeckFormat deckFormat) {
 		return query(deckFormat, card -> card.isCollectible() && card.getCardType() == CardType.HERO_POWER);
 	}
 
-	public static CardCollection query(DeckFormat deckFormat) {
+	public static CardList query(DeckFormat deckFormat) {
 		return query(deckFormat, (CardType) null, (Rarity) null, (HeroClass) null, (Attribute) null);
 	}
 
-	public static CardCollection query(DeckFormat deckFormat, CardType cardType) {
+	public static CardList query(DeckFormat deckFormat, CardType cardType) {
 		return query(deckFormat, cardType, (Rarity) null, (HeroClass) null, (Attribute) null);
 	}
 
-	public static CardCollection query(DeckFormat deckFormat, HeroClass heroClass) {
+	public static CardList query(DeckFormat deckFormat, HeroClass heroClass) {
 		return query(deckFormat, (CardType) null, (Rarity) null, heroClass, (Attribute) null);
 	}
 
-	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass) {
+	public static CardList query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass) {
 		return query(deckFormat, cardType, rarity, heroClass, (Attribute) null);
 	}
 
-	public static CardCollection query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
-		CardCollection result = new CardCollection();
+	public static CardList query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
+		CardList result = new CardList();
 		for (Card card : cards) {
 			if (!deckFormat.isInFormat(card)) {
 				continue;
@@ -119,8 +119,8 @@ public class CardCatalogue {
 		return result;
 	}
 
-	public static CardCollection query(DeckFormat deckFormat, Predicate<Card> filter) {
-		CardCollection result = new CardCollection();
+	public static CardList query(DeckFormat deckFormat, Predicate<Card> filter) {
+		CardList result = new CardList();
 		for (Card card : cards) {
 			if (deckFormat != null && !deckFormat.isInFormat(card)) {
 				continue;

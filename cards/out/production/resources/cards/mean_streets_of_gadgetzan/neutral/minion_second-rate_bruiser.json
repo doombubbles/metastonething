@@ -18,6 +18,12 @@
 			"value": 3
 		}
 	},
+	"glow": {
+		"class": "MinionCountCondition",
+		"targetPlayer": "OPPONENT",
+		"operation": "GREATER_OR_EQUAL",
+		"value": 3
+	},
 	"attributes": {
 		"TAUNT": true
 	},

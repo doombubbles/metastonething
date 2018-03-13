@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.minions.Minion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +15,7 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Entity;
@@ -54,7 +56,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 
 	public boolean switched = false;
 
-	private CardCollection tempCards = new CardCollection();
+	private CardList tempCards = new CardList();
 
 	public GameContext(Player player1, Player player2, GameLogic logic, DeckFormat deckFormat) {
 		this.getPlayers()[PLAYER_1] = player1;
@@ -121,7 +123,11 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		Stack<EntityReference> eventSourceReferenceStack = new Stack<EntityReference>();
 		eventTargetReferenceStack.addAll(getEventSourceStack());
 		clone.getEnvironment().put(Environment.EVENT_SOURCE_REFERENCE_STACK, eventSourceReferenceStack);
-		
+
+		Stack<EntityReference> outputReferenceStack = new Stack<EntityReference>();
+		eventTargetReferenceStack.addAll(getOutputStack());
+		clone.getEnvironment().put(Environment.OUTPUT_REFERENCE_STACK, outputReferenceStack);
+
 		for (Environment key : getEnvironment().keySet()) {
 			if (!key.customClone()) {
 				clone.getEnvironment().put(key, getEnvironment().get(key));
@@ -166,7 +172,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		turnState = TurnState.TURN_ENDED;
 	}
 
-	private Card findCardinCollection(CardCollection cardCollection, int cardId) {
+	private Card findCardinCollection(CardList cardCollection, int cardId) {
 		for (Card card : cardCollection) {
 			if (card.getId() == cardId) {
 				return card;
@@ -296,6 +302,14 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return (Stack<EntityReference>) environment.get(Environment.EVENT_SOURCE_REFERENCE_STACK);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Stack<EntityReference> getOutputStack() {
+		if (!environment.containsKey(Environment.EVENT_SOURCE_REFERENCE_STACK)) {
+			environment.put(Environment.EVENT_SOURCE_REFERENCE_STACK, new Stack<EntityReference>());
+		}
+		return (Stack<EntityReference>) environment.get(Environment.EVENT_SOURCE_REFERENCE_STACK);
+	}
+
 	public List<Summon> getLeftSummons(Player player, EntityReference minionReference) {
 		List<Summon> leftSummons = new ArrayList<>();
 		Summon summon = (Summon) resolveSingleTarget(minionReference);
@@ -357,6 +371,17 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	}
 	
 	public Card getPendingCard() {
+		Entity entity = resolveSingleTarget((EntityReference) getEnvironment().get(Environment.PENDING_CARD));
+		if (entity != null) {
+			if (entity.getEntityType().equals(EntityType.CARD))  {
+				return (Card) entity;
+			} else {
+				System.out.println("Something is really quite wrong here " + entity.getName());
+				if (entity.getEntityType().equals(EntityType.MINION)) {
+					return ((Minion) entity).getSourceCard();
+				}
+			}
+		}
 		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.PENDING_CARD));
 	}
 
@@ -398,7 +423,7 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		return (Stack<EntityReference>) environment.get(Environment.SUMMON_REFERENCE_STACK);
 	}
 
-	public CardCollection getTempCards() {
+	public CardList getTempCards() {
 		return tempCards;
 	}
 

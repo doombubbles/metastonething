@@ -14,7 +14,7 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.StringConverter;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 
 public class CardCollectionEditor extends SandboxEditor {
@@ -58,7 +58,7 @@ public class CardCollectionEditor extends SandboxEditor {
 
 	private int cardLimit;
 
-	public CardCollectionEditor(String title, CardCollection cardCollection, ICardCollectionEditingListener listener, int cardLimit) {
+	public CardCollectionEditor(String title, CardList cardCollection, ICardCollectionEditingListener listener, int cardLimit) {
 		super("CardCollectionEditor.fxml");
 		this.listener = listener;
 		this.cardLimit = cardLimit;
@@ -98,7 +98,7 @@ public class CardCollectionEditor extends SandboxEditor {
 	}
 
 	private void handleOkButton(ActionEvent actionEvent) {
-		CardCollection changedCollection = new CardCollection();
+		CardList changedCollection = new CardList();
 		for (Card card : editableListView.getItems()) {
 			changedCollection.add(card);
 		}
@@ -127,7 +127,7 @@ public class CardCollectionEditor extends SandboxEditor {
 		catalogueListView.setItems(data);
 	}
 
-	private void populateEditableView(CardCollection cardCollection) {
+	private void populateEditableView(CardList cardCollection) {
 		ObservableList<Card> data = FXCollections.observableArrayList();
 		for (Card card : cardCollection) {
 			data.add(card);

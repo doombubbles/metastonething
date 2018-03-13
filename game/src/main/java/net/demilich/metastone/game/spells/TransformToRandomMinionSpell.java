@@ -6,7 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
@@ -25,8 +25,8 @@ public class TransformToRandomMinionSpell extends TransformMinionSpell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter filter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 
-		CardCollection allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
-		CardCollection filteredMinions = new CardCollection();
+		CardList allMinions = CardCatalogue.query(context.getDeckFormat(), CardType.MINION);
+		CardList filteredMinions = new CardList();
 		for (Card card : allMinions) {
 			MinionCard minionCard = (MinionCard) card;
 			if (filter == null || filter.matches(context, player, card)) {
@@ -36,8 +36,8 @@ public class TransformToRandomMinionSpell extends TransformMinionSpell {
 
 		if (filteredMinions.getCount() > 1) {
 			//Don't even ask me why I have to do this
-			filteredMinions.removeAll(card -> card.getName() == "Snowfury Giant");
-			filteredMinions.removeAll(card -> card.getName() == "The Darkness");
+			filteredMinions.removeAll(card -> card.getName().equals("Snowfury Giant"));
+			filteredMinions.removeAll(card -> card.getName().equals("The Darkness"));
 		}
 
 		MinionCard randomCard = (MinionCard) filteredMinions.getRandom();

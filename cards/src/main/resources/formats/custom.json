@@ -1,5 +1,5 @@
 {
-	"name": "Custom",
+	"name": "Custom Standard",
 	"sets": [
 		"BASIC",
 		"CLASSIC",
@@ -9,7 +9,6 @@
 		"JOURNEY_TO_UNGORO",
 		"CUSTOM",
 		"FROZEN_THRONE",
-		"KOBOLDS_AND_CATACOMBS",
-		"SANDS_OF_TIME"
+		"KOBOLDS_AND_CATACOMBS"
 	]
 }

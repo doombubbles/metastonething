@@ -2,7 +2,7 @@ package net.demilich.metastone.game.spells.desc.source;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 
 public class PlayedThisGameSource extends CardSource {
 
@@ -11,8 +11,8 @@ public class PlayedThisGameSource extends CardSource {
 	}
 
 	@Override
-	protected CardCollection match(GameContext context, Player player) {
-		CardCollection minionCards = new CardCollection();
+	protected CardList match(GameContext context, Player player) {
+		CardList minionCards = new CardList();
 		player.minionsPlayed.forEach(minionCard -> minionCards.add(minionCard));
 		return minionCards;
 	}

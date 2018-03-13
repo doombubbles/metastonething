@@ -17,6 +17,7 @@ public enum Environment{
 	CHOOSE_ONE_CARD,
 	LAST_MANA_COST,
 	EVENT_SOURCE_REFERENCE_STACK,
+	OUTPUT_REFERENCE_STACK,
 	;
 	
 	public boolean customClone() {

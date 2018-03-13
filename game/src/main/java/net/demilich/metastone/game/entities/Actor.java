@@ -42,7 +42,7 @@ public abstract class Actor extends Entity {
 		if (hasAttribute(Attribute.FROZEN)) {
 			return false;
 		}
-		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE)) {
+		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !(hasAttribute(Attribute.CHARGE) || hasAttribute(Attribute.RUSH) )) {
 			return false;
 		}
 		return getAttack() > 0 && ((getAttributeValue(Attribute.NUMBER_OF_ATTACKS) + getAttributeValue(Attribute.EXTRA_ATTACKS)) > 0 || hasAttribute(Attribute.UNLIMITED_ATTACKS));
@@ -74,7 +74,7 @@ public abstract class Actor extends Entity {
 		return tag == Attribute.CHARGE || tag == Attribute.ENRAGED || tag == Attribute.FROZEN || tag == Attribute.DIVINE_SHIELD
 				|| tag == Attribute.WINDFURY || tag == Attribute.SPELL_DAMAGE || tag == Attribute.STEALTH || tag == Attribute.TAUNT
 				|| tag == Attribute.CANNOT_ATTACK || tag == Attribute.UNTARGETABLE_BY_SPELLS || tag == Attribute.AURA_UNTARGETABLE_BY_SPELLS
-				|| tag == Attribute.MEGA_WINDFURY;
+				|| tag == Attribute.MEGA_WINDFURY || tag == Attribute.LIFESTEAL || tag == Attribute.POISONOUS || tag == Attribute.RUSH;
 	}
 
 	public int getAttack() {

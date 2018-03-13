@@ -30,7 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
@@ -86,7 +86,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		for (CardSet cardSet : CardSet.values()) {
 			deckFormat.addSet(cardSet);
 		}
-		CardCollection cardCollection;
+		CardList cardCollection;
 		if (activeDeck.isArbitrary()) {
 			cardCollection = CardCatalogue.query(deckFormat);
 		} else {

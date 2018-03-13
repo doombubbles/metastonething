@@ -14,7 +14,7 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.ChooseOneCard;
 import net.demilich.metastone.game.cards.SpellCard;
@@ -48,13 +48,13 @@ public class CastRandomSpellSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// This spell is crazy.
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
-		CardCollection spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
+		CardList spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
 		Boolean tryAgain = desc.getBool(SpellArg.EXCLUSIVE);
 		if (cardSource != null) {
 			spells = cardSource.getCards(context, player);
 		}
-		CardCollection filteredSpells = new CardCollection();
+		CardList filteredSpells = new CardList();
 		for (Card spell : spells) {
 			if ((filter == null || filter.matches(context, player, spell))) {
 				filteredSpells.add(spell);

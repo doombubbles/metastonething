@@ -19,7 +19,10 @@
 					"cardLocation": "DECK",
 					"cardFilter": {
 						"class": "CardFilter",
-						"manaCost": 1
+						"cardType": "MINION",
+						"attribute": "ATTACK",
+						"operation": "EQUAL",
+						"value": 1
 					}
 				},
 				{
@@ -28,7 +31,10 @@
 					"cardLocation": "DECK",
 					"cardFilter": {
 						"class": "CardFilter",
-						"manaCost": 2
+						"cardType": "MINION",
+						"attribute": "ATTACK",
+						"operation": "EQUAL",
+						"value": 2
 					}
 				},
 				{
@@ -37,7 +43,10 @@
 					"cardLocation": "DECK",
 					"cardFilter": {
 						"class": "CardFilter",
-						"manaCost": 3
+						"cardType": "MINION",
+						"attribute": "ATTACK",
+						"operation": "EQUAL",
+						"value": 3
 					}
 				}
 			]

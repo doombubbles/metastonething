@@ -8,7 +8,8 @@
 	"targetSelection": "AUTO",
 	"spell": {
 		"class": "ReceiveCardSpell",
-		"card": "spell_shadow_reflection"
+		"card": "spell_shadow_reflection",
+		"attribute": "ONE_TURN"
 	},
 	"collectible": false,
 	"set": "FROZEN_THRONE",

@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -27,7 +27,7 @@ public class FromDeckToHandSpell extends Spell {
 		String replacementCard = (String) desc.get(SpellArg.CARD);
 
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
-		CardCollection relevantCards = null;
+		CardList relevantCards = null;
 		if (cardFilter != null) {
 			relevantCards = SpellUtils.getCards(player.getDeck(), card -> cardFilter.matches(context, player, card));
 		} else {

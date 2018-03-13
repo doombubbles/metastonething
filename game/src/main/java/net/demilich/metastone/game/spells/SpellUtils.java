@@ -11,7 +11,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.GroupCard;
 import net.demilich.metastone.game.entities.Actor;
@@ -25,9 +25,29 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.ComparisonOperation;
+import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 public class SpellUtils {
+
+	public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target, Entity output) {
+		// card may be null (i.e. try to draw from deck, but already in
+		// fatigue)
+		if (output == null) {
+			return;
+		} else if (output.getEntityType().equals(EntityType.CARD)) {
+			if (((Card)output).getLocation().equals(CardLocation.GRAVEYARD)) {
+				return;
+			}
+		}
+		if (spell == null) {
+			return;
+		}
+
+		context.getOutputStack().push(output.getReference());
+		castChildSpell(context, player, spell, source, target);
+		context.getOutputStack().pop();
+	}
 
 	public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target) {
 		EntityReference sourceReference = source != null ? source.getReference() : null;
@@ -56,8 +76,8 @@ public class SpellUtils {
 		return false;
 	}
 
-	public static CardCollection getCards(CardCollection source, Predicate<Card> filter) {
-		CardCollection result = new CardCollection();
+	public static CardList getCards(CardList source, Predicate<Card> filter) {
+		CardList result = new CardList();
 		for (Card card : source) {
 			if (filter == null || filter.test(card)) {
 				result.add(card);
@@ -104,7 +124,7 @@ public class SpellUtils {
 		return null;
 	}
 	
-	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
+	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardList cards) {
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (Card card : cards) {
@@ -142,8 +162,8 @@ public class SpellUtils {
 		}
 	}
 
-	public static Card getRandomCard(CardCollection source, Predicate<Card> filter) {
-		CardCollection result = getCards(source, filter);
+	public static Card getRandomCard(CardList source, Predicate<Card> filter) {
+		CardList result = getCards(source, filter);
 		if (result.isEmpty()) {
 			return null;
 		}

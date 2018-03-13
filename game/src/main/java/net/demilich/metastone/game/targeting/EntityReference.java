@@ -49,6 +49,9 @@ public class EntityReference implements Serializable {
 	public static final EntityReference EVENT_SOURCE = new EntityReference(-82);
 	public static final EntityReference FRIENDLY_RIFTS = new EntityReference(-83);
 	public static final EntityReference ENEMY_RIFTS = new EntityReference(-84);
+	public static final EntityReference OUTPUT = new EntityReference(-85);
+	public static final EntityReference FRIENDLY_TOP_CARD = new EntityReference(-86);
+	public static final EntityReference ENEMY_TOP_CARD = new EntityReference(-87);
 
 	public static EntityReference pointTo(Entity entity) {
 		if (entity == null) {

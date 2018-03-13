@@ -5,7 +5,7 @@ import java.util.Map;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -13,20 +13,6 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardDescType;
-import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.desc.SpellCardDesc;
-import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.desc.SpellArg;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class CreateRagnarosSpell extends Spell {
 	
@@ -39,7 +25,7 @@ public class CreateRagnarosSpell extends Spell {
 	
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		CardCollection cards = new CardCollection();
+		CardList cards = new CardList();
 		cards.add(CardCatalogue.getCardById("minion_base_lesser_rag"));
 		cards.add(CardCatalogue.getCardById("minion_base_greater_rag"));
 		cards.add(CardCatalogue.getCardById("minion_base_woke_rag"));
@@ -47,7 +33,7 @@ public class CreateRagnarosSpell extends Spell {
 		Card chosenSize = SpellUtils.getDiscover(context, player, desc, cards).getCard();
 		
 		
-		CardCollection cards2 = new CardCollection();
+		CardList cards2 = new CardList();
 		Card chosenEffect = null;
 		switch (chosenSize.getManaCost(context, player)) {
 		case 3:

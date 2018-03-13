@@ -11,8 +11,10 @@
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
-			"class": "DiscardCardsFromDeckSpell",
-			"targetPlayer": "OPPONENT"
+			"class": "RemoveCardSpell",
+			"target": "ENEMY_TOP_CARD",
+			"targetPlayer": "OPPONENT",
+			"reveal": true
 		}
     },
     "attributes": {

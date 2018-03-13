@@ -45,7 +45,7 @@
 				"spell": {
 					"class": "DamageSpell",
 					"target": "ENEMY_MINIONS",
-					"value": 4,
+					"value": 3,
 					"randomTarget": true
 				}
 			}
@@ -143,7 +143,7 @@
 					"value": 1
 				}
 			}
-		},
+		}
 	],
 	"collectible": false,
 	"set": "SANDS_OF_TIME",

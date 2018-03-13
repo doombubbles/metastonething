@@ -37,6 +37,6 @@
 		"SPELL_DAMAGE": 1
 	},
 	"collectible": true,
-	"set": "CUSTOM",
+	"set": "BAD_CUSTOM",
 	"fileFormatVersion": 1
 }

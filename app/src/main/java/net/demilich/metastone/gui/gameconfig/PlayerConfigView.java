@@ -134,7 +134,6 @@ public class PlayerConfigView extends VBox {
 				}
 			}
 		}
-
 		deckBox.setItems(deckList);
 		deckBox.getSelectionModel().selectFirst();
 

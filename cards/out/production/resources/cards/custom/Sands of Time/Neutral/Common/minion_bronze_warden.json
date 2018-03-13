@@ -24,11 +24,20 @@
 		}
 	},
 	"glow": {
-		"class": "HoldsCardCondition",
-		"cardFilter": {
-			"class": "CardFilter",
-			"race": "DRAGON"
-		}
+		"class": "AndCondition",
+		"conditions": [
+			{
+				"class": "HoldsCardCondition",
+				"cardFilter": {
+					"class": "CardFilter",
+					"race": "DRAGON"
+				}
+			},
+			{
+				"class": "MinionOnBoardCondition"
+			}
+		]
+		
 	},
 	"attributes": {
 		"BATTLECRY": true

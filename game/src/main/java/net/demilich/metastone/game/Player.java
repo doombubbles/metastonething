@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import net.demilich.metastone.game.behaviour.IBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.entities.Actor;
@@ -27,8 +27,8 @@ public class Player extends Entity {
 	private Hero hero;
 	private final String deckName;
 
-	private final CardCollection deck;
-	private final CardCollection hand = new CardCollection();
+	private final CardList deck;
+	private final CardList hand = new CardList();
 	private final List<Entity> setAsideZone = new ArrayList<>();
 	private final List<Entity> graveyard = new ArrayList<>();
 	private final List<Card> discarded = new ArrayList<>();
@@ -36,8 +36,8 @@ public class Player extends Entity {
 	private final HashSet<String> secrets = new HashSet<>();
 	private final HashSet<String> quests = new HashSet<>();
 	
-	private final CardCollection startingDeck;
-	private final CardCollection supremeArchive;
+	private final CardList startingDeck;
+	private final CardList supremeArchive;
 
 	private final GameStatistics statistics = new GameStatistics();
 
@@ -106,7 +106,7 @@ public class Player extends Entity {
 		return characters;
 	}
 
-	public CardCollection getDeck() {
+	public CardList getDeck() {
 		return deck;
 	}
 
@@ -127,7 +127,7 @@ public class Player extends Entity {
 		return discarded;
 	}
 
-	public CardCollection getHand() {
+	public CardList getHand() {
 		return hand;
 	}
 
@@ -165,11 +165,11 @@ public class Player extends Entity {
 		return quests;
 	}
 	
-	public CardCollection getStartingDeck() {
+	public CardList getStartingDeck() {
 		return startingDeck;
 	}
 
-	public CardCollection getSupremeArchive() {
+	public CardList getSupremeArchive() {
 		return supremeArchive;
 	}
 
