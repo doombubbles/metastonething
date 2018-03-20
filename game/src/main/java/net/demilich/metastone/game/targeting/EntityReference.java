@@ -79,6 +79,7 @@ public class EntityReference implements Serializable {
 		return key;
 	}
 
+
 	@Override
 	public int hashCode() {
 		return new Integer(key).hashCode();

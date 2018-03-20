@@ -1,11 +1,11 @@
 {
-	"name": "Custom Rotation",
+	"name": "New Standard",
 	"sets": [
 		"BASIC",
 		"CLASSIC",
 		"JOURNEY_TO_UNGORO",
 		"FROZEN_THRONE",
 		"KOBOLDS_AND_CATACOMBS",
-		"SANDS_OF_TIME"
+		"WITCHWOOD"
 	]
 }

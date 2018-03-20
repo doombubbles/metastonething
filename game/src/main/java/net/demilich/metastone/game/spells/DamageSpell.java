@@ -8,6 +8,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
@@ -58,7 +59,13 @@ public class DamageSpell extends Spell {
 		} else {
 			damage = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		}
-		
+		/*
+		if (target.getEntityType().equals(EntityType.WEAPON)) {
+			SpellUtils.castChildSpell(context, player, ModifyDurabilitySpell.create(-1 * damage), source, target);
+			return;
+		}
+		*/
+
 		boolean ignoreSpellDamage = desc.getBool(SpellArg.IGNORE_SPELL_DAMAGE);
 		context.getLogic().damage(player, (Actor) target, damage, source, ignoreSpellDamage, desc.contains(SpellArg.EXCESS) ? (EntityReference) desc.get(SpellArg.EXCESS) : null);
 	}

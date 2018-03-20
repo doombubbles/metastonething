@@ -15,6 +15,7 @@
 		},
 		"spell": {
 			"class": "BuffHeroSpell",
+			"targetPlayer": "SELF",
 			"armorBonus": {
 				"class": "PlayerAttributeValueProvider",
 				"playerAttribute": "LAST_MANA_COST"

@@ -72,6 +72,8 @@ public class SpellUtils {
 			return actualValue < targetValue;
 		case LESS_OR_EQUAL:
 			return actualValue <= targetValue;
+		case MOD_2_EQUAL:
+			return actualValue % 2 == targetValue;
 		}
 		return false;
 	}

@@ -1,0 +1,81 @@
+{
+	"name": "Warswords of the Valarjar",
+	"baseManaCost": 4,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 6,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Has Windfury while your hero has taken more damage than you have cards in your deck.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "GameStateChangedTrigger"
+		},
+		"spell": {
+			"class": "ConditionalEffectSpell",
+			"exclusive": true,
+			"spell1": {
+				"class": "RemoveAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "WINDFURY"
+			},
+			"spell2": {
+				"class": "AddAttributeSpell",
+				"target": "FRIENDLY_HERO",
+				"attribute": "WINDFURY"
+			},
+			"condition": {
+				"class": "ComparisonCondition",
+				"value1": {
+					"class": "AlgebraicValueProvider",
+					"operation": "SUBTRACT",
+					"value1": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "MAX_HP"
+					},
+					"value2": {
+						"class": "AttributeValueProvider",
+						"target": "FRIENDLY_HERO",
+						"attribute": "HP"
+					}
+				},
+				"operation": "GREATER",
+				"value2": {
+					"class": "CardCounter",
+					"target": "FRIENDLY_DECK"
+				}
+			}
+		}
+	},
+	"onUnequip": {
+		"class": "RemoveAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "WINDFURY"
+	},
+	"glow": {
+		"class": "ComparisonCondition",
+		"value1": {
+			"class": "AlgebraicValueProvider",
+			"operation": "SUBTRACT",
+			"value1": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "MAX_HP"
+			},
+			"value2": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "HP"
+			}
+		},
+		"operation": "GREATER",
+		"value2": {
+			"class": "CardCounter",
+			"target": "FRIENDLY_DECK"
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

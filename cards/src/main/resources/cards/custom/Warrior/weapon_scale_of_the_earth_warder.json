@@ -1,0 +1,42 @@
+{
+	"name": "Scale of the Earth Warder",
+	"baseManaCost": 10,
+	"type": "WEAPON",
+	"damage": 0,
+	"durability": 12,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Whenever your hero takes damage, this weapon takes it instead. Deathrattle: Destroy all minions.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "PreDamageTrigger",
+			"sourcePlayer": "BOTH",
+			"targetPlayer": "SELF",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ModifyDurabilitySpell",
+					"target": "SELF"
+				},
+				{
+					"class": "ModifyDamageSpell",
+					"operation": "SET",
+					"value": 0
+				}
+			]
+		}
+	},
+	"deathrattle": {
+		"class": "DestroySpell",
+		"target": "ALL_MINIONS"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

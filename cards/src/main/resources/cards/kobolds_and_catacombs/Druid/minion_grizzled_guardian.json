@@ -14,7 +14,7 @@
 		"value": 2,
 		"cardFilter": {
 			"class": "CardFilter",
-			"attribute": "BASE_MANA_COST",
+			"attribute": "ACTUAL_MANA_COST",
 			"operation": "LESS_OR_EQUAL",
 			"cardType": "MINION",
 			"value": 4

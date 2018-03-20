@@ -1,9 +1,10 @@
-Militia Commander
+Glitter Moth
 
-Mana Cost: 4
-Attack: 2
-Health: 5
+Mana Cost: 5
+Attack: 4
+Health: 4
+Tribe: Beast
 Type: Minion
-Rarity: Rare
-Class: Warrior
-Text: Rush. Battlecry: Gain +3 Attack this turn.
+Rarity: Epic
+Class: Priest
+Text: Battlecry: If your deck has only odd-Cost cards, double the Health of your other minions.

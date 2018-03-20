@@ -18,16 +18,12 @@
 			"condition": {
 				"class": "DeckContainsCondition",
 				"cardFilter": {
-					"class": "AlgebraicFilter",
-					"value1": {
-						"class": "AttributeValueProvider",
-						"attribute": "BASE_MANA_COST"
-					},
-					"algebraicOperation": "MODULO",
-					"value2": 2,
-					"operation": "EQUAL",
-					"value": 1
-				}
+					"class": "AttributeFilter",
+					"attribute": "BASE_MANA_COST",
+					"operation": "MOD_2_EQUAL",
+					"value": 0
+				},
+				"invert": true
 			},
 			"spell": {
 				"class": "ConditionalSpell",

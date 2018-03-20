@@ -20,7 +20,7 @@ public class RemoveCardSpell extends Spell {
 		}
 		if (card.getCardReference().getLocation().equals(CardLocation.DECK)) {
 			context.getLogic().removeCardFromDeck(player.getId(), card);
-		} else context.getLogic().removeCard(player.getId(), card);
+		} else context.getLogic().removeCardFromHand(player.getId(), card);
 		
 	}
 

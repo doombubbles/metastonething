@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
@@ -28,11 +30,17 @@ public class RemoveAttributeSpell extends RevertableSpell {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Attribute tag = (Attribute) desc.get(SpellArg.ATTRIBUTE);
 		if (desc.contains(SpellArg.VALUE) && target.hasAttribute(tag)) {
 			int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 			target.modifyAttribute(tag, -1 * value);
+		} else if (desc.contains(SpellArg.NAME) && target.hasAttribute(tag)) {
+			String string = desc.getString(SpellArg.NAME);
+			List<String> strings = (List<String>) target.getAttribute(tag);
+			strings.remove(string);
+			target.setAttribute(tag, strings);
 		} else {
 			context.getLogic().removeAttribute(target, tag);
 		}

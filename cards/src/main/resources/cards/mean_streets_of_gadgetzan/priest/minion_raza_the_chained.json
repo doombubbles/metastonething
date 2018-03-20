@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "PRIEST",
 	"rarity": "LEGENDARY",
-	"description": "Battlecry: If your deck has no duplicates, your Hero Power costs (1) less this game.",
+	"description": "Battlecry: If your deck has no duplicates, your Hero Power costs (1) this game.",
 	"battlecry": {
 		"spell": {
 			"class": "CardCostModifierSpell",
@@ -15,7 +15,7 @@
 				"class": "CardCostModifier",
 				"cardType": "HERO_POWER",
 				"targetPlayer": "SELF",
-				"operation": "SUBTRACT",
+				"operation": "SET",
 				"value": 1
 			}
 		},

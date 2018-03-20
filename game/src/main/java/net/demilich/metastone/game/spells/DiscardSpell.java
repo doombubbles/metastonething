@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -43,7 +44,16 @@ public class DiscardSpell extends Spell {
 		int cardCount = numberOfCards == ALL_CARDS ? discardableCards.getCount() : numberOfCards;
 
 		for (int i = 0; i < cardCount; i++) {
-			Card randomHandCard = discardableCards.getRandom();
+			Card randomHandCard;
+			if (context.getLogic().hasAttribute(player, Attribute.CHOOSE_DISCARD) && context.getActivePlayerId() == player.getId()
+					&& !discardableCards.isEmpty() && player.getHand().getCount() > cardCount
+					&& !player.hasAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION)) {
+				SpellDesc spell = NullSpell.create().addArg(SpellArg.SPELL, NullSpell.create("Discard:"));
+				randomHandCard = SpellUtils.getDiscover(context, player, spell, discardableCards).getCard();
+			} else {
+				randomHandCard = discardableCards.getRandom();
+			}
+
 			if (randomHandCard == null) {
 				return;
 			}

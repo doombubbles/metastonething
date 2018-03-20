@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import net.demilich.metastone.game.entities.minions.*;
 import net.demilich.metastone.game.events.*;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -734,7 +735,7 @@ public class GameLogic implements Cloneable, Serializable {
 			context.fireGameEvent(new DiscardEvent(context, player.getId(), card));
 		}
 
-		removeCard(player.getId(), card);
+		removeCardFromHand(player.getId(), card);
 	}
 
 	public Card drawCard(int playerId, Entity source) {
@@ -809,7 +810,7 @@ public class GameLogic implements Cloneable, Serializable {
 			}
 		}
 		for (Card card : dumb) {
-			removeCard(player.getId(), card);
+			removeCardFromHand(player.getId(), card);
 		}
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
@@ -1040,7 +1041,15 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getBaseManaCost();
-		for (CardCostModifier costModifier : context.getCardCostModifiers()) {
+		List<CardCostModifier> cardModifiers = context.getCardCostModifiers();
+		cardModifiers.sort((c1, c2) -> {
+			if (c1.getOperation().equals(AlgebraicOperation.SET)) {
+				return -1;
+			} else if (c2.getOperation().equals(AlgebraicOperation.SET)) {
+				return 1;
+			} else return 0;
+		});
+		for (CardCostModifier costModifier : cardModifiers) {
 			if (!costModifier.appliesTo(card, context)) {
 				continue;
 			}
@@ -1581,7 +1590,7 @@ public class GameLogic implements Cloneable, Serializable {
 			context.fireGameEvent(new OverloadEvent(context, playerId, card, card.getAttributeValue(Attribute.OVERLOAD)));
 		}
 
-		removeCard(playerId, card);
+		removeCardFromHand(playerId, card);
 
 		if ((card.getCardType().isCardType(CardType.SPELL))) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
@@ -1628,18 +1637,23 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public void processTargetModifiers(Player player, GameAction action) {
 		HeroPower heroPower = player.getHero().getHeroPower();
-		List<String> okPowers = new ArrayList<String>();
-		okPowers.add(CardCatalogue.getCardById("hero_power_steady_shot").getCardId());
-		okPowers.add(CardCatalogue.getCardById("hero_power_ballista_shot").getCardId());
-		okPowers.add(CardCatalogue.getCardById("hero_power_life_tap").getCardId());
-		if (!okPowers.contains(heroPower.getCardId())) {
-			return;
-		}
-		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS)) {
+		final List<String> OK_POWERS = Arrays.asList("hero_power_steady_shot", "hero_power_ballista_shot", "hero_power_life_tap");
+		if (action.getActionType() == ActionType.HERO_POWER && hasAttribute(player, Attribute.HERO_POWER_CAN_TARGET_MINIONS) && OK_POWERS.contains(heroPower.getCardId())) {
 			PlaySpellCardAction spellCardAction = (PlaySpellCardAction) action;
+			switch (((EntityReference) spellCardAction.getSpell().get(SpellArg.TARGET)).getId()) {
+				case -4:
+					spellCardAction.setTargetRequirement(TargetSelection.MINIONS_AND_ENEMY_HERO);
+					break;
+				case -9:
+					spellCardAction.setTargetRequirement(TargetSelection.MINIONS_AND_FRIENDLY_HERO);
+					break;
+			}
 			SpellDesc targetChangedSpell = spellCardAction.getSpell().removeArg(SpellArg.TARGET);
 			spellCardAction.setSpell(targetChangedSpell);
-			spellCardAction.setTargetRequirement(TargetSelection.ENEMY_CHARACTERS);
+		}
+		if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.BATTLECRY)
+				&& hasAttribute(player, Attribute.FRIENDLY_TARGET_ENEMIES) && action.getTargetRequirement() == TargetSelection.FRIENDLY_MINIONS) {
+			action.setTargetRequirement(TargetSelection.MINIONS);
 		}
 	}
 
@@ -1726,7 +1740,7 @@ public class GameLogic implements Cloneable, Serializable {
 		log("Removing attribute {} from {}", attr, entity);
 	}
 
-	public void removeCard(int playerId, Card card) {
+	public void removeCardFromHand(int playerId, Card card) {
 		Player player = context.getPlayer(playerId);
 		log("Card {} has been moved from the HAND to the GRAVEYARD", card);
 		card.setLocation(CardLocation.GRAVEYARD);
@@ -1737,7 +1751,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public void removeAllCards(int playerId) {
 		for (Card card : context.getPlayer(playerId).getHand().toList()) {
-			removeCard(playerId, card);
+			removeCardFromHand(playerId, card);
 		}
 	}
 
@@ -1745,7 +1759,7 @@ public class GameLogic implements Cloneable, Serializable {
 		Player player = context.getPlayer(playerID);
 		CardLocation location = card.getLocation();
 		if (location.equals(CardLocation.HAND)) {
-			removeCard(playerID, card);
+			removeCardFromHand(playerID, card);
 		} else if (location.equals(CardLocation.DECK)) {
 			removeCardFromDeck(playerID, card);
 		}
@@ -1842,7 +1856,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 		log("{} replaces card {} with card {}", player.getName(), oldCard, newCard);
 		hand.replace(oldCard, newCard);
-		removeCard(playerId, oldCard);
+		removeCardFromHand(playerId, oldCard);
 		newCard.setLocation(CardLocation.HAND);
 		context.fireGameEvent(new DrawCardEvent(context, playerId, newCard, null, false));
 	}
@@ -1881,6 +1895,7 @@ public class GameLogic implements Cloneable, Serializable {
 		GameAction battlecryAction = null;
 		battlecry.setSource(actor.getReference());
 		if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
+			processTargetModifiers(player, battlecry);
 			List<Entity> validTargets = targetLogic.getValidTargets(context, player, battlecry);
 			if (validTargets.isEmpty()) {
 				return;

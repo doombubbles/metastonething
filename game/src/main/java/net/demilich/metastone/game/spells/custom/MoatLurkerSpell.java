@@ -20,10 +20,9 @@ public class MoatLurkerSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;
-		TargetPlayer targetPlayer = TargetPlayer.SELF;
-		if (minion.getOwner() != source.getOwner()) {
-			targetPlayer = TargetPlayer.OPPONENT;
-		}
+		player = context.getPlayer(source.getOwner());
+		TargetPlayer targetPlayer = desc.contains(SpellArg.TARGET_PLAYER) ? desc.getTargetPlayer() :
+				minion.getOwner() == source.getOwner() ? TargetPlayer.SELF : TargetPlayer.OPPONENT;
 		source.removeAttribute(Attribute.DEATHRATTLES);
 		SpellDesc deathrattle = SummonSpell.create(targetPlayer, (SummonCard) minion.getSourceCard());
 		SpellDesc addDeathrattleSpell = AddDeathrattleSpell.create(deathrattle);

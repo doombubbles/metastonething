@@ -19,6 +19,11 @@ public class DamageEvent extends GameEvent {
 	public int getDamage() {
 		return damage;
 	}
+
+	@Override
+	public int getValue() {
+		return damage;
+	}
 	
 	@Override
 	public Entity getEventSource() {

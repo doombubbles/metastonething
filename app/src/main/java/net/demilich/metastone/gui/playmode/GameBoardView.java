@@ -163,6 +163,7 @@ public class GameBoardView extends BorderPane {
 		GameContext context = targetOptions.getContext();
 
 		for (final GameAction action : targetOptions.getActionGroup().getActionsInGroup()) {
+
 			Entity target = context.resolveSingleTarget(action.getTargetKey());
 			GameToken token = getToken(target);
 			EventHandler<MouseEvent> clickedHander = new EventHandler<MouseEvent>() {

@@ -28,7 +28,12 @@ public class ModifyDurabilitySpell extends Spell {
 		if (player.getHero().getWeapon() == null) {
 			return;
 		}
-		int durabilityChange = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
+		int durabilityChange;
+		if (!desc.contains(SpellArg.VALUE) && !context.getDamageStack().isEmpty()) {
+			durabilityChange = context.getDamageStack().peek() * -1;
+		} else {
+			durabilityChange = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
+		}
 		context.getLogic().modifyDurability(player.getHero().getWeapon(), durabilityChange);
 	}
 

@@ -1,5 +1,7 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
@@ -39,6 +41,7 @@ public class AddAttributeSpell extends RevertableSpell {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Attribute tag = (Attribute) desc.get(SpellArg.ATTRIBUTE);
 		if (desc.contains(SpellArg.OBJECT)) {
@@ -46,6 +49,11 @@ public class AddAttributeSpell extends RevertableSpell {
 			System.out.println("woot toot");
 			target.setAttribute(tag, object);
 			System.out.println(target.getAttribute(tag).toString());
+		} else if (desc.contains(SpellArg.NAME)) {
+			String string = desc.getString(SpellArg.NAME);
+			List<String> strings = target.hasAttribute(tag) ? (List<String>) target.getAttribute(tag) : new ArrayList<>();
+			strings.add(string);
+			target.setAttribute(tag, strings);
 		} else context.getLogic().applyAttribute(target, tag);
 		super.onCast(context, player, desc, source, target);
 	}

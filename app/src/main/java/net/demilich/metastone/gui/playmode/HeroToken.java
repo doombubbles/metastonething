@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.Attribute;
@@ -55,7 +56,10 @@ public class HeroToken extends GameToken {
 	private Label cardsLabel;
 	@FXML
 	private Label manaLabel;
-	
+
+
+	@FXML
+	private Text windfury;
 	@FXML
 	private Label questLabel;
 
@@ -83,8 +87,8 @@ public class HeroToken extends GameToken {
 	@FXML
 	private Shape glow;
 
-	//@FXML
-	//private Shape elusive;
+	@FXML
+	private ImageView elusive;
 	
 	@FXML
 	private ImageView glow2;
@@ -255,7 +259,9 @@ public class HeroToken extends GameToken {
 			immune.setVisible(hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO, context));
 		} else immune.setVisible(false);
 		divineShield.setVisible(hero.hasAttribute(Attribute.DIVINE_SHIELD));
-		//elusive.setVisible(context.getLogic().hasAttribute(context.getPlayer(hero.getOwner()), Attribute.ELUSIVE_HERO));
+		elusive.setVisible(context.getLogic().hasAttribute(context.getPlayer(hero.getOwner()), Attribute.ELUSIVE_HERO));
+		windfury.setVisible(hero.hasAttribute(Attribute.WINDFURY));
+		windfury.setText("x2");
 	}
 	
 	public boolean hasAttribute(Player player, Attribute attr, GameContext context) {
@@ -275,7 +281,7 @@ public class HeroToken extends GameToken {
 			tooltip.setGraphic(tooltipContent);
 			Tooltip.install(weaponPane, tooltip);
 			deathrattle.setVisible(weapon.hasAttribute(Attribute.DEATHRATTLES));
-			trigger.setVisible(weapon.hasSpellTrigger());
+			trigger.setVisible(weapon.hasProbablyVisibleTrigger());
 			poisonous.setVisible(weapon.hasAttribute(Attribute.POISONOUS));
 			lifesteal.setVisible(weapon.hasAttribute(Attribute.LIFESTEAL));
 		}

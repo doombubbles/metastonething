@@ -12,8 +12,13 @@ import net.demilich.metastone.game.targeting.EntityReference;
 public class NullSpell extends Spell {
 
 	public static SpellDesc create() {
+		return create("");
+	}
+
+	public static SpellDesc create(String name) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(NullSpell.class);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
+		arguments.putIfAbsent(SpellArg.NAME, name);
 		return new SpellDesc(arguments);
 	}
 

@@ -176,7 +176,7 @@ public class ParseUtils {
 				case "CardType":
 					return Enum.valueOf(CardType.class, rest);
 				default:
-					break;
+					return rest;
 			}
 		default:
 			break;

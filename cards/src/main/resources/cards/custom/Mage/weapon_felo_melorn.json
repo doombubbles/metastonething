@@ -6,7 +6,7 @@
     "durability": 3,
     "heroClass": "MAGE",
     "rarity": "LEGENDARY",
-    "description": "During your turn, add a 'Phoenix Flames' to your hand.",
+    "description": "During your turn, add a 'Phoenix's Flames' to your hand.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "TurnStartTrigger",

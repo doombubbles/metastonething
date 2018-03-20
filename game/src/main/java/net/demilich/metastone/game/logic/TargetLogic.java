@@ -153,19 +153,22 @@ public class TargetLogic implements Serializable {
 		Player opponent = context.getOpponent(player);
 		List<Entity> entities = new ArrayList<>();
 		if (targetRequirement == TargetSelection.ENEMY_HERO || targetRequirement == TargetSelection.ENEMY_CHARACTERS
-				|| targetRequirement == TargetSelection.ANY || targetRequirement == TargetSelection.HEROES) {
+				|| targetRequirement == TargetSelection.ANY || targetRequirement == TargetSelection.HEROES || targetRequirement == TargetSelection.MINIONS_AND_ENEMY_HERO) {
 			entities.add(opponent.getHero());
 		}
 		if (targetRequirement == TargetSelection.ENEMY_MINIONS || targetRequirement == TargetSelection.ENEMY_CHARACTERS
-				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
+				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY
+				|| targetRequirement == TargetSelection.MINIONS_AND_ENEMY_HERO || targetRequirement == TargetSelection.MINIONS_AND_FRIENDLY_HERO) {
 			entities.addAll(opponent.getMinions());
 		}
 		if (targetRequirement == TargetSelection.FRIENDLY_HERO || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
-				|| targetRequirement == TargetSelection.ANY || targetRequirement == TargetSelection.HEROES) {
+				|| targetRequirement == TargetSelection.ANY || targetRequirement == TargetSelection.HEROES
+				|| targetRequirement == TargetSelection.MINIONS_AND_FRIENDLY_HERO) {
 			entities.add(player.getHero());
 		}
 		if (targetRequirement == TargetSelection.FRIENDLY_MINIONS || targetRequirement == TargetSelection.FRIENDLY_CHARACTERS
-				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY) {
+				|| targetRequirement == TargetSelection.MINIONS || targetRequirement == TargetSelection.ANY
+				|| targetRequirement == TargetSelection.MINIONS_AND_ENEMY_HERO || targetRequirement == TargetSelection.MINIONS_AND_FRIENDLY_HERO) {
 			entities.addAll(player.getMinions());
 		}
 		List<Entity> destroyedEntities = new ArrayList<Entity>();

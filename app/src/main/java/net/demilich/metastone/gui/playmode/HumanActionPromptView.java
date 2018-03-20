@@ -32,6 +32,7 @@ import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.gui.cards.CardTooltip;
 import net.demilich.metastone.gui.multiplayermode.Client;
@@ -82,7 +83,7 @@ public class HumanActionPromptView extends VBox implements Serializable {
 			break;
 		case DISCOVER:
 			DiscoverAction discover = (DiscoverAction) action;
-			actionString = "DISCOVER " + discover.getSpell().getSpellClass().getSimpleName();
+			actionString = "DISCOVER " + (discover.getSpell().contains(SpellArg.NAME) ? discover.getSpell().getString(SpellArg.NAME) : discover.getSpell().getSpellClass().getSimpleName());
 			break;
 		case REPLACE_HERO:
 			PlayReplaceHeroCardAction raction = (PlayReplaceHeroCardAction) action;
@@ -218,7 +219,6 @@ public class HumanActionPromptView extends VBox implements Serializable {
 	public void setActions(HumanActionOptions options, boolean visible) {
 		getChildren().removeAll(existingButtons);
 		existingButtons.clear();
-
 		Collection<ActionGroup> actionGroups = groupActions(options);
 		for (ActionGroup actionGroup : actionGroups) {
 			if (actionGroup.getPrototype().getActionType().equals(ActionType.BATTLECRY)) {

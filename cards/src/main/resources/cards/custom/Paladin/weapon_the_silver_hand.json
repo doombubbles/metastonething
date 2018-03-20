@@ -1,0 +1,25 @@
+{
+	"name": "The Silver Hand",
+	"baseManaCost": 5,
+	"type": "WEAPON",
+	"damage": 2,
+	"durability": 5,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "All of your minions count as Silver Hand Recruits.",
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "MINIONS_COUNT_AS",
+		"name": "token_silver_hand_recruit"
+	},
+	"onUnequip": {
+		"class": "RemoveAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "MINIONS_COUNT_AS",
+		"name": "token_silver_hand_recruit"
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

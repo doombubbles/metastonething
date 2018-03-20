@@ -6,6 +6,7 @@
     "rarity": "RARE",
     "description": "Deal *1* damage to all minions. If any die, cast this again.",
     "targetSelection": "NONE",
+	"race": "AFFLICTION",
     "spell": {
 		"class": "MetaSpell",
 		"spells": [

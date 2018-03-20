@@ -14,45 +14,38 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "ConditionalSpell",
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"cardType": "HERO_POWER",
+				"targetPlayer": "SELF",
+				"operation": "SET",
+				"value": 1
+			},
+			"cardFilter": {
+				"class": "SpecificCardFilter",
+				"cards": [
+					"hero_power_shapeshift",
+					"hero_power_steady_shot",
+					"hero_power_fireblast",
+					"hero_power_reinforce",
+					"hero_power_lesser_heal",
+					"hero_power_dagger_mastery",
+					"hero_power_totemic_call",
+					"hero_power_life_tap",
+					"hero_power_armor_up"
+				]
+			},
 			"condition": {
 				"class": "DeckContainsCondition",
 				"cardFilter": {
-					"class": "AlgebraicFilter",
-					"value1": {
-						"class": "AttributeValueProvider",
-						"attribute": "BASE_MANA_COST"
-					},
-					"algebraicOperation": "MODULO",
-					"value2": 2,
-					"operation": "EQUAL",
-					"value": 0
-				}
-			},
-			"spell": {
-				"class": "CardCostModifierSpell",
-				"target": "FRIENDLY_PLAYER",
-				"cardCostModifier": {
-					"class": "CardCostModifier",
-					"cardType": "HERO_POWER",
-					"targetPlayer": "SELF",
-					"operation": "SET",
+					"class": "AttributeFilter",
+					"attribute": "BASE_MANA_COST",
+					"operation": "MOD_2_EQUAL",
 					"value": 1
 				},
-				"cardFilter": {
-					"class": "SpecificCardFilter",
-					"cards": [
-						"hero_power_shapeshift",
-						"hero_power_steady_shot",
-						"hero_power_fireblast",
-						"hero_power_reinforce",
-						"hero_power_lesser_heal",
-						"hero_power_dagger_mastery",
-						"hero_power_totemic_call",
-						"hero_power_life_tap",
-						"hero_power_armor_up"
-					]
-				}
+				"invert": true
 			}
 		}
 	},

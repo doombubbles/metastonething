@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.entities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
@@ -128,6 +130,17 @@ public abstract class Actor extends Entity {
 
 	public boolean hasSpellTrigger() {
 		return spellTriggers.size() != 0;
+	}
+
+	public boolean hasProbablyVisibleTrigger() {
+		int i = 0;
+		List<GameEventType> badEventTypes = Arrays.asList(GameEventType.BOARD_CHANGED, GameEventType.ALL, GameEventType.ENRAGE_CHANGED);
+		for (SpellTrigger spellTrigger : spellTriggers) {
+			if (!badEventTypes.contains(spellTrigger.getPrimaryTrigger().interestedIn())) {
+				i++;
+			}
+		}
+		return i > 0;
 	}
 	
 	public int getMaxNumberOfAttacks() {
