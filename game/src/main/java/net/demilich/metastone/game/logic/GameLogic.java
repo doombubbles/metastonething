@@ -1756,7 +1756,6 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void remove(int playerID, Card card) {
-		Player player = context.getPlayer(playerID);
 		CardLocation location = card.getLocation();
 		if (location.equals(CardLocation.HAND)) {
 			removeCardFromHand(playerID, card);

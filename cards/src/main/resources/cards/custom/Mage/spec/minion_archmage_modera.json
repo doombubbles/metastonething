@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 5,
-	"heroClass": "ANY",
+	"heroClass": "MAGE",
 	"rarity": "LEGENDARY",
 	"description": "Whenever you cast a spell, shuffle an Ice Lance into your deck.",
 	"trigger": {

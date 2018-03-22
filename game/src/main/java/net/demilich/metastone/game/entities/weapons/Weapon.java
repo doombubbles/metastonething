@@ -50,7 +50,7 @@ public class Weapon extends Actor {
 	}
 
 	public boolean isBroken() {
-		return !hasAttribute(Attribute.HP);
+		return !hasAttribute(Attribute.HP) || getAttributeValue(Attribute.HP) <= 0;
 	}
 
 	@Override

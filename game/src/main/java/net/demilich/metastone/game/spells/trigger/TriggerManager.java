@@ -76,7 +76,6 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 						continue;
 					}
 				} catch (Exception e) {
-					System.out.println("Well there's your problem");
 					continue;
 				}
 
