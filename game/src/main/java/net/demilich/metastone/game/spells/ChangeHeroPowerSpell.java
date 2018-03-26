@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.events.HeroPowerChangedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,7 @@ public class ChangeHeroPowerSpell extends Spell {
 		HeroPower heroPower = (HeroPower) context.getCardById(newHeroPower);
 		logger.debug("{}'s hero power was changed to {}", hero.getName(), heroPower);
 		hero.setHeroPower(heroPower);
+		context.fireGameEvent(new HeroPowerChangedEvent(context, hero.getOwner(), heroPower));
 	}
 	
 	@Override

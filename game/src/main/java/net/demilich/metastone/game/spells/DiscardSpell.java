@@ -42,11 +42,11 @@ public class DiscardSpell extends Spell {
 		}
 		
 		int cardCount = numberOfCards == ALL_CARDS ? discardableCards.getCount() : numberOfCards;
-
+		int originalHandCount = player.getHand().getCount();
 		for (int i = 0; i < cardCount; i++) {
 			Card randomHandCard;
 			if (context.getLogic().hasAttribute(player, Attribute.CHOOSE_DISCARD) && context.getActivePlayerId() == player.getId()
-					&& !discardableCards.isEmpty() && player.getHand().getCount() > cardCount
+					&& !discardableCards.isEmpty() && originalHandCount > cardCount
 					&& !player.hasAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION)) {
 				SpellDesc spell = NullSpell.create().addArg(SpellArg.SPELL, NullSpell.create("Discard:"));
 				randomHandCard = SpellUtils.getDiscover(context, player, spell, discardableCards).getCard();

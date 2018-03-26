@@ -37,9 +37,9 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	private double alphaBeta(GameContext context, int playerId, GameAction action, int depth) {
 		GameContext simulation = context.clone();
-		int queststhen = simulation.getLogic().getQuests(simulation.getPlayer(playerId)).size();
+		int questsThen = simulation.getLogic().getQuests(simulation.getPlayer(playerId)).size();
 		simulation.getLogic().performGameAction(playerId, action);
-		int questsnow = simulation.getLogic().getQuests(simulation.getPlayer(playerId)).size();
+		int questsNow = simulation.getLogic().getQuests(simulation.getPlayer(playerId)).size();
 		if (depth == 0 || simulation.getActivePlayerId() != playerId || simulation.gameDecided()) {
 			return heuristic.getScore(simulation, playerId);
 		}
@@ -54,7 +54,7 @@ public class GameStateValueBehaviour extends Behaviour {
 				break;
 			}
 		}
-		if (questsnow > queststhen) {
+		if (questsNow > questsThen) {
 			return 99999;
 		}
 		return score;
@@ -93,6 +93,7 @@ public class GameStateValueBehaviour extends Behaviour {
 
 	@Override
 	public GameAction requestAction(GameContext context, Player player, List<GameAction> validActions) {
+		Player opponent = context.getOpponent(player);
 		if (validActions.size() == 1) {
 			return validActions.get(0);
 		}
@@ -109,7 +110,14 @@ public class GameStateValueBehaviour extends Behaviour {
 		double bestScore = Double.NEGATIVE_INFINITY;
 
 		for (GameAction gameAction : validActions) {
-			double score = alphaBeta(context, player.getId(), gameAction, depth);
+			double score = 0;
+			if (!opponent.getSecrets().isEmpty()) {
+				try {
+					score = alphaBeta(context.randomizePotentialSecrets(opponent), player.getId(), gameAction, depth);
+				} catch (Exception e) {
+					score = alphaBeta(context, player.getId(), gameAction, depth);
+				}
+			} else score = alphaBeta(context, player.getId(), gameAction, depth);
 			if (score > bestScore) {
 				bestAction = gameAction;
 				bestScore = score;

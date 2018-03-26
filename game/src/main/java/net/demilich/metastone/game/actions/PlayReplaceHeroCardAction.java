@@ -12,6 +12,7 @@ import net.demilich.metastone.game.cards.ReplaceHeroCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
+import net.demilich.metastone.game.events.HeroPowerChangedEvent;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -32,7 +33,9 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 		HeroCard heroCard = (HeroCard) context.getCardById(replaceHeroCard.hero).clone();
 		heroCard.setAttribute(Attribute.HP, context.getPlayer(playerId).getHero().getHp());
 		heroCard.setAttribute(Attribute.ARMOR, player.getHero().getArmor() + replaceHeroCard.armor);
-		context.getLogic().changeHero(player, heroCard.createHero());
+		Hero hero = heroCard.createHero();
+		context.getLogic().changeHero(player, hero);
+		context.fireGameEvent(new HeroPowerChangedEvent(context, playerId, hero.getHeroPower()));
 		
 		Actor actor = (Actor) player.getHero();
 		

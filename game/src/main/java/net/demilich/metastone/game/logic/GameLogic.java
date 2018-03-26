@@ -1043,12 +1043,18 @@ public class GameLogic implements Cloneable, Serializable {
 		int manaCost = card.getBaseManaCost();
 		List<CardCostModifier> cardModifiers = context.getCardCostModifiers();
 		cardModifiers.sort((c1, c2) -> {
-			if (c1.getOperation().equals(AlgebraicOperation.SET)) {
-				return -1;
-			} else if (c2.getOperation().equals(AlgebraicOperation.SET)) {
-				return 1;
-			} else return 0;
+			if (c1.hasOperation()) {
+				if (c1.getOperation().equals(AlgebraicOperation.SET)) {
+					return -1;
+				}
+			} else if (c2.hasOperation()) {
+				if (c2.getOperation().equals(AlgebraicOperation.SET)) {
+					return 1;
+				}
+			}
+			return 0;
 		});
+
 		for (CardCostModifier costModifier : cardModifiers) {
 			if (!costModifier.appliesTo(card, context)) {
 				continue;

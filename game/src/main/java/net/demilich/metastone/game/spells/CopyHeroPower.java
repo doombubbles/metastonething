@@ -3,6 +3,7 @@ package net.demilich.metastone.game.spells;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.events.HeroPowerChangedEvent;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class CopyHeroPower extends ChangeHeroPowerSpell {

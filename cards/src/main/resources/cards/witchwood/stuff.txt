@@ -1,10 +1,9 @@
-Glitter Moth
+Face Collector
 
-Mana Cost: 5
-Attack: 4
-Health: 4
-Tribe: Beast
+Mana Cost: 3
+Attack: 2
+Health: 2
 Type: Minion
-Rarity: Epic
-Class: Priest
-Text: Battlecry: If your deck has only odd-Cost cards, double the Health of your other minions.
+Rarity: Legendary
+Class: Rogue
+Text: Echo. Battlecry: Add a random Legendary minion to your hand.

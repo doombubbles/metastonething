@@ -1,12 +1,11 @@
 package net.demilich.metastone.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.EntityType;
+import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -545,6 +544,65 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 	public void printCurrentTriggers() {
 		logger.info("Active spelltriggers:");
 		triggerManager.printCurrentTriggers();
+	}
+
+	public GameContext noSecrets(Player player) {
+		GameContext simulation = clone();
+		simulation.getLogic().removeSecrets(player);
+		return simulation;
+	}
+
+	public GameContext randomizePotentialSecrets(Player player) {
+		HashSet<String> secrets = player.getSecrets();
+		int numberSecrets = secrets.size();
+		List<GameContext> potentialTimelines = new ArrayList<>();
+		HashSet<HashSet<String>> potentialSecretSets = new HashSet<>();
+		List<List<String>> potentialSecretAlternatives = new ArrayList<>();
+		for (String secret : secrets) {
+			HeroClass heroClass = getCardById(secret).getHeroClass();
+			List<String> alternatives = new ArrayList<>();
+			CardList secretList = CardCatalogue.query(deckFormat, CardType.SPELL, null, heroClass, Attribute.SECRET);
+			for (Card card : secretList) {
+				if (player.getStatistics().getCardsPlayed().containsKey(card.getCardId())) {
+					if (player.getStatistics().getCardsPlayed().get(card.getCardId()).containsValue(1)) {
+						alternatives.add(card.getCardId());
+					}
+				} else alternatives.add(card.getCardId());
+			}
+			potentialSecretAlternatives.add(alternatives);
+		}
+		int[] indexArray = new int[numberSecrets];
+		boolean stillGoing = true;
+		while (stillGoing) {
+			HashSet<String> secretSet = new HashSet<>();
+			for (int i = 0; i < numberSecrets; i++) {
+				secretSet.add(potentialSecretAlternatives.get(i).get(indexArray[i]));
+			}
+			if (secretSet.size() == numberSecrets) {
+				potentialSecretSets.add(secretSet);
+			}
+			indexArray[numberSecrets - 1]++;
+			for (int meta = numberSecrets - 1; meta >= 0; meta--) {
+				if (indexArray[meta] >= potentialSecretAlternatives.get(meta).size()) {
+					indexArray[meta] = 0;
+					try {
+						indexArray[meta - 1]++;
+					} catch (Exception e) {
+						stillGoing = false;
+					}
+				}
+			}
+		}
+
+		for (HashSet<String> potentialSecretSet : potentialSecretSets) {
+			GameContext simulation = clone();
+			simulation.getLogic().removeSecrets(simulation.getPlayer(player.getId()));
+			for (String s : potentialSecretSet) {
+				simulation.getPlayer(player.getId()).getSecrets().add(s);
+			}
+			potentialTimelines.add(simulation);
+		}
+		return potentialTimelines.get((int) (Math.random() * potentialTimelines.size()));
 	}
 	
 	public void removeTrigger(IGameEventListener trigger) {

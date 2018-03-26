@@ -21,21 +21,11 @@
 				"cardType": "HERO_POWER",
 				"targetPlayer": "SELF",
 				"operation": "SET",
-				"value": 1
-			},
-			"cardFilter": {
-				"class": "SpecificCardFilter",
-				"cards": [
-					"hero_power_shapeshift",
-					"hero_power_steady_shot",
-					"hero_power_fireblast",
-					"hero_power_reinforce",
-					"hero_power_lesser_heal",
-					"hero_power_dagger_mastery",
-					"hero_power_totemic_call",
-					"hero_power_life_tap",
-					"hero_power_armor_up"
-				]
+				"value": 1,
+				"expirationTrigger": {
+					"class": "HeroPowerChangedTrigger",
+					"targetPlayer": "SELF"
+				}
 			},
 			"condition": {
 				"class": "DeckContainsCondition",

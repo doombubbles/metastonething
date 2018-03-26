@@ -1,12 +1,12 @@
 {
-	"name": "N'Zoth, the Corruptor",
-	"baseManaCost": 10,
-	"type": "MINION",
-	"baseAttack": 5,
-	"baseHp": 7,
-	"heroClass": "ANY",
-	"rarity": "LEGENDARY",
-	"description": "Battlecry: Summon your friendly Deathrattle minions that died this game.",
+    "name": "Titanstrike",
+    "baseManaCost": 10,
+    "type": "WEAPON",
+    "damage": 5,
+    "durability": 3,
+    "heroClass": "HUNTER",
+    "rarity": "LEGENDARY",
+    "description": "Battlecry: Summon your Animal Companions that died this game.",
 	"battlecry": {
 		"spell": {
 			"class": "ResurrectSpell",
@@ -33,7 +33,7 @@
 	"attributes": {
 		"BATTLECRY": true
 	},
-	"collectible": true,
-	"set": "THE_OLD_GODS",
-	"fileFormatVersion": 1
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
 }

@@ -88,6 +88,10 @@ public class CardCatalogue {
 		return query(deckFormat, cardType, rarity, heroClass, (Attribute) null);
 	}
 
+	public static CardList query(DeckFormat deckFormat, CardType cardType, HeroClass heroClass) {
+		return query(deckFormat, cardType, null, heroClass, (Attribute) null);
+	}
+
 	public static CardList query(DeckFormat deckFormat, CardType cardType, Rarity rarity, HeroClass heroClass, Attribute tag) {
 		CardList result = new CardList();
 		for (Card card : cards) {

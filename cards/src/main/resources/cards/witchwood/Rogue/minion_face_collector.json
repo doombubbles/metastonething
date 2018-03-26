@@ -1,0 +1,39 @@
+{
+    "name": "Face Collector",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "ROGUE",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Echo. Battlecry: Add a random Legendary minion to your hand.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ReceiveCardSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"rarity": "LEGENDARY",
+						"cardType": "MINION"
+					}
+				},
+				{
+					"class": "ReceiveCardSpell",
+					"card": "minion_face_collector",
+					"attribute": "ONE_TURN"
+				}
+			]
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

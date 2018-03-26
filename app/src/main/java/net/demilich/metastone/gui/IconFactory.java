@@ -48,91 +48,6 @@ public class IconFactory {
 		}
 		return new Image(iconPath);
 	}
-	/*
-	public static String getHeroIconUrl(HeroClass heroClass, int maxHP) {
-		String iconPath = RESOURCE_PATH + "/img/heroes/";
-		if (maxHP == 15) {
-			return iconPath + "jaraxxus" + ".png";
-		}
-		else if (maxHP == 8) {
-			return iconPath + "ragnaros" + ".png";
-		}
-		switch (heroClass) {
-		case DRUID:
-			iconPath += "malfurion";
-			break;
-		case HUNTER:
-			iconPath += "rexxar";
-			break;
-		case MAGE:
-			iconPath += "jaina";
-			break;
-		case PALADIN:
-			iconPath += "uther";
-			break;
-		case PRIEST:
-			iconPath += "anduin";
-			break;
-		case ROGUE:
-			iconPath += "valeera";
-			break;
-		case SHAMAN:
-			iconPath += "thrall";
-			break;
-		case WARLOCK:
-			iconPath += "guldan";
-			break;
-		case WARRIOR:
-			iconPath += "garrosh";
-			break;
-		default:
-		case ANY:
-			iconPath += "unknown";
-			break;
-
-		}
-		return iconPath + ".png";
-	}
-	
-	public static String getHeroPowerIconUrl(HeroPower heroPower) {
-		String iconPath = RESOURCE_PATH + "/img/powers/";
-		switch (heroPower.getHeroClass()) {
-		case DRUID:
-			iconPath += "shapeshift";
-			break;
-		case HUNTER:
-			iconPath += "steady_shot";
-			break;
-		case MAGE:
-			iconPath += "fireblast";
-			break;
-		case PALADIN:
-			iconPath += "reinforce";
-			break;
-		case PRIEST:
-			iconPath += "lesser_heal";
-			break;
-		case ROGUE:
-			iconPath += "dagger_mastery";
-			break;
-		case SHAMAN:
-			iconPath += "totemic_call";
-			break;
-		case WARLOCK:
-			iconPath += "life_tap";
-			break;
-		case WARRIOR:
-			iconPath += "armor_up";
-			break;
-		default:
-			iconPath += "unknown";
-			break;
-
-		}
-		iconPath += ".png";
-		return iconPath;
-	}
-	*/
 	
 	public static String getHeroIconUrl(Card heroCard) {
 		String iconPath = RESOURCE_PATH + "/img/heroes/";
@@ -143,21 +58,14 @@ public class IconFactory {
 			}
 			hero = heroCard.getCardId().replace("hero_", "");
 		} else hero = "unknown";
+
+		try {
+			new Image(iconPath + hero + ".png");
+		} catch (Exception e) {
+			hero = "unknown";
+		}
 		
-		/*
-		hero.replace("_druid", "");
-		hero.replace("_shaman", "");
-		hero.replace("_hunter", "");
-		hero.replace("_mage", "");
-		hero.replace("_paladin", "");
-		hero.replace("_warlock", "");
-		hero.replace("_rogue", "");
-		hero.replace("_warrior", "");
-		hero.replace("_priest", "");
-		*/
-		iconPath += hero;
-		
-		return iconPath + ".png";
+		return iconPath + hero + ".png";
 	}
 	
 	public static String getHeroPowerIconUrl(HeroPower heroPower) {
@@ -166,13 +74,15 @@ public class IconFactory {
 			iconPath = RESOURCE_PATH + "/img/powers/custom/";
 		}
 		
-		
 		String power = heroPower.getCardId().replace("hero_power_", "");
-		
-		iconPath += power;
-		
-		iconPath += ".png";
-		return iconPath;
+
+		try {
+			new Image(iconPath + power + ".png");
+		} catch (Exception e) {
+			power = "unkown";
+		}
+
+		return iconPath + power + ".png";
 	}
 	
 	

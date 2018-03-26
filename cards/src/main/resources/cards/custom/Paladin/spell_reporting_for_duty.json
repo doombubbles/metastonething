@@ -4,8 +4,8 @@
     "type": "SPELL",
     "heroClass": "PALADIN",
     "rarity": "EPIC",
-    "description": "Summon a 1/1 Silver Hand Recruit. Repeatable this turn.",
-    "targetSelection": "FRIENDLY_MINIONS",
+    "description": "Echo. Summon a 1/1 Silver Hand Recruit.",
+    "targetSelection": "NONE",
     "spell": {
         "class": "MetaSpell",
 		"spells": [

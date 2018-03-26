@@ -6,7 +6,7 @@
     "baseHp": 6,
     "heroClass": "WARLOCK",
     "rarity": "LEGENDARY",
-    "race": "DEMON",
+    "race": "NONE",
     "description": "Lifesteal. Has +1 Attack for each card you've discarded this game.",
 	"triggers": [
 		{
