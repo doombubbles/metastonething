@@ -1,0 +1,21 @@
+{
+	"name": "Vivid Nightmare",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "EPIC",
+	"description": "Choose a friendly minion. Summon a copy of it with 1 Health remaining.",
+	"targetSelection": "FRIENDLY_MINIONS",
+	"race": "SHADOW",
+	"spell": {
+		"class": "CloneMinionSpell",
+		"spell": {
+			"class": "SetAttributeSpell",
+			"attribute": "HP",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

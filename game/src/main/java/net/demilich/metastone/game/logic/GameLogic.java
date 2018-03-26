@@ -1597,6 +1597,11 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		removeCardFromHand(playerId, card);
+		if (card.hasAttribute(Attribute.ECHO)) {
+			Card echoCard = context.getCardById(card.getCardId());
+			echoCard.setAttribute(Attribute.ONE_TURN);
+			receiveCard(playerId, echoCard);
+		}
 
 		if ((card.getCardType().isCardType(CardType.SPELL))) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);

@@ -6,6 +6,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 public class CloneMinionSpell extends Spell {
@@ -18,7 +19,10 @@ public class CloneMinionSpell extends Spell {
 		Minion template = (Minion) target;
 		Minion clone = template.clone();
 
-		context.getLogic().summon(player.getId(), clone);
+		if (context.getLogic().summon(player.getId(), clone) && desc.contains(SpellArg.SPELL)) {
+			SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
+			SpellUtils.castChildSpell(context, player, spell, source, clone);
+		}
 	}
 
 }

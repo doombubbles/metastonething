@@ -7,20 +7,13 @@
     "description": "Echo. Deal 1 damage to all minions.",
     "targetSelection": "",
     "spell": {
-        "class": "MetaSpell",
-		"spells": [
-			{
-				"class": "DamageSpell",
-				"target": "ALL_MINIONS",
-				"value": 1
-			},
-			{
-				"class": "ReceiveCardSpell",
-				"card": "spell_warpath",
-				"attribute": "ONE_TURN"
-			}
-		]
+        "class": "DamageSpell",
+		"target": "ALL_MINIONS",
+		"value": 1
     },
+	"attributes": {
+		"ECHO": true
+	},
     "collectible": true,
     "set": "WITCHWOOD",
     "fileFormatVersion": 1

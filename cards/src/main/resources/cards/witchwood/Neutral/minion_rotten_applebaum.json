@@ -1,0 +1,22 @@
+{
+	"name": "Rotten Applebaum",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Taunt. Deathrattle: Restore 4 Health to your hero.",
+	"deathrattle": {
+		"class": "HealSpell",
+		"target": "FRIENDLY_HERO",
+		"value": 4
+	},
+	"attributes": {
+		"DEATHRATTLES": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

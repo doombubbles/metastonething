@@ -1,0 +1,28 @@
+{
+	"name": "Witch's Apprentice",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 1,
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Taunt. Battlecry: Add a random Shaman spell to your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "SHAMAN"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

@@ -82,7 +82,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.CHOOSE_DISCARD, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.FRIENDLY_TARGET_ENEMIES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MINIONS_COUNT_AS, jsonData, map, ParseValueType.STRING_ARRAY);
-
+		parseAttribute(Attribute.ECHO, jsonData, map, ParseValueType.BOOLEAN);]
 		return map;
 	}
 

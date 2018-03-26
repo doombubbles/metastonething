@@ -1,0 +1,27 @@
+{
+	"name": "Rebuke",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "COMMON",
+	"description": "Enemy spells cost (5) more next turn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "CardCostModifierSpell",
+		"target": "FRIENDLY_PLAYER",
+		"cardCostModifier": {
+			"class": "CardCostModifier",
+			"cardType": "SPELL",
+			"targetPlayer": "OPPONENT",
+			"operation": "ADD",
+			"value": 5,
+			"expirationTrigger": {
+				"class": "TurnEndTrigger",
+				"targetPlayer": "OPPONENT"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}
