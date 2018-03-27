@@ -22,7 +22,6 @@ public class CastRepeatedlySpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		
 		int iterations = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		Condition condition = (Condition) desc.get(SpellArg.CONDITION);

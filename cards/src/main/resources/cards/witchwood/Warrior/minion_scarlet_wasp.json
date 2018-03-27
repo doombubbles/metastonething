@@ -1,0 +1,27 @@
+{
+	"name": "Scarlet Wasp",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"race": "BEAST",
+	"description": "Rush. Has +3 Attack while damaged.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "EnrageChangedTrigger"
+		},
+		"spell": {
+			"class": "EnrageSpell",
+			"target": "SELF"
+		}
+	},
+	"attributes": {
+		"RUSH": true,
+		"ENRAGED_ATTACK": 3
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

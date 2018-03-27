@@ -1,9 +1,9 @@
-Face Collector
+Houndmaster Shaw
 
-Mana Cost: 3
-Attack: 2
-Health: 2
+Mana Cost: 4
+Attack: 3
+Health: 6
 Type: Minion
 Rarity: Legendary
-Class: Rogue
-Text: Echo. Battlecry: Add a random Legendary minion to your hand.
+Class: Hunter
+Text: Your other minions have Rush.

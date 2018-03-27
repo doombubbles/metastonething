@@ -1165,7 +1165,7 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	private void handleEnrage(Actor entity) {
-		if (!entity.hasAttribute(Attribute.ENRAGABLE)) {
+		if (!(entity.hasAttribute(Attribute.ENRAGABLE) || entity.hasAttribute(Attribute.ENRAGED_ATTACK))) {
 			return;
 		}
 		boolean enraged = entity.getHp() < entity.getMaxHp();
