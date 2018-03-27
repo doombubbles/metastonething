@@ -6,15 +6,18 @@ import net.demilich.metastone.game.actions.HeroPowerAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
+import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 
 public class HeroPower extends SpellCard {
 
 	private int used;
+	private TriggerDesc trigger;
 
 	public HeroPower(HeroPowerCardDesc desc) {
 		super(desc);
 		setLocation(CardLocation.HERO_POWER);
+		this.trigger = desc.trigger;
 	}
 
 	public int hasBeenUsed() {
@@ -23,6 +26,14 @@ public class HeroPower extends SpellCard {
 
 	public void markUsed() {
 		this.used++;
+	}
+
+	public boolean hasTrigger() {
+		return trigger != null;
+	}
+
+	public TriggerDesc getTrigger() {
+		return trigger;
 	}
 
 	public void onWillUse(GameContext context, Player player) {

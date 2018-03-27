@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.spells.Spell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -93,6 +95,7 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 				trigger.delayTimeDown();
 			}
 			if (trigger.revertInterestedIn(event.getEventType())) {
+				System.out.println("Bye bye trigger");
 				trigger.expire();
 			}
 			if (trigger.isExpired()) {
@@ -112,7 +115,12 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 			if (trigger.canFireCondition(event) && triggers.contains(trigger)) {
 				trigger.countDown(event);
 				if (!trigger.hasCounter()) {
-					trigger.onGameEvent(event);
+					if (trigger instanceof SpellTrigger) {
+						SpellTrigger spellTrigger = (SpellTrigger) trigger;
+						if (!(spellTrigger.heroPower && event.getGameContext().getLogic().attributeExists(Attribute.KRYPTONITE))) {
+							trigger.onGameEvent(event);
+						}
+					} else trigger.onGameEvent(event);
 				}
 			}
 

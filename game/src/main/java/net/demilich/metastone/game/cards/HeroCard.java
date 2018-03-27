@@ -2,6 +2,7 @@ package net.demilich.metastone.game.cards;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import net.demilich.metastone.game.Attribute;
@@ -9,6 +10,12 @@ import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
+import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.spells.trigger.CardDrawnTrigger;
+import net.demilich.metastone.game.spells.trigger.HeroPowerChangedTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class HeroCard extends Card {
 
@@ -31,7 +38,7 @@ public class HeroCard extends Card {
 				hero.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}
-		
+		hero.getSpellTriggers().forEach(trigger -> System.out.println(trigger.heroPower));
 		if (desc.aura != null) {
 			hero.addSpellTrigger(desc.aura.create());
 			hero.setAttribute(Attribute.AURA, true);

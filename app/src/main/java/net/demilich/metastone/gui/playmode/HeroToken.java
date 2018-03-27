@@ -202,7 +202,17 @@ public class HeroToken extends GameToken {
 	}
 
 	private void updateHeroPower(Hero hero) {
-		Image heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
+		Image heroPowerImage;
+		boolean nope = false;
+		if (options != null) {
+			GameContext context = options.getContext();
+			Player player = context.getPlayer(hero.getOwner());
+			if (!context.getLogic().hasAutoHeroPower(hero.getOwner()) && !context.getLogic().canPlayCard(hero.getOwner(), hero.getHeroPower().getCardReference(), true)) {
+				heroPowerImage = new Image(IconFactory.getImageUrl("powers/nope.png"));
+				nope = true;
+			} else heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
+		} else heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower()));
+		heroPowerAnchor.setVisible(hero.getHeroPower().getBaseManaCost() != 0 && !nope);
 		heroPowerIcon.setImage(heroPowerImage);
 		Card card = CardCatalogue.getCardById(hero.getHeroPower().getCardId());
 		Tooltip tooltip = new Tooltip();
@@ -215,7 +225,6 @@ public class HeroToken extends GameToken {
 	}
 
 	public void updateHeroPowerCost(GameContext context, Player player) {
-		heroPowerAnchor.setVisible(player.getHero().getHeroPower().getBaseManaCost() != 0);
 		setScoreValueLowerIsBetter(heroPowerAnchor, context.getLogic().getModifiedManaCost(player, player.getHero().getHeroPower()), player.getHero().getHeroPower().getBaseManaCost());
 		
 	}

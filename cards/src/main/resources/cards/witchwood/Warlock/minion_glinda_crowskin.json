@@ -1,28 +1,25 @@
 {
-	"name": "Black Lotus",
-	"baseManaCost": 2,
+	"name": "Glinda Crowskin",
+	"baseManaCost": 6,
 	"type": "MINION",
-	"baseAttack": 1,
-	"baseHp": 2,
-	"heroClass": "ROGUE",
-	"rarity": "EPIC",
-	"description": "Your Razorpetals are Poisonous",
+	"baseAttack": 3,
+	"baseHp": 7,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Minions in your hand have Echo.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "SpellCastedTrigger",
-			"sourcePlayer": "SELF",
-			"queueCondition": {
-				"class": "CardPropertyCondition",
-				"cardId": "spell_razorpetal"
-			}
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"cardType": "MINION"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",
 			"target": "EVENT_CARD",
-			"attribute": "POISONOUS"
+			"attribute": "ECHO"
 		}
 	},
 	"collectible": true,
-	"set": "CUSTOm",
+	"set": "WITCHWOOD",
 	"fileFormatVersion": 1
 }

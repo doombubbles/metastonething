@@ -10,64 +10,8 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "AddSpellTriggerSpell",
-					"target": "FRIENDLY_HERO",
-					"trigger": {
-						"eventTrigger": {
-							"class": "BoardChangedTrigger"
-						},
-						"spell": {
-							"class": "ConditionalSpell",
-							"spell": {
-								"class": "SetAttributeSpell",
-								"target": "ENEMY_HERO",
-								"attribute": "HP",
-								"value": 0
-							},
-							"condition": {
-								"class": "AndCondition",
-								"conditions": [
-									{
-										"class": "MinionOnBoardCondition",
-										"cardFilter": {
-											"class": "SpecificCardFilter",
-											"cardId": "token_mograine"
-										}
-									},
-									{
-										"class": "MinionOnBoardCondition",
-										"cardFilter": {
-											"class": "SpecificCardFilter",
-											"cardId": "token_nazgrim"
-										}
-									},
-									{
-										"class": "MinionOnBoardCondition",
-										"cardFilter": {
-											"class": "SpecificCardFilter",
-											"cardId": "token_trollbane"
-										}
-									},
-									{
-										"class": "MinionOnBoardCondition",
-										"cardFilter": {
-											"class": "SpecificCardFilter",
-											"cardId": "token_whitemane"
-										}
-									}
-								]
-							}
-						}
-					}
-				},
-				{
-					"class": "EquipWeaponSpell",
-					"card": "weapon_grave_vengeance"
-				}
-			]
+			"class": "EquipWeaponSpell",
+			"card": "weapon_grave_vengeance"
 		}
 	},
 	"attributes": {

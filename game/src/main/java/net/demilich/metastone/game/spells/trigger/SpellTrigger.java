@@ -25,6 +25,8 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 	private int turnDelay;
 	private GameEventTrigger revertTrigger;
 
+	public boolean heroPower;
+
 	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, int turnDelay, boolean oneTime, GameEventTrigger revertTrigger) {
 		this.primaryTrigger = primaryTrigger;
 		this.secondaryTrigger = secondaryTrigger;
@@ -33,6 +35,7 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		this.turnDelay = turnDelay;
 		this.oneTime = oneTime;
 		this.revertTrigger = revertTrigger;
+		this.heroPower = false;
 	}
 	
 	public SpellTrigger(GameEventTrigger primaryTrigger, GameEventTrigger secondaryTrigger, SpellDesc spell, boolean oneTurn, boolean oneTime) {
@@ -79,8 +82,12 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		return primaryTrigger.getOwner();
 	}
 
-	protected SpellDesc getSpell() {
+	public SpellDesc getSpell() {
 		return spell;
+	}
+
+	public void setSpell(SpellDesc spell) {
+		this.spell = spell;
 	}
 
 	@Override

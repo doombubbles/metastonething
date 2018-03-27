@@ -34,8 +34,8 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 		heroCard.setAttribute(Attribute.HP, context.getPlayer(playerId).getHero().getHp());
 		heroCard.setAttribute(Attribute.ARMOR, player.getHero().getArmor() + replaceHeroCard.armor);
 		Hero hero = heroCard.createHero();
-		context.getLogic().changeHero(player, hero);
 		context.fireGameEvent(new HeroPowerChangedEvent(context, playerId, hero.getHeroPower()));
+		context.getLogic().changeHero(player, hero);
 		
 		Actor actor = (Actor) player.getHero();
 		

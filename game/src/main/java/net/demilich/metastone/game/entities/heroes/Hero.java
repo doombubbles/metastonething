@@ -9,6 +9,15 @@ import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
+import net.demilich.metastone.game.spells.TargetPlayer;
+import net.demilich.metastone.game.spells.desc.SpellArg;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.AndCondition;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
+import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
+import net.demilich.metastone.game.spells.trigger.HeroPowerChangedTrigger;
+import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
 public class Hero extends Actor {
 
@@ -93,6 +102,15 @@ public class Hero extends Actor {
 	}
 
 	public void setHeroPower(HeroPower heroPower) {
+		if (heroPower.hasTrigger()) {
+			SpellTrigger trigger = heroPower.getTrigger().create();
+			Map<EventTriggerArg, Object> eventTriggerMap = EventTriggerDesc.build(HeroPowerChangedTrigger.class);
+			eventTriggerMap.put(EventTriggerArg.TARGET_PLAYER, TargetPlayer.SELF);
+			trigger.addRevertTrigger(new EventTriggerDesc(eventTriggerMap).create());
+			trigger.heroPower = true;
+			addSpellTrigger(trigger);
+			System.out.println("Triggered!");
+		}
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());
 	}

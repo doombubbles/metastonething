@@ -1,24 +1,30 @@
 {
-	"name": "Transmute Spirit",
-	"baseManaCost": 2,
+	"name": "Bewitch",
+	"baseManaCost": 0,
 	"type": "HERO_POWER",
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
-	"description": "Transform a friendly minion into a random one that costs (1) more.",
-	"targetSelection": "FRIENDLY_MINIONS",
+	"description": "Passive. Whenever you play a minion, add a random Shaman spell to your hand.",
+	"targetSelection": "NONE",
 	"spell": {
-		"class": "TransformToRandomMinionSpell",
-		"cardFilter": {
-			"class": "CardFilter",
-			"attribute": "BASE_MANA_COST",
-			"value": {
-				"class": "AttributeValueProvider",
-				"target": "SPELL_TARGET",
-				"attribute": "BASE_MANA_COST",
-				"offset": 1
-			},
-			"operation": "EQUAL"
+		"class": "NullSpell"
+	},
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionPlayedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "SHAMAN"
+			}
 		}
+	},
+	"condition": {
+		"class": "NeverCondition"
 	},
 	"collectible": false,
 	"set": "FROZEN_THRONE",

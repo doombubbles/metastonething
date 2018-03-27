@@ -214,33 +214,39 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public boolean canPlayCard(int playerId, CardReference cardReference) {
+		return canPlayCard(playerId, cardReference, false);
+	}
+
+	public boolean canPlayCard(int playerId, CardReference cardReference, boolean ignoreMana) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
 		List<CardType> cardTypes = new ArrayList<>();
-		if (hasAttribute(player, Attribute.CARD_TYPE_COSTS_HEALTH)) {
-			List<Object> results = getAttributes(player, Attribute.CARD_TYPE_COSTS_HEALTH);
-			for (Object object : results) {
-				CardType cardType = (CardType) object;
-				cardTypes.add(cardType);
+		if (!ignoreMana) {
+			if (hasAttribute(player, Attribute.CARD_TYPE_COSTS_HEALTH)) {
+				List<Object> results = getAttributes(player, Attribute.CARD_TYPE_COSTS_HEALTH);
+				for (Object object : results) {
+					CardType cardType = (CardType) object;
+					cardTypes.add(cardType);
+				}
+				if (cardTypes.contains(card.getCardType()) && player.getHero().getEffectiveHp() < manaCost && !hasAttribute(player, Attribute.IMMUNE_HERO) && !player.hasAttribute(Attribute.IMMUNE)) {
+					return false;
+				}
 			}
-			if (cardTypes.contains(card.getCardType()) && player.getHero().getEffectiveHp() < manaCost && !hasAttribute(player, Attribute.IMMUNE_HERO) && !player.hasAttribute(Attribute.IMMUNE)) {
+			if (card.hasAttribute(Attribute.COSTS_HEALTH) && player.getHero().getEffectiveHp() < manaCost) {
 				return false;
 			}
-		}
-		if (card.hasAttribute(Attribute.COSTS_HEALTH) && player.getHero().getEffectiveHp() < manaCost) {
-			return false; 
-		}
-		else if (card.getCardType().isCardType(CardType.MINION)
-				&& (card.getAttribute(Attribute.RACE) == Race.MURLOC || card.getAttribute(Attribute.RACE) == Race.ALL)
-				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)
-				&& player.getHero().getEffectiveHp() < manaCost) {
-			return false;
-		} else if (player.getMana() < manaCost && manaCost != 0
-				&& !(cardTypes.contains(card.getCardType()))
-				&& !(((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))
-				&& !card.hasAttribute(Attribute.COSTS_HEALTH)) {
-			return false;
+			else if (card.getCardType().isCardType(CardType.MINION)
+					&& (card.getAttribute(Attribute.RACE) == Race.MURLOC || card.getAttribute(Attribute.RACE) == Race.ALL)
+					&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)
+					&& player.getHero().getEffectiveHp() < manaCost) {
+				return false;
+			} else if (player.getMana() < manaCost && manaCost != 0
+					&& !(cardTypes.contains(card.getCardType()))
+					&& !(((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))
+					&& !card.hasAttribute(Attribute.COSTS_HEALTH)) {
+				return false;
+			}
 		}
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
 			HeroPower power = (HeroPower) card;
@@ -434,6 +440,9 @@ public class GameLogic implements Cloneable, Serializable {
 		hero.setOwner(player.getId());
 		hero.setWeapon(player.getHero().getWeapon());
 		player.setHero(hero);
+		for (SpellTrigger trigger : hero.getSpellTriggers()) {
+			addGameEventListener(player, trigger, hero);
+		}
 		player.getHero().setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
 

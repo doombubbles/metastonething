@@ -79,7 +79,7 @@ public class IconFactory {
 		try {
 			new Image(iconPath + power + ".png");
 		} catch (Exception e) {
-			power = "unkown";
+			power = "unknown";
 		}
 
 		return iconPath + power + ".png";
