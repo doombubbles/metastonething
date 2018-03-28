@@ -1,0 +1,26 @@
+{
+	"name": "Vex Crow",
+	"baseManaCost": 4	,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "Whenever you cast a spell, summon a random 2-Cost minion.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonRandomMinionFilteredSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"manaCost": 2
+			}
+		}
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

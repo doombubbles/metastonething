@@ -23,10 +23,10 @@ public class MissilesSpell extends DamageSpell {
 
 		if (damage == 1 && source.getEntityType() == EntityType.CARD && ((Card) source).getCardType().isCardType(CardType.SPELL)) {
 			missiles = context.getLogic().applySpellpower(player, source,  missiles);
-			missiles = context.getLogic().applyAmplify(player, missiles, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+			missiles = context.getLogic().applyAmplify(player, missiles, Attribute.SPELLS_DAMAGE_MULTIPLIER);
 		} else if (source.getEntityType() == EntityType.CARD && ((Card) source).getCardType().isCardType(CardType.SPELL)) {
 			damage = context.getLogic().applySpellpower(player, source,  damage);
-			damage = context.getLogic().applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+			damage = context.getLogic().applyAmplify(player, damage, Attribute.SPELLS_DAMAGE_MULTIPLIER);
 		}
 		EntityFilter filter = (EntityFilter) desc.get(SpellArg.FILTER);
 		for (int i = 0; i < missiles; i++) {

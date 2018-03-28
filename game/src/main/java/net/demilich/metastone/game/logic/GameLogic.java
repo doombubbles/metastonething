@@ -525,8 +525,11 @@ public class GameLogic implements Cloneable, Serializable {
 					applyAttribute(target, Attribute.FROZEN);
 				}
 			}
-			if (sourceCard.getCardType().isCardType(CardType.SPELL) || sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
-				damage = applyAmplify(player, damage, Attribute.SPELL_AMPLIFY_MULTIPLIER);
+			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
+				damage = applyAmplify(player, damage, Attribute.SPELLS_DAMAGE_MULTIPLIER);
+			}
+			if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
+				damage = applyAmplify(player, damage, Attribute.HP_DAMAGE_MULTIPLIER);
 			}
 		}
 		int damageDealt = 0;
@@ -1249,10 +1252,14 @@ public class GameLogic implements Cloneable, Serializable {
 			damage(player, target, healing, source);
 			return;
 		}
-		if (source != null && source instanceof Card
-				&& (((Card) source).getCardType().isCardType(CardType.SPELL)
-				|| ((Card) source).getCardType().isCardType(CardType.HERO_POWER))) {
-			healing = applyAmplify(player, healing, Attribute.HEAL_AMPLIFY_MULTIPLIER);
+		if (source != null && source instanceof Card) {
+			Card card = (Card) source;
+			if (card.getCardType().isCardType(CardType.SPELL)) {
+				healing = applyAmplify(player, healing, Attribute.SPELLS_HEAL_MULTIPLIER);
+			}
+			if (card.getCardType().isCardType(CardType.HERO_POWER)) {
+				healing = applyAmplify(player, healing, Attribute.HP_HEAL_MULTIPLIER);
+			}
 		}
 		boolean success = false;
 		switch (target.getEntityType()) {

@@ -26,8 +26,6 @@ public class GameTagUtils {
 		case NUMBER_OF_ATTACKS:
 		case OPPONENT_SPELL_DAMAGE:
 		case OVERLOAD:
-		case SPELL_AMPLIFY_MULTIPLIER:
-		case HEAL_AMPLIFY_MULTIPLIER:
 		case SPELL_DAMAGE:
 			return TagValueType.INTEGER;
 		case ATTACK_EQUALS_HP:

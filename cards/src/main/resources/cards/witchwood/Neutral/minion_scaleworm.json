@@ -1,0 +1,46 @@
+{
+	"name": "Scaleworm",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "NEUTRAL",
+	"rarity": "RARE",
+	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Rush.",
+	"battlecry": {
+		"spell": {
+			"class": "MetaSpell",
+			"target": "SELF",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 1
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "RUSH"
+				}
+			]
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+	},
+	"glow": {
+		"class": "HoldsCardCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "DRAGON"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

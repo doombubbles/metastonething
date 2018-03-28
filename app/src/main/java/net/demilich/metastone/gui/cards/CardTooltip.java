@@ -66,7 +66,7 @@ public class CardTooltip extends CardToken {
 					int oldValue = Integer.parseInt(s);
 					int newValue = context.getLogic().applyAmplify(player, context.getLogic().applySpellpower(player, card, oldValue)
 							+ card.getAttributeValue(Attribute.SPELL_DAMAGE)
-							+ player.getAttributeValue(Attribute.SPELL_DAMAGE), Attribute.SPELL_AMPLIFY_MULTIPLIER);
+							+ player.getAttributeValue(Attribute.SPELL_DAMAGE), Attribute.SPELLS_DAMAGE_MULTIPLIER);
 
 					descriptionText = descriptionText.replace("*" + s + "*","*" + newValue + "*");
 					if (newValue <= oldValue) {

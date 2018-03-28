@@ -35,7 +35,6 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.DOUBLE_BATTLECRIES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.DOUBLE_DEATHRATTLES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.ENRAGABLE, jsonData, map, ParseValueType.BOOLEAN);
-		parseAttribute(Attribute.HEAL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.HERO_POWER_CAN_TARGET_MINIONS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.HERO_POWER_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.HERO_POWER_USAGES, jsonData, map, ParseValueType.INTEGER);
@@ -44,7 +43,6 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.MEGA_WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.OPPONENT_SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
-		parseAttribute(Attribute.SPELL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.STEALTH, jsonData, map, ParseValueType.BOOLEAN);
@@ -83,6 +81,10 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.FRIENDLY_TARGET_ENEMIES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MINIONS_COUNT_AS, jsonData, map, ParseValueType.STRING_ARRAY);
 		parseAttribute(Attribute.ECHO, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.SPELLS_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.SPELLS_HEAL_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.HP_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.HP_HEAL_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
 
