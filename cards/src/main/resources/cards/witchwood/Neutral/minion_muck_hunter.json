@@ -7,14 +7,14 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"race": "NONE",
-	"description": "Rush. Battlecry: Summon two 2/1 Mucks for your opponent.",
+	"description": "Rush. Battlecry: Summon two 2/1 Mucklings for your opponent.",
 	"battlecry": {
 		"spell": {
 			"class": "SummonSpell",
 			"targetPlayer": "OPPONENT",
 			"cards": [
-				"token_muck",
-				"token_muck"
+				"token_muckling",
+				"token_muckling"
 			]
 		}
 	},

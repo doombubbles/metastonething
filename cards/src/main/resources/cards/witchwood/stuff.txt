@@ -1,9 +1,0 @@
-Houndmaster Shaw
-
-Mana Cost: 4
-Attack: 3
-Health: 6
-Type: Minion
-Rarity: Legendary
-Class: Hunter
-Text: Your other minions have Rush.

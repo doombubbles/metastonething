@@ -81,10 +81,10 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.FRIENDLY_TARGET_ENEMIES, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MINIONS_COUNT_AS, jsonData, map, ParseValueType.STRING_ARRAY);
 		parseAttribute(Attribute.ECHO, jsonData, map, ParseValueType.BOOLEAN);
-		parseAttribute(Attribute.SPELLS_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
-		parseAttribute(Attribute.SPELLS_HEAL_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
-		parseAttribute(Attribute.HP_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
-		parseAttribute(Attribute.HP_HEAL_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.SPELLS_DAMAGE_MULT, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.SPELLS_HEAL_MULT, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.HERO_POWER_DAMAGE_MULT, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.HERO_POWER_HEAL_MULT, jsonData, map, ParseValueType.INTEGER);
 		return map;
 	}
 

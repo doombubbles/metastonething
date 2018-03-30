@@ -8,8 +8,8 @@
 	"rarity": "COMMON",
 	"description": "Double the damage and healing of your Hero Power.",
 	"attributes": {
-		"HP_HEAL_MULTIPLIER": 2,
-		"HP_DAMAGE_MULTIPLIER": 2,
+		"HERO_POWER_HEAL_MULT": 2,
+		"HERO_POWER_DAMAGE_MULT": 2
 	},
 	"collectible": true,
 	"set": "WITCHWOOD",

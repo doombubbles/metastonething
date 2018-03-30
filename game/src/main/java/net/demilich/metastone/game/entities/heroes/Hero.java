@@ -109,7 +109,7 @@ public class Hero extends Actor {
 			trigger.addRevertTrigger(new EventTriggerDesc(eventTriggerMap).create());
 			trigger.heroPower = true;
 			addSpellTrigger(trigger);
-			System.out.println("Triggered!");
+			//System.out.println("Triggered!");
 		}
 		this.heroPower = heroPower;
 		heroPower.setOwner(getOwner());

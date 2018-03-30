@@ -21,6 +21,6 @@
 		"TAUNT": true
     },
     "collectible": true,
-    "set": "FROZEN_THRONE",
+    "set": "CUSTOM",
     "fileFormatVersion": 1
 }

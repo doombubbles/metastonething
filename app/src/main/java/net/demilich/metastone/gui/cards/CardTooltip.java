@@ -9,10 +9,6 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class CardTooltip extends CardToken {
@@ -66,7 +62,7 @@ public class CardTooltip extends CardToken {
 					int oldValue = Integer.parseInt(s);
 					int newValue = context.getLogic().applyAmplify(player, context.getLogic().applySpellpower(player, card, oldValue)
 							+ card.getAttributeValue(Attribute.SPELL_DAMAGE)
-							+ player.getAttributeValue(Attribute.SPELL_DAMAGE), Attribute.SPELLS_DAMAGE_MULTIPLIER);
+							+ player.getAttributeValue(Attribute.SPELL_DAMAGE), Attribute.SPELLS_DAMAGE_MULT);
 
 					descriptionText = descriptionText.replace("*" + s + "*","*" + newValue + "*");
 					if (newValue <= oldValue) {

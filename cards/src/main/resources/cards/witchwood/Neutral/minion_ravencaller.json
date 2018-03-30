@@ -1,0 +1,28 @@
+{
+    "name": "Ravencaller",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "description": "Battlecry: Add two random 1-Cost minions to your hand.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"manaCost": 1
+			},
+			"value": 2
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}
