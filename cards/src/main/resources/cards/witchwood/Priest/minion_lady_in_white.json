@@ -1,23 +1,18 @@
 {
-    "name": "Emeriss",
-    "baseManaCost": 10,
+    "name": "Lady in White",
+    "baseManaCost": 6,
     "type": "MINION",
-    "baseAttack": 8,
-    "baseHp": 8,
-    "heroClass": "HUNTER",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "PRIEST",
     "rarity": "LEGENDARY",
-    "race": "DRAGON",
-    "description": "Battlecry: Double the Attack and Health of all minions in your hand.",
+    "description": "Battlecry: Cast 'Inner Fire' on all minions in your deck. (Change their Attack to be equal to their Health)",
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
-			"class": "BuffSpell",
-			"target": "FRIENDLY_HAND",
-			"attackBonus": {
-				"class": "AttributeValueProvider",
-				"attribute": "ATTACK"
-			},
-			"hpBonus": {
+            "class": "SetAttackSpell",
+			"target": "FRIENDLY_DECK",
+			"value": {
 				"class": "AttributeValueProvider",
 				"attribute": "HP"
 			},
@@ -25,7 +20,7 @@
 				"class": "CardFilter",
 				"cardType": "MINION"
 			}
-		}
+        }
     },
     "attributes": {
         "BATTLECRY": true

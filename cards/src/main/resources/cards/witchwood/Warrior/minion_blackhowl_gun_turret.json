@@ -1,0 +1,28 @@
+{
+    "name": "Blackhowl Gun Turret",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 8,
+    "heroClass": "WARRIOR",
+    "rarity": "LEGENDARY",
+    "description": "Can't Attack. Whenever this takes damage, deal 3 damage to a random enemy.",
+    "trigger": {
+		"eventTrigger": {
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "MissilesSpell",
+			"target": "ENEMY_CHARACTERS",
+			"value": 3,
+			"howMany": 1
+		}
+	},
+    "attributes": {
+        "CANNOT_ATTACK": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -6,6 +6,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -13,6 +14,7 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerArg;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
@@ -25,7 +27,16 @@ public class ShifterZerusSpell extends Spell {
 		Card card = (Card) target;
 
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
-		Card newCard = SpellUtils.getRandomCard(CardCatalogue.query(context.getDeckFormat()), filterCard -> cardFilter.matches(context, player, filterCard));
+
+		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
+		CardList cards = CardCatalogue.query(context.getDeckFormat());
+		if (cardSource != null) {
+			cards = cardSource.getCards(context, player);
+		}
+		if (cardFilter != null) {
+			cards.removeAll(filterCard -> !cardFilter.matches(context, player, filterCard));
+		}
+		Card newCard = cards.getRandom();
 		newCard.setName("'" + newCard.getName() + "'");
 		context.getLogic().replaceCard(player.getId(), card, newCard);
 		
