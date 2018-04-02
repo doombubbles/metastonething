@@ -12,6 +12,7 @@ import net.demilich.metastone.game.cards.ReplaceHeroCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
+import net.demilich.metastone.game.events.BoardChangedEvent;
 import net.demilich.metastone.game.events.HeroPowerChangedEvent;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
@@ -70,6 +71,8 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 		} else {
 			context.getLogic().performGameAction(playerId, battlecryAction);
 		}
+
+		context.fireGameEvent(new BoardChangedEvent(context));
 		
 	}
 

@@ -1,0 +1,32 @@
+{
+    "name": "Toxmonger",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 4,
+    "heroClass": "HUNTER",
+    "rarity": "EPIC",
+    "race": "NONE",
+    "description": "Whenever you play a minion that costs (1), give it Poisonous.",
+    "trigger": {
+        "eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"cardType": "MINION",
+			"fireCondition": {
+				"class": "AttributeCondition",
+				"attribute": "BASE_MANA_COST",
+				"operation": "EQUAL",
+				"value": 1
+			}
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "EVENT_TARGET",
+			"attribute": "POISONOUS"
+		}
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

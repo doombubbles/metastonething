@@ -25,10 +25,14 @@ public class SwapBaseAttackAndHpSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int attack = target.getAttributeValue(Attribute.ATTACK);
+		int hp = target.getAttributeValue(Attribute.HP);
 		int baseAttack = target.getAttributeValue(Attribute.BASE_ATTACK);
 		int baseHp = target.getAttributeValue(Attribute.BASE_HP);
 		int attackBuff = target.getAttributeValue(Attribute.ATTACK_BONUS);
 		int hpBuff = target.getAttributeValue(Attribute.HP_BONUS);
+		target.setAttribute(Attribute.HP, attack);
+		target.setAttribute(Attribute.ATTACK, hp);
 		target.setAttribute(Attribute.BASE_HP, baseAttack);
 		target.setAttribute(Attribute.BASE_ATTACK, baseHp);
 		target.setAttribute(Attribute.ATTACK_BONUS, hpBuff);

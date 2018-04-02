@@ -1,0 +1,19 @@
+{
+    "name": "Witching Hour",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "DRUID",
+    "rarity": "RARE",
+    "description": "Summon a random friendly Beast that died this game.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "ResurrectSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "BEAST"
+		}
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

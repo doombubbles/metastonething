@@ -5,7 +5,7 @@
     "heroClass": "WARRIOR",
     "rarity": "COMMON",
     "description": "Echo. Deal 1 damage to all minions.",
-    "targetSelection": "",
+    "targetSelection": "NONE",
     "spell": {
         "class": "DamageSpell",
 		"target": "ALL_MINIONS",

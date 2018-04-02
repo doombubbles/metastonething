@@ -174,7 +174,8 @@ public class HeroToken extends GameToken {
 		updateHeroPower(hero);
 		glow.setVisible(hero.getId() == ((multiplayer && context.switched) ? context.getPlayer2().getHero() : context.getPlayer1().getHero()).getId()
 						&& hero.getId() == context.getActivePlayer().getHero().getId()
-						&& context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower().getCardReference()));
+						&& context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower().getCardReference())
+						&& hero.getHeroPower().getBaseManaCost() != 0);
 		updateWeapon(hero.getWeapon());
 		updateSecrets(player);
 		updateStatus(hero, context);

@@ -11,15 +11,27 @@
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
-			"class": "AddAttributeSpell",
+			"class": "AddSpellTriggerSpell",
 			"target": "FRIENDLY_PLAYER",
-			"attribute": "DOUBLE_BATTLECRIES",
-			"revertTrigger": {
-				"class": "TurnEndTrigger"
-			},
-			"secondRevertTrigger": {
-				"class": "CardPlayedTrigger",
-				"requiredAttribute": "BATTLECRY"
+			"trigger": {
+				"eventTrigger": {
+					"class": "CardPlayedTrigger",
+					"targetPlayer": "SELF",
+					"requiredAttribute": "BATTLECRY"
+				},
+				"spell": {
+					"class": "AddAttributeSpell",
+					"target": "FRIENDLY_PLAYER",
+					"attribute": "DOUBLE_BATTLECRIES",
+					"revertTrigger": {
+						"class": "TurnEndTrigger"
+					},
+					"secondRevertTrigger": {
+						"class": "AfterCardPlayedTrigger",
+						"targetPlayer": "SELF"
+					}
+				},
+				"oneTime": true
 			}
 		}
     },

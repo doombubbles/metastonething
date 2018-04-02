@@ -8,6 +8,7 @@
 	"rarity": "RARE",
 	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Rush.",
 	"battlecry": {
+		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",
 			"target": "SELF",

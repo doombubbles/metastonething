@@ -125,7 +125,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 		player.modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
-		
+		context.fireGameEvent(new AfterCardPlayedEvent(context, playerId, card));
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 	}
 

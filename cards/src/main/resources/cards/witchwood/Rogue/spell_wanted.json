@@ -6,7 +6,6 @@
 	"rarity": "EPIC",
 	"description": "Deal *3* damage to a minion. If that kills it, add a Coin to your hand.",
 	"targetSelection": "MINIONS",
-	"race": "AFFLICTION",
 	"spell": {
 		"class": "ConditionalEffectSpell",
 		"spell1": {

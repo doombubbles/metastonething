@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.*;
@@ -29,6 +30,8 @@ public class CastSpellFromSourceSpell extends Spell {
             }
         }
 
+        context.getOpponent(player).setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true);
+        player.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, true);
         int numberOfSpellsToCast = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
         for (int i = 0; i < numberOfSpellsToCast; i++) {
             Card randomCard = filteredSpells.getRandom();
@@ -46,5 +49,7 @@ public class CastSpellFromSourceSpell extends Spell {
             SpellDesc cast = CastRandomSpellSpell.create(randomCard.getCardId());
             SpellUtils.castChildSpell(context, player, cast, source, target);
         }
+        context.getOpponent(player).setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, false);
+        player.setAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION, false);
     }
 }
