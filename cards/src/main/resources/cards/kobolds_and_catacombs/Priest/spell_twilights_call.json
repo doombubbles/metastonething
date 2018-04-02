@@ -5,7 +5,7 @@
     "heroClass": "PRIEST",
     "rarity": "RARE",
     "description": "Summon 1/1 copies of 2 friendly Deathrattle minions that died this game.",
-    "targetSelection": "",
+    "targetSelection": "NONE",
     "spell": {
         "class": "ResurrectSpell",
 		"value": 2,
@@ -15,7 +15,7 @@
 			"operation": "HAS"
 		},
 		"attackBonus": 1,
-		"healthBonus": 1
+		"hpBonus": 1
     },
     "collectible": true,
     "set": "KOBOLDS_AND_CATACOMBS",

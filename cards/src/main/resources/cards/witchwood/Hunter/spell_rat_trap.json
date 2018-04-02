@@ -1,0 +1,30 @@
+{
+    "name": "Rat Trap",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "HUNTER",
+    "rarity": "EPIC",
+    "description": "Secret: After your opponent plays three cards in a turn, summon a 6/6 Rat.",
+    "targetSelection": "NONE",
+    "trigger": {
+        "class": "AfterSpellCastedTrigger",
+		"targetPlayer": "OPPONENT",
+		"value": 3,
+		"inOneTurn": true,
+		"reset": true
+    },
+    "spell": {
+        "class": "SummonSpell",
+		"card": "token_rat66"
+    },
+	"instant": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_rat66"
+		}
+	},
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}
