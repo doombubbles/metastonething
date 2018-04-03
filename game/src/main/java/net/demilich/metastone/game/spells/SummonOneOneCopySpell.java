@@ -50,7 +50,11 @@ public class SummonOneOneCopySpell extends Spell {
 			}
 			minionCard = (MinionCard) relevantMinions.getRandom();
 		} else {
-			minionCard = (MinionCard) ((Minion) target).getSourceCard();
+			if (target instanceof Minion) {
+				minionCard = (MinionCard) ((Minion) target).getSourceCard();
+			} else if (target instanceof Card) {
+				minionCard = (MinionCard) target;
+			}
 		}
 
 		if (minionCard != null) {

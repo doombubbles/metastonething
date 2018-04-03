@@ -1,0 +1,43 @@
+{
+    "name": "Deathweb Spider",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 6,
+    "heroClass": "WARLOCK",
+    "rarity": "EPIC",
+    "race": "BEAST",
+    "description": "Battlecry: If your hero took damage this turn, gain Lifesteal.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+           "class": "AddAttributeSpell",
+		   "target": "SELF",
+		   "attribute": "LIFESTEAL"
+        },
+		"condition": {
+			"class": "ComparisonCondition",
+			"value1": {
+				"class": "PlayerAttributeValueProvider",
+				"playerAttribute": "DAMAGE_THIS_TURN"
+			},
+			"operation": "GREATER",
+			"value2": 0
+		}
+    },
+	"glow": {
+		"class": "ComparisonCondition",
+		"value1": {
+			"class": "PlayerAttributeValueProvider",
+			"playerAttribute": "DAMAGE_THIS_TURN"
+		},
+		"operation": "GREATER",
+		"value2": 0
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

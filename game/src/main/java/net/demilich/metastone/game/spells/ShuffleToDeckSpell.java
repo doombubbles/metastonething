@@ -22,6 +22,7 @@ public class ShuffleToDeckSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Card card = null;
 		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, target, source, 1);
+		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		if (target != null && target.getEntityType() != EntityType.CARD) {
 			card = ((Actor) target).getSourceCard().getCopy();
 		} else if (desc.contains(SpellArg.CARD_FILTER)){
@@ -58,7 +59,11 @@ public class ShuffleToDeckSpell extends Spell {
 		}
 		for (int i = 0; i < howMany; i++) {
 			if (card != null) {
-				context.getLogic().shuffleToDeck(player, context.getCardById(card.getCardId()));
+				Card newCard = context.getCardById(card.getCardId());
+				if (spell != null) {
+					SpellUtils.castChildSpell(context, player, spell, source, newCard);
+				}
+				context.getLogic().shuffleToDeck(player, newCard);
 			}
 		}
 	}

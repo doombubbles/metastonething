@@ -35,8 +35,6 @@ public class CardPlayedTrigger extends GameEventTrigger {
 		if (attribute != null && cardPlayedEvent.getCard().hasAttribute(attribute) != true) {
 			return false;
 		}
-
-
 		
 		return true;
 	}

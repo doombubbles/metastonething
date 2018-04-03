@@ -1,0 +1,24 @@
+{
+    "name": "Blood Witch",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 6,
+    "heroClass": "WARLOCK",
+    "rarity": "RARE",
+    "description": "At the start of your turn, deal 1 damage to your hero.",
+    "trigger": {
+        "eventTrigger": {
+            "class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+        }
+        "spell": {
+            "class": "DamageSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 1
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}
