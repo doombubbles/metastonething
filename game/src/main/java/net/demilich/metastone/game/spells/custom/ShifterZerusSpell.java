@@ -37,6 +37,9 @@ public class ShifterZerusSpell extends Spell {
 			cards.removeAll(filterCard -> !cardFilter.matches(context, player, filterCard));
 		}
 		Card newCard = cards.getRandom();
+		if (newCard == null) {
+			return;
+		}
 		newCard.setName("'" + newCard.getName() + "'");
 		context.getLogic().replaceCard(player.getId(), card, newCard);
 		

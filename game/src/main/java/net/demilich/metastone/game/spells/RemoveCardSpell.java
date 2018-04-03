@@ -14,7 +14,9 @@ public class RemoveCardSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Card card = (Card) target;
-		SpellDesc subSpell = (SpellDesc) desc.get(SpellArg.SPELL);
+		if (card == null) {
+			return;
+		}
 		if (desc.contains(SpellArg.REVEAL)) {
 			context.fireGameEvent(new CardRevealedEvent(context, player.getId(), card,1.2));
 		}

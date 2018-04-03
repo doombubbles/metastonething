@@ -83,7 +83,7 @@ public class HumanActionPromptView extends VBox implements Serializable {
 			break;
 		case DISCOVER:
 			DiscoverAction discover = (DiscoverAction) action;
-			actionString = "DISCOVER " + (discover.getSpell().contains(SpellArg.NAME) ? discover.getSpell().getString(SpellArg.NAME) : discover.getSpell().getSpellClass().getSimpleName());
+			actionString = "DISCOVER " + (discover.getSpell().contains(SpellArg.DESCRIPTION) ? discover.getSpell().getString(SpellArg.DESCRIPTION) : discover.getSpell().getSpellClass().getSimpleName());
 			break;
 		case REPLACE_HERO:
 			PlayReplaceHeroCardAction raction = (PlayReplaceHeroCardAction) action;

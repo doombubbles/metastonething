@@ -15,10 +15,10 @@ public class NullSpell extends Spell {
 		return create("");
 	}
 
-	public static SpellDesc create(String name) {
+	public static SpellDesc create(String description) {
 		Map<SpellArg, Object> arguments = SpellDesc.build(NullSpell.class);
 		arguments.put(SpellArg.TARGET, EntityReference.NONE);
-		arguments.putIfAbsent(SpellArg.NAME, name);
+		arguments.putIfAbsent(SpellArg.DESCRIPTION, description);
 		return new SpellDesc(arguments);
 	}
 

@@ -95,7 +95,6 @@ public class TriggerManager implements Cloneable, IDisposable, Serializable {
 				trigger.delayTimeDown();
 			}
 			if (trigger.revertInterestedIn(event.getEventType())) {
-				System.out.println("Bye bye trigger");
 				trigger.expire();
 			}
 			if (trigger.isExpired()) {
