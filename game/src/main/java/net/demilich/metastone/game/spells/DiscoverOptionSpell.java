@@ -34,6 +34,7 @@ public class DiscoverOptionSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		List<SpellDesc> spells = new ArrayList<SpellDesc>();
 		boolean reveal = desc.getBool(SpellArg.REVEAL);
+		boolean random = desc.getBool(SpellArg.RANDOM_TARGET);
 		SpellDesc[] spellArray = (SpellDesc[]) desc.get(SpellArg.SPELLS);
 		for (SpellDesc spell : spellArray) {
 			spells.add(spell);
@@ -55,7 +56,7 @@ public class DiscoverOptionSpell extends Spell {
 			List<SpellDesc> spellsCopy = new ArrayList<SpellDesc>(spells);
 			for (int j = 0; j < count; j++) {
 				if (!spellsCopy.isEmpty()) {
-					SpellDesc spell = spellsCopy.get(context.getLogic().random(spellsCopy.size()));
+					SpellDesc spell = spellsCopy.get(random ? context.getLogic().random(spellsCopy.size()) : 0);
 					spellChoices.add(spell);
 					spellsCopy.remove(spell);
 				}
