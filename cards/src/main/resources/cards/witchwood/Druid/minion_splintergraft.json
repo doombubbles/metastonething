@@ -1,0 +1,25 @@
+{
+    "name": "Splintergraft",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 8,
+    "baseHp": 8,
+    "heroClass": "DRUID",
+    "rarity": "LEGENDARY",
+    "description": "Battlecry: Choose a friendly minion. Add a 10/10 copy to your hand that costs (10).",
+    "battlecry": {
+        "targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "custom.PutMiniCopyInHandSpell",
+			"attackBonus": 10,
+			"healthBonus": 10,
+			"mana": 10
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

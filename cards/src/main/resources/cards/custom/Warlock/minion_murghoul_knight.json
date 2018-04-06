@@ -1,0 +1,29 @@
+{
+	"name": "Mur'Ghoul Knight",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 3,
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"race": "MURLOC",
+	"description": "Battlecry: Summon a 1/1 copy of a friendly Murloc that died this game.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ResurrectSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "MURLOC"
+			},
+			"attackBonus": 1,
+			"hpBonus": 1
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

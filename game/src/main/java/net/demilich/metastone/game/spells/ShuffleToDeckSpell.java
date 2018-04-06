@@ -60,10 +60,10 @@ public class ShuffleToDeckSpell extends Spell {
 		for (int i = 0; i < howMany; i++) {
 			if (card != null) {
 				Card newCard = context.getCardById(card.getCardId());
+				context.getLogic().shuffleToDeck(player, newCard);
 				if (spell != null) {
 					SpellUtils.castChildSpell(context, player, spell, source, newCard);
 				}
-				context.getLogic().shuffleToDeck(player, newCard);
 			}
 		}
 	}

@@ -15,12 +15,13 @@
 			},
 			{
 				"class": "ShuffleToDeckSpell",
+				"howMany": 3,
 				"spell": {
 					"class": "BuffSpell",
 					"value": 3
 				}
 			}
-		]
+		],
 		"filter": {
 			"class": "RaceFilter",
 			"race": "BEAST"

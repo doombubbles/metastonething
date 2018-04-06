@@ -11,8 +11,8 @@
         "eventTrigger": {
             "class": "CardDrawnTrigger",
 			"targetPlayer": "SELF",
-			"sourceType": "MINION"
-        }
+			"cardType": "MINION"
+        },
         "spell": {
             "class": "SummonOneOneCopySpell",
 			"target": "EVENT_TARGET"

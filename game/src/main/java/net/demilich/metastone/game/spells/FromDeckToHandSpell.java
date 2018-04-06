@@ -44,7 +44,7 @@ public class FromDeckToHandSpell extends Spell {
 			}
 
 			if (card != null) {
-				context.getLogic().receiveCard(player.getId(), card);
+				context.getLogic().receiveCard(player.getId(), card, source, true);
 			}
 		}
 	}

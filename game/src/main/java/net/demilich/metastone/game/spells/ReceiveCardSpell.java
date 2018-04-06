@@ -10,6 +10,7 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 
 import java.util.Map;
 
@@ -25,15 +26,21 @@ public class ReceiveCardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
 		Attribute attribute = (Attribute) desc.get(SpellArg.ATTRIBUTE);
-		if (cardFilter != null) {
-			CardList cards = CardCatalogue.query(context.getDeckFormat());
+		if (cardFilter != null || cardSource != null) {
+			CardList cards;
+			if (cardSource != null) {
+				cards = cardSource.getCards(context, player);
+			} else cards = CardCatalogue.query(context.getDeckFormat());
 			CardList result = new CardList();
 			String replacementCard = (String) desc.get(SpellArg.CARD);
 			for (Card card : cards) {
-				if (cardFilter.matches(context, player, card)) {
-					result.add(card);
-				}
+				if (cardFilter != null) {
+					if (cardFilter.matches(context, player, card)) {
+						result.add(card);
+					}
+				} else result.add(card);
 			}
 			for (int i = 0; i < count; i++) {
 				Card card = null;

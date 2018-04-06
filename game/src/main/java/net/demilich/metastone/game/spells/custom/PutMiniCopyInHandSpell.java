@@ -42,10 +42,10 @@ public class PutMiniCopyInHandSpell extends Spell {
 		for (int i = 0; i < amount; i++) {
 			Card copyCard = sourceCard.getCopy();
 			context.getLogic().receiveCard(player.getId(), copyCard);
-			copyCard.setAttribute(Attribute.ATTACK, 1);
-			copyCard.setAttribute(Attribute.HP, 1);
-			copyCard.setAttribute(Attribute.MAX_HP, 1);
-			SpellDesc spell = CardCostModifierSpell.create(copyCard.getReference(), AlgebraicOperation.SET, 1);
+			copyCard.setAttribute(Attribute.ATTACK, desc.getValue(SpellArg.ATTACK_BONUS, 1));
+			copyCard.setAttribute(Attribute.HP, desc.getValue(SpellArg.HP_BONUS, 1));
+			copyCard.setAttribute(Attribute.MAX_HP, desc.getValue(SpellArg.HP_BONUS, 1));
+			SpellDesc spell = CardCostModifierSpell.create(copyCard.getReference(), AlgebraicOperation.SET, desc.getValue(SpellArg.MANA, 1));
 			SpellUtils.castChildSpell(context, player, spell, source, copyCard);
 		}
 	}

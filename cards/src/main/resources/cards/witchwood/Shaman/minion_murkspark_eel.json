@@ -25,6 +25,16 @@
 			"invert": true
 		}
     },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "AttributeFilter",
+			"attribute": "BASE_MANA_COST",
+			"operation": "MOD_2_EQUAL",
+			"value": 1
+		},
+		"invert": true
+	},
     "attributes": {
         "BATTLECRY": true
     },

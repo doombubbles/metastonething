@@ -2192,9 +2192,6 @@ public class GameLogic implements Cloneable, Serializable {
 
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
 			refreshAttacksPerRound(minion);
-			if (minion.hasAttribute(Attribute.RUSH)) {
-				applyAttribute(minion, Attribute.CANNOT_ATTACK_HEROES);
-			}
 		} else if (summon instanceof Permanent) {
 			Permanent permanent = (Permanent) summon;
 			player.getStatistics().permanentSummoned(permanent, context.getTurn());

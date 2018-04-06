@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"description": "Put 2 random Demons from your deck into your hand.",
+	"description": "Draw 2 Demons from your deck.",
 	"targetSelection": "NONE",
 	"race": "DEMONOLOGY",
 	"spell": {

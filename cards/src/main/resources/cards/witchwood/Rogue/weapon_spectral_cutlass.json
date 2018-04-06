@@ -11,7 +11,7 @@
         "eventTrigger": {
             "class": "CardPlayedTrigger",
 			"targetPlayer": "SELF",
-			"fireCondiiton": {
+			"fireCondition": {
 				"class": "CardPropertyCondition",
 				"filter": {
 					"class": "CardFilter",
@@ -22,7 +22,7 @@
 					"invert": true
 				}
 			}
-        }
+        },
         "spell": {
             "class": "ModifyDurabilitySpell",
 			"value": 1

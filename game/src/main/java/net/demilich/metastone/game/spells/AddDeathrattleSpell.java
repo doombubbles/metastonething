@@ -28,8 +28,12 @@ public class AddDeathrattleSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-
 		SpellDesc deathrattle = (SpellDesc) desc.get(SpellArg.SPELL);
+		if (deathrattle.hasPredefinedTarget()) {
+			if (deathrattle.getTarget().equals(EntityReference.TARGET)) {
+				deathrattle.addArg(SpellArg.TARGET, context.resolveTarget(player, source, EntityReference.TARGET).get(0).getReference());
+			}
+		}
 		if (target.getEntityType() == EntityType.CARD) {
 			MinionCard minionCard = (MinionCard) target;
 			minionCard.addDeathrattle(deathrattle);

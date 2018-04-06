@@ -11,7 +11,7 @@
         "eventTrigger": {
             "class": "TurnStartTrigger",
 			"targetPlayer": "SELF"
-        }
+        },
         "spell": {
             "class": "DamageSpell",
 			"target": "FRIENDLY_HERO",
