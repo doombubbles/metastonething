@@ -45,14 +45,19 @@ public class DiscardSpell extends Spell {
 		int originalHandCount = player.getHand().getCount();
 		for (int i = 0; i < cardCount; i++) {
 			Card randomHandCard;
-			if (context.getLogic().hasAttribute(player, Attribute.CHOOSE_DISCARD) && context.getActivePlayerId() == player.getId()
-					&& !discardableCards.isEmpty() && originalHandCount > cardCount
-					&& !player.hasAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION)) {
-				SpellDesc spell = NullSpell.create().addArg(SpellArg.SPELL, NullSpell.create("Discard:"));
-				randomHandCard = SpellUtils.getDiscover(context, player, spell, discardableCards).getCard();
+			if (desc.hasPredefinedTarget()) {
+				randomHandCard = (Card) context.resolveSingleTarget(desc.getTarget());
 			} else {
-				randomHandCard = discardableCards.getRandom();
+				if (context.getLogic().hasAttribute(player, Attribute.CHOOSE_DISCARD) && context.getActivePlayerId() == player.getId()
+						&& !discardableCards.isEmpty() && originalHandCount > cardCount
+						&& !player.hasAttribute(Attribute.ALL_RANDOM_YOGG_ONLY_FINAL_DESTINATION)) {
+					SpellDesc spell = NullSpell.create().addArg(SpellArg.SPELL, NullSpell.create("Discard:"));
+					randomHandCard = SpellUtils.getDiscover(context, player, spell, discardableCards).getCard();
+				} else {
+					randomHandCard = discardableCards.getRandom();
+				}
 			}
+
 
 			if (randomHandCard == null) {
 				return;
