@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.entities.minions.*;
 import net.demilich.metastone.game.events.*;
 import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
@@ -19,13 +20,6 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PlaySpellCardAction;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardList;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.QuestCard;
-import net.demilich.metastone.game.cards.SecretCard;
-import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
@@ -1860,6 +1854,55 @@ public class GameLogic implements Cloneable, Serializable {
 				iterator.remove();
 			}
 		}
+	}
+
+	public void replaceHero(int playerId, ReplaceHeroCard replaceHeroCard, boolean resolveBattlecry) {
+		Player player = context.getPlayer(playerId);
+		HeroCard heroCard = (HeroCard) context.getCardById(replaceHeroCard.hero).clone();
+		heroCard.setAttribute(Attribute.HP, context.getPlayer(playerId).getHero().getHp());
+		gainArmor(player, replaceHeroCard.armor);
+		Hero hero = heroCard.createHero();
+		context.fireGameEvent(new HeroPowerChangedEvent(context, playerId, hero.getHeroPower()));
+		changeHero(player, hero);
+
+		Actor actor = player.getHero();
+
+		BattlecryAction battlecry = replaceHeroCard.battlecry;
+		if (battlecry != null && resolveBattlecry) {
+			GameAction battlecryAction = null;
+			battlecry.setSource(actor.getReference());
+			if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
+				List<Entity> validTargets = context.getLogic().getValidTargets(playerId, (GameAction) battlecry);
+				if (validTargets.isEmpty()) {
+					return;
+				}
+
+				List<GameAction> battlecryActions = new ArrayList<>();
+				for (Entity validTarget : validTargets) {
+					GameAction targetedBattlecry = battlecry.clone();
+					targetedBattlecry.setTarget(validTarget);
+					battlecryActions.add(targetedBattlecry);
+				}
+
+
+				battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
+
+			} else {
+				battlecryAction = battlecry;
+			}
+			if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
+				performGameAction(playerId, battlecryAction);
+				if (!battlecry.canBeExecuted(context, player)) {
+					return;
+				}
+				performGameAction(playerId, battlecryAction);
+			} else {
+				performGameAction(playerId, battlecryAction);
+			}
+		}
+
+		context.fireGameEvent(new BoardChangedEvent(context));
+
 	}
 
 	public void replaceCard(int playerId, Card oldCard, Card newCard) {

@@ -44,13 +44,24 @@ public class CastRandomSpellSpell extends Spell {
 		return new SpellDesc(arguments);
 	}
 
+	public static SpellDesc create(String card, boolean reveal) {
+		Map<SpellArg, Object> arguments = SpellDesc.build(CastRandomSpellSpell.class);
+		arguments.put(SpellArg.CARD, card);
+		arguments.put(SpellArg.REVEAL, reveal);
+		return new SpellDesc(arguments);
+	}
+
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		// This spell is crazy.
 		CardFilter filter = (CardFilter) desc.get(SpellArg.CARD_FILTER);
 		CardList spells = CardCatalogue.query(context.getDeckFormat(), CardType.SPELL);
 		CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
-		Boolean tryAgain = desc.getBool(SpellArg.EXCLUSIVE);
+		boolean tryAgain = desc.getBool(SpellArg.EXCLUSIVE);
+		boolean reveal = true;
+		if (desc.contains(SpellArg.REVEAL)) {
+			reveal = desc.getBool(SpellArg.REVEAL);
+		}
 		if (cardSource != null) {
 			spells = cardSource.getCards(context, player);
 		}
@@ -94,8 +105,10 @@ public class CastRandomSpellSpell extends Spell {
 				}
 			}
 			logger.debug("Yogg-Saron chooses to play " + randomCard.getName());
-			CardRevealedEvent revealEvent = new CardRevealedEvent(context, player.getId(), randomCard, 1.2 * (i + 1));
-			context.fireGameEvent(revealEvent);
+			if (reveal) {
+				CardRevealedEvent revealEvent = new CardRevealedEvent(context, player.getId(), randomCard, 1.2 * (i + 1));
+				context.fireGameEvent(revealEvent);
+			}
 			if (randomCard instanceof ChooseOneCard && !context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
 				// While it might seem odd to do this, Choose One spells are still chosen
 				// randomly, even if the choice isn't available.

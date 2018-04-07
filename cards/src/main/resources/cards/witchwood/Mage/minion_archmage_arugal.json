@@ -1,0 +1,24 @@
+{
+    "name": "Archmage Arugal",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "MAGE",
+    "rarity": "LEGENDARY",
+    "description": "Whenever you draw a minion, add a copy of it to your hand.",
+    "trigger": {
+        "eventTrigger": {
+			"class": "CardDrawnTrigger",
+			"targetPlayer": "SELF",
+			"cardType": "MINION"
+		},
+		"spell": {
+			"class": "CopyCardSpell",
+			"target": "EVENT_TARGET"
+		}
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

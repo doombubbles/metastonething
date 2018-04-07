@@ -29,51 +29,8 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 
 	@Override
 	protected void play(GameContext context, int playerId, GameContext previousContext) {
-		Player player = context.getPlayer(playerId);
 		ReplaceHeroCard replaceHeroCard = (ReplaceHeroCard) context.getPendingCard();
-		HeroCard heroCard = (HeroCard) context.getCardById(replaceHeroCard.hero).clone();
-		heroCard.setAttribute(Attribute.HP, context.getPlayer(playerId).getHero().getHp());
-		context.getLogic().gainArmor(player, replaceHeroCard.armor);
-		Hero hero = heroCard.createHero();
-		context.fireGameEvent(new HeroPowerChangedEvent(context, playerId, hero.getHeroPower()));
-		context.getLogic().changeHero(player, hero);
-		
-		Actor actor = (Actor) player.getHero();
-		
-		BattlecryAction battlecry = this.battlecry;
-		GameAction battlecryAction = null;
-		battlecry.setSource(actor.getReference());
-		if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
-			List<Entity> validTargets = context.getLogic().getValidTargets(playerId, (GameAction) battlecry);
-			if (validTargets.isEmpty()) {
-				return;
-			}
-
-			List<GameAction> battlecryActions = new ArrayList<>();
-			for (Entity validTarget : validTargets) {
-				GameAction targetedBattlecry = battlecry.clone();
-				targetedBattlecry.setTarget(validTarget);
-				battlecryActions.add(targetedBattlecry);
-			}
-			
-			
-			battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
-			
-		} else {
-			battlecryAction = battlecry;
-		}
-		if (context.getLogic().hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
-			context.getLogic().performGameAction(playerId, battlecryAction);
-			if (!battlecry.canBeExecuted(context, player)) {
-				return;
-			}
-			context.getLogic().performGameAction(playerId, battlecryAction);
-		} else {
-			context.getLogic().performGameAction(playerId, battlecryAction);
-		}
-
-		context.fireGameEvent(new BoardChangedEvent(context));
-		
+		context.getLogic().replaceHero(playerId, replaceHeroCard,true);
 	}
 
 }
