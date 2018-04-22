@@ -14,17 +14,18 @@ public class ReplaceHeroCard extends Card {
 
 	public String hero;
 	public BattlecryAction battlecry;
+	public BattlecryDesc battlecryDesc;
 	public int armor;
 	
 	public ReplaceHeroCard(ReplaceHeroCardDesc desc) {
 		super(desc);
 		hero = desc.hero;
 		armor = desc.armor;
-		BattlecryDesc battlecrydesc = desc.battlecry;
-		if (battlecrydesc != null) {
-			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecrydesc.spell, battlecrydesc.getTargetSelection());
-			if (battlecrydesc.condition != null) {
-				battlecryAction.setCondition(battlecrydesc.condition.create());
+		battlecryDesc = desc.battlecry;
+		if (battlecryDesc != null) {
+			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecryDesc.spell, battlecryDesc.getTargetSelection());
+			if (battlecryDesc.condition != null) {
+				battlecryAction.setCondition(battlecryDesc.condition.create());
 			}
 
 			battlecry = battlecryAction;
@@ -35,6 +36,11 @@ public class ReplaceHeroCard extends Card {
 	@Override
 	public PlayCardAction play() {
 		return new PlayReplaceHeroCardAction(getCardReference(), battlecry);
+	}
+
+	@Override
+	public BattlecryDesc getBattlecry() {
+		return battlecryDesc;
 	}
 
 }

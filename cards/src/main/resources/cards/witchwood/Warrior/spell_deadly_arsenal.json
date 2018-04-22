@@ -1,6 +1,6 @@
 {
     "name": "Deadly Arsenal",
-    "baseManaCost": 6,
+    "baseManaCost": 4,
     "type": "SPELL",
     "heroClass": "WARRIOR",
     "rarity": "EPIC",

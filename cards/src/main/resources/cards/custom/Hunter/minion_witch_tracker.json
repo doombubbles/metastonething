@@ -1,0 +1,42 @@
+{
+    "name": "Witch Tracker",
+    "baseManaCost": 1,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 1,
+    "heroClass": "HUNTER",
+    "rarity": "RARE",
+    "description": "Battlecry: If your deck has only odd-Cost cards, trigger your Hero Power.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "TriggerHeroPowerSpell"
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "MOD_2_EQUAL",
+				"value": 0
+			},
+			"invert": true
+		}
+    },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "AttributeFilter",
+			"attribute": "BASE_MANA_COST",
+			"operation": "MOD_2_EQUAL",
+			"value": 0
+		},
+		"invert": true
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

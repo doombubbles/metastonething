@@ -111,9 +111,17 @@ public class PlayerConfigView extends VBox {
 					if (deckFormat == null || !deckFormat.isInFormat(dick)) {
 						metaDick.getDecks().remove(dick);
 					}
+					/*
+					if (deckFormat.getCardSets().contains(CardSet.CUSTOM)) {
+						boolean hasAlternate = false;
+						for (Deck dek : metaDecks) {
+
+						}
+					}
+					*/
 				}
 				if (deckFormat != null && deckFormat.isInFormat(deck)) {
-					deckList.add((Deck) metaDick);
+					deckList.add(metaDick);
 				}
 				
 			}

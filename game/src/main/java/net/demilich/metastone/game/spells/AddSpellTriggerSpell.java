@@ -28,6 +28,11 @@ public class AddSpellTriggerSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		TriggerDesc triggerDesc = (TriggerDesc) desc.get(SpellArg.TRIGGER);
+		if (triggerDesc.spell.hasPredefinedTarget()) {
+			if (triggerDesc.spell.getTarget().getId() == EntityReference.TARGET.getId()) {
+				triggerDesc.spell = triggerDesc.spell.addArg(SpellArg.TARGET, target.getReference());
+			}
+		}
 		SpellTrigger spellTrigger = triggerDesc.create();
 		if (desc.contains(SpellArg.REVERT_TRIGGER)) {
 			EventTriggerDesc revertTriggerDesc = (EventTriggerDesc) desc.get(SpellArg.REVERT_TRIGGER);

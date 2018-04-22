@@ -7,7 +7,7 @@
     "heroClass": "SHAMAN",
     "rarity": "EPIC",
     "race": "BEAST",
-    "description": "Taunt. Battlecry: Destroy your Totems. Gain +2/+2 for each destroyed.",
+    "description": "Rush. Taunt. Battlecry: Destroy your Totems. Gain +2/+2 for each destroyed.",
     "battlecry": {
         "targetSelection": "NONE",
         "spell": {
@@ -40,7 +40,8 @@
     },
     "attributes": {
         "TAUNT": true,
-        "BATTLECRY": true
+        "BATTLECRY": true,
+		"RUSH": true
     },
     "collectible": true,
     "set": "WITCHWOOD",

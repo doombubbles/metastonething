@@ -1,0 +1,65 @@
+{
+    "name": "Paragon of Light",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 5,
+    "heroClass": "PALADIN",
+    "rarity": "RARE",
+    "description": "While this minion's Attack is greater or equal to 3, gain Taunt and Lifesteal.",
+    "trigger": {
+        "eventTrigger": {
+            "class": "GameStateChangedTrigger"
+        },
+        "spell": {
+            "class": "MetaSpell",
+            "spells": [
+                {
+                    "class": "ConditionalEffectSpell",
+                    "exclusive": true,
+                    "spell1": {
+                        "class": "RemoveAttributeSpell",
+                        "target": "SELF",
+                        "attribute": "TAUNT"
+                    },
+                    "spell2": {
+                        "class": "AddAttributeSpell",
+                        "target": "SELF",
+                        "attribute": "TAUNT"
+                    },
+                    "condition": {
+                        "class": "AttributeCondition",
+                        "target": "SELF",
+                        "attribute": "ATTACK",
+                        "operation": "GREATER_OR_EQUAL",
+                        "value": 3
+                    }
+                },
+                {
+                    "class": "ConditionalEffectSpell",
+                    "exclusive": true,
+                    "spell1": {
+                        "class": "RemoveAttributeSpell",
+                        "target": "SELF",
+                        "attribute": "LIFESTEAL"
+                    },
+                    "spell2": {
+                        "class": "AddAttributeSpell",
+                        "target": "SELF",
+                        "attribute": "LIFESTEAL"
+                    },
+                    "condition": {
+                        "class": "AttributeCondition",
+                        "target": "SELF",
+                        "attribute": "ATTACK",
+                        "operation": "GREATER_OR_EQUAL",
+                        "value": 3
+                    }
+                }
+            ]
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

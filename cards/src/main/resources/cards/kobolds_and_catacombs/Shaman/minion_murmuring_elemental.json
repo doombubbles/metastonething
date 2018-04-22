@@ -31,7 +31,8 @@
 						"targetPlayer": "SELF"
 					}
 				},
-				"oneTime": true
+				"oneTime": true,
+				"oneTurn": true
 			}
 		}
     },

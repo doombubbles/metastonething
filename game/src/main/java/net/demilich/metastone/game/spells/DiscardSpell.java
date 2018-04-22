@@ -65,8 +65,7 @@ public class DiscardSpell extends Spell {
 			player.getDiscarded().add(randomHandCard.clone());
 			context.getLogic().discardCard(player, randomHandCard);
 			discardableCards.remove(randomHandCard);
-			context.fireGameEvent(new CardRevealedEvent(context, context.getPlayer1().getId(), randomHandCard.clone(), (1 + i) * 1.2));
-			context.fireGameEvent(new CardRevealedEvent(context, context.getPlayer2().getId(), randomHandCard.clone(), (1 + i) * 1.2));
+			context.fireGameEvent(new CardRevealedEvent(context, player.getId(), randomHandCard.clone(), (1 + i) * 1.2));
 			
 		}
 	}

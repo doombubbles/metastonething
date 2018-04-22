@@ -35,7 +35,8 @@ public class PutRandomSecretIntoPlaySpell extends Spell {
 		if (cardSource == null) {
 			cardSource = new SourceDesc(SourceDesc.build(DeckSource.class)).create();
 		}
-		EntityFilter filter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
+		EntityFilter filter = desc.getEntityFilter();
+
 		for (int i = 0; i < howMany; i++) {
 			CardList secretCards = findSecretCards(cardSource.getCards(context, player));
 

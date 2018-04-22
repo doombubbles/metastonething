@@ -24,6 +24,8 @@ public class SummonRandomNotOnBoardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+		int value = desc.getValue(SpellArg.VALUE, 1);
+		int howMany = desc.getValue(SpellArg.HOW_MANY, 1);
 		String[] minionCardsId = (String[]) desc.get(SpellArg.CARDS);
 		List<String> eligibleMinions = new ArrayList<String>();
 		for (String minion : minionCardsId) {
@@ -31,13 +33,18 @@ public class SummonRandomNotOnBoardSpell extends Spell {
 				eligibleMinions.add(minion);
 			}
 		}
-		if (eligibleMinions.isEmpty()) {
-			return;
+		for (int i = 1; i <= value; i++) {
+			if (eligibleMinions.isEmpty()) {
+				return;
+			}
+			String randomMinionId = eligibleMinions.get(context.getLogic().random(eligibleMinions.size()));
+			MinionCard randomMinionCard = (MinionCard) context.getCardById(randomMinionId);
+			for (int j = 1; j <= howMany; j++) {
+				context.getLogic().summon(player.getId(), randomMinionCard.summon());
+			}
+			eligibleMinions.remove(randomMinionId);
 		}
 
-		String randomMinionId = eligibleMinions.get(context.getLogic().random(eligibleMinions.size()));
-		MinionCard randomMinionCard = (MinionCard) context.getCardById(randomMinionId);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
 	}
 
 }

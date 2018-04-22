@@ -4,6 +4,8 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -25,7 +27,12 @@ public class AddSecretSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Secret secret = (Secret) desc.get(SpellArg.SECRET);
+		SpellDesc secretDesc = desc;
+		if (desc.contains(SpellArg.CARD)) {
+			SecretCard secretCard = (SecretCard) desc.get(SpellArg.CARD);
+			secretDesc = secretCard.getSpell();
+		}
+		Secret secret = (Secret) secretDesc.get(SpellArg.SECRET);
 		context.getLogic().playSecret(player, secret, true);
 	}
 

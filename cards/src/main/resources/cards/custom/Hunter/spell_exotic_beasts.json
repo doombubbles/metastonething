@@ -1,0 +1,50 @@
+{
+    "name": "Exotic Beasts",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "HUNTER",
+    "rarity": "EPIC",
+    "description": "Discover a Beast from your deck, or craft a Zom-Beast if your deck doesn't have any.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "EitherOrSpell",
+		"spell2": {
+			"class": "DiscoverDrawSpell",
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "BEAST"
+			},
+			"spell": {
+				"class": "ReceiveCardSpell"
+			}
+		},
+		"spell1": {
+			"class": "custom.BuildABeastSpell",
+			"spell": {
+				"class": "NullSpell"
+			}
+		},	
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"race": "BEAST"
+			},
+			"invert": true
+		}
+    },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"race": "BEAST"
+		},
+		"invert": true
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

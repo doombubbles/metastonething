@@ -20,4 +20,5 @@ public enum FilterArg {
 	VALUE2,
 	ALGEBRAIC_OPERATION,
 	CARDS,
+	CUSTOM
 }

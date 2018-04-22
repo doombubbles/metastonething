@@ -11,7 +11,8 @@
 		"class": "DiscoverDrawSpell",
 		"spell": {
 			"class": "ReceiveCardSpell"
-		}
+		},
+		"exclusive": true
 	},
 	"collectible": true,
 	"set": "BASIC",

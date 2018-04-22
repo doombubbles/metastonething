@@ -11,7 +11,7 @@
     },
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "TurnStartTrigger",
+			"class": "TurnEndTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {
@@ -25,10 +25,7 @@
 		}
 	},
 	"condition": {
-		"class": "ComparisonCondition",
-		"operation": "GREATER",
-		"value1": 0,
-		"value2": 1
+		"class": "NeverCondition"
 	},
     "collectible": true,
     "set": "KOBOLDS_AND_CATACOMBS",

@@ -1,0 +1,23 @@
+{
+    "name": "Cauldron Elemental",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 7,
+    "baseHp": 7,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "ELEMENTAL",
+    "description": "Your other Elementals have +2 Attack.",
+    "aura": {
+        "class": "BuffAura",
+        "target": "OTHER_FRIENDLY_MINIONS",
+        "attackBonus": 2,
+        "filter": {
+            "class": "RaceFilter",
+            "race": "ELEMENTAL"
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

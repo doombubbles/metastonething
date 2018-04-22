@@ -9,7 +9,7 @@
     "description": "Divine Shield. Rush. Each turn this is in your hand, swap its Attack and Health.",
 	"passiveTrigger": {
 		"eventTrigger": {
-			"class": "TurnStartTrigger",
+			"class": "TurnEndTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {

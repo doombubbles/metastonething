@@ -1,0 +1,41 @@
+{
+    "name": "Earthen Might",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "race": "NONE",
+    "description": "Give a minion +2/+2. If it's an Elemental, add a random Elemental to your hand.",
+    "targetSelection": "MINIONS",
+    "spell": {
+        "class": "ConditionalEffectSpell",
+        "spell1": {
+            "class": "BuffSpell",
+            "target": "TARGET",
+            "attackBonus": 2,
+            "hpBonus": 2
+        },
+        "spell2": {
+            "class": "ReceiveCardSpell",
+            "cardFilter": {
+                "class": "CardFilter",
+                "race": "ELEMENTAL"
+            }
+        },
+        "condition": {
+            "class": "RaceCondition",
+            "race": "ELEMENTAL"
+        }
+    },
+    "glow": {
+        "class": "MinionOnBoardCondition",
+        "target": "FRIENDLY_MINIONS",
+        "cardFilter": {
+            "class": "RaceFilter",
+            "race": "ELEMENTAL"
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -7,7 +7,7 @@
     "description": "Secret: After your opponent plays three cards in a turn, summon a 6/6 Rat.",
     "targetSelection": "NONE",
     "trigger": {
-        "class": "AfterSpellCastedTrigger",
+        "class": "CardPlayedTrigger",
 		"targetPlayer": "OPPONENT",
 		"value": 3,
 		"inOneTurn": true,

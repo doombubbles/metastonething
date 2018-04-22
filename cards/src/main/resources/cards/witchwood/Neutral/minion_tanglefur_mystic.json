@@ -1,0 +1,28 @@
+{
+    "name": "Tanglefur Mystic",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "description": "Battlecry: Add a random 2-Cost minion to each player's hand.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "ReceiveCardSpell",
+            "targetPlayer": "BOTH",
+            "cardFilter": {
+                "class": "CardFilter",
+                "cardType": "MINION",
+                "manaCost": 2
+            }
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

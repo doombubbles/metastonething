@@ -7,19 +7,12 @@
     "description": "Echo. Summon a 1/1 Silver Hand Recruit.",
     "targetSelection": "NONE",
     "spell": {
-        "class": "MetaSpell",
-		"spells": [
-			{
-				"class": "SummonSpell",
-				"card": "token_silver_hand_recruit"
-			},
-			{
-				"class": "ReceiveCardSpell",
-				"card": "spell_reporting_for_duty",
-				"attribute": "ONE_TURN"
-			}
-		]
+        "class": "SummonSpell",
+		"card": "token_silver_hand_recruit"
     },
+	"attributes": {
+		"ECHO": true
+	},
     "collectible": true,
     "set": "CUSTOM",
     "fileFormatVersion": 1

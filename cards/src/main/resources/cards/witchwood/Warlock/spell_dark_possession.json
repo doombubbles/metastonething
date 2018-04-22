@@ -1,0 +1,33 @@
+{
+    "name": "Dark Possession",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "RARE",
+    "description": "Deal * 2* damage to a friendly character. Discover a Demon.",
+    "targetSelection": "FRIENDLY_CHARACTERS",
+    "spell": {
+        "class": "MetaSpell",
+        "spells": [
+            {
+                "class": "DamageSpell",
+                "value": 2
+            },
+            {
+                "class": "DiscoverRandomCardSpell",
+                "spell": {
+                    "class": "ReceiveCardSpell",
+                    "targetPlayer": "SELF"
+                },
+                "cardFilter": {
+                    "class": "CardFilter",
+                    "cardType": "MINION",
+                    "race": "DEMON"
+                }
+            }
+        ]
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

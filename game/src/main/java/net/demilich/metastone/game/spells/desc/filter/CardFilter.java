@@ -3,15 +3,15 @@ package net.demilich.metastone.game.spells.desc.filter;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.Rift;
+import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
+import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class CardFilter extends EntityFilter {
 
@@ -105,6 +105,20 @@ public class CardFilter extends EntityFilter {
 				requiredCardId = context.getEventCard().getCardId();
 			}
 			return card.getCardId().equalsIgnoreCase(requiredCardId);
+		}
+
+		if (desc.getString(FilterArg.CUSTOM).equals("TARGETING")) {
+			if (card.getCardType().equals(CardType.SPELL)) {
+				SpellCard spell = (SpellCard) card;
+				if (spell.getTargetRequirement().equals(TargetSelection.NONE)) {
+					return false;
+				}
+			} else if (card.getCardType().equals(CardType.MINION)) {
+				MinionCard minionCard = (MinionCard) card;
+				if (minionCard.hasBattlecry() && !minionCard.getBattlecry().getTargetSelection().equals(TargetSelection.NONE)) {
+					return false;
+				}
+			}
 		}
 
 		return true;

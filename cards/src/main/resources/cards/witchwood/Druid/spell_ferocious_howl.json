@@ -1,0 +1,28 @@
+{
+    "name": "Ferocious Howl",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "DRUID",
+    "rarity": "COMMON",
+    "description": "Draw a card. Gain 1 Armor for each card in your hand.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+        "spells": [
+            {
+                "class": "DrawCardSpell"
+            },
+            {
+                "class": "BuffHeroSpell",
+                "armorBonus": {
+                    "class": "PlayerAttributeValueProvider",
+                    "targetPlayer": "SELF",
+                    "playerAttribute": "HAND_COUNT"
+                }
+            }
+        ]
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

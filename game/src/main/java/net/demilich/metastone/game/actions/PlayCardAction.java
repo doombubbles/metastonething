@@ -43,6 +43,12 @@ public abstract class PlayCardAction extends GameAction {
 			// card was countered, do not actually resolve its effects
 			if (!card.hasAttribute(Attribute.COUNTERED)) {
 				play(context, playerId, previousContext);
+				if (card.hasAttribute(Attribute.ECHO)) {
+					Card echoCard = context.getCardById(card.getCardId());
+					echoCard.setAttribute(Attribute.ONE_TURN);
+					context.getLogic().receiveCard(playerId, echoCard);
+				}
+
 			}
 
 		} catch (Exception e) {

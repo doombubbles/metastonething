@@ -13,7 +13,7 @@
 			"class": "AdaptSpell",
 			"group": "group_adapt",
 			"target": "SELF",
-			"howMany": 5
+			"value": 5
 		}
 	},
 	"attributes": {

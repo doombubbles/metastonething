@@ -49,7 +49,7 @@ public class ReplayCardsSpell extends Spell {
                     break;
                 case REPLACE_HERO:
                     ReplaceHeroCard replaceHeroCard = (ReplaceHeroCard) card;
-                    context.getLogic().replaceHero(player.getId(), replaceHeroCard, true);
+                    context.getLogic().replaceHero(player.getId(), replaceHeroCard, null);
                     break;
             }
         }

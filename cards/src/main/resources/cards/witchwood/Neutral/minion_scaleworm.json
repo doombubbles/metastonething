@@ -1,10 +1,10 @@
 {
 	"name": "Scaleworm",
-	"baseManaCost": 5,
+	"baseManaCost": 4,
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
-	"heroClass": "NEUTRAL",
+	"heroClass": "ANY",
 	"rarity": "RARE",
 	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Rush.",
 	"battlecry": {

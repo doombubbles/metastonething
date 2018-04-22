@@ -1,0 +1,54 @@
+{
+    "name": "Blackjack",
+    "baseManaCost": 1,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "EPIC",
+    "description": "Echo. Add a random Rogue card to your hand. If your hand's Cost exceeds (21), discard all.",
+    "targetSelection": "NONE",
+    "spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "ReceiveCardSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"heroClass": "ROGUE"
+				}
+			},
+			{
+				"class": "ConditionalSpell",
+				"condition": {
+					"class": "ComparisonCondition",
+					"value1": {
+						"class": "AttributeCounter",
+						"target": "FRIENDLY_HAND",
+						"attribute": "ACTUAL_MANA_COST"
+					},
+					"operation": "GREATER",
+					"value2": 20
+				},
+				"spell": {
+					"class": "AddSpellTriggerSpell",
+					"target": "FRIENDLY_PLAYER",
+					"trigger": {
+						"eventTrigger": {
+							"class": "AfterCardPlayedTrigger"
+						},
+						"spell": {
+							"class": "DiscardSpell",
+							"value": -1
+						},
+						"oneTime": true
+					}
+				}
+			}
+		]
+	},
+    "attributes": {
+        "ECHO": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

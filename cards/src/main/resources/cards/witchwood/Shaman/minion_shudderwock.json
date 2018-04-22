@@ -1,0 +1,22 @@
+{
+    "name": "Shudderwock",
+    "baseManaCost": 9,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 6,
+    "heroClass": "SHAMAN",
+    "rarity": "LEGENDARY",
+    "description": "Battlecry: Repeat all other Battlecries from cards you played this game (targets chosen randomly).",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "RepeatBattlecriesSpell"
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -1,6 +1,6 @@
 {
 	"name": "Strom'kar",
-	"baseManaCost": 6,
+	"baseManaCost": 7,
 	"type": "WEAPON",
 	"damage": 4,
 	"durability": 2,

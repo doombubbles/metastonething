@@ -4,14 +4,18 @@
 	"type": "HERO_POWER",
 	"heroClass": "SHAMAN",
 	"rarity": "FREE",
-	"description": "Summon a Totem of your choice.",
+	"description": "Summon 2 random Basic Totems.",
 	"targetSelection": "NONE",
-	"options": [
-		"spell_summon_searing_totem",
-		"spell_summon_healing_totem",
-		"spell_summon_wrath_of_air_totem",
-		"spell_summon_stoneclaw_totem"
-	],
+	"spell": {
+		"class": "SummonRandomNotOnBoardSpell",
+		"cards": [
+			"token_searing_totem",
+			"token_healing_totem",
+			"token_wrath_of_air_totem",
+			"token_stoneclaw_totem"
+		],
+		"value": 2
+	},
 	"condition": {
 		"class": "MinionCountCondition",
 		"operation": "LESS",

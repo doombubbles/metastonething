@@ -1,0 +1,17 @@
+{
+	"name": "Druid of the Scythe",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 2,
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"race": "BEAST",
+	"description": "Rush.",
+	"attributes": {
+		"RUSH": true
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

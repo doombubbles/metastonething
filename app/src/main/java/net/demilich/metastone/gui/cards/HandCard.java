@@ -17,8 +17,10 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
+import net.demilich.metastone.game.behaviour.Behaviour;
 import net.demilich.metastone.game.behaviour.human.ActionGroup;
 import net.demilich.metastone.game.behaviour.human.HumanActionOptions;
+import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.behaviour.human.HumanTargetOptions;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
@@ -248,7 +250,7 @@ public class HandCard extends CardToken {
 	}
 	public void evaluateGlow(GameContext context, Card card, Player player) {
 		glow("NOPE");
-		if (context.getLogic().canPlayCard(player.getId(), card.getCardReference()) && context.getActivePlayer() == player) {
+		if (context.getLogic().canPlayCard(player.getId(), card.getCardReference()) && context.getActivePlayer() == player && player.getBehaviour().getName().equals("<Human controlled>")) {
 			glow("GREEN");
 			if (card.hasAttribute(Attribute.COMBO) && player.hasAttribute(Attribute.COMBO)) {
 				glow("YELLOW");

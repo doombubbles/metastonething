@@ -1,0 +1,17 @@
+{
+    "name": "Divine Hymn",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "PRIEST",
+    "rarity": "COMMON",
+    "description": "Restore 6 Health to all friendly characters.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "HealSpell",
+        "value": 6,
+        "target": "FRIENDLY_CHARACTERS"
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

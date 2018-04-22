@@ -9,6 +9,7 @@ import net.demilich.metastone.game.GameValue;
 import net.demilich.metastone.game.PlayerAttribute;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardDescType;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -170,14 +171,19 @@ public class ParseUtils {
 			return manaModifierParser.deserialize(entry, CardCostModifierDesc.class, null);
 		case OBJECT:
 			String string = entry.getAsString();
-			String classy = string.substring(0, string.indexOf("."));
-			String rest = string.substring(string.indexOf(".") + 1);
-			switch (classy) {
-				case "CardType":
-					return Enum.valueOf(CardType.class, rest);
-				default:
-					return rest;
-			}
+			if (string.contains(".")) {
+				String classy = string.substring(0, string.indexOf("."));
+				String rest = string.substring(string.indexOf(".") + 1);
+				switch (classy) {
+					case "CardType":
+						return Enum.valueOf(CardType.class, rest);
+					case "CardSet":
+						return CardSet.valueOf(rest);
+					default:
+						return rest;
+				}
+			} else return string;
+
 		default:
 			break;
 		}

@@ -15,11 +15,21 @@ public class DeckContainsCondition extends Condition {
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(ConditionArg.CARD_FILTER);
-		for (Card card : player.getDeck()) {
-			if (cardFilter == null || cardFilter.matches(context, player, card)) {
-				return true;
+		String[] cardIds = (String[]) desc.get(ConditionArg.CARD_IDS);
+		if (cardFilter != null) {
+			for (Card card : player.getDeck()) {
+				if (cardFilter == null || cardFilter.matches(context, player, card)) {
+					return true;
+				}
+			}
+		} else {
+			for (String s : cardIds) {
+				if (player.getDeck().contains(context.getCardById(s))) {
+					return true;
+				}
 			}
 		}
+
 		return false;
 	}
 

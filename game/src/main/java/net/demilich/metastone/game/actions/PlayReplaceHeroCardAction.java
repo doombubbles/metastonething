@@ -30,7 +30,7 @@ public class PlayReplaceHeroCardAction extends PlayCardAction {
 	@Override
 	protected void play(GameContext context, int playerId, GameContext previousContext) {
 		ReplaceHeroCard replaceHeroCard = (ReplaceHeroCard) context.getPendingCard();
-		context.getLogic().replaceHero(playerId, replaceHeroCard,true);
+		context.getLogic().replaceHero(playerId, replaceHeroCard,battlecry);
 	}
 
 }

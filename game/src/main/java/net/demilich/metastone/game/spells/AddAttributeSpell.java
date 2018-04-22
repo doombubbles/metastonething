@@ -46,9 +46,7 @@ public class AddAttributeSpell extends RevertableSpell {
 		Attribute tag = (Attribute) desc.get(SpellArg.ATTRIBUTE);
 		if (desc.contains(SpellArg.OBJECT)) {
 			Object object = desc.get(SpellArg.OBJECT);
-			System.out.println("woot toot");
 			target.setAttribute(tag, object);
-			System.out.println(target.getAttribute(tag).toString());
 		} else if (desc.contains(SpellArg.NAME)) {
 			String string = desc.getString(SpellArg.NAME);
 			List<String> strings = target.hasAttribute(tag) ? (List<String>) target.getAttribute(tag) : new ArrayList<>();

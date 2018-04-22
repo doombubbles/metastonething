@@ -1,0 +1,26 @@
+{
+    "name": "Nightscale Matriarch",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 9,
+    "heroClass": "PRIEST",
+    "rarity": "RARE",
+    "race": "DRAGON",
+    "description": "Whenever a friendly minion is healed, summon a 3/3 Whelp.",
+    "trigger": {
+        "eventTrigger": {
+            "class": "HealingTrigger",
+            "targetEntityType": "MINION",
+            "targetPlayer": "SELF"
+        },
+        "spell": {
+            "class": "SummonSpell",
+            "card": "token_33whelp",
+            "boardPositionRelative": "RIGHT"
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

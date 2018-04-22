@@ -56,6 +56,7 @@ public abstract class Card extends Entity {
 		}
 
 		setAttribute(Attribute.BASE_MANA_COST, desc.baseManaCost);
+		setAttribute(Attribute.ACTUAL_MANA_COST, desc.baseManaCost);
 		if (desc.attributes != null) {
 			attributes.putAll(desc.attributes);
 		}
@@ -214,6 +215,8 @@ public abstract class Card extends Entity {
 		if (filter == null || filter == "") {
 			return true;
 		}
+		filter = filter.replace("mana=odd", "mana!=0 mana!=2 mana!=4 mana!=6 mana!=8 mana!=10 mana!=12 mana!=14 mana!=16 mana!=18 mana!=20 mana!=22 mana!=24 mana!=26 mana!=28 mana!=30")
+				.replace("mana=even","mana!=1 mana!=3 mana!=5 mana!=7 mana!=9 mana!=11 mana!=13 mana!=15 mana!=17 mana!=19 mana!=21 mana!=23 mana!=25");
 		String[] filters = filter.split(" ");
 		for (String splitString : filters) {
 			if (!matchesSplitFilter(splitString)) {

@@ -34,7 +34,7 @@ public class LowestAttributeValueProvider extends ValueProvider {
 		}
 
 		EntityFilter filter = (EntityFilter) desc.get(ValueProviderArg.FILTER);		
-		int value = 0;
+		int value = Integer.MAX_VALUE;
 		for (Entity entity : entities) {
 			if (filter != null && !filter.matches(context, player, entity)) {
 				continue;
@@ -46,7 +46,7 @@ public class LowestAttributeValueProvider extends ValueProvider {
 				} else if (attribute == Attribute.MAX_HP) {
 					value = Math.min(card.getAttributeValue(Attribute.MAX_HP) + card.getAttributeValue(Attribute.HP_BONUS), value);
 				} else {
-					value = Math.max(card.getAttributeValue(attribute), value);
+					value = Math.min(card.getAttributeValue(attribute), value);
 				}
 			} else {
 				Actor source = (Actor) entity;
@@ -59,7 +59,6 @@ public class LowestAttributeValueProvider extends ValueProvider {
 				}
 			}
 		}
-
 		return value;
 	}
 

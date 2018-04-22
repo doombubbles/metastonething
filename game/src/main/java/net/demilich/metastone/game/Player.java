@@ -79,6 +79,9 @@ public class Player extends Entity {
 		config.build();
 		Deck selectedDeck = config.getDeckForPlay();
 		this.deck = selectedDeck.getCardsCopy();
+		for (Card card : this.deck) {
+			card.setOwner(getId());
+		}
 		this.setHero(config.getHeroForPlay().createHero());
 		this.setName(config.getName() + " - " + hero.getName());
 		this.deckName = selectedDeck.getName();

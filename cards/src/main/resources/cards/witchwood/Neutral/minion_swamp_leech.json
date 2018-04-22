@@ -1,0 +1,17 @@
+{
+    "name": "Swamp Leech",
+    "baseManaCost": 1,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Lifesteal",
+    "attributes": {
+        "LIFESTEAL": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

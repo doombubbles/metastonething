@@ -1,0 +1,40 @@
+{
+    "name": "Curse of Weakness",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "WARLOCK",
+    "rarity": "RARE",
+    "description": "Echo. Give all enemy minions -2 Attack until your next turn.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "MetaSpell",
+        "spells": [
+            {
+                "class": "TemporaryAttackSpell",
+                "target": "ENEMY_MINIONS",
+                "value": -2
+            },
+            {
+                "class": "AddSpellTriggerSpell",
+                "target": "ENEMY_MINIONS",
+                "trigger": {
+                    "eventTrigger": {
+                        "class": "TurnStartTrigger"
+                    },
+                    "spell": {
+                        "class": "TemporaryAttackSpell",
+                        "target": "TARGET",
+                        "value": -2
+                    },
+                    "oneTime": true
+                }            
+            }
+        ]
+    },
+    "attributes": {
+        "ECHO": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

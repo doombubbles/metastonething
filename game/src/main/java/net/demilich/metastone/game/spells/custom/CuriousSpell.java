@@ -36,6 +36,7 @@ public class CuriousSpell extends Spell {
 			potentialCards.removeAll(p -> (p.getHeroClass() != opponent.getHero().getHeroClass() || p.getHeroClass() != opponent.getHero().getHeroClass()));
 		} else potentialCards.removeAll(p -> p.getHeroClass() != opponent.getHero().getHeroClass());
 		potentialCards.shuffle();
+		potentialCards.removeAll(deck::contains);
 		Card realCard = deck.getRandom();
 		Card wrongCard1 = potentialCards.get(0);
 		Card wrongCard2 = potentialCards.get(1);
@@ -43,9 +44,9 @@ public class CuriousSpell extends Spell {
 		cards.add(wrongCard1);
 		cards.add(wrongCard2);
 		cards.shuffle();
-		
+
 		if (SpellUtils.getDiscover(context, player, desc, cards).getCard() == realCard) {
-			context.getLogic().receiveCard(player.getId(), realCard);
+			context.getLogic().receiveCard(player.getId(), context.getCardById(realCard.getCardId()).clone());
 		}
 	}
 

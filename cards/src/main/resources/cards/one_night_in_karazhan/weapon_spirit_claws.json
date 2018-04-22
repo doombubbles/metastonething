@@ -1,12 +1,12 @@
 {
 	"name": "Spirit Claws",
-	"baseManaCost": 2,
+	"baseManaCost": 1,
 	"type": "WEAPON",
 	"damage": 1,
 	"durability": 3,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"description": "Has +2 Attack while you have Spell Damage.",
+	"description": "Has +1 Attack for each Spell Damage you have.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "BoardChangedTrigger"
@@ -15,19 +15,9 @@
 			"class": "ConditionalAttackBonusSpell",
 			"target": "SELF",
 			"value": {
-				"class": "ConditionalValueProvider",
-				"ifTrue": 2,
-				"ifFalse": 0,
-				"condition": {
-					"class": "ComparisonCondition",
-					"value1": {
-						"class": "AttributeCounter",
-						"target": "FRIENDLY_CHARACTERS",
-						"attribute": "SPELL_DAMAGE"
-					},
-					"value2": 1,
-					"operation": "GREATER_OR_EQUAL"
-				}
+				"class": "AttributeCounter",
+				"target": "FRIENDLY_CHARACTERS",
+				"attribute": "SPELL_DAMAGE"
 			}
 		}
 	},

@@ -7,9 +7,11 @@ import java.util.Map;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -39,6 +41,28 @@ public class AdaptSpell extends Spell {
 		int count = desc.getValue(SpellArg.VALUE, context, player, null, source, 1);
 		List<SpellDesc> spellList = new ArrayList<SpellDesc>();
 		for (SpellDesc spell : group) {
+			CardSet set = (CardSet) spell.get(SpellArg.OBJECT);
+			Condition condition = (Condition) spell.get(SpellArg.CONDITION);
+
+			if (set != null) {
+				if (!context.getDeckFormat().getCardSets().contains(set)) {
+					continue;
+				}
+				spell = spell.removeArg(SpellArg.OBJECT);
+			}
+			if (condition != null) {
+				int i = 0;
+				for (Entity validTarget : validTargets) {
+					if (condition.isFulfilled(context, player, source, validTarget)) {
+						i++;
+					}
+				}
+				if (i == 0) {
+					continue;
+				}
+				spell = spell.removeArg(SpellArg.CONDITION);
+			}
+
 			spellList.add(spell);
 		}
 

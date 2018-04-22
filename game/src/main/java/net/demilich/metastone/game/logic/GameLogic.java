@@ -429,7 +429,6 @@ public class GameLogic implements Cloneable, Serializable {
 		if (hero.getHeroClass() == null || hero.getHeroClass() == HeroClass.ANY) {
 			hero.setHeroClass(player.getHero().getHeroClass());
 		}
-
 		log("{}'s hero has been changed to {}", player.getName(), hero);
 		hero.setOwner(player.getId());
 		hero.setWeapon(player.getHero().getWeapon());
@@ -512,7 +511,7 @@ public class GameLogic implements Cloneable, Serializable {
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellDamage && sourceCard != null) {
 			if (sourceCard.getCardType().isCardType(CardType.SPELL)) {
-				damage = applySpellpower(player, source, baseDamage) + sourceCard.getAttributeValue(Attribute.SPELL_DAMAGE) + player.getAttributeValue(Attribute.SPELL_DAMAGE);
+				damage = applySpellpower(player, source, baseDamage) + sourceCard.getAttributeValue(Attribute.SPELL_DAMAGE);
 			} else if (sourceCard.getCardType().isCardType(CardType.HERO_POWER)) {
 				damage = applyHeroPowerDamage(player, damage);
 				if (hasAttribute(player, Attribute.FREEZE_POWER)) {
@@ -1115,6 +1114,7 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public int getTotalAttributeValue(Player player, Attribute attr) {
 		int total = player.getHero().getAttributeValue(attr);
+		total += player.getAttributeValue(attr);
 		for (Summon summon : player.getSummons()) {
 			if (!summon.hasAttribute(attr)) {
 				continue;
@@ -1607,11 +1607,6 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		removeCardFromHand(playerId, card);
-		if (card.hasAttribute(Attribute.ECHO)) {
-			Card echoCard = context.getCardById(card.getCardId());
-			echoCard.setAttribute(Attribute.ONE_TURN);
-			receiveCard(playerId, echoCard);
-		}
 
 		if ((card.getCardType().isCardType(CardType.SPELL))) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
@@ -1856,52 +1851,19 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 	}
 
-	public void replaceHero(int playerId, ReplaceHeroCard replaceHeroCard, boolean resolveBattlecry) {
+	public void replaceHero(int playerId, ReplaceHeroCard replaceHeroCard, BattlecryAction battlecry) {
 		Player player = context.getPlayer(playerId);
 		HeroCard heroCard = (HeroCard) context.getCardById(replaceHeroCard.hero).clone();
 		heroCard.setAttribute(Attribute.HP, context.getPlayer(playerId).getHero().getHp());
-		gainArmor(player, replaceHeroCard.armor);
+		heroCard.setAttribute(Attribute.ARMOR, context.getPlayer(playerId).getHero().getArmor());
 		Hero hero = heroCard.createHero();
 		context.fireGameEvent(new HeroPowerChangedEvent(context, playerId, hero.getHeroPower()));
 		changeHero(player, hero);
+		gainArmor(player, replaceHeroCard.armor);
 
-		Actor actor = player.getHero();
-
-		BattlecryAction battlecry = replaceHeroCard.battlecry;
-		if (battlecry != null && resolveBattlecry) {
-			GameAction battlecryAction = null;
-			battlecry.setSource(actor.getReference());
-			if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
-				List<Entity> validTargets = context.getLogic().getValidTargets(playerId, (GameAction) battlecry);
-				if (validTargets.isEmpty()) {
-					return;
-				}
-
-				List<GameAction> battlecryActions = new ArrayList<>();
-				for (Entity validTarget : validTargets) {
-					GameAction targetedBattlecry = battlecry.clone();
-					targetedBattlecry.setTarget(validTarget);
-					battlecryActions.add(targetedBattlecry);
-				}
-
-
-				battlecryAction = player.getBehaviour().requestAction(context, player, battlecryActions);
-
-			} else {
-				battlecryAction = battlecry;
-			}
-			if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
-				performGameAction(playerId, battlecryAction);
-				if (!battlecry.canBeExecuted(context, player)) {
-					return;
-				}
-				performGameAction(playerId, battlecryAction);
-			} else {
-				performGameAction(playerId, battlecryAction);
-			}
+		if (battlecry != null) {
+			resolveBattlecry(playerId, battlecry, player.getHero(), replaceHeroCard);
 		}
-
-		context.fireGameEvent(new BoardChangedEvent(context));
 
 	}
 
@@ -1954,15 +1916,19 @@ public class GameLogic implements Cloneable, Serializable {
 		newCard.setLocation(CardLocation.DECK);
 	}
 
-	private void resolveBattlecry(int playerId, Actor actor) {
+	private void resolveBattlecry(int playerdId, Actor actor) {
 		BattlecryAction battlecry = actor.getBattlecry();
+		resolveBattlecry(playerdId, battlecry, actor, actor.getSourceCard());
+	}
+
+	private void resolveBattlecry(int playerId, BattlecryAction battlecry, Actor source, Card card) {
 		Player player = context.getPlayer(playerId);
 		if (!battlecry.canBeExecuted(context, player)) {
 			return;
 		}
 
 		GameAction battlecryAction = null;
-		battlecry.setSource(actor.getReference());
+		battlecry.setSource(source.getReference());
 		if (battlecry.getTargetRequirement() != TargetSelection.NONE) {
 			processTargetModifiers(player, battlecry);
 			List<Entity> validTargets = targetLogic.getValidTargets(context, player, battlecry);
@@ -1985,16 +1951,18 @@ public class GameLogic implements Cloneable, Serializable {
 		} else {
 			battlecryAction = battlecry;
 		}
-		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && actor.getSourceCard().hasAttribute(Attribute.BATTLECRY)) {
+
+
+
+		if (hasAttribute(player, Attribute.DOUBLE_BATTLECRIES) && card.hasAttribute(Attribute.BATTLECRY)) {
 			// You need DOUBLE_BATTLECRIES before your battlecry action, not after.
 			performGameAction(playerId, battlecryAction);
 			if (!battlecry.canBeExecuted(context, player)) {
 				return;
 			}
-			performGameAction(playerId, battlecryAction);
-		} else {
-			performGameAction(playerId, battlecryAction);
 		}
+		performGameAction(playerId, battlecryAction);
+
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor) {
@@ -2134,11 +2102,13 @@ public class GameLogic implements Cloneable, Serializable {
 	public void stealCard(Player newOwner, Entity source, Card card, CardLocation destination) throws IllegalArgumentException {
 
 		// If the card isn't already in the SET_ASIDE_ZONE, move it
-		if (card.getLocation() != CardLocation.SET_ASIDE_ZONE
-				&& card.getOwner() != newOwner.getId()) {
+		if (card.getLocation() != CardLocation.SET_ASIDE_ZONE && card.getOwner() != newOwner.getId()) {
 			// Move to set aside zone first.
-
-			remove(card.getOwner(), card);
+			int owner = card.getOwner();
+			if (owner == -1) {
+				owner = context.getOpponent(newOwner).getId();
+			}
+			remove(owner, card);
 			newOwner.getSetAsideZone().add(card);
 		}
 
@@ -2205,6 +2175,13 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 		context.fireGameEvent(new BoardChangedEvent(context));
 
+
+        if (summon instanceof Minion) {
+            applyAttribute(summon, Attribute.SUMMONING_SICKNESS);
+            refreshAttacksPerRound(summon);
+        }
+
+
 		if (resolveBattlecry && summon.getBattlecry() != null) {
 			resolveBattlecry(player.getId(), summon);
 			checkForDeadEntities();
@@ -2232,9 +2209,6 @@ public class GameLogic implements Cloneable, Serializable {
 				SummonEvent summonEvent = new SummonEvent(context, minion, source, minion.getAttack() + minion.getHp());
 				context.fireGameEvent(summonEvent);
 			}
-
-			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
-			refreshAttacksPerRound(minion);
 		} else if (summon instanceof Permanent) {
 			Permanent permanent = (Permanent) summon;
 			player.getStatistics().permanentSummoned(permanent, context.getTurn());
@@ -2352,15 +2326,21 @@ public class GameLogic implements Cloneable, Serializable {
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
-	public void useHeroPower(int playerId) {
+	public void useHeroPower(int playerId, boolean mana) {
 		Player player = context.getPlayer(playerId);
 		HeroPower power = player.getHero().getHeroPower();
-		int modifiedManaCost = getModifiedManaCost(player, power);
-		modifyCurrentMana(playerId, -modifiedManaCost);
-		log("{} uses {}", player.getName(), power);
-		power.markUsed();
-		player.getStatistics().cardPlayed(power, context.getTurn());
+		if (mana) {
+			int modifiedManaCost = getModifiedManaCost(player, power);
+			modifyCurrentMana(playerId, -modifiedManaCost);
+			log("{} uses {}", player.getName(), power);
+			power.markUsed();
+			player.getStatistics().cardPlayed(power, context.getTurn());
+		}
 		context.fireGameEvent(new HeroPowerUsedEvent(context, playerId, power));
+	}
+
+	public void useHeroPower(int playerId) {
+		useHeroPower(playerId, true);
 	}
 	
 	public void info (String string) {
