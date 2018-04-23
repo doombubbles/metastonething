@@ -37,12 +37,20 @@ public class CardCatalogue {
 		cards.add(card);
 	}
 
-	public static CardList getAll() {
+	public static CardList getAll(DeckFormat format) {
 		CardList result = new CardList();
 		for (Card card : cards) {
-			result.add(card);
+			if (format != null) {
+				if (format.isInFormat(card)) {
+					result.add(card);
+				}
+			} else result.add(card);
 		}
 		return result;
+	}
+
+	public static CardList getAll() {
+		return getAll(null);
 	}
 
 	public static Card getCardById(String id) {

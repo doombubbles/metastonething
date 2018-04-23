@@ -1,0 +1,26 @@
+{
+    "name": "Forgotten Hero",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "description": "After a hero power is used, replace it with a random one from ANYWHERE.",
+    "trigger": {
+        "eventTrigger": {
+			"class": "InspireTrigger",
+			"targetPlayer": "BOTH"
+		},
+		"spell": {
+			"class": "ChangeHeroPowerSpell",
+			"targetPlayer": "ACTIVE",
+			"cardSource": {
+				"class": "AllSource"
+			}
+		}
+    },
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}
