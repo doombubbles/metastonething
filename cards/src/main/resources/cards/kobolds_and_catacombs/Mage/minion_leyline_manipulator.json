@@ -15,8 +15,9 @@
 			"target": "FRIENDLY_PLAYER",
 			"cardFilter": {
 				"class": "CardFilter",
-				"attribute": "RECEIVED",
-				"operation": "HAS"
+				"attribute": "STARTED_IN_DECK",
+				"operation": "HAS",
+				"invert": true
 			},
 			"cardCostModifier": {
 				"class": "CardCostModifier",
