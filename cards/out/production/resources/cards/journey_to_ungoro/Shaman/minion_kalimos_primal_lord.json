@@ -26,13 +26,13 @@
 					"description": "Fill your board with 1/1 Elementals.",
 					"class": "SummonSpell",
 					"cards": [
-						"token_elemental",
-						"token_elemental",
-						"token_elemental",
-						"token_elemental",
-						"token_elemental",
-						"token_elemental",
-						"token_elemental"
+						"token_stone_elemental",
+						"token_stone_elemental",
+						"token_stone_elemental",
+						"token_stone_elemental",
+						"token_stone_elemental",
+						"token_stone_elemental",
+						"token_stone_elemental"
 					]
 				},
 				{

@@ -1,0 +1,24 @@
+{
+    "name": "Dollmaster Dorian",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "description": "Whenever you draw a minion, summon a 1/1 copy of it.",
+    "trigger": {
+        "eventTrigger": {
+            "class": "CardDrawnTrigger",
+			"targetPlayer": "SELF",
+			"cardType": "MINION"
+        },
+        "spell": {
+            "class": "SummonOneOneCopySpell",
+			"target": "EVENT_TARGET"
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -1,0 +1,39 @@
+{
+    "name": "Quartz Spellstone",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "description": "Give your minions +2/+2. (Freeze {$1 more}[2] minions to upgrade.)",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
+		"value": 1
+    },
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "AttributeGainedTrigger",
+			"targetEntityType": "MINION",
+			"requiredAttribute": "FROZEN",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"value": 2
+		},
+		"spell": {
+			"class": "TransformCardSpell",
+			"target": "SELF",
+			"card": "spell_greater_quartz_spellstone"
+		}
+	},
+	"descValues": [
+		{
+			"class": "TriggerValueProvider",
+			"target": "SELF",
+			"custom": "ATTRIBUTE_GAINED"
+		}
+	],
+    "collectible": false,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

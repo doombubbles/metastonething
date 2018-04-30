@@ -1,0 +1,31 @@
+{
+    "name": "Witchwood Piper",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "description": "Battlecry: Draw a minion from your deck with the lowest mana cost.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "FromDeckToHandSpell",
+            "cardFilter": {
+                "class": "CardFilter",
+                "cardType": "MINION",
+                "manaCost": {
+                    "class": "LowestAttributeValueProvider",
+                    "target": "FRIENDLY_DECK",
+                    "attribute": "BASE_MANA_COST"
+                }
+            }
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -119,8 +119,9 @@ public class CardList implements Iterable<Card>, Cloneable, Serializable {
 		cards.clear();
 	}
 
-	public void removeAll(Predicate<Card> filter) {
+	public CardList removeAll(Predicate<Card> filter) {
 		cards.removeIf(filter);
+		return this;
 	}
 
 	public Card removeFirst() {

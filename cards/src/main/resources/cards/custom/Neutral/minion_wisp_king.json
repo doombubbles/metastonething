@@ -1,0 +1,30 @@
+{
+    "name": "Wisp King",
+    "baseManaCost": 0,
+    "type": "MINION",
+    "baseAttack": 1,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "description": "Start of Game: Give all 0-Cost minions in your deck +1/+1.",
+	"deckTrigger": {
+		"eventTrigger": {
+			"class": "GameStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_DECK",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"manaCost": 0
+			}
+		}
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

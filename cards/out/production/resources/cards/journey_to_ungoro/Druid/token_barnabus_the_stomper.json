@@ -10,31 +10,17 @@
 	"description": "Taunt. Battlecry: Reduce the Cost of minions in your deck to (0).",
 	"battlecry": {
 		"targetSelection": "NONE",
-		"spell": {
-			"class": "AddSpellTriggerSpell",
+        "spell": {
+			"class": "CardCostModifierSpell",
 			"target": "FRIENDLY_PLAYER",
-			"trigger": {
-				"eventTrigger": {
-					"class": "CardDrawnTrigger",
-					"targetPlayer": "SELF",
-					"queueCondition": {
-						"class": "CardPropertyCondition",
-						"target": "EVENT_TARGET",
-						"cardType": "MINION"
-					}
-				},
-				"spell": {
-					"class": "CardCostModifierSpell",
-					"target": "FRIENDLY_PLAYER",
-					"cardCostModifier": {
-						"class": "CardCostModifier",
-						"target": "EVENT_TARGET",
-						"operation": "SET",
-						"value": 0
-					}
-				}
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"target": "FRIENDLY_DECK",
+				"cardType": "MINION",
+				"operation": "SET",
+				"value": 0
 			}
-		}
+        }
 	},
 	"attributes": {
 		"BATTLECRY": true,

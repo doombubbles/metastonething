@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -72,10 +73,25 @@ public class AdaptSpell extends Spell {
 			for (int i = 0; i < howMany; i++) {
 				SpellDesc spell = adaptions.remove(context.getLogic().random(adaptions.size()));
 				spells.add(spell);
+
+				if (context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+					if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
+						onCast(context, player, spell, source, randomTarget);
+					} else {
+						// there is at least one target and RANDOM_TARGET flag is not set,
+						// cast in on all targets
+
+						for (Entity target : validTargets) {
+							context.getEnvironment().put(Environment.SPELL_TARGET, target.getReference());
+							onCast(context, player, spell, source, target);
+							context.getEnvironment().remove(Environment.SPELL_TARGET);
+						}
+					}
+				}
 			}
 			
-			if (spells.isEmpty()) {
-				return;
+			if (spells.isEmpty() || context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+				continue;
 			}
 			SpellDesc spell = SpellUtils.getSpellDiscover(context, player, desc, spells).getSpell();
 			spellList.remove(spell);

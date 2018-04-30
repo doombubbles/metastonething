@@ -59,7 +59,7 @@ public class SummonSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
-		for (Card card : SpellUtils.getCards(context, desc)) {
+		for (Card card : SpellUtils.getCards(context, desc, player)) {
 			for (int i = 0; i < count; i++) {
 				SummonCard summonCard = (SummonCard) card.clone();
 				context.getLogic().summon(player.getId(), summonCard.summon(), null, boardPosition, false);

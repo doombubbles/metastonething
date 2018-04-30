@@ -18,7 +18,7 @@ import net.demilich.metastone.game.targeting.EntityReference;
 
 public class TestSecretCard extends SecretCard {
 
-	private static SecretCardDesc getDesc() {
+	private static SecretCardDesc getDesc2() {
 		SecretCardDesc desc = new SecretCardDesc();
 		desc.name = "Trap";
 		desc.rarity = Rarity.FREE;
@@ -34,7 +34,7 @@ public class TestSecretCard extends SecretCard {
 	}
 
 	public TestSecretCard(int damage) {
-		super(getDesc());
+		super(getDesc2());
 		setDescription("Secret for unit testing. Deals " + damage + " damage to all enemies");
 		setCollectible(false);
 

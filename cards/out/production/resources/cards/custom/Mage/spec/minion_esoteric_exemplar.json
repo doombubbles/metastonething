@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "MAGE",
 	"rarity": "EPIC",
-	"description": "After you cast an Arcane spell, gain 1 Mana Crystal this turn only.",
+	"description": "After you cast an Arcane spell, give another random friendly minion +1/+1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "AfterSpellCastedTrigger",
@@ -14,11 +14,14 @@
 			"race": "ARCANE"
 		},
 		"spell": {
-			"class": "GainManaSpell",
-			"value": 1
+			"class": "BuffSpell",
+			"target": "OTHER_FRIENDLY_MINIONS",
+			"attackBonus": 1,
+			"hpBonus": 1,
+			"randomTarget": true
 		}
 	},
-	"collectible": false,
+	"collectible": true,
 	"set": "CUSTOM",
 	"fileFormatVersion": 1
 }

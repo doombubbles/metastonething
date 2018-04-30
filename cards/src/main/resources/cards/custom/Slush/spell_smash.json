@@ -1,0 +1,35 @@
+{
+	"name": "Smash",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Destroy a minion. If you have at least 10 Armor, this costs (1).",
+	"targetSelection": "MINIONS",
+	"race": "PROTECTION",
+	"spell": {
+		"class": "DestroySpell"
+	},
+	"manaCostModifier": {
+		"class": "ConditionalValueProvider",
+		"ifTrue": 5,
+		"ifFalse": 0,
+		"condition": {
+			"class": "AttributeCondition",
+			"target": "FRIENDLY_HERO",
+			"attribute": "ARMOR",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 10
+		}
+	},
+	"glow": {
+		"class": "AttributeCondition",
+		"target": "FRIENDLY_HERO",
+		"attribute": "ARMOR",
+		"operation": "GREATER_OR_EQUAL",
+		"value": 10
+	},
+	"collectible": true,
+	"set": "GOBLINS_VS_GNOMES",
+	"fileFormatVersion": 1
+}

@@ -28,7 +28,6 @@ public class ShadowReflectionSpell extends Spell {
 		Card card = (Card) target;
 		Card newCard = context.getCardById(context.getEventCard().getCardId());
 		newCard.setAttribute(Attribute.ONE_TURN, true);
-		newCard.setAttribute(Attribute.RECEIVED);
 		newCard.setName("'" + newCard.getName() + "'");
 		newCard.setAttribute(Attribute.ATTACK_BONUS, context.getPendingCard().getAttribute(Attribute.ATTACK_BONUS) != null ? context.getPendingCard().getAttributeValue(Attribute.ATTACK_BONUS) : 0);
 		newCard.setAttribute(Attribute.HP_BONUS, context.getPendingCard().getAttribute(Attribute.HP_BONUS) != null ? context.getPendingCard().getAttributeValue(Attribute.HP_BONUS) : 0);

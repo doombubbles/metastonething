@@ -225,6 +225,8 @@ public class ParseUtils {
 			return EntityReference.ALL_OTHER_CHARACTERS;
 		case "all_other_minions":
 			return EntityReference.ALL_OTHER_MINIONS;
+		case "all_other_enemies":
+			return EntityReference.ALL_OTHER_ENEMIES;
 		case "event_target":
 			return EntityReference.EVENT_TARGET;
 		case "target":

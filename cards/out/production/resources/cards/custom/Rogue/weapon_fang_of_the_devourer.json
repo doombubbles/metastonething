@@ -1,0 +1,46 @@
+{
+    "name": "Fang of the Devourer",
+    "baseManaCost": 5,
+    "type": "WEAPON",
+    "damage": 3,
+    "durability": 3,
+    "heroClass": "ROGUE",
+    "rarity": "LEGENDARY",
+    "description": "After your hero attacks, add a 0-Cost spell to your hand. If the target is killed, add 2.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourcePlayer": "SELF",
+			"targetPlayer": "BOTH",
+			"sourceEntityType": "HERO"
+		},
+		"spell": {
+			"class": "ConditionalEffectSpell",
+			"spell1": {
+				"class": "ReceiveCardSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": 0,
+					"cardType": "SPELL",
+					"heroClass": "ROGUE"
+				}
+			},
+			"spell2": {
+				"class": "ReceiveCardSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": 0,
+					"cardType": "SPELL",
+					"heroClass": "ROGUE"
+				}
+			},
+			"condition": {
+				"class": "IsDeadCondition",
+				"target": "EVENT_TARGET"
+			}
+		}
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

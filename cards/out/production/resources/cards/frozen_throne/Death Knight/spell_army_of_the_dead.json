@@ -7,7 +7,13 @@
     "description": "Remove the top 5 cards of your deck. Summon any minions removed.",
     "targetSelection": "NONE",
     "spell": {
-		"class": "custom.ArmyoftheDeadSpell"
+		"class": "CastRepeatedlySpell",
+		"howMany": 5,
+		"spell":{  
+            "class": "PutMinionOnBoardFromDeckSpell",
+            "target": "FRIENDLY_TOP_CARD",
+			"exclusive": true
+        }
 	},
     "collectible": false,
     "set": "FROZEN_THRONE",

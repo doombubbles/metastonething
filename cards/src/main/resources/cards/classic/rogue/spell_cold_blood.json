@@ -19,6 +19,9 @@
 			"attackBonus": 4
 		}
 	},
+	"attributes": {
+		"COMBO": true
+	},
 	"collectible": true,
 	"set": "CLASSIC",
 	"fileFormatVersion": 1

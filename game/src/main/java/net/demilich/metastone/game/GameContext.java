@@ -488,6 +488,10 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		logic.init(getOpponent(getActivePlayer()).getId(), false);
 	}
 
+	public void logError(String error) {
+		logger.error(error);
+	}
+
 	protected void onGameStateChanged() {
 	}
 

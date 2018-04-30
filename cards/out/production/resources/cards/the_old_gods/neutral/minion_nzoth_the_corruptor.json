@@ -12,9 +12,21 @@
 			"class": "ResurrectSpell",
 			"value": 7,
 			"cardFilter": {
-				"class": "CardFilter",
-				"attribute": "DEATHRATTLES",
-				"operation": "HAS"
+				"class": "OrFilter",
+				"filters": [
+					{
+						"class": "SpecificCardFilter",
+						"cardId": "token_huffer"
+					},
+					{
+						"class": "SpecificCardFilter",
+						"cardId": "token_misha"
+					},
+					{
+						"class": "SpecificCardFilter",
+						"cardId": "token_leokk"
+					}
+				]
 			}
 		}
 	},

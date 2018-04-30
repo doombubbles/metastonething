@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
-	"description": "Summon the basic totems you don't already control. Overload: (1)",
+	"description": "Summon the basic totems you don't already control.",
 	"targetSelection": "NONE",
 	"race": "ENHANCEMENT",
 	"spell": {
@@ -66,9 +66,6 @@
 				"invert": true
 			}
 		]
-	},
-	"attributes": {
-		"OVERLOAD": 1
 	},
 	"collectible": true,
 	"set": "CUSTOM",

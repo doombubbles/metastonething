@@ -1,0 +1,32 @@
+{
+	"name": "Bewitch",
+	"baseManaCost": 0,
+	"type": "HERO_POWER",
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"description": "Passive. Whenever you play a minion, add a random Shaman spell to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "NullSpell"
+	},
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionPlayedTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "SHAMAN"
+			}
+		}
+	},
+	"condition": {
+		"class": "NeverCondition"
+	},
+	"collectible": false,
+	"set": "FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

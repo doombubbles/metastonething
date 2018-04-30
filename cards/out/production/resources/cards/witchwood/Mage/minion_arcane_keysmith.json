@@ -1,0 +1,30 @@
+{
+    "name": "Arcane Keysmith",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "MAGE",
+    "rarity": "EPIC",
+    "description": "Battlecry: Discover a Secret. Put it into the battlefield.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "DiscoverFilteredCardSpell",
+            "filter": {
+                "class": "CardFilter",
+                "attribute": "SECRET",
+                "operation": "HAS"
+            },
+            "spell": {
+                "class": "AddSecretSpell"
+            }
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

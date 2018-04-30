@@ -1,6 +1,6 @@
 {
 	"name": "Molten Giant",
-	"baseManaCost": 25,
+	"baseManaCost": 20,
 	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
@@ -22,6 +22,6 @@
 		}
 	},
 	"collectible": true,
-	"set": "CLASSIC",
+	"set": "HALL_OF_FAME",
 	"fileFormatVersion": 1
 }

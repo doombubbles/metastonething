@@ -4,7 +4,7 @@
 	"type": "SPELL",
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
-	"description": "Freeze an enemy minion. At the start of your next turn, it freezes all other enemy minions.",
+	"description": "Freeze a minion. At the start of your next turn, it freezes all other minions.",
 	"targetSelection": "ENEMY_MINIONS",
 	"race": "FROST",
 	"spell": {
@@ -20,7 +20,7 @@
 					"spell": {
 						"class": "AddAttributeSpell",
 						"attribute": "FROZEN",
-						"target": "OTHER_ENEMY_MINIONS"
+						"target": "ALL_OTHER_MINIONS"
 					},
 					"oneTurn": true
 				} 

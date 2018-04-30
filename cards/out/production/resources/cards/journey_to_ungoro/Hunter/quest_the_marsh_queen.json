@@ -7,7 +7,7 @@
 	"description": "Quest: Play 7 1-Cost minions. Reward: Queen Carnassa.",
 	"targetSelection": "NONE",
 	"quest": {
-		"class": "MinionPlayedTrigger",
+		"class": "AfterMinionPlayedTrigger",
 		"targetPlayer": "SELF",
 		"queueCondition": {
 			"class": "ComparisonCondition",

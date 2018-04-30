@@ -22,12 +22,13 @@ public class SpellCastedTrigger extends GameEventTrigger {
 		SpellCastedEvent spellCastedEvent = (SpellCastedEvent) event;
 
 		String customId = desc.getString(EventTriggerArg.CUSTOM);
+		/*
 		if (customId.equals("MAGE_QUEST")) {
 			if (!spellCastedEvent.getSourceCard().hasAttribute(Attribute.RECEIVED) && spellCastedEvent.getSourceCard().isCollectible()) {
 				return false;
 			}
 		}
-
+		*/
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
 		if (race != null && spellCastedEvent.getSourceCard().getRace() != race) {
 			return false;

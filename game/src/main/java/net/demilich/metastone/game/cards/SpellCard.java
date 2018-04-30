@@ -17,15 +17,11 @@ public class SpellCard extends Card {
 
 	private SpellDesc spell;
 	private TargetSelection targetRequirement;
-	private Condition condition;
 
 	public SpellCard(SpellCardDesc desc) {
 		super(desc);
 		setTargetRequirement(desc.targetSelection);
 		setSpell(desc.spell);
-		if (desc.condition != null) {
-			condition = desc.condition.create();
-		}
 		
 		if (desc.race != null) {
 			setRace(desc.race);
@@ -43,9 +39,6 @@ public class SpellCard extends Card {
 			return context.getTotalMinionCount() > 0;
 		default:
 			break;
-		}
-		if (condition != null) {
-			return condition.isFulfilled(context, player, null, null);
 		}
 		return true;
 	}
@@ -65,7 +58,6 @@ public class SpellCard extends Card {
 			throw new RuntimeException("Spell is NULL for SpellCard " + getName());
 		}
 		clone.spell = spell.clone();
-		clone.condition = condition;
 		return clone;
 	}
 

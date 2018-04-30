@@ -1,0 +1,23 @@
+{
+    "name": "Splitting Festeroot",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 4,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "description": "Deathrattle: Summon two 2/2 Splitting Saplings",
+    "deathrattle": {
+        "class": "SummonSpell",
+		"cards": [
+			"token_splitting_sapling",
+			"token_splitting_sapling"
+		]
+    },
+    "attributes": {
+        "DEATHRATTLES": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -2,12 +2,14 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.*;
+import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.SummonCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -46,6 +48,11 @@ public class TransformMinionSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
+        CardList relevantMinions = new CardList();
+		if (target == null) {
+		    relevantMinions = SpellUtils.getCards(context, desc, player).removeAll(card -> !card.getCardType().isCardType(CardType.MINION));
+        }
+
 		if (target instanceof Hero) {
 			String heroCardName = desc.getString(SpellArg.HERO_CARD);
 			SpellDesc changeHeroSpell = ChangeHeroSpell.create(heroCardName);
@@ -55,11 +62,17 @@ public class TransformMinionSpell extends Spell {
 			Summon summon = (Summon) target;
 			Summon transformTarget = (Summon) desc.get(SpellArg.SECONDARY_TARGET);
 			
-			SummonCard templateCard = cardName != null ? (SummonCard) context.getCardById(cardName) : null;
-			Summon newSummon = transformTarget != null ? transformTarget : templateCard.summon();
-			
-			logger.debug("{} is transformed into a {}", summon, newSummon);
-			context.getLogic().transformMinion(summon, newSummon, desc.contains(SpellArg.EXCLUSIVE));
+			SummonCard templateCard = null;
+			if (cardName != null) {
+				templateCard = (SummonCard) context.getCardById(cardName);
+			} else if (!relevantMinions.isEmpty()) {
+				templateCard = ((SummonCard) relevantMinions.getRandom());
+			}
+			Summon newSummon = transformTarget != null ? transformTarget : templateCard != null ? templateCard.summon() : null;
+			if (newSummon != null) {
+				logger.debug("{} is transformed into a {}", summon, newSummon);
+				context.getLogic().transformMinion(summon, newSummon, desc.contains(SpellArg.EXCLUSIVE));
+			}
 		}
 	}
 

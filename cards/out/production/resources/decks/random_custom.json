@@ -1,0 +1,27 @@
+{
+  "name": "[Random Custom]",
+  "heroClass": "DECK_COLLECTION",
+  "arbitrary": false,
+  "decks": [
+    "Spell    ",
+    "Tempo   ",
+    "Even Pally",
+    "Even Handlock",
+    "Cubelock",
+    "Control",
+    "Handruid",
+    "Mindblast",
+    "Miracle  ",
+    "Odd Face",
+    "Odd Quest",
+    "Odd Tempo",
+    "Secret  ",
+    "Spiteful",
+    "Spitefull",
+    "Tempo Tess",
+    "Tempo ",
+    "Custom Odd Pally",
+    "Aegwynn",
+    "Custom Even Shammy"
+  ]
+}

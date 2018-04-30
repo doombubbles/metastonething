@@ -11,7 +11,6 @@
 		"spells": [
 			{
 				"class": "TransformToRandomMinionSpell",
-				"target": "FRIENDLY_MINIONS",
 				"cardFilter": {
 					"class": "CardFilter",
 					"attribute": "BASE_MANA_COST",

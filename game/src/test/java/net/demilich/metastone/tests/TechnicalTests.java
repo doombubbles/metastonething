@@ -3,6 +3,8 @@ package net.demilich.metastone.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.spells.desc.source.CardSource;
+import net.demilich.metastone.game.spells.desc.source.CatalogueSource;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -77,6 +79,16 @@ public class TechnicalTests extends TestBase {
 		// are resolved
 		for (Minion minion : copyOfMinionList) {
 			Assert.assertEquals(minion.getHp(), -1);
+		}
+	}
+
+	@Test
+	public void testRandom() {
+		GameContext context = createContext(HeroClass.PRIEST, HeroClass.WARRIOR);
+		CardSource cardSource = CatalogueSource.create();
+		String[] cards = cardSource.getCards(context, context.getPlayer1()).toList().stream().map(Card::getCardId).toArray(String[]::new);
+		for (int i = 0; i < 5; i++) {
+			System.out.println(cards[i]);
 		}
 	}
 }

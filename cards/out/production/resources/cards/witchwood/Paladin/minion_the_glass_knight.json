@@ -1,0 +1,27 @@
+{
+    "name": "The Glass Knight",
+    "baseManaCost": 4,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 3,
+    "heroClass": "PALADIN",
+    "rarity": "LEGENDARY",
+    "description": "Divine Shield. Whenever you restore Health, gain Divine Shield.",
+    "trigger": {
+        "eventTrigger": {
+            "class": "HealingTrigger",
+			"sourcePlayer": "SELF"
+        },
+        "spell": {
+            "class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "DIVINE_SHIELD"
+        }
+    },
+    "attributes": {
+        "DIVINE_SHIELD": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

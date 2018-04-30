@@ -1,0 +1,17 @@
+{
+	"name": "Druid of the Scythe",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"description": "Taunt",
+	"race": "BEAST",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

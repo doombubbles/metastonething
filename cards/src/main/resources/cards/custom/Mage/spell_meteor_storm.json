@@ -1,0 +1,27 @@
+{
+    "name": "Meteor Storm",
+    "baseManaCost": 8,
+    "type": "SPELL",
+    "heroClass": "MAGE",
+    "rarity": "RARE",
+    "description": "Deal *8* damage to a random minion. If it dies, cast this again.",
+    "targetSelection": "NONE",
+	"race": "AFFLICTION",
+    "spell": {
+		"class": "CastRecastSpell",
+		"spell": {
+			"class": "DamageSpell",
+			"value": 8,
+			"target": "ALL_MINIONS",
+			"randomTarget": "TRUE"
+		},
+		"condition": {
+			"class": "IsDeadCondition",
+			"target": "ALL_MINIONS"
+		},
+		"howMany": 100
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

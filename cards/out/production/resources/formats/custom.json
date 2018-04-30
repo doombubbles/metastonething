@@ -1,15 +1,12 @@
 {
-	"name": "Custom",
+	"name": "Custom Standard",
 	"sets": [
 		"BASIC",
 		"CLASSIC",
-		"THE_OLD_GODS",
-		"ONE_NIGHT_IN_KARAZHAN",
-		"MEAN_STREETS_OF_GADGETZAN",
 		"JOURNEY_TO_UNGORO",
 		"CUSTOM",
 		"FROZEN_THRONE",
 		"KOBOLDS_AND_CATACOMBS",
-		"SANDS_OF_TIME"
+		"WITCHWOOD"
 	]
 }

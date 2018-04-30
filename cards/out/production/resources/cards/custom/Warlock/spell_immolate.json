@@ -4,38 +4,37 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"description": "Deal *3* damage to a minion at the end of your turn. Add a Burning Ember to your hand.",
+	"description": "Deal *1* damage to a minion now and again at the end of each turn.",
 	"targetSelection": "MINIONS",
 	"race": "DESTRUCTION",
 	"spell": {
 		"class": "MetaSpell",
 		"spells": [
 			{
-				"class": "ReceiveRandomCardSpell",
-				"cards": [
-					"spell_burning_ember"
-				]
+				"class": "DamageSpell",
+				"value": 1
 				
 			},
 			{
 				"class": "AddSpellTriggerSpell",
 				"trigger": {
 					"eventTrigger": {
-						"class": "TurnEndTrigger",
-						"targetPlayer": "SELF"
+						"class": "TurnEndTrigger"
 					},
 					"spell": {
 						"class": "DamageSpell",
-						"value": 3,
-						"target": "SELF",
-						"ignoreSpellDamage": true
-					},
-					"oneTurn": true
+						"value": {
+							"class": "SpellDamageValueProvider",
+							"targetPlayer": "SELF",
+							"value": 1
+						},
+						"target": "SELF"
+					}
 				}
 			}
 		]
 	},
-	"collectible": false,
+	"collectible": true,
 	"set": "CUSTOM",
 	"fileFormatVersion": 1
 }

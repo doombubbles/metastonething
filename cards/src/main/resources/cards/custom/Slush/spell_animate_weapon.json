@@ -1,0 +1,29 @@
+{
+    "name": "Animate Weapon",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "EPIC",
+    "description": "Transform your weapon into a minion with Deathrattle: Re-equip this.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "custom.AnimateWeaponSpell",
+		"target": "FRIENDLY_WEAPON"
+    },
+	"condition": {
+		"class": "AndCondition",
+		"conditions": [
+			{
+				"class": "HasWeaponCondition"
+			},
+			{
+				"class": "MinionCountCondition",
+				"operation": "LESS",
+				"value": 7
+			}
+		]
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

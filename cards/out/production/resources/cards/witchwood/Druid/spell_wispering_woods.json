@@ -1,0 +1,20 @@
+{
+	"name": "Wispering Woods",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Summon a 1/1 Wisp for each card in your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"card": "minion_wisp",
+		"value": {
+			"class": "CardCounter",
+			"targetPlayer": "SELF"
+		}
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

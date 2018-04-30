@@ -7,7 +7,7 @@
 	"heroClass": "ANY",
 	"rarity": "EPIC",
 	"race": "BEAST",
-	"description": "Battlecry: Put a random Pirate from your deck into your hand.",
+	"description": "Battlecry: Draw a Pirate from your Deck.",
 	"battlecry": {
 		"spell": {
 			"class": "FromDeckToHandSpell",

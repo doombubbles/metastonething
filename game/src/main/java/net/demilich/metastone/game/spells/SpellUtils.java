@@ -25,6 +25,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.ComparisonOperation;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
 
@@ -100,17 +101,22 @@ public class SpellUtils {
 		return card;
 	}
 
-	public static Card[] getCards(GameContext context, SpellDesc spell) {
-		String[] cardNames = null;
+	public static CardList getCards(GameContext context, SpellDesc spell, Player player) {
+		CardList cards = new CardList();
 		if (spell.contains(SpellArg.CARDS)) {
-			cardNames = (String[]) spell.get(SpellArg.CARDS);
+			String[] cardNames = (String[]) spell.get(SpellArg.CARDS);
+			for (int i = 0; i < cardNames.length; i++) {
+				cards.add(context.getCardById(cardNames[i]));
+			}
+		} else if (spell.contains(SpellArg.CARD_SOURCE)) {
+			CardSource cardSource = (CardSource) spell.get(SpellArg.CARD_SOURCE);
+			cards = cardSource.getCards(context, player);
 		} else {
-			cardNames = new String[1];
-			cardNames[0] = (String) spell.get(SpellArg.CARD);
+			cards.add(context.getCardById((String) spell.get(SpellArg.CARD)));
 		}
-		Card[] cards = new Card[cardNames.length];
-		for (int i = 0; i < cards.length; i++) {
-			cards[i] = context.getCardById(cardNames[i]);
+		EntityFilter filter = spell.getEntityFilter();
+		if (filter != null) {
+			cards.removeAll(card -> !filter.matches(context, player, card));
 		}
 		return cards;
 	}

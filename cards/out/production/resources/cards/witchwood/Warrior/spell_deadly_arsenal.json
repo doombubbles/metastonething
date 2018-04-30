@@ -1,0 +1,29 @@
+{
+    "name": "Deadly Arsenal",
+    "baseManaCost": 4,
+    "type": "SPELL",
+    "heroClass": "WARRIOR",
+    "rarity": "EPIC",
+    "description": "Reveal a weapon from your deck. Deal its Attack to all minions.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "RevealAndDoSomethingSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "WEAPON"
+		},
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_MINIONS",
+			"value": {
+				"class": "AttributeValueProvider",
+				"target": "EVENT_CARD",
+				"attribute": "ATTACK"
+			}
+			
+		}
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

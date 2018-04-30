@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,8 +60,21 @@ public class DiscoverOptionSpell extends Spell {
 					SpellDesc spell = spellsCopy.get(random ? context.getLogic().random(spellsCopy.size()) : 0);
 					spellChoices.add(spell);
 					spellsCopy.remove(spell);
+
+					if (context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+						chosenSpellInts.add(spellOrder.get(spell));
+						if (exclusive) {
+							spellChoices.remove(spell);
+							spells.remove(spell);
+						}
+					}
 				}
 			}
+
+			if (spellChoices.isEmpty() || context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+				continue;
+			}
+
 			if (!spellChoices.isEmpty()) {
 				DiscoverAction action = SpellUtils.getSpellDiscover(context, player, desc, spellChoices);
 				SpellDesc chosenSpell = action.getSpell();

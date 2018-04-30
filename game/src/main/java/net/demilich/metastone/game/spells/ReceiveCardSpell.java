@@ -51,7 +51,6 @@ public class ReceiveCardSpell extends Spell {
 				}
 				if (card != null) {
 					Card clone = card.clone();
-					clone.setAttribute(Attribute.RECEIVED);
 					if (attribute != null) {
 						clone.setAttribute(attribute);
 					}
@@ -59,13 +58,12 @@ public class ReceiveCardSpell extends Spell {
 				}
 			}
 		} else {
-			for (Card card : SpellUtils.getCards(context, desc)) {
+			for (Card card : SpellUtils.getCards(context, desc, player)) {
 				for (int i = 0; i < count; i++) {
 					Card local = card.clone();
 					if (attribute != null) {
 						local.setAttribute(attribute);
 					}
-					local.setAttribute(Attribute.RECEIVED);
 					context.getLogic().receiveCard(player.getId(), local);
 				}
 			}

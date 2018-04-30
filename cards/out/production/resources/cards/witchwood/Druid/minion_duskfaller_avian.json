@@ -1,0 +1,24 @@
+{
+    "name": "Duskfaller Avian",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 7,
+    "heroClass": "DRUID",
+    "rarity": "LEGENDARY",
+    "description": "The first card each player plays each turn costs (0).",
+	"cardCostModifier": {
+		"class": "ToggleCostModifier",
+		"targetPlayer": "ACTIVE",
+		"value": -99,
+		"toggleOnTrigger": {
+			"class": "TurnStartTrigger"
+		},
+		"toggleOffTrigger": {
+			"class": "CardPlayedTrigger"
+		}
+	},
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

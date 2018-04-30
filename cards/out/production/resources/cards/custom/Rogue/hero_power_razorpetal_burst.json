@@ -1,0 +1,16 @@
+{
+	"name": "Razorpetal Burst",
+	"baseManaCost": 1,
+	"type": "HERO_POWER",
+	"heroClass": "ROGUE",
+	"rarity": "FREE",
+	"description": "Add a Razopetal to your hand that deals 1 damage.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ReceiveCardSpell",
+		"card": "spell_razorpetal"
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

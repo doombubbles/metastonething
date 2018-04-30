@@ -1,0 +1,29 @@
+{
+	"name": "Arc Lightning",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Deal *4* damage. Then deal 4 damage to another random enemy.",
+	"targetSelection": "ANY",
+	"race": "ELEMENTAL",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 4
+			},
+			{
+				"class": "DamageSpell",
+				"spellSource": "SPELL_TARGET",
+				"target": "ALL_OTHER_ENEMIES",
+				"value": 4,
+				"randomTarget": true
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

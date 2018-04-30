@@ -4,7 +4,6 @@
   "arbitrary": false,
   "decks": [
     "Spell    ",
-    "Tempo   ",
     "Even Pally",
     "Even Handlock",
     "Cubelock",
@@ -21,6 +20,9 @@
     "Spiteful",
     "Spitefull",
     "Tempo Tess",
-    "Tempo "
+    "Tempo ",
+    "Midrange ",
+    "Zoo",
+    "Aggro"
   ]
 }

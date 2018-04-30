@@ -1,0 +1,23 @@
+{
+	"name": "Splitting Sapling",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "FREE",
+	"description": "Deathrattle: Summon two 1/1 Woodchips.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"cards": [
+			"token_woodchip",
+			"token_woodcip"
+		]
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

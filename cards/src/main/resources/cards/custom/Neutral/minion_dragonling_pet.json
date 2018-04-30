@@ -1,0 +1,27 @@
+{
+    "name": "Dragonling Pet",
+    "baseManaCost": 0,
+    "type": "MINION",
+    "baseAttack": 1,
+    "baseHp": 1,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+	"race": "DRAGON",
+    "description": "Start of Game: Draw this card from your deck. Can't be played from your hand.",
+	"deckTrigger": {
+		"eventTrigger": {
+			"class": "GameStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"target": "SELF"
+		}
+	},
+	"condition": {
+		"class": "NeverCondition"
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

@@ -15,6 +15,7 @@ import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
@@ -37,6 +38,7 @@ public abstract class Card extends Entity {
 	private final String cardId;
 	private final ConditionDesc glow;
 	private List<ValueProvider> descValues;
+	private Condition condition;
 	private CardDesc desc;
 
 	public Card(CardDesc desc) {
@@ -53,6 +55,10 @@ public abstract class Card extends Entity {
 		glow = desc.glow;
 		if (desc.heroClasses != null) {
 			heroClasses = desc.heroClasses;
+		}
+
+		if (desc.condition != null) {
+			condition = desc.condition.create();
 		}
 
 		setAttribute(Attribute.BASE_MANA_COST, desc.baseManaCost);
@@ -85,6 +91,7 @@ public abstract class Card extends Entity {
 	public Card clone() {
 		Card clone = (Card) super.clone();
 		clone.attributes = new EnumMap<>(getAttributes());
+		clone.condition = condition;
 		return clone;
 	}
 
@@ -128,6 +135,10 @@ public abstract class Card extends Entity {
 
 	public CardType getCardType() {
 		return cardType;
+	}
+
+	public Condition getCondition() {
+		return condition;
 	}
 
 	public HeroClass getHeroClass() {

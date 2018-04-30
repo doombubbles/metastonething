@@ -1,0 +1,23 @@
+{
+	"name": "Ulthalesh",
+	"baseManaCost": 7,
+	"type": "WEAPON",
+	"damage": 0,
+	"durability": 3,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Your cards that target friendly minions can also be cast on enemy minions.",
+	"onEquip": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "FRIENDLY_TARGET_ENEMIES"
+	},
+	"onUnequip": {
+		"class": "RemoveAttributeSpell",
+		"target": "FRIENDLY_HERO",
+		"attribute": "FRIENDLY_TARGET_ENEMIES"
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

@@ -9,8 +9,13 @@
 	"quest": {
 		"class": "SpellCastedTrigger",
 		"sourcePlayer": "SELF",
-		"custom": "MAGE_QUEST",
-		"value": 6
+		"value": 6,
+		"queueCondition": {
+			"class": "AttributeCondition",
+			"attribute": "STARTED_IN_DECK",
+			"operation": "HAS",
+			"invert": true
+		}
 	},
 	"spell": {
 		"class": "ReceiveCardSpell",

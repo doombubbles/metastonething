@@ -1,0 +1,23 @@
+{
+	"name": "Archmage Modera",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "MAGE",
+	"rarity": "LEGENDARY",
+	"description": "Whenever you cast a spell, shuffle an Ice Lance into your deck.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "ShuffleToDeckSpell",
+			"card": "spell_ice_lance"
+		}
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

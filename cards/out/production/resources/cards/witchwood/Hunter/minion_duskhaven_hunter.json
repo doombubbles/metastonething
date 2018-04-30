@@ -1,0 +1,26 @@
+{
+    "name": "Duskhaven Hunter",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 5,
+    "heroClass": "HUNTER",
+    "rarity": "RARE",
+    "description": "Stealth. Each turn this is in your hand, swap its Attack and Health.",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SwapBaseAttackAndHpSpell",
+			"target": "SELF"
+		}
+	},
+    "attributes": {
+        "STEALTH": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

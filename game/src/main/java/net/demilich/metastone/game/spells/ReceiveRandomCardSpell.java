@@ -6,6 +6,7 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardList;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -23,9 +24,8 @@ public class ReceiveRandomCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Card[] cards = SpellUtils.getCards(context, desc);
-		Card randomCard = cards[context.getLogic().random(cards.length)];
-		randomCard.setAttribute(Attribute.RECEIVED);
+		CardList cards = SpellUtils.getCards(context, desc, player);
+		Card randomCard = cards.getRandom();
 		context.getLogic().receiveCard(player.getId(), randomCard);
 	}
 

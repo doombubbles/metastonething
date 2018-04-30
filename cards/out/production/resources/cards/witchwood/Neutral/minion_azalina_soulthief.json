@@ -1,0 +1,25 @@
+{
+    "name": "Azalina Soulthief",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 3,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Battlecry: Replace your hand with a copy of your opponent's",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "CopyHandSpell",
+			"target": "ENEMY_HAND",
+			"targetPlayer": "SELF"
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

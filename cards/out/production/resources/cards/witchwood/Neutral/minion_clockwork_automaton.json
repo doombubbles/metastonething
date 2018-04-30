@@ -1,0 +1,17 @@
+{
+	"name": "Clockwork Automaton",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"description": "Double the damage and healing of your Hero Power.",
+	"attributes": {
+		"HERO_POWER_HEAL_MULT": 2,
+		"HERO_POWER_DAMAGE_MULT": 2
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

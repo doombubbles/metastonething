@@ -12,16 +12,11 @@
 		"spell": {
 			"class": "ReplaceCardSpell",
 			"target": "FRIENDLY_HAND",
-			"cardFilters": [
-				{
-					"class": "SpecificCardFilter",
-					"cardId": "token_flame_elemental"
-				},
-				{
-					"class": "SpecificCardFilter",
-					"cardId": "spell_lava_burst"
-				}
-			]
+			"filter": {
+				"class": "SpecificCardFilter",
+				"cardId": "token_flame_elemental"
+			},
+			"card": "spell_lava_burst"
 		}
 	},
 	"attributes": {

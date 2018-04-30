@@ -64,7 +64,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.CUSTOM_8, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.CUSTOM_6, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.DOUBLE_END_TURN, jsonData, map, ParseValueType.BOOLEAN);
-		parseAttribute(Attribute.RECEIVED, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.STARTED_IN_DECK, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.INSTANT_TRAPS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.QUEST, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.EXTRA_TURNS, jsonData, map, ParseValueType.INTEGER);
@@ -85,6 +85,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.SPELLS_HEAL_MULT, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.HERO_POWER_DAMAGE_MULT, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.HERO_POWER_HEAL_MULT, jsonData, map, ParseValueType.INTEGER);
+		parseAttribute(Attribute.ALL_OPTIONS, jsonData, map, ParseValueType.BOOLEAN);
 		return map;
 	}
 

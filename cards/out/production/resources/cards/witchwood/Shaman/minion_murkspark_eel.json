@@ -1,0 +1,44 @@
+{
+    "name": "Murkspark Eel",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 3,
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "race": "BEAST",
+    "description": "Battlecry: If your deck has only even-Cost cards, deal 2 damage.",
+    "battlecry": {
+        "targetSelection": "ANY",
+        "spell": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "MOD_2_EQUAL",
+				"value": 1
+			},
+			"invert": true
+		}
+    },
+	"glow": {
+		"class": "DeckContainsCondition",
+		"cardFilter": {
+			"class": "AttributeFilter",
+			"attribute": "BASE_MANA_COST",
+			"operation": "MOD_2_EQUAL",
+			"value": 1
+		},
+		"invert": true
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

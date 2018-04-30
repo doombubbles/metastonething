@@ -1,0 +1,25 @@
+{
+	"name": "Magma Shock",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Silence a minion, then deal *4* damage to it.",
+	"targetSelection": "MINIONS",
+	"race": "ELEMENTAL",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "SilenceSpell"
+			},
+			{
+				"class": "DamageSpell",
+				"value": 4
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

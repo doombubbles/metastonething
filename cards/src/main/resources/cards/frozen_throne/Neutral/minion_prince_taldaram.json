@@ -7,11 +7,11 @@
     "heroClass": "ANY",
     "rarity": "LEGENDARY",
     "race": "NONE",
-    "description": "Battlecry: If your deck has no 3-Cost cards, summon a 3/3 copy of a minion.",
+    "description": "Battlecry: If your deck has no 3-Cost cards, transform into a 3/3 copy of a minion.",
     "battlecry": {
         "targetSelection": "MINIONS",
         "spell": {
-			"class": "SummonOneOneCopySpell",
+			"class": "custom.FacelessSpell",
 			"attackBonus": 3,
 			"hpBonus": 3
 		},

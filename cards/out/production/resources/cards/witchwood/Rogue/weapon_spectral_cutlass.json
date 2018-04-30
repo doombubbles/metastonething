@@ -1,0 +1,37 @@
+{
+    "name": "Spectral Cutlass",
+    "baseManaCost": 4,
+    "type": "WEAPON",
+    "damage": 2,
+    "durability": 2,
+    "heroClass": "ROGUE",
+    "rarity": "EPIC",
+    "description": "Lifesteal. Whenever you play a card from another class, gain +1 Durability. ",
+    "trigger": {
+        "eventTrigger": {
+            "class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"fireCondition": {
+				"class": "CardPropertyCondition",
+				"filter": {
+					"class": "CardFilter",
+					"heroClasses": [
+						"SELF",
+						"ANY"
+					],
+					"invert": true
+				}
+			}
+        },
+        "spell": {
+            "class": "ModifyDurabilitySpell",
+			"value": 1
+        }
+    },
+    "attributes": {
+        "LIFESTEAL": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

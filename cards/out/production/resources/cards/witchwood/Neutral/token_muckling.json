@@ -1,0 +1,13 @@
+{
+	"name": "Muckling",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "NEUTRAL",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

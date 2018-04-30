@@ -1,0 +1,27 @@
+{
+    "name": "Worgen Abomination",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "EPIC",
+    "description": "At the end of your turn, deal 2 damage to all other damaged minions.",
+    "trigger": {
+        "eventTrigger": {
+            "class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+        },
+        "spell": {
+            "class": "DamageSpell",
+			"target": "ALL_MINIONS",
+			"value": 3,
+			"filter": {
+				"class": "DamagedFilter"
+			}
+        }
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

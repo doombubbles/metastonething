@@ -1,0 +1,18 @@
+{
+    "name": "Hunting Mastiff",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 1,
+    "heroClass": "HUNTER",
+    "rarity": "COMMON",
+    "race": "BEAST",
+    "description": "Echo. Rush.",
+	"attributes": {
+		"ECHO": true,
+		"RUSH": true
+	},
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

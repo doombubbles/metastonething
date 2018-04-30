@@ -1,0 +1,42 @@
+{
+    "name": "Ratcatcher",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "WARLOCK",
+    "rarity": "EPIC",
+    "description": "Rush. Battlecry: Destroy a friendly minion and gain its Attack and Health.",
+    "battlecry": {
+        "targetSelection": "FRIENDLY_MINIONS",
+        "spell": {
+            "class": "MetaSpell",
+            "spells": [
+                {
+                    "class": "BuffSpell",
+                    "target": "SELF",
+                    "attackBonus": {
+                        "class": "AttributeValueProvider",
+                        "target": "TARGET",
+                        "attribute": "ATTACK"
+                    },
+                    "hpBonus": {
+                        "class": "AttributeValueProvider",
+                        "target": "TARGET",
+                        "attribute": "HP"
+                    }
+                },
+                {
+                    "class": "DestroySpell"
+                }
+            ]
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true,
+        "RUSH": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

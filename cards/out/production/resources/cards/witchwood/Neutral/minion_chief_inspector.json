@@ -1,0 +1,23 @@
+{
+    "name": "Chief Inspector",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 6,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "description": "Battlecry: Destroy all enemy Secrets.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "DestroySecretsSpell",
+            "targetPlayer": "OPPONENT"
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

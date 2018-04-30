@@ -1,0 +1,24 @@
+{
+    "name": "Pickpocket",
+    "baseManaCost": 2,
+    "type": "SPELL",
+    "heroClass": "ROGUE",
+    "rarity": "RARE",
+    "description": "Echo. Add a random card to your hand (from your opponent's class).",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "ReceiveCardSpell",
+		"value": 1,
+		"card": "spell_the_coin",
+		"cardFilter": {
+			"class": "CardFilter",
+			"heroClass": "OPPONENT"
+		}
+    },
+    "attributes": {
+        "ECHO": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

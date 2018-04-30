@@ -249,6 +249,10 @@ public class TargetLogic implements Serializable {
 			List<Entity> targets = getEntities(context, player, TargetSelection.MINIONS);
 			targets.remove(source);
 			return targets;
+		} else if (targetKey.getId() == EntityReference.ALL_OTHER_ENEMIES.getId()) {
+			List<Entity> targets = getEntities(context, player, TargetSelection.ENEMY_CHARACTERS);
+			targets.remove(source);
+			return targets;
 		} else if (targetKey.getId() == EntityReference.ADJACENT_MINIONS.getId()) {
 			return new ArrayList<>(context.getAdjacentSummons(player, source.getReference()));
 		} else if (targetKey.getId() == EntityReference.OPPOSITE_MINIONS.getId()) {

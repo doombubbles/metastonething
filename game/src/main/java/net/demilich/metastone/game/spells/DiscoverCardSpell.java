@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -27,7 +28,7 @@ public class DiscoverCardSpell extends Spell {
 		CardList result = new CardList();
 		boolean cannotReceiveOwned = desc.getBool(SpellArg.CANNOT_RECEIVE_OWNED);
 		if (desc.contains(SpellArg.CARDS)) {
-			for (Card card : SpellUtils.getCards(context, desc)) {
+			for (Card card : SpellUtils.getCards(context, desc, player)) {
 				if (!cannotReceiveOwned || !context.getLogic().hasCard(player, card)) {
 					result.add(card);
 				}
@@ -36,12 +37,12 @@ public class DiscoverCardSpell extends Spell {
 			CardSource cardSource = (CardSource) desc.get(SpellArg.CARD_SOURCE);
 			result = cardSource.getCards(context, player);
 		}
-
+		/*
 		EntityFilter filter = desc.getEntityFilter();
 		if (filter != null) {
 			result.removeAll(card -> !filter.matches(context, player, card));
 		}
-
+		*/
 		
 		CardList cards = new CardList();
 		
@@ -51,12 +52,17 @@ public class DiscoverCardSpell extends Spell {
 				Card card = result.getRandom();
 				cards.add(card);
 				result.remove(card);
+				if (context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+					SpellUtils.castChildSpell(context, player, ((SpellDesc) desc.get(SpellArg.SPELL)).addArg(SpellArg.CARD, card.getCardId()), source, target);
+				}
 			}
 		}
-		
-		if (!cards.isEmpty()) {
-			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+
+		if (cards.isEmpty() || context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+			return;
 		}
+
+		SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
 	}
 
 }

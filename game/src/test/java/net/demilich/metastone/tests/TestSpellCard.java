@@ -13,7 +13,7 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 
 public class TestSpellCard extends SpellCard {
 
-	private static SpellCardDesc getDesc() {
+	private static SpellCardDesc getDesc2() {
 		SpellCardDesc desc = new SpellCardDesc();
 		desc.name = "Unit Test Spell";
 		desc.rarity = Rarity.FREE;
@@ -24,7 +24,7 @@ public class TestSpellCard extends SpellCard {
 	}
 
 	public TestSpellCard(SpellDesc spell) {
-		super(getDesc());
+		super(getDesc2());
 		setDescription("This spell can have various effects and should only be used in the context of unit net.demilich.metastone.tests.");
 		setCollectible(false);
 

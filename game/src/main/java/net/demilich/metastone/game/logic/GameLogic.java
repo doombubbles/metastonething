@@ -3,6 +3,7 @@ package net.demilich.metastone.game.logic;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
 
 import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.entities.minions.*;
@@ -239,6 +240,11 @@ public class GameLogic implements Cloneable, Serializable {
 					&& !(cardTypes.contains(card.getCardType()))
 					&& !(((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC || (Race) card.getAttribute(Attribute.RACE) == Race.ALL) && player.hasAttribute(Attribute.MURLOCS_COST_HEALTH))
 					&& !card.hasAttribute(Attribute.COSTS_HEALTH)) {
+				return false;
+			}
+		}
+		if (card.getCondition() != null) {
+			if (!card.getCondition().isFulfilled(context, player, null, null)) {
 				return false;
 			}
 		}
@@ -1317,12 +1323,14 @@ public class GameLogic implements Cloneable, Serializable {
 
 		for (Card card : player.getDeck()) {
 			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				card.setAttribute(Attribute.STARTED_IN_DECK);
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
 				addGameEventListener(player, triggerDesc.create(), card);
 			}
 		}
 		for (Card card : player.getHand()) {
 			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
+				card.setAttribute(Attribute.STARTED_IN_DECK);
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
 				addGameEventListener(player, triggerDesc.create(), card);
 			}

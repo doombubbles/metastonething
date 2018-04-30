@@ -10,18 +10,17 @@
     "description": "After you play a Secret, put a random Hunter Secret into the battlefield.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "CardPlayedTrigger",
-			"sourcePlayer": "SELF",
-			"requiredAttribute": "SECRET"
+			"class": "SecretPlayedTrigger",
+			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "CastRandomSpellSpell",
-			"exclusive": true,
+			"class": "PutRandomSecretIntoPlaySpell",
 			"cardFilter": {
 				"class": "CardFilter",
-				"attribute": "SECRET",
-				"operation": "HAS",
 				"heroClass": "HUNTER"
+			},
+			"cardSource": {
+				"class": "CatalogueSource"
 			}
 		}
 	},

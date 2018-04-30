@@ -33,7 +33,6 @@ public class EliseSpell extends Spell {
 		}
 		cards.shuffle();
 		for (Card card : cards) {
-			card.setAttribute(Attribute.RECEIVED);
 			if (player.getHand().getCount() < context.getLogic().MAX_HAND_CARDS) {
 				context.getLogic().receiveCard(player.getId(), card, source);
 			}

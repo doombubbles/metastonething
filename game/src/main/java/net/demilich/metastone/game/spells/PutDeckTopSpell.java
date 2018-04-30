@@ -9,7 +9,7 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 public class PutDeckTopSpell extends Spell {
     @Override
     protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-        for (Card card : SpellUtils.getCards(context, desc)) {
+        for (Card card : SpellUtils.getCards(context, desc, player)) {
             player.getDeck().add(card, 0);
         }
     }

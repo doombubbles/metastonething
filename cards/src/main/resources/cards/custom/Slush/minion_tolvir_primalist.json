@@ -1,0 +1,29 @@
+{
+    "name": "Tol'vir Primalist",
+    "baseManaCost": 3,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 4,
+    "heroClass": "DRUID",
+    "rarity": "RARE",
+    "description": "Battlecry: Your next Choose One effect has both options combined.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "AddAttributeSpell",
+			"target": "FRIENDLY_PLAYER",
+			"attribute": "BOTH_CHOOSE_ONE_OPTIONS",
+			"revertTrigger": {
+				"class": "CardPlayedTrigger",
+				"targetPlayer": "SELF",
+				"requiredAttribute": "CHOOSE_ONE"
+			}
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

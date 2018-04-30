@@ -1,0 +1,23 @@
+{
+	"name": "Training Blade",
+	"baseManaCost": 1,
+	"type": "WEAPON",
+	"damage": 1,
+	"durability": 3,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Add a random weapon to your hand.",
+	"deathrattle": {
+		"class": "ReceiveCardSpell",
+		"filter": {
+			"class": "CardFilter",
+			"cardType": "WEAPON"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

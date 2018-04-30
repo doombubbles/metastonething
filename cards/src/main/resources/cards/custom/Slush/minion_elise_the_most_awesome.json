@@ -1,0 +1,16 @@
+{
+	"name": "Elise, the Most Awesome",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "ANY",
+	"rarity": "LEGENDARY",
+	"description": "Your Discover and Adapt cards give you all options.",
+	"attributes": {
+		"ALL_OPTIONS": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

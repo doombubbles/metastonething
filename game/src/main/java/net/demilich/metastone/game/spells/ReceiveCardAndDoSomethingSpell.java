@@ -15,7 +15,6 @@ import net.demilich.metastone.game.targeting.CardLocation;
 public class ReceiveCardAndDoSomethingSpell extends Spell {
 
 	private void castSomethingSpell(GameContext context, Player player, SpellDesc spell, Entity source, Card card) {
-		card.setAttribute(Attribute.RECEIVED);
 		context.getLogic().receiveCard(player.getId(), card);
 		// card may be null (i.e. try to draw from deck, but already in
 		// fatigue)
@@ -54,7 +53,7 @@ public class ReceiveCardAndDoSomethingSpell extends Spell {
 				}
 			}
 		} else {
-			for (Card card : SpellUtils.getCards(context, desc)) {
+			for (Card card : SpellUtils.getCards(context, desc, player)) {
 				for (int i = 0; i < count; i++) {
 					castSomethingSpell(context, player, cardEffectSpell, source, card);
 				}

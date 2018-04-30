@@ -1,0 +1,46 @@
+{
+    "name": "Bonfire Elemental",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "MAGE",
+    "rarity": "RARE",
+    "race": "ELEMENTAL",
+    "description": "Battlecry: If you played an Elemental last turn, draw a card.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "DiscoverRandomCardSpell",
+            "spell": {
+                "class": "ReceiveCardSpell",
+                "targetPlayer": "SELF"
+            },
+            "cardFilter": {
+                "class": "CardFilter",
+                "cardType": "MINION",
+                "race": "ELEMENTAL"
+            }
+        },
+        "condition": {
+            "class": "PlayedLastTurnCondition",
+            "filter": {
+                "class": "CardFilter",
+                "race": "ELEMENTAL"
+            }
+        }
+    },
+    "glow": {
+        "class": "PlayedLastTurnCondition",
+        "filter": {
+            "class": "CardFilter",
+            "race": "ELEMENTAL"
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

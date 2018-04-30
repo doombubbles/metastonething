@@ -44,6 +44,6 @@
 		"BATTLECRY": true
 	},
 	"collectible": true,
-	"set": "CUSTOM",
+	"set": "BAD_CUSTOM",
 	"fileFormatVersion": 1
 }

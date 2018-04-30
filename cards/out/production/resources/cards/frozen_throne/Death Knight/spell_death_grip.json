@@ -7,7 +7,15 @@
     "description": "Steal a minnion from your opponent's deck and add it to your hand.",
     "targetSelection": "NONE",
     "spell": {
-		"class": "custom.DeathGripSpell"
+		"class": "StealCardSpell",
+        "target": "ENEMY_DECK",
+        "cardLocation": "HAND",
+        "filter": {
+            "class": "CardFilter",
+            "cardType": "MINION"
+        },
+        "randomTarget": true,
+        "targetPlayer": "SELF"
 	},
     "collectible": false,
     "set": "FROZEN_THRONE",

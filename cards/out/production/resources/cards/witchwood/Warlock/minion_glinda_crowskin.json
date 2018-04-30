@@ -1,0 +1,25 @@
+{
+	"name": "Glinda Crowskin",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 7,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Minions in your hand have Echo.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"targetPlayer": "SELF",
+			"cardType": "MINION"
+		},
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "EVENT_CARD",
+			"attribute": "ECHO"
+		}
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

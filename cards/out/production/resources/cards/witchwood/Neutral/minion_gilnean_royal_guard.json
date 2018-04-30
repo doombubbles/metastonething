@@ -1,0 +1,27 @@
+{
+    "name": "Gilnean Royal Guard",
+    "baseManaCost": 8,
+    "type": "MINION",
+    "baseAttack": 3,
+    "baseHp": 8,
+    "heroClass": "ANY",
+    "rarity": "RARE",
+    "description": "Divine Shield. Rush. Each turn this is in your hand, swap its Attack and Health.",
+	"passiveTrigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SwapBaseAttackAndHpSpell",
+			"target": "SELF"
+		}
+	},
+    "attributes": {
+		"DIVINE_SHIELD": true,
+        "RUSH": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

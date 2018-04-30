@@ -33,6 +33,7 @@ public abstract class CardDesc implements Serializable {
 	public TriggerDesc deckTrigger;
 	public ConditionDesc glow;
 	public ValueProviderDesc[] descValues;
+	public ConditionDesc condition;
 
 	public abstract Card createInstance();
 

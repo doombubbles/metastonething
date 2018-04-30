@@ -12,6 +12,7 @@
         "targetSelection": "NONE",
         "spell": {
 			"class": "DiscoverOptionSpell",
+			"howMany": 4,
 			"spells": [
 				{
 					"name": "Wrath of Air Totem",

@@ -1,0 +1,27 @@
+{
+	"name": "A Final Strike",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "LEGENDARY",
+	"description": "Quest and Reward: Deal 30 damage to the enemy hero.",
+	"targetSelection": "NONE",
+	"quest": {
+		"class": "DamageReceivedTrigger",
+		"targetPlayer": "OPPONENT",
+		"targetEntityType": "HERO",
+		"value": 30,
+		"total": true
+	},
+	"spell": {
+		"class": "DamageSpell",
+		"value": 30,
+		"target": "ENEMY_HERO"
+	},
+	"attributes": {
+		"QUEST": 30
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

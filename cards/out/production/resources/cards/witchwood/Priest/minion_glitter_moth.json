@@ -1,0 +1,38 @@
+{
+    "name": "Glitter Moth",
+    "baseManaCost": 5,
+    "type": "MINION",
+    "baseAttack": 4,
+    "baseHp": 4,
+    "heroClass": "PRIEST",
+    "rarity": "EPIC",
+    "race": "BEAST",
+    "description": "Battlecry: If your deck has only odd-Cost cards, double the Health of your other minions.",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+			"class": "BuffSpell",
+			"target": "OTHER_FRIENDLY_MINIONS",
+			"hpBonus": {
+				"class": "AttributeValueProvider",
+				"attribute": "HP"
+			}
+		},
+		"condition": {
+			"class": "DeckContainsCondition",
+			"cardFilter": {
+				"class": "AttributeFilter",
+				"attribute": "BASE_MANA_COST",
+				"operation": "MOD_2_EQUAL",
+				"value": 0
+			},
+			"invert": true
+		}
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

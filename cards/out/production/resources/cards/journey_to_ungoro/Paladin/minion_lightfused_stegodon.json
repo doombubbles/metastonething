@@ -12,7 +12,7 @@
 		"spell": {
 			"class": "AdaptSpell",
 			"group": "group_adapt",
-			"target": "FRIENDLY_MINIONS",
+			"target": "OTHER_FRIENDLY_MINIONS",
 			"filter": {
 				"class": "SpecificCardFilter",
 				"cardId": "token_silver_hand_recruit"

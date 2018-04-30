@@ -1,0 +1,17 @@
+{
+    "name": "Greater Quartz Spellstone",
+    "baseManaCost": 3,
+    "type": "SPELL",
+    "heroClass": "SHAMAN",
+    "rarity": "RARE",
+    "description": "Give your minions +3/+3.",
+    "targetSelection": "NONE",
+    "spell": {
+        "class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
+		"value": 3
+    },
+    "collectible": false,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

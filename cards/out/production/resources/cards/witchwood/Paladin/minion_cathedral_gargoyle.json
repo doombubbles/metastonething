@@ -1,0 +1,47 @@
+{
+    "name": "Cathedral Gargoyle",
+    "baseManaCost": 2,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 2,
+    "heroClass": "PALADIN",
+    "rarity": "EPIC",
+    "description": "Battlecry: If you're holding a Dragon, gain Taunt and Divine Shield.",
+    "battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"target": "SELF",
+			"spells": [
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "DIVINE_SHIELD"
+				}
+			]
+		},
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"race": "DRAGON"
+			}
+		}
+	},
+	"glow": {
+		"class": "HoldsCardCondition",
+		"cardFilter": {
+			"class": "CardFilter",
+			"race": "DRAGON"
+		}
+	},
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

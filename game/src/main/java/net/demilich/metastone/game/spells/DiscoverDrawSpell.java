@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.spells;
 
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
@@ -40,15 +41,24 @@ public class DiscoverDrawSpell extends Spell {
 					context.getLogic().removeCardFromDeck(player.getId(), card);
 				}
 				cards.add(card);
+
+				if (context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+					SpellUtils.castChildSpell(context, player, ((SpellDesc) desc.get(SpellArg.SPELL)).addArg(SpellArg.CARD, card.getCardId()), source, target);
+					if (!discard) {
+						context.getLogic().removeCardFromDeck(player.getId(), card);
+					}
+				}
 			}
 		}
-		
-		if (!cards.isEmpty()) {
-			DiscoverAction action = SpellUtils.getDiscover(context, player, desc, cards);
-			SpellUtils.castChildSpell(context, player, action.getSpell(), source, target);
-			if (!discard) {
-				context.getLogic().removeCardFromDeck(player.getId(), action.getCard());
-			}
+
+		if (cards.isEmpty() || context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+			return;
+		}
+
+		DiscoverAction action = SpellUtils.getDiscover(context, player, desc, cards);
+		SpellUtils.castChildSpell(context, player, action.getSpell(), source, target);
+		if (!discard) {
+			context.getLogic().removeCardFromDeck(player.getId(), action.getCard());
 		}
 	}
 

@@ -6,6 +6,8 @@ import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -25,7 +27,15 @@ public class FacelessSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		Minion template = (Minion) target;
+		Minion template = null;
+		if (target instanceof Minion) {
+			template = (Minion) target;
+		} else if (target instanceof MinionCard) {
+			template = ((MinionCard) target).summon();
+		}
+		if (template == null) {
+			return;
+		}
 		Minion clone = template.clone();
 		clone.removeAttribute(Attribute.AURA_ATTACK_BONUS);
 		clone.removeAttribute(Attribute.AURA_HP_BONUS);

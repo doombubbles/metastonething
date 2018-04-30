@@ -1,6 +1,6 @@
 {
     "name": "Bonemare",
-    "baseManaCost": 7,
+    "baseManaCost": 8,
     "type": "MINION",
     "baseAttack": 5,
     "baseHp": 5,

@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
-	"description": "Hunter Secrets you play trigger instantly.",
+	"description": "Your Hunter Secrets are targetable and trigger instantly.",
 	"attributes": {
 		"INSTANT_TRAPS": true
 	},

@@ -77,7 +77,20 @@
 			"name": "Sanguine Fangs",
 			"description": "Lifesteal",
 			"class": "AddAttributeSpell",
-			"attribute": "LIFESTEAL"
+			"attribute": "LIFESTEAL",
+			"object": "CardSet.CUSTOM"
+		},
+		{
+			"name": "Surging Momentum",
+			"description": "Rush",
+			"class": "AddAttributeSpell",
+			"attribute": "RUSH",
+			"object": "CardSet.CUSTOM",
+			"condition": {
+				"class": "AttributeCondition",
+				"attribute": "SUMMONING_SICKNESS",
+				"operation": "HAS"
+			}
 		}
 	],
 	"collectible": false,

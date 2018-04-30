@@ -1,0 +1,32 @@
+{
+	"name": "Lord Godfrey",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Deal 2 damage to all other minions. If any die, repeat this Battlecry.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "CastRecastSpell",
+			"spell": {
+				"class": "DamageSpell",
+				"value": 2,
+				"target": "ALL_OTHER_MINIONS"
+			},
+			"condition": {
+				"class": "IsDeadCondition",
+				"target": "ALL_MINIONS"
+			},
+			"howMany": 14
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

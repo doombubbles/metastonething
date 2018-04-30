@@ -12,7 +12,6 @@ public class SpellCardDesc extends CardDesc {
 	public TargetSelection targetSelection;
 	public SpellDesc spell;
 	public Race race;
-	public ConditionDesc condition;
 
 	@Override
 	public Card createInstance() {

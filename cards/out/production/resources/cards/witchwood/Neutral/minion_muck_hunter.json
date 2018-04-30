@@ -1,0 +1,28 @@
+{
+	"name": "Muck Hunter",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 8,
+	"heroClass": "ANY",
+	"rarity": "EPIC",
+	"race": "NONE",
+	"description": "Rush. Battlecry: Summon two 2/1 Mucklings for your opponent.",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "OPPONENT",
+			"cards": [
+				"token_muckling",
+				"token_muckling"
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"RUSH": true
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

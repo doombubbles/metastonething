@@ -6,6 +6,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.events.SecretPlayedEvent;
 import net.demilich.metastone.game.events.SecretRevealedEvent;
+import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.types.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -34,7 +35,11 @@ public class PlaySpellCardAction extends PlayCardAction {
 			context.fireGameEvent(new SecretRevealedEvent(context, ((SecretCard) card), playerId));
 			context.fireGameEvent(new SecretPlayedEvent(context, playerId, (SecretCard) card));
 		}
-		context.getLogic().castSpell(playerId, spell, cardReference, getTargetKey(), targetRequirement, false, previousContext);
+		EntityReference source = cardReference;
+		if (spell.contains(SpellArg.SPELL_SOURCE)) {
+			source = (EntityReference) spell.get(SpellArg.SPELL_SOURCE);
+		}
+		context.getLogic().castSpell(playerId, spell, source, getTargetKey(), targetRequirement, false, previousContext);
 	}
 
 	public SpellDesc getSpell() {

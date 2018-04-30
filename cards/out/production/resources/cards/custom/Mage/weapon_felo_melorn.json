@@ -1,0 +1,29 @@
+{
+    "name": "Felo'melorn",
+    "baseManaCost": 3,
+    "type": "WEAPON",
+    "damage": 0,
+    "durability": 3,
+    "heroClass": "MAGE",
+    "rarity": "LEGENDARY",
+    "description": "During your turn, add a 'Phoenix's Flames' to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "spell_phoenix_flames",
+			"attribute": "ONE_TURN"
+		}
+	},
+	"onEquip": {
+		"class": "ReceiveCardSpell",
+		"card": "spell_phoenix_flames",
+		"attribute": "ONE_TURN"
+	},
+    "collectible": true,
+    "set": "CUSTOM",
+    "fileFormatVersion": 1
+}

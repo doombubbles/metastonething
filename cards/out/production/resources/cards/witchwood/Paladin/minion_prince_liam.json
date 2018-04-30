@@ -1,0 +1,50 @@
+{
+	"name": "Prince Liam",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Transform all 1-Cost cards in your hand and deck into Legendary minions.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ReplaceCardSpell",
+					"target": "FRIENDLY_DECK",
+					"filter": {
+						"class": "CardFilter",
+						"manaCost": 1
+					},
+					"cardFilter": {
+						"class": "CardFilter",
+						"cardType": "MINION",
+						"rarity": "LEGENDARY"
+					}
+				},
+				{
+					"class": "ReplaceCardSpell",
+					"target": "FRIENDLY_HAND",
+					"filter": {
+						"class": "CardFilter",
+						"manaCost": 1
+					},
+					"cardFilter": {
+						"class": "CardFilter",
+						"cardType": "MINION",
+						"rarity": "LEGENDARY"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

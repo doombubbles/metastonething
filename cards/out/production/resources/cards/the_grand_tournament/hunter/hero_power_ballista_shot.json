@@ -9,7 +9,7 @@
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ENEMY_HERO",
-		"value": 4
+		"value": 3
 	},
 	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",

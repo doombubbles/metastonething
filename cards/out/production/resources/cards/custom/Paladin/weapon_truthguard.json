@@ -1,0 +1,47 @@
+{
+	"name": "Truthguard",
+	"baseManaCost": 8,
+	"type": "WEAPON",
+	"damage": 0,
+	"durability": 12,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Whenever your hero takes damage, this weapon takes it instead. Deathrattle: Summon your Taunt minions that died this game.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "PreDamageTrigger",
+			"sourcePlayer": "BOTH",
+			"targetPlayer": "SELF",
+			"targetEntityType": "HERO"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "ModifyDurabilitySpell",
+					"target": "SELF"
+				},
+				{
+					"class": "ModifyDamageSpell",
+					"operation": "SET",
+					"value": 0
+				}
+			]
+		}
+	},
+	"deathrattle": {
+        "class": "ResurrectSpell",
+		"value": 7,
+		"cardFilter": {
+			"class": "CardFilter",
+			"attribute": "TAUNT",
+			"operation": "HAS"
+		}
+    },
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

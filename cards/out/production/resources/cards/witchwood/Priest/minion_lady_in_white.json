@@ -1,0 +1,31 @@
+{
+    "name": "Lady in White",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 5,
+    "heroClass": "PRIEST",
+    "rarity": "LEGENDARY",
+    "description": "Battlecry: Cast 'Inner Fire' on all minions in your deck. (Change their Attack to be equal to their Health)",
+    "battlecry": {
+        "targetSelection": "NONE",
+        "spell": {
+            "class": "SetAttackSpell",
+			"target": "FRIENDLY_DECK",
+			"value": {
+				"class": "AttributeValueProvider",
+				"attribute": "HP"
+			},
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			}
+        }
+    },
+    "attributes": {
+        "BATTLECRY": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

@@ -44,7 +44,7 @@ public class TransformToRandomMinionSpell extends TransformMinionSpell {
 		}
 
 
-		for (Card card : SpellUtils.getCards(context, desc)) {
+		for (Card card : SpellUtils.getCards(context, desc, player)) {
 			if (card instanceof MinionCard) {
 				filteredMinions.add(card);
 			}

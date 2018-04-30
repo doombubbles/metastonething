@@ -1,0 +1,27 @@
+{
+    "name": "Cursed Castaway",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 5,
+    "baseHp": 3,
+    "heroClass": "ROGUE",
+    "rarity": "RARE",
+    "race": "PIRATE",
+    "description": "Rush. Deathrattle: Draw a Combo card from your deck.",
+    "deathrattle": {
+        "class": "FromDeckToHandSpell",
+		"value": 1,
+		"cardFilter": {
+			"class": "CardFilter",
+			"attribute": "COMBO",
+			"operation": "HAS"
+		}
+    },
+    "attributes": {
+        "DEATHRATTLES": true,
+        "RUSH": true
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

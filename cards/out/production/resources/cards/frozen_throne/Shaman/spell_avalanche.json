@@ -1,11 +1,10 @@
 {
 	"name": "Avalanche",
-	"baseManaCost": 4,
+	"baseManaCost": 3,
 	"type": "SPELL",
 	"heroClass": "SHAMAN",
-	"rarity": "COMMON",
+	"rarity": "RARE",
 	"description": "Freeze a minion and deal *3* damage to adjacent ones.",
-	"race": "FROST",
 	"targetSelection": "MINIONS",
 	"spell": {
 		"class": "AdjacentEffectSpell",

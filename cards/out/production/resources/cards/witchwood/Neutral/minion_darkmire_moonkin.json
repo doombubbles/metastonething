@@ -1,0 +1,16 @@
+{
+    "name": "Darkmire Moonkin",
+    "baseManaCost": 7,
+    "type": "MINION",
+    "baseAttack": 2,
+    "baseHp": 8,
+    "heroClass": "ANY",
+    "rarity": "COMMON",
+    "description": "Spell Damage +2",
+    "attributes": {
+        "SPELL_DAMAGE": 2
+    },
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

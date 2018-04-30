@@ -119,7 +119,7 @@ public class HandCard extends CardToken {
 			rainbowGem.setVisible(false);
 			shadowGem.setVisible(false);
 		}
-		if (card.getCardType().equals(CardType.SPELL) && player.getQuests().contains("quest_open_the_waygate") && (card.hasAttribute(Attribute.RECEIVED) || !card.isCollectible())) {
+		if (card.getCardType().equals(CardType.SPELL) && player.getQuests().contains("quest_open_the_waygate") && (!card.hasAttribute(Attribute.STARTED_IN_DECK) || !card.isCollectible())) {
 			manaGem.setVisible(false);
 			bloodGem.setVisible(false);
 			rainbowGem.setVisible(true);

@@ -1,0 +1,45 @@
+{
+    "name": "Genn Greymane",
+    "baseManaCost": 6,
+    "type": "MINION",
+    "baseAttack": 6,
+    "baseHp": 5,
+    "heroClass": "ANY",
+    "rarity": "LEGENDARY",
+    "race": "NONE",
+    "description": "Start of Game: If your deck has only even-Cost cards, your starting Hero Power costs (1).",
+	"deckTrigger": {
+		"eventTrigger": {
+			"class": "GameStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "CardCostModifierSpell",
+			"target": "FRIENDLY_PLAYER",
+			"cardCostModifier": {
+				"class": "CardCostModifier",
+				"cardType": "HERO_POWER",
+				"targetPlayer": "SELF",
+				"operation": "SET",
+				"value": 1,
+				"expirationTrigger": {
+					"class": "HeroPowerChangedTrigger",
+					"targetPlayer": "SELF"
+				}
+			},
+			"condition": {
+				"class": "DeckContainsCondition",
+				"cardFilter": {
+					"class": "AttributeFilter",
+					"attribute": "BASE_MANA_COST",
+					"operation": "MOD_2_EQUAL",
+					"value": 1
+				},
+				"invert": true
+			}
+		}
+	},
+    "collectible": true,
+    "set": "WITCHWOOD",
+    "fileFormatVersion": 1
+}

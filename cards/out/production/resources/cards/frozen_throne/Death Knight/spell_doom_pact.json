@@ -14,11 +14,15 @@
 				"target": "ALL_MINIONS"
 			},
 			{
-				"class": "DiscardCardsFromDeckSpell",
-				"targetPlayer": "SELF",
+				"class": "CastRepeatedlySpell",
 				"howMany": {
 					"class": "EntityCounter",
 					"target": "ALL_MINIONS"
+				},
+				"spell": {
+					"class": "RemoveCardSpell",
+					"target": "FRIENDLY_TOP_CARD",
+					"reveal": true
 				}
 			}
 		]

@@ -12,6 +12,7 @@
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
 			"class": "custom.MoatLurkerSpell",
+			"targetPlayer": "SELF",
 			"howMany": 2
 		}
 	},

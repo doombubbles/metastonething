@@ -6,16 +6,26 @@
     "baseHp": 6,
     "heroClass": "WARLOCK",
     "rarity": "RARE",
-    "description": "At the start of your turn, deal 1 damage to your hero.",
+    "description": "At the start of each turn, deal 1 damage to both heroes.",
     "trigger": {
         "eventTrigger": {
             "class": "TurnStartTrigger",
-			"targetPlayer": "SELF"
+			"targetPlayer": "BOTH"
         },
         "spell": {
-            "class": "DamageSpell",
-			"target": "FRIENDLY_HERO",
-			"value": 1
+            "class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "ENEMY_HERO",
+					"value": 1
+				},
+				{
+					"class": "DamageSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 1
+				}
+			]
         }
     },
     "collectible": true,

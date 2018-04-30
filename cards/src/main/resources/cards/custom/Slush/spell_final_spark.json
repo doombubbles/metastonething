@@ -1,0 +1,27 @@
+{
+	"name": "Final Spark",
+	"baseManaCost": 8,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Deal *7* damage to a minion and the enemy hero.",
+	"targetSelection": "MINIONS",
+	"race": "FIRE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 7
+			},
+			{
+				"class": "DamageSpell",
+				"target": "ENEMY_HERO",
+				"value": 7
+			}
+		]
+	},
+	"collectible": true,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}
