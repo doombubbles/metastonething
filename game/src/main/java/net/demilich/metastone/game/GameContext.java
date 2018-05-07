@@ -630,7 +630,9 @@ public class GameContext implements Cloneable, IDisposable, Serializable {
 		case PENDING:
 			return getPendingCard();
 		case HERO_POWER:
-			return player.getHero().getHeroPower();
+			if (player.getHero().getHeroPower().getCardReference().equals(cardReference)) {
+				return player.getHero().getHeroPower();
+			} else return player.getHero().getHeroPower2();
 		default:
 			break;
 

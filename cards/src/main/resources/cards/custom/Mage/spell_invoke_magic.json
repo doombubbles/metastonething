@@ -1,0 +1,16 @@
+{
+	"name": "Invoke Magic",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Create a custom Omnispell.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "custom.CombineSpellsSpell",
+		"name": "Omnispell"
+	},
+	"collectible": false,
+	"set": "CUSTOM",
+	"fileFormatVersion": 1
+}

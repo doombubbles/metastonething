@@ -77,11 +77,11 @@ public class DiscoverFilteredCardSpell extends Spell {
 			
 		}
 
-		if (cards.isEmpty() || context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
+		if (discoverCards.isEmpty() || context.getLogic().hasAttribute(player, Attribute.ALL_OPTIONS)) {
 			return;
 		}
 
-		SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+		SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, discoverCards).getSpell(), source, target);
 	}
 
 }

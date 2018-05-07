@@ -4,7 +4,7 @@
     "type": "SPELL",
     "heroClass": "WARLOCK",
     "rarity": "FREE",
-    "description": "Summon a 5/5 Demon. Add 'Azari, the Devourer' to your hand.",
+    "description": "Summon a 6/6 Demon. Add 'Azari, the Devourer' to your hand.",
     "targetSelection": "NONE",
     "spell": {
         "class": "MetaSpell",
@@ -12,7 +12,7 @@
 			{
 				"class": "CreateSummonSpell",
 				"race": "DEMON",
-				"name": "Demon",
+				"name": "Felhunter",
 				"attackBonus": 6,
 				"hpBonus": 6,
 				"mana": 6

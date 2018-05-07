@@ -251,6 +251,11 @@ public class GameLogic implements Cloneable, Serializable {
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
 			HeroPower power = (HeroPower) card;
 			int heroPowerUsages = getGreatestAttributeValue(player, Attribute.HERO_POWER_USAGES);
+			if (power.getId() == player.getHero().getHeroPower().getId()) {
+				heroPowerUsages = Math.max(heroPowerUsages, player.getHero().getHeroPower().getAttributeValue(Attribute.HERO_POWER_USAGES));
+			} else {
+				heroPowerUsages = Math.max(heroPowerUsages, player.getHero().getHeroPower2().getAttributeValue(Attribute.HERO_POWER_USAGES));
+			}
 			if (heroPowerUsages == 0) {
 				heroPowerUsages = 1;
 			} 
@@ -262,7 +267,9 @@ public class GameLogic implements Cloneable, Serializable {
 			}
 		} else if (card.getCardType().isCardType(CardType.MINION)) {
 			return canSummonMoreMinions(player);
-		}
+		} /*else if (card.getCardType().isCardType(CardType.WEAPON)) {
+			return player.hasAttribute(Attribute.REPLACED_WEAPON_SLOT);
+		} */
 		if (card instanceof SecretCard) {
 			SecretCard secretCard = (SecretCard) card;
 			return secretCard.canBeCast(context, player);
@@ -588,7 +595,9 @@ public class GameLogic implements Cloneable, Serializable {
 		
 		if (source.getEntityType() == EntityType.CARD) {
 			if (((Card) source).getCardType().equals(CardType.HERO_POWER)) {
-				source = player.getHero().getHeroPower();
+				if (source.getId() == player.getHero().getHeroPower().getId()) {
+					source = player.getHero().getHeroPower();
+				} else source  = player.getHero().getHeroPower2();
 			}
 		}
 		
@@ -790,7 +799,10 @@ public class GameLogic implements Cloneable, Serializable {
 		Hero hero = player.getHero();
 		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		context.getOpponent(player).getHero().removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-		hero.removeAttribute(Attribute.HERO_POWER_USAGES);
+		hero.getHeroPower().removeAttribute(Attribute.HERO_POWER_USAGES);
+		if (hero.hasHeroPower2()) {
+			hero.getHeroPower2().removeAttribute(Attribute.HERO_POWER_USAGES);
+		}
 		handleFrozen(hero);
 		for (Summon summon : player.getSummons()) {
 			summon.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
@@ -838,6 +850,11 @@ public class GameLogic implements Cloneable, Serializable {
 
 	public void equipWeapon(int playerId, Weapon weapon, boolean battlecry) {
 		Player player = context.getPlayer(playerId);
+
+		if (player.hasAttribute(Attribute.REPLACED_WEAPON_SLOT) || player.getHero().hasHeroPower2()) {
+			player.removeAttribute(Attribute.REPLACED_WEAPON_SLOT);
+			player.getHero().removeHeroPower2();
+		}
 
 		weapon.setId(idFactory.generateId());
 		Weapon currentWeapon = player.getHero().getWeapon();
@@ -1243,6 +1260,12 @@ public class GameLogic implements Cloneable, Serializable {
 		if (player.getHero().getHeroPower().getCardId().equals(card.getCardId())) {
 			return true;
 		}
+		if (player.getHero().hasHeroPower2()) {
+			if (player.getHero().getHeroPower2().getCardId().equals(card.getCardId())) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -2096,6 +2119,9 @@ public class GameLogic implements Cloneable, Serializable {
 		}
 
 		player.getHero().getHeroPower().setUsed(0);
+		if (player.getHero().hasHeroPower2()) {
+			player.getHero().getHeroPower2().setUsed(0);
+		}
 		player.getHero().activateWeapon(true);
 		refreshAttacksPerRound(player.getHero());
 		for (Summon summon : player.getSummons()) {
@@ -2334,9 +2360,9 @@ public class GameLogic implements Cloneable, Serializable {
 		context.fireGameEvent(new BoardChangedEvent(context));
 	}
 
-	public void useHeroPower(int playerId, boolean mana) {
+	public void useHeroPower(int playerId, HeroPower heroPower, boolean mana) {
 		Player player = context.getPlayer(playerId);
-		HeroPower power = player.getHero().getHeroPower();
+		HeroPower power = heroPower != null ? heroPower : player.getHero().getHeroPower();
 		if (mana) {
 			int modifiedManaCost = getModifiedManaCost(player, power);
 			modifyCurrentMana(playerId, -modifiedManaCost);
@@ -2348,7 +2374,11 @@ public class GameLogic implements Cloneable, Serializable {
 	}
 
 	public void useHeroPower(int playerId) {
-		useHeroPower(playerId, true);
+		useHeroPower(playerId, null, true);
+	}
+
+	public void useHeroPower(int playerId, boolean mana) {
+		useHeroPower(playerId, null, mana);
 	}
 	
 	public void info (String string) {

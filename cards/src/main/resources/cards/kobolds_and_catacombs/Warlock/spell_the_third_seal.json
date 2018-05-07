@@ -12,7 +12,7 @@
 			{
 				"class": "CreateSummonSpell",
 				"race": "DEMON",
-				"name": "Demon",
+				"name": "Felhunter",
 				"attackBonus": 4,
 				"hpBonus": 4,
 				"mana": 4

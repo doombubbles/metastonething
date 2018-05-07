@@ -125,6 +125,11 @@ public class TargetLogic implements Serializable {
 		if (player.getHero().getHeroPower().getId() == targetId) {
 			return player.getHero().getHeroPower();
 		}
+		if (player.getHero().hasHeroPower2()) {
+			if (player.getHero().getHeroPower2().getId() == targetId) {
+				return player.getHero().getHeroPower2();
+			}
+		}
 		for (Card card : player.getHand()) {
 			if (card.getId() == targetId) {
 				return card;

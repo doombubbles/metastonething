@@ -30,9 +30,23 @@ public class ChangeHeroPowerSpell extends Spell {
 	protected void changeHeroPower(GameContext context, String newHeroPower, Hero hero) {
 		HeroPower heroPower = (HeroPower) context.getCardById(newHeroPower);
 		logger.debug("{}'s hero power was changed to {}", hero.getName(), heroPower);
+
 		context.removeTriggersAssociatedWith(hero.getHeroPower().getReference(), true);
 		hero.setHeroPower(heroPower);
 		context.fireGameEvent(new HeroPowerChangedEvent(context, hero.getOwner(), heroPower));
+	}
+
+	protected void changeHeroPower(GameContext context, String newHeroPower, Hero hero, boolean second) {
+		HeroPower heroPower = (HeroPower) context.getCardById(newHeroPower);
+		logger.debug("{}'s hero power was changed to {}", hero.getName(), heroPower);
+		if (second) {
+			hero.setHeroPower(heroPower, 2);
+		} else {
+			context.removeTriggersAssociatedWith(hero.getHeroPower().getReference(), true);
+			hero.setHeroPower(heroPower);
+			context.fireGameEvent(new HeroPowerChangedEvent(context, hero.getOwner(), heroPower));
+		}
+
 	}
 	
 	@Override
@@ -63,8 +77,6 @@ public class ChangeHeroPowerSpell extends Spell {
 			}
 			heroPowerName = SpellUtils.getRandomTarget(potentialIds);
 		}
-
-
-		changeHeroPower(context, heroPowerName, player.getHero());
+		changeHeroPower(context, heroPowerName, player.getHero(), desc.contains(SpellArg.VALUE));
 	}
 }

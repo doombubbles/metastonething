@@ -4,7 +4,7 @@
     "type": "SPELL",
     "heroClass": "WARLOCK",
     "rarity": "FREE",
-    "description": "Summon a 4/4 Demon. Add 'The Final Seal' to your hand.",
+    "description": "Summon a 5/5 Demon. Add 'The Final Seal' to your hand.",
     "targetSelection": "NONE",
     "spell": {
         "class": "MetaSpell",
@@ -12,14 +12,14 @@
 			{
 				"class": "CreateSummonSpell",
 				"race": "DEMON",
-				"name": "Demon",
+				"name": "Felhunter",
 				"attackBonus": 5,
 				"hpBonus": 5,
 				"mana": 5
 			},
 			{
 				"class": "ReceiveCardSpell",
-				"card": "spell_the_finalseal"
+				"card": "spell_the_final_seal"
 			}
 		]
     },

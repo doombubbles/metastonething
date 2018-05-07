@@ -2,6 +2,7 @@ package net.demilich.metastone.game.spells;
 
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.*;
@@ -44,6 +45,9 @@ public class ReplayCardsSpell extends Spell {
                     context.getLogic().summon(player.getId(), minionCard.summon(), card, -1, false);
                     break;
                 case WEAPON:
+                    if (player.hasAttribute(Attribute.REPLACED_WEAPON_SLOT)) {
+                        break;
+                    }
                     WeaponCard weaponCard = (WeaponCard) card;
                     context.getLogic().equipWeapon(player.getId(), weaponCard.getWeapon(), false);
                     break;

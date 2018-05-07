@@ -6,13 +6,12 @@
 	"baseHp": 4,
 	"heroClass": "WARRIOR",
 	"rarity": "EPIC",
-	"description": "Your Fury spells can't reduce your minions below 1 health.",
+	"description": "Your spells can't damage your minions below 1 health.",
 	"triggers": [
 		{
 			"eventTrigger": {
 				"class": "SpellCastedTrigger",
-				"sourcePlayer": "SELF",
-				"race": "FURY"
+				"sourcePlayer": "SELF"
 			},
 			"spell": {
 				"class": "AddAttributeSpell",
@@ -23,8 +22,7 @@
 		{
 			"eventTrigger": {
 				"class": "AfterSpellCastedTrigger",
-				"sourcePlayer": "SELF",
-				"race": "FURY"
+				"sourcePlayer": "SELF"
 			},
 			"spell": {
 				"class": "RemoveAttributeSpell",

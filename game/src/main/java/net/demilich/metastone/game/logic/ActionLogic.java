@@ -2,6 +2,7 @@ package net.demilich.metastone.game.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,28 +51,54 @@ public class ActionLogic implements Serializable {
 		List<GameAction> heroPowerActions = new ArrayList<GameAction>();
 		HeroPower heroPower = player.getHero().getHeroPower();
 		heroPower.onWillUse(context, player);
-		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(),
-				heroPower.getName());
-		if (!context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
-			return heroPowerActions;
-		}
-		if (heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
-			IChooseOneCard chooseOneCard = (IChooseOneCard) heroPower;
-			if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
-				GameAction chooseOneAction = chooseOneCard.playBothOptions();
-				chooseOneAction.setSource(heroPower.getReference());
-				rollout(chooseOneAction, context, player, heroPowerActions);
-			} else {
-				for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+		CardReference heroPowerReference = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower.getId(), heroPower.getName());
+		if (context.getLogic().canPlayCard(player.getId(), heroPowerReference)) {
+			if (heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
+				IChooseOneCard chooseOneCard = (IChooseOneCard) heroPower;
+				if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+					GameAction chooseOneAction = chooseOneCard.playBothOptions();
 					chooseOneAction.setSource(heroPower.getReference());
 					rollout(chooseOneAction, context, player, heroPowerActions);
+				} else {
+					for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+						chooseOneAction.setSource(heroPower.getReference());
+						rollout(chooseOneAction, context, player, heroPowerActions);
+					}
+				}
+
+			} else {
+				GameAction action = heroPower.play();
+				action.setSource(heroPower.getReference());
+				rollout(action, context, player, heroPowerActions);
+			}
+		}
+
+
+		if (player.getHero().hasHeroPower2()) {
+			HeroPower heroPower2 = player.getHero().getHeroPower2();
+			heroPower2.onWillUse(context, player);
+			CardReference heroPowerReference2 = new CardReference(player.getId(), CardLocation.HERO_POWER, heroPower2.getId(), heroPower2.getName());
+			if (context.getLogic().canPlayCard(player.getId(), heroPowerReference2)) {
+				if (heroPower2.hasAttribute(Attribute.CHOOSE_ONE)) {
+					IChooseOneCard chooseOneCard = (IChooseOneCard) heroPower2;
+					if (context.getLogic().hasAttribute(player, Attribute.BOTH_CHOOSE_ONE_OPTIONS)) {
+						GameAction chooseOneAction = chooseOneCard.playBothOptions();
+						chooseOneAction.setSource(heroPower2.getReference());
+						rollout(chooseOneAction, context, player, heroPowerActions);
+					} else {
+						for (GameAction chooseOneAction : chooseOneCard.playOptions()) {
+							chooseOneAction.setSource(heroPower2.getReference());
+							rollout(chooseOneAction, context, player, heroPowerActions);
+						}
+					}
+
+				} else {
+					GameAction action = heroPower2.play();
+					action.setSource(heroPower2.getReference());
+					rollout(action, context, player, heroPowerActions);
 				}
 			}
-			
-		} else {
-			GameAction action = heroPower.play();
-			action.setSource(heroPower.getReference());
-			rollout(action, context, player, heroPowerActions);
+
 		}
 
 		return heroPowerActions;

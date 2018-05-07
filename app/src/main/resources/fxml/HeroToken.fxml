@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.paint.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root xmlns:fx="http://javafx.com/fxml/1" id="" type="BorderPane" xmlns="http://javafx.com/javafx/8">
+<fx:root id="" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <StackPane fx:id="targetAnchor" prefHeight="115.0" prefWidth="108.0">
             <children>
@@ -90,28 +96,28 @@
     <left>
         <VBox maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
             <children>
-                <StackPane fx:id="weaponPane" prefHeight="-1.0" prefWidth="-1.0">
+                <StackPane fx:id="leftPane" prefHeight="-1.0" prefWidth="-1.0">
                     <children>
-                        <Circle fill="#404040" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Label fx:id="weaponNameLabel" maxWidth="70.0" styleClass="label-white" text="&lt;weapon name&gt;" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
-                            <font>
-                                <Font name="Arial Bold" size="10.0" />
-                            </font>
-                        </Label>
-                        <ImageView fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-2.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
-                            <image>
-                                <Image url="/img/common/weapon_attack.png" />
-                            </image>
-                        </ImageView>
-                        <Group fx:id="weaponAttackAnchor" StackPane.alignment="BOTTOM_LEFT" />
-                        <ImageView fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="3.0" translateY="-2.0" y="0.0" StackPane.alignment="BOTTOM_RIGHT">
-                            <image>
-                                <Image url="/img/common/weapon_durability.png" />
-                            </image>
-                        </ImageView>
-                        <Group fx:id="weaponDurabilityAnchor" StackPane.alignment="BOTTOM_RIGHT" />
-                        <StackPane prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
+                        <StackPane fx:id="weaponPane" prefHeight="-1.0" prefWidth="-1.0" translateY="0.0" StackPane.alignment="BOTTOM_CENTER">
                            <children>
+                              <Circle fill="#404040" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label fx:id="weaponNameLabel" maxWidth="70.0" styleClass="label-white" text="&lt;weapon name&gt;" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
+                                  <font>
+                                      <Font name="Arial Bold" size="10.0" />
+                                  </font>
+                              </Label>
+                              <ImageView fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" y="0.0" StackPane.alignment="BOTTOM_LEFT">
+                                  <image>
+                                      <Image url="/img/common/weapon_attack.png" />
+                                  </image>
+                              </ImageView>
+                              <Group fx:id="weaponAttackAnchor" StackPane.alignment="BOTTOM_LEFT" />
+                              <ImageView fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="3.0" y="0.0" StackPane.alignment="BOTTOM_RIGHT">
+                                  <image>
+                                      <Image url="/img/common/weapon_durability.png" />
+                                  </image>
+                              </ImageView>
+                              <Group fx:id="weaponDurabilityAnchor" StackPane.alignment="BOTTOM_RIGHT" />
                                <ImageView fx:id="deathrattle" fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" translateY="10.0" visible="false" StackPane.alignment="BOTTOM_CENTER">
                                    <image>
                                        <Image url="/img/common/deathrattle.png" />
@@ -135,10 +141,18 @@
                            </children>
 
                         </StackPane>
+                  <StackPane fx:id="heroPowerPane2" prefHeight="-1.0" prefWidth="-1.0">
+                     <children>
+                        <Ellipse fx:id="glow3" fill="#ffffff00" pickOnBounds="true" radiusX="30.0" radiusY="30.0" smooth="true" stroke="#32CD32" strokeType="OUTSIDE" strokeWidth="4.0" translateY="2.0" visible="false" />
+                        <ImageView id="heropower" fx:id="heroPowerIcon2" fitHeight="150.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" translateY="0.0" y="0.0">
+                           <image>
+                              <Image url="/img/powers/armor_up.png" />
+                           </image>
+                        </ImageView>
+                        <Group fx:id="heroPowerAnchor2" translateX="0.0" translateY="-1.0" StackPane.alignment="TOP_CENTER" />
+                     </children>
+                  </StackPane>
                     </children>
-                    <padding>
-                        <Insets bottom="4.0" left="4.0" top="4.0" />
-                    </padding>
                 </StackPane>
             </children>
         </VBox>

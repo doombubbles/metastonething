@@ -36,6 +36,7 @@ import net.demilich.metastone.game.cards.QuestCard;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.weapons.Weapon;
+import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.gui.IconFactory;
 import net.demilich.metastone.gui.cards.CardTooltip;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -86,6 +87,15 @@ public class HeroToken extends GameToken {
 	private ImageView heroPowerIcon;
 	@FXML
 	private Shape glow;
+
+	@FXML
+	private Pane heroPowerPane2;
+	@FXML
+	private Group heroPowerAnchor2;
+	@FXML
+	private ImageView heroPowerIcon2;
+	@FXML
+	private Shape glow3;
 
 	@FXML
 	private ImageView elusive;
@@ -172,11 +182,20 @@ public class HeroToken extends GameToken {
 		}
 		updateArmor(hero.getArmor());
 		updateHeroPower(hero);
+		heroPowerPane2.setVisible(hero.hasHeroPower2());
+		if (hero.hasHeroPower2()) {
+			updateSecondHeroPower(hero);
+		}
 		glow.setVisible(hero.getId() == ((multiplayer && context.switched) ? context.getPlayer2().getHero() : context.getPlayer1().getHero()).getId()
 						&& hero.getId() == context.getActivePlayer().getHero().getId()
 						&& context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower().getCardReference())
 						&& hero.getHeroPower().getBaseManaCost() != 0);
-		updateWeapon(hero.getWeapon());
+		glow3.setVisible(hero.hasHeroPower2()
+				&& hero.getId() == ((multiplayer && context.switched) ? context.getPlayer2().getHero() : context.getPlayer1().getHero()).getId()
+				&& hero.getId() == context.getActivePlayer().getHero().getId()
+				&& context.getLogic().canPlayCard(context.getPlayer(hero.getOwner()).getId(), hero.getHeroPower2().getCardReference())
+				&& hero.getHeroPower2().getBaseManaCost() != 0);
+		updateWeapon(hero.getWeapon(), !player.hasAttribute(Attribute.REPLACED_WEAPON_SLOT));
 		updateSecrets(player);
 		updateStatus(hero, context);
 		
@@ -184,7 +203,14 @@ public class HeroToken extends GameToken {
 			@Override
 			public void handle(Event event) {
 				MouseEvent Event = (MouseEvent) event;
-				heroPower(Event);
+				heroPower(Event, 1);
+			}
+		});
+		heroPowerIcon2.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				MouseEvent Event = (MouseEvent) event;
+				heroPower(Event, 2);
 			}
 		});
 		targetAnchor.setOnMouseClicked(new EventHandler<Event>() {
@@ -225,9 +251,32 @@ public class HeroToken extends GameToken {
 		portrait.setImage(portraitImage);
 	}
 
+	private void updateSecondHeroPower(Hero hero) {
+		Image heroPowerImage;
+		boolean nope = false;
+		if (options != null) {
+			GameContext context = options.getContext();
+			Player player = context.getPlayer(hero.getOwner());
+			if (!context.getLogic().hasAutoHeroPower(hero.getOwner()) && !context.getLogic().canPlayCard(hero.getOwner(), hero.getHeroPower2().getCardReference(), true)) {
+				heroPowerImage = new Image(IconFactory.getImageUrl("powers/nope.png"));
+				nope = true;
+			} else heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower2()));
+		} else heroPowerImage = new Image(IconFactory.getHeroPowerIconUrl(hero.getHeroPower2()));
+		heroPowerAnchor2.setVisible(true);
+		heroPowerIcon2.setImage(heroPowerImage);
+		Card card = CardCatalogue.getCardById(hero.getHeroPower2().getCardId());
+		Tooltip tooltip = new Tooltip();
+		CardTooltip tooltipContent = new CardTooltip();
+		tooltipContent.setCard(card);
+		tooltip.setGraphic(tooltipContent);
+		Tooltip.install(heroPowerIcon2, tooltip);
+	}
+
 	public void updateHeroPowerCost(GameContext context, Player player) {
 		setScoreValueLowerIsBetter(heroPowerAnchor, context.getLogic().getModifiedManaCost(player, player.getHero().getHeroPower()), player.getHero().getHeroPower().getBaseManaCost());
-		
+		if (player.getHero().hasHeroPower2()) {
+			setScoreValueLowerIsBetter(heroPowerAnchor2, context.getLogic().getModifiedManaCost(player, player.getHero().getHeroPower2()), player.getHero().getHeroPower2().getBaseManaCost());
+		}
 	}
 
 	private void updateSecrets(Player player) {
@@ -278,8 +327,8 @@ public class HeroToken extends GameToken {
 		return context.getLogic().hasAttribute(player, attr);
 	}
 
-	private void updateWeapon(Weapon weapon) {
-		boolean hasWeapon = weapon != null;
+	private void updateWeapon(Weapon weapon, boolean slot) {
+		boolean hasWeapon = weapon != null && slot;
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
@@ -302,12 +351,13 @@ public class HeroToken extends GameToken {
 		this.multiplayer = options.isMultiplayer();
 	}
 	
-	private void heroPower(MouseEvent event) {
+	private void heroPower(MouseEvent event, int power) {
 		if (options != null) {
 			GameContext context = options.getContext();
 			if (hero != context.getActivePlayer().getHero() || multiplayer ? Client.blockedByAnimation : !options.getBehaviour().isWaiting()) {
 				return;
 			}
+			HeroPower heroPower = power == 2 ? hero.getHeroPower2() : hero.getHeroPower();
 			Collection<ActionGroup> actionGroups = new ArrayList<>();
 			for (GameAction action : options.getValidActions()) {
 				if (!options.matchesExistingGroup(action, actionGroups)) {
@@ -322,12 +372,12 @@ public class HeroToken extends GameToken {
 				if (context.resolveSingleTarget(action.getSource()) == null) {
 					break;
 				}
-				if (context.resolveSingleTarget(action.getSource()).getId() == hero.getHeroPower().getId()) {
+				if (context.resolveSingleTarget(action.getSource()).getId() == heroPower.getId()) {
 					yeahs.add(actionGroup);
 				}
 			}
 			
-			if (yeahs.size() > 1 && hero.getHeroPower().hasAttribute(Attribute.CHOOSE_ONE)) {
+			if (yeahs.size() > 1 && heroPower.hasAttribute(Attribute.CHOOSE_ONE)) {
 				switch (event.getButton()) {
 				case PRIMARY:
 						yeahs.remove(1);

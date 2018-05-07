@@ -24,6 +24,7 @@ public class Hero extends Actor {
 	private HeroClass heroClass;
 	private HeroPower heroPower;
 	private Weapon weapon;
+	private HeroPower heroPower2;
 
 	public Hero(HeroCard heroCard, HeroPower heroPower) {
 		super(heroCard);
@@ -87,6 +88,18 @@ public class Hero extends Actor {
 		return heroPower;
 	}
 
+	public HeroPower getHeroPower2() {
+		return heroPower2;
+	}
+
+	public boolean hasHeroPower2() {
+		return heroPower2 != null;
+	}
+
+	public void removeHeroPower2() {
+		heroPower2 = null;
+	}
+
 	public Weapon getWeapon() {
 		return weapon;
 	}
@@ -102,6 +115,10 @@ public class Hero extends Actor {
 	}
 
 	public void setHeroPower(HeroPower heroPower) {
+		setHeroPower(heroPower, 1);
+	}
+
+	public void setHeroPower(HeroPower heroPower, int power) {
 		if (heroPower.hasTrigger()) {
 			SpellTrigger trigger = heroPower.getTrigger().create();
 			Map<EventTriggerArg, Object> eventTriggerMap = EventTriggerDesc.build(HeroPowerChangedTrigger.class);
@@ -110,7 +127,13 @@ public class Hero extends Actor {
 			trigger.heroPower = true;
 			addSpellTrigger(trigger);
 		}
-		this.heroPower = heroPower;
+		switch (power) {
+			case 2:
+				this.heroPower2 = heroPower;
+				break;
+			default:
+				this.heroPower = heroPower;
+		}
 		heroPower.setOwner(getOwner());
 	}
 

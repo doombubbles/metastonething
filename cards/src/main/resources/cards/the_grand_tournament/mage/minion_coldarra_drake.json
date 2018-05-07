@@ -9,7 +9,7 @@
 	"description": "You can use your Hero Power any number of times.",
 	"race": "DRAGON",
 	"attributes": {
-		"HERO_POWER_USAGES": -1
+		"HERO_POWER_USAGES": 999
 	},
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

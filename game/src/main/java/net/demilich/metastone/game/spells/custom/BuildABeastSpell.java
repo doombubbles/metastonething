@@ -63,6 +63,8 @@ public class BuildABeastSpell extends Spell {
 		card3.setAttribute(Attribute.BASE_MANA_COST, (card1.getAttributeValue(Attribute.BASE_MANA_COST) + card2.getAttributeValue(Attribute.BASE_MANA_COST)));
 		card3.setDescription(card2.getDescription() + " " + card1.getDescription());
 		context.getLogic().receiveCard(player.getId(), card3);
+
+		context.addTempCard(card3);
 	}
 
 }
